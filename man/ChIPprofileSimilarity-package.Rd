@@ -14,9 +14,9 @@ More about what it does (maybe more than one line)
 \tabular{ll}{
 Package: \tab ChIPprofileSimilarity\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
+Version: \tab 0.99\cr
 Date: \tab 2014-08-08\cr
-License: \tab What license is it under?\cr
+License: \tab Artistic-2.0\cr
 }
 ~~ An overview of how to use the package, including the most important functions ~~
 }
