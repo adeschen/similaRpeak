@@ -1,16 +1,16 @@
 # Get the area ratio between two curves 
 #
 # Input:   
-#   profile1:                               a first curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   profile2:                               a second curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   threshold                             the minimum denominator accepted to calculate a ratio.
+#   profile1:                 a first curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   profile2:                 a second curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   threshold:                the minimum denominator accepted to calculate a ratio.
 #
 # Output: 
 #   The calculated ratio. 
 #
-ratioArea <- function(profile1, profile2, threshold){
+ratioArea <- function(profile1, profile2, threshold=1){
     
     # Get the total area associated to each curve
     area1 = sum(profile1)
@@ -27,16 +27,16 @@ ratioArea <- function(profile1, profile2, threshold){
 # Get the ratio between two curves' maximal elements. 
 #
 # Input:   
-#   profile1:                               a first curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   profile2:                               a second curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   threshold                             the minimum denominator accepted to calculate a ratio.
+#   profile1:                 a first curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   profile2:                 a second curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   threshold                 the minimum denominator accepted to calculate a ratio.
 #
 # Output: 
 #   The calculated ratio. 
 #
-ratioMaxMax <- function(profile1, profile2, threshold){
+ratioMaxMax <- function(profile1, profile2, threshold=1){
     
     # Get the maximum element associated to each curve
     max1 = max(profile1)
@@ -53,16 +53,16 @@ ratioMaxMax <- function(profile1, profile2, threshold){
 # Get the difference between two curves' maximal elements' positions. 
 #
 # Input:   
-#   profile1:                               a first curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   profile2:                               a second curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   threshold                             the minimum denominator accepted to calculate a ratio.
+#   profile1:                 a first curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   profile2:                 a second curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   threshold                 the minimum denominator accepted to calculate a ratio.
 #
 # Output: 
 #   The calculated difference. 
 #
-diffPosMax <- function(profile1, profile2, threshold){
+diffPosMax <- function(profile1, profile2, threshold=1){
     
     # Get the position of the maximum element associated to each curve
     posMax1 = which.max(profile1)
@@ -77,16 +77,16 @@ diffPosMax <- function(profile1, profile2, threshold){
 # Get the ratio between the intersection area of two curves and the total area covered by those curves. 
 #
 # Input:   
-#   profile1:                               a first curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   profile2:                               a second curve/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-#   threshold                             the minimum denominator accepted to calculate a ratio.
+#   profile1:                 a first curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   profile2:                 a second curve/vector containing depths. Each position is 
+#                             associated to a position in particular, which is assumed.
+#   threshold                 the minimum denominator accepted to calculate a ratio.
 #
 # Output: 
 #   The calculated ratio. 
 #
-ratioIntersect <- function(profile1, profile2, threshold){
+ratioIntersect <- function(profile1, profile2, threshold=1){
     
     # Get the area of the intersection (min of both curves for each position)
     intersect = sum(unlist(lapply(1:length(profile1), function(x) min(profile1[x], profile2[x]))))
