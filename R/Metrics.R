@@ -74,7 +74,7 @@ RatioMaxMax <- R6Class("RatioMaxMax",
                                 
                                 # The length of profile1 is equal to the length of profile2
                                 if (length(profile1) != length(profile2)) {
-                                    stop("Lengths of 'profile1' and 'profile2' vectors aren't equals.")
+                                    stop("Lengths of 'profile1' and 'profile2' vectors aren't equals. The metric value has been reset to NA.")
                                 }
                                 
                                 # Calculate and assign the new max max ratio
