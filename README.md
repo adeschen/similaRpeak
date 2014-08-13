@@ -6,7 +6,7 @@ This package calculates metrics to assign a level of similarity between two ChIP
 
 ## Authors ##
 
-[Astrid Louise Deschenes](http://ca.linkedin.com/in/astriddeschenes "Astrid Louise Deschenes"), Elsa Bernatchez, [Charles Joly Beauparlant](http://ca.linkedin.com/pub/charles-joly-beauparlant/89/491/3b3 "Charles Joly Beauparlant"), [Fabien Claude Lamaze](http://ca.linkedin.com/in/fabienlamaze/en "Fabien Claude Lamaze"), [Rawane Samb](http://ca.linkedin.com/in/rawanesamb "Rawane Samb"), Pascal Belleau and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud "Arnaud Droit").
+[Astrid Louise Deschenes](http://ca.linkedin.com/in/astriddeschenes "Astrid Louise Deschenes"), Elsa Bernatchez, [Charles Joly Beauparlant](http://ca.linkedin.com/pub/charles-joly-beauparlant/89/491/3b3 "Charles Joly Beauparlant"), [Fabien Claude Lamaze](http://ca.linkedin.com/in/fabienlamaze/en "Fabien Claude Lamaze"), [Rawane Samb](http://ca.linkedin.com/in/rawanesamb "Rawane Samb"), [Pascal Belleau](http://ca.linkedin.com/pub/pascal-belleau/4/738/20a "Pascal Belleau") and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud "Arnaud Droit").
 
 See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/ "Arnaud Droit Lab") website.
 
