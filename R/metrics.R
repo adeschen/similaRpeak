@@ -229,3 +229,84 @@ RatioIntersect <- R6Class("RatioIntersect",
                          }
                      )
 )
+
+
+# TODO
+MetricFactory <- R6Class("MetricFactory",
+                          public = list(
+                              initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1) {
+                                  ratioAreaThreshold <<- ratioAreaThreshold
+                                  ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
+                                  ratioIntersectThreshold <<- ratioIntersectThreshold
+                              },
+                              createMetric = function(metricType, profile1, profile2) {
+                                  
+                                  # Metric, profile1 and profile2 are mandatory
+                                  if (missing(metricType)) {
+                                      stop("The 'metricType' argument is mandatory.")
+                                  }
+                                  if (missing(profile1)) {
+                                      stop("The 'profile1' argument is mandatory.")
+                                  }
+                                  if (missing(profile2)) {
+                                      stop("The 'profile2' argument is mandatory.")
+                                  }
+                                  
+                                  # The profile1 and profile2 arguments are numeric vectors where at 
+                                  # least one element is greater than zero
+                                  if (!is.vector(profile1) | !is.numeric(profile1)) {
+                                      stop("The 'profile1' argument must be a numeric vector.")
+                                  }
+                                  if (!is.vector(profile2) | !is.numeric(profile2)) {
+                                      stop("The 'profile2' argument must be a numeric vector.")
+                                  }
+                                  
+                                  # The length of profile1 is equal to the length of profile2
+                                  if (length(profile1) != length(profile2)) {
+                                      stop("Lengths of 'profile1' and 'profile2' vectors aren't equals.")
+                                  }
+                                  
+                                  # Metric type must exist
+                                  if (!metricType %in% metricVector) {
+                                      stop(paste("The metricType must be one of those choices: ", paste(metricList,collapse=", "), collapse="")) 
+                                  }
+                                  
+                                  result_name = list()
+                                  result=list()
+                                  
+                                  if (metricType == "ALL" || metricType == "RATIO_AREA") {
+                                     metric = RatioArea$new(profile1, profile2, ratioAreaThreshold)
+                                     result_name = c(result_name, metric$getType())
+                                     result= c(result, metric$getMetric())
+                                  }
+                                  if (metricType == "ALL" || metricType == "DIFF_POS_MAX") {
+                                      metric = DiffPosMax$new(profile1, profile2)
+                                      result_name = c(result_name, metric$getType())
+                                      result = c(result, metric$getMetric())
+                                  }
+                                  if (metricType == "ALL" || metricType == "RATIO_MAX_MAX") {
+                                      metric = RatioMaxMax$new(profile1, profile2, ratioMaxMaxThreshold)
+                                      result_name = c(result_name, metric$getType())
+                                      result= c(result, metric$getMetric())
+                                  }
+                                  if (metricType == "ALL" || metricType == "RATIO_INTERSECT") {
+                                      metric = RatioIntersect$new(profile1, profile2, ratioIntersectThreshold)
+                                      result_name = c(result_name, metric$getType())
+                                      result = c(result, metric$getMetric())
+                                  }
+                                  
+                                  names(result) = result_name
+                                  return(result)
+                                  
+                              }
+                          ), private = list(
+                                  # Vector of all existing types of metrics
+                                  metricVector = c("ALL", "RATIO_AREA", "DIFF_POS_MAX", "RATIO_MAX_MAX", "RATIO_INTERSECT"),
+                                  # Threshold values
+                                  ratioAreaThreshold = NA,
+                                  ratioMaxMaxThreshold = NA,
+                                  ratioIntersectThreshold = NA
+                          )
+                )
+
+
