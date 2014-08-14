@@ -1,26 +1,32 @@
-# Assign a level of similarity between two profiles (represent as vectors) by calculating them mean 
-# difference and them ratio.
+# 
+# Calculate and return four metrics which estimates the level of similarity between two profiles 
+# (represent as vectors).
 #
 # Input:   
 #   profile1:                               a first profile/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
+#                                             associated to a position in particular, which is assumed.
 #   profile2:                               a second profile/vector containing depths. Each position is 
-#                                         associated to a position in particular, which is assumed.
-
+#                                             associated to a position in particular, which is assumed.
+#   ratioAreaThreshold:                     the minimum denominator accepted to calculate the ratio of
+#                                             the area between both profiles. Default = 1.
+#   ratioMaxMaxThreshold:                   the minimum denominator accepted to calculate the ratio of
+#                                             the maximum values between both profiles. Default = 1.
+#   ratioIntersectThreshold:                the minimum denominator accepted to calculate the ratio of
+#                                             the intersection area of both profiles and the total 
+#                                             area. Default = 1.
 #
 # Prerequisites: 
-#   The profile1 argument is a numeric vector where at least one element is greater than zero and 
-#   none element is less than zero or NA.
-#   The profile2 argument is a numeric vector where at least one element is greater than zero and 
-#   none element is less than zero or NA.
-#   The length of profile1 is equal to the length of profile2.
-#   The ratioAreaThreshold argument is a positive numeric value. 
-#   The ratioMaxMaxThreshold argument is a positive numeric value. 
-#   The ratioIntersectThreshold argument is a positive numeric value. 
+#   The 'profile1' argument is a numeric vector where at least one element is greater than zero and 
+#   none element is less than zero.
+#   The 'profile2' argument is a numeric vector where at least one element is greater than zero and 
+#   none element is less than zero.
+#   The length of 'profile1' is equal to the length of 'profile2'.
+#   The 'ratioAreaThreshold' argument is a positive numeric value. 
+#   The 'ratioMaxMaxThreshold' argument is a positive numeric value. 
+#   The 'ratioIntersectThreshold' argument is a positive numeric value. 
 #
 # Output: 
-#   A matrix containing in order: Maximum and minimum depths sum, depths means difference, ratio 
-#   and number of positios used. 
+#   A list of elements containing information about both profiles and a list of metrics.
 #
 similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1){
     
@@ -41,10 +47,17 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     # than zero'.
     
     if (sum(profile1)==0 || sum(profile1<0)>0){
+<<<<<<< HEAD
         stop("The profile1 argument contains negatives or is made up of zeros only.")
     }
     if (sum(profile2)==0 || sum(profile2<0)>0){
         stop("The profile2 argument contains negatives or is made up of zeros only.")
+=======
+        stop("The 'profile1' argument contains negatives or NAs or is made up of zeros only.")
+    }
+    if (sum(profile2)==0 || sum(profile2<0)>0){
+        stop("The 'profile2' argument contains negatives or NAs or is made up of zeros only.")
+>>>>>>> 5afdda3ccb684c65165a85f70523dd3051caaf85
     }
     
     # The length of profile1 is equal to the length of profile2
