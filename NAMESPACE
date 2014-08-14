@@ -1,2 +1,3 @@
 export(Metrics)
+export(ChIPprofileSimilarity)
 import(R6)
