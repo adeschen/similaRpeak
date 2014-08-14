@@ -268,7 +268,7 @@ MetricFactory <- R6Class("MetricFactory",
                                   
                                   # Metric type must exist
                                   if (!metricType %in% metricVector) {
-                                      stop(paste("The metricType must be one of those choices: ", paste(metricList,collapse=", "), collapse="")) 
+                                      stop(paste("The metricType must be one of those choices: ", paste(metricVector,collapse=", "), collapse="")) 
                                   }
                                   
                                   result_name = list()

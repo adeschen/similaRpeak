@@ -57,19 +57,23 @@ test.metrics_metricfactory_all_na<- function() {
 
 ## Test the result of using a wrong metricVector name
 test.metrics_metricfactory_wrong_metric_name<- function() {
-    checkException(factory$createMetric("TOTO", c(1,59,6,24,65,34,15,4,53,22), c(15,9,46,44,9,39,27,34,34,4)), msg ="The 'profile1' argument must be a numeric vector.")
+    checkException(factory$createMetric("TOTO", c(1,59,6,24,65,34,15,4,53,22), c(15,9,46,44,9,39,27,34,34,4)), msg ="The metricType must be one of those choices: ALL, RATIO_AREA, DIFF_POS_MAX, RATIO_MAX_MAX, RATIO_INTERSECT")
 }
 
+## Test the result of missing metricType
+test.metrics_metricfactory_missing_metric_type<- function() {
+    checkException(factory$createMetric(metricType=, profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4)), msg ="The 'metricType' argument is mandatory.")
+}
 
+## Test the result of missing profile1
+test.metrics_metricfactory_missing_profile1<- function() {
+    checkException(factory$createMetric(metricType="ALL", profile1=, profile2=c(15,9,46,44,9,39,27,34,34,4)), msg ="The 'profile1' argument is mandatory.")
+}
 
-# essayer de faire une erreur dans le nom des fonctions a passer
-
-
-
-
-
-
-
+## Test the result of missing profile2
+test.metrics_metricfactory_missing_profile2<- function() {
+    checkException(factory$createMetric(metricType="ALL", profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=), msg ="The 'profile2' argument is mandatory.")
+}
 
 
 
