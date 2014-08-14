@@ -23,6 +23,9 @@
 \arguments{
   \item{profile1}{ Vector containing the RPM values of the first ChIP-Seq profile 
     for each position of selection region.}
+    
+  \item{profile2}{ Vector containing the RPM values of the second ChIP-Seq profile 
+    for each position of selection region.}
 
   \item{ratioAreaThreshold}{ The minimum denominator accepted 
     to calculate the ratio of the area between both profiles. Default = 1.}
