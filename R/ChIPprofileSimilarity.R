@@ -38,13 +38,13 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     }
     
     # At least one element in profile1 and profile2 is greater than zero and none element is less 
-    # than zero' or NA'.
+    # than zero'.
     
     if (sum(profile1)==0 || sum(profile1<0)>0){
-        stop("The profile1 argument contains negatives or NAs or is made up of zeros only.")
+        stop("The profile1 argument contains negatives or is made up of zeros only.")
     }
     if (sum(profile2)==0 || sum(profile2<0)>0){
-        stop("The profile2 argument contains negatives or NAs or is made up of zeros only.")
+        stop("The profile2 argument contains negatives or is made up of zeros only.")
     }
     
     # The length of profile1 is equal to the length of profile2
