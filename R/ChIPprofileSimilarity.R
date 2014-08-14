@@ -15,8 +15,8 @@
 ratioArea <- function(profile1, profile2, threshold=1){
     
     # Get the total area associated to each profile
-    area1 = sum(profile1)
-    area2 = sum(profile2)
+    area1 = sum(profile1, na.rm=T)
+    area2 = sum(profile2, na.rm=T)
     
     # Get the ratio between area1 and area2
     if (threshold <= min(area1, area2)){
