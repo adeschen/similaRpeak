@@ -1,6 +1,6 @@
 Package: ChIPprofileSimilarity
 Type: Package
-Title: ChIPprofileSimilarity: a package to assign a level of similarity between ChIP profiles.
+Title: ChIPprofileSimilarity: a package to estimate a level of similarity between ChIP profiles.
 Version: 0.99
 Date: 2014-08-08
 Author: Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>,
