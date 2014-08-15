@@ -1,2 +1,2 @@
-export(Metrics)
+export(similarity)
 import(R6)
