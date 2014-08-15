@@ -3,12 +3,10 @@
 \alias{ChIPprofileSimilarity}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+This package calculates metrics to estimate a level of similarity between two ChIP profiles.
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+TODO
 }
 \details{
 \tabular{ll}{
@@ -18,23 +16,24 @@ Version: \tab 0.99\cr
 Date: \tab 2014-08-08\cr
 License: \tab Artistic-2.0\cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
-Who wrote it
+Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchuq.ulaval.ca>), 
+Elsa Bertnachez <elsa.bernatchez.1@ulaval.ca>,
+Charles Joly Beauparlant <charles.joly-beauparlant@crchul.ulaval.ca>,
+Fabien Claude Lamaze <fabien.lamaze.1@ulaval.ca>,
+Rawane Samb <rawane.samb.1@ulaval.ca>,
+Pascal Belleau <Pascal.Belleau@crchudequebec.ulaval.ca> and
+Arnaud Droit <arnaud.droit@crchuq.ulaval.ca>
 
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Maintainer: Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchuq.ulaval.ca>
 }
 \references{
-~~ Literature or other references for background information ~~
-}
-~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R documentation directory ~~
+TODO
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
 ~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
 }
 \examples{
-~~ simple examples of the most important functions ~~
+TODO
 }

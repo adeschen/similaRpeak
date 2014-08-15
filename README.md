@@ -1,7 +1,7 @@
 ChIPprofileSimilarity
 =====================
 
-This package calculates metrics to assign a level of similarity between two ChIP profils.
+This package calculates metrics to estimate a level of similarity between two ChIP profiles.
 
 
 ## Authors ##
