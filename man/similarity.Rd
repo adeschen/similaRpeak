@@ -7,7 +7,7 @@
 
 \description{
   Return a list containing information about both ChIP-Seq profiles and a list of all four similarity 
-  metrics: the ratio of the maximum values, the ratio of the area, the ratio between the intersection 
+  metrics: the ratio of the maximum values, the ratio of the areas, the ratio between the intersection 
   area and the total area, the difference between two profiles maximal peaks positions.
 }
 
@@ -22,10 +22,10 @@
 
 \arguments{
   \item{profile1}{ Vector containing the RPM values of the first ChIP-Seq profile 
-    for each position of selection region.}
+    for each position of the selected region.}
     
   \item{profile2}{ Vector containing the RPM values of the second ChIP-Seq profile 
-    for each position of selection region.}
+    for each position of the selected region.}
 
   \item{ratioAreaThreshold}{ The minimum denominator accepted 
     to calculate the ratio of the area between both profiles. Default = 1.}
@@ -51,11 +51,11 @@
 
   The first level contain the following items:
   \itemize{
-    \item nbrPosition: The number of position included in each profile.
+    \item nbrPosition: The number of positions included in each profile.
     \item areaProfile1: The area of the first profile.
     \item areaProfile2: The area of the second profile.
-    \item maxProfile1: The maximum value for the first profile.
-    \item maxProfile2: The maximum value for the second profile.
+    \item maxProfile1: The maximum value in the first profile.
+    \item maxProfile2: The maximum value in the second profile.
     \item maxPositionProfile1: The position of the maximum value in the 
         first profile.
     \item maxPositionProfile2: The position of the maximum value in the 
@@ -69,12 +69,12 @@
                           respected.
         \item DIFF_POS_MAX: The difference between the maximal peaks positions. 
                             The difference is always a positive value.
-        \item RATIO_MAX_MAX: the ratio between the maximal peaks values. 
+        \item RATIO_MAX_MAX: The ratio between the maximal peaks values. 
                             The larger value is always divided by the smaller
                             value. \code{NA} if minimal threshold is not
                             respected.
         \item RATIO_INTERSECT: The ratio between the intersection area and the 
-                                total area. \code{NA} is minimal threshold is not
+                                total area. \code{NA} if minimal threshold is not
                                 respected.
         }
   }
@@ -82,7 +82,8 @@
 
 \author{
   Astrid Louise Deschenes
-  <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
+  <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca> 
+  
   Elsa Bernatchez
   <elsa.bernatchez.1@ulaval.ca>
 }
