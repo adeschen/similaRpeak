@@ -6,7 +6,7 @@
 }
 
 \description{
-  Return a list containing information about both ChIP-Seq profiles and a list of all four similarity 
+  Return a list containing information about both ChIP-Seq profiles and a \code{list} of all four similarity 
   metrics: the ratio of the maximum values, the ratio of the areas, the ratio between the intersection 
   area and the total area, the difference between two profiles maximal peaks positions.
 }
