@@ -1,39 +1,34 @@
-\name{ChIPprofileSimilarity-package}
+\docType{package}
+\name{ChIPprofileSimilarity}
 \alias{ChIPprofileSimilarity-package}
 \alias{ChIPprofileSimilarity}
-\docType{package}
 \title{
-This package calculates metrics to estimate a level of similarity between two ChIP profiles.
+ChIPprofileSimilarity: Metrics to estimate a level of similarity between two ChIP profiles
 }
 \description{
-TODO
+\pkg{ChIPprofileSimilarity} is calculing four differents metrics to estimate a level of similarity between two ChIP profiles.
 }
 \details{
-\tabular{ll}{
-Package: \tab ChIPprofileSimilarity\cr
-Type: \tab Package\cr
-Version: \tab 0.99\cr
-Date: \tab 2014-08-08\cr
-License: \tab Artistic-2.0\cr
-}
+The R function \code{\link{similarity}} calculates four differents metrics: the ratio of the maximum values, the ratio of the areas, the ratio between the intersection area and the total area, the difference between two profiles maximal peaks positions.
+
+The function \code{\link{similarity}} also reports basic information about each ChIP profile such as the number of positions, the area, the maximum value and the position of the maximum value.
+
+To learn more about \pkg{ChIPprofileSimilarity} package see:
+
+\url{https://github.com/adeschen/ChIPprofileSimilarity/wiki}
 }
 \author{
-Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchuq.ulaval.ca>), 
-Elsa Bertnachez <elsa.bernatchez.1@ulaval.ca>,
-Charles Joly Beauparlant <charles.joly-beauparlant@crchul.ulaval.ca>,
-Fabien Claude Lamaze <fabien.lamaze.1@ulaval.ca>,
-Rawane Samb <rawane.samb.1@ulaval.ca>,
-Pascal Belleau <Pascal.Belleau@crchudequebec.ulaval.ca> and
-Arnaud Droit <arnaud.droit@crchuq.ulaval.ca>
+A. Deschenes, 
+E. Bertnachez,
+C. Joly Beauparlant,
+F.C. Lamaze,
+R. Samb,
+P. Belleau and
+A. Droit 
 
 Maintainer: Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchuq.ulaval.ca>
 }
-\references{
-TODO
-\keyword{ package }
 \seealso{
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+\code{\link{similarity}}
 }
-\examples{
-TODO
-}
+\keyword{package}

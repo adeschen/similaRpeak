@@ -11,6 +11,9 @@ Author: Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca
         Arnaud Droit <arnaud.droit@crchuq.ulaval.ca>.
 Maintainer: Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
 Description: This package calculates metrics which assign a level of similarity between  ChIP profiles.
-License: Artistic-2.0
 Depends: R6
 Suggests: RUnit, BiocGenerics, knitr
+License: Artistic-2.0 | file LICENSE
+URL: https://github.com/adeschen/ChIPprofileSimilarity
+BugReports: https://github.com/adeschen/ChIPprofileSimilarity/issues
+VignetteBuilder: knitr
