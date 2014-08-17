@@ -30,7 +30,7 @@ To learn more about \pkg{ChIPprofileSimilarity} package see:
 \url{https://github.com/adeschen/ChIPprofileSimilarity/wiki}
 }
 \author{
-A. Deschenes, 
+A.L. Deschenes, 
 E. Bertnachez,
 C. Joly Beauparlant,
 F.C. Lamaze,

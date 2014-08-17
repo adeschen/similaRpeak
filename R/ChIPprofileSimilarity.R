@@ -16,10 +16,8 @@
 #                                             area. Default = 1.
 #
 # Prerequisites: 
-#   The 'profile1' argument is a numeric vector where at least one element is greater than zero and 
-#   none element is less than zero.
-#   The 'profile2' argument is a numeric vector where at least one element is greater than zero and 
-#   none element is less than zero.
+#   The 'profile1' argument is a numeric vector where no element is less than zero.
+#   The 'profile2' argument is a numeric vector where no element is less than zero.
 #   The length of 'profile1' is equal to the length of 'profile2'.
 #   The 'ratioAreaThreshold' argument is a positive numeric value. 
 #   The 'ratioMaxMaxThreshold' argument is a positive numeric value. 
@@ -43,14 +41,13 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
         stop("The 'profile2' argument must be a numeric vector.")
     }
     
-    # At least one element in profile1 and profile2 is greater than zero and none element is less 
-    # than zero'.
+    # At least one element in profile1 and profile2 is less than zero.
     
-    if (sum(profile1, na.rm=T)==0 || sum(profile1<0, na.rm=T)>0){
-        stop("The profile1 argument contains negatives or is made up of zeros only.")
+    if (sum(profile1<0, na.rm=T)>0) {
+        stop("The profile1 argument contains at least one negative number.")
     }
-    if (sum(profile2, na.rm=T)==0 || sum(profile2<0, na.rm=T)>0){
-        stop("The profile2 argument contains negatives or is made up of zeros only.")
+    if (sum(profile2<0, na.rm=T)>0){
+        stop("The profile2 argument contains at least one negative number.")
     }
     
     # The length of profile1 is equal to the length of profile2

@@ -1,6 +1,6 @@
 # Calculate and return the area ratio between two ChIP profiles covering the same range. The maximum
 # area is always divided by the minimum area.If the minimum area is inferior to the threshold, 
-# the function returns NA.
+# the function returns NA. The threshold has to be a positive value.
 #
 # Input:   
 #   profile1:                 a first profile/vector containing depths. Each position is 
@@ -19,8 +19,9 @@ ratioArea <- function(profile1, profile2, threshold=1){
     area2 = sum(profile2, na.rm=T)
     
     # Get the ratio between area1 and area2
-    if (threshold <= min(area1, area2)){
-        ratio = max(area1, area2)/min(area1, area2)
+    minimum = min(area1, area2)
+    if (minimum > 0  && threshold <= minimum){
+        ratio = max(area1, area2)/minimum
     }else {
         ratio = NA
     }
@@ -49,8 +50,9 @@ ratioMaxMax <- function(profile1, profile2, threshold=1){
     max2 = max(profile2, na.rm=T)
     
     # Get the ratio between max1 and max2
-    if (threshold <= min(max1, max2)){
-        ratio = max(max1, max2)/min(max1, max2)
+    minimum = min(max1, max2)
+    if (minimum > 0 && threshold <= min(max1, max2)){
+        ratio = max(max1, max2)/minimum
     }else {
         ratio = NA
     }
@@ -87,7 +89,7 @@ diffPosMax <- function(profile1, profile2, threshold=NULL){
 
 # Calculate and return the ratio between the intersection area of two profiles and the 
 # total area covered by those profiles. If the total area is inferior to the threshold, 
-# the function returns NA. 
+# the function returns NA. The threshold has to be a positive value.
 #
 # Input:   
 #   profile1:                 a first curve/vector containing depths. Each position is 
@@ -105,11 +107,11 @@ ratioIntersect <- function(profile1, profile2, threshold=1){
     intersect = sum(unlist(lapply(1:length(profile1), function(x) min(profile1[x], profile2[x]))), na.rm=T)
     
     # Get the total area covered by both curves
-    totArea = sum(profile1, na.rm=T)+sum(profile2, na.rm=T)-intersect
+    totalArea = sum(profile1, na.rm=T)+sum(profile2, na.rm=T)-intersect
  
     # Get the ratio between intersect and totArea
-    if (threshold <= totArea){
-        ratio = intersect/totArea
+    if (totalArea > 0 && threshold <= totalArea){
+        ratio = intersect/totalArea
     }else {
         ratio = NA
     }
