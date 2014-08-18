@@ -3,6 +3,14 @@ ChIPprofileSimilarity
 
 This package calculates metrics to estimate a level of similarity between two ChIP profiles.
 
+## NOTE ##
+
+To use this current development version, the use of the development version of the R6 package is mandatory. To be installed, it requires the devtools package :
+
+```
+install.packages("devtools")
+devtools::install_github('wch/R6', build_vignettes = FALSE)
+```
 
 ## Authors ##
 
