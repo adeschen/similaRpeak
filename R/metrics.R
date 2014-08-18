@@ -19,17 +19,17 @@ Metric <- R6Class("Metric",
                       calculateMetric = function(profile1, profile2, threshold=NULL) {
                       },
                       getInfo = function() {
-                          cat(paste0("Metric type: ", type, ". Metric value: ", metric, "\n"))
+                          cat(paste0("Metric type: ", private$type, ". Metric value: ", private$metric, "\n"))
                       }
                    ),  
                    private = list(
                       metric = NA,
                       type = NA,
                       setMetric = function(val){
-                          metric <<- val
+                          private$metric <<- val
                       },
                       setType = function(val){
-                          type <<- val
+                          private$type <<- val
                       }
                    )
               )
@@ -47,7 +47,7 @@ RatioMaxMax <- R6Class("RatioMaxMax",
                                 super$setType("RATIO_MAX_MAX")
                                 
                                 if (!missing(profile1) && !missing(profile2)) {
-                                    calculateMetric(profile1, profile2, threshold)   
+                                    self$calculateMetric(profile1, profile2, threshold)   
                                 }
                             },
                             calculateMetric = function(profile1, profile2, threshold=1) {
@@ -96,7 +96,7 @@ RatioArea <- R6Class("RatioArea",
                                super$setType("RATIO_AREA")
                                
                                if (!missing(profile1) && !missing(profile2)) {
-                                   calculateMetric(profile1, profile2, threshold)   
+                                   self$calculateMetric(profile1, profile2, threshold)   
                                }
                            },
                            calculateMetric = function(profile1, profile2, threshold=1) {
@@ -145,7 +145,7 @@ DiffPosMax <- R6Class("DiffPosMax",
                              super$setType("DIFF_POS_MAX")
                              
                              if (!missing(profile1) && !missing(profile2)) {
-                                 calculateMetric(profile1, profile2, threshold)   
+                                 self$calculateMetric(profile1, profile2, threshold)   
                              }
                          },
                          calculateMetric = function(profile1, profile2, threshold=NULL) {
@@ -194,7 +194,7 @@ RatioIntersect <- R6Class("RatioIntersect",
                              super$setType("RATIO_INTERSECT")
                              
                              if (!missing(profile1) && !missing(profile2)) {
-                                 calculateMetric(profile1, profile2, threshold)   
+                                 self$calculateMetric(profile1, profile2, threshold)   
                              }
                          },
                          calculateMetric = function(profile1, profile2, threshold=1) {
@@ -235,9 +235,9 @@ RatioIntersect <- R6Class("RatioIntersect",
 MetricFactory <- R6Class("MetricFactory",
                           public = list(
                               initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1) {
-                                  ratioAreaThreshold <<- ratioAreaThreshold
-                                  ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
-                                  ratioIntersectThreshold <<- ratioIntersectThreshold
+                                  private$ratioAreaThreshold <<- ratioAreaThreshold
+                                  private$ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
+                                  private$ratioIntersectThreshold <<- ratioIntersectThreshold
                               },
                               createMetric = function(metricType, profile1, profile2) {
                                   
@@ -267,15 +267,15 @@ MetricFactory <- R6Class("MetricFactory",
                                   }
                                   
                                   # Metric type must exist
-                                  if (!metricType %in% metricVector) {
-                                      stop(paste("The metricType must be one of those choices: ", paste(metricVector,collapse=", "), collapse="")) 
+                                  if (!metricType %in% private$metricVector) {
+                                      stop(paste("The metricType must be one of those choices: ", paste(private$metricVector,collapse=", "), collapse="")) 
                                   }
                                   
                                   result_name = list()
                                   result=list()
                                   
                                   if (metricType == "ALL" || metricType == "RATIO_AREA") {
-                                     metric = RatioArea$new(profile1, profile2, ratioAreaThreshold)
+                                     metric = RatioArea$new(profile1, profile2, private$ratioAreaThreshold)
                                      result_name = c(result_name, metric$getType())
                                      result= c(result, metric$getMetric())
                                   }
@@ -285,12 +285,12 @@ MetricFactory <- R6Class("MetricFactory",
                                       result = c(result, metric$getMetric())
                                   }
                                   if (metricType == "ALL" || metricType == "RATIO_MAX_MAX") {
-                                      metric = RatioMaxMax$new(profile1, profile2, ratioMaxMaxThreshold)
+                                      metric = RatioMaxMax$new(profile1, profile2, private$ratioMaxMaxThreshold)
                                       result_name = c(result_name, metric$getType())
                                       result= c(result, metric$getMetric())
                                   }
                                   if (metricType == "ALL" || metricType == "RATIO_INTERSECT") {
-                                      metric = RatioIntersect$new(profile1, profile2, ratioIntersectThreshold)
+                                      metric = RatioIntersect$new(profile1, profile2, private$ratioIntersectThreshold)
                                       result_name = c(result_name, metric$getType())
                                       result = c(result, metric$getMetric())
                                   }
