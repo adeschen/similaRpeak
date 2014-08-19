@@ -40,6 +40,10 @@
 }
 
 \details{
+  \code{similarity} uses the two vectors passed as arguments to
+  calculate the metrics. When the metric is a ratio, it always verify
+  that the threshold for the denominator is respected. If the threshold
+  is not respected, the metric is assigned the \code{NA} value.
 }
 
 \value{
@@ -89,6 +93,15 @@
 }
 
 \examples{
-  ChIPprofileSimilarity:::similarity(c(3,59,6,24,65,34,15,4,53,22), c(15,9,46,44,9,39,27,34,34,4))
+# Example with vector directly used as inputs -----------------------------------------
+ChIPprofileSimilarity:::similarity(c(3,59,6,24,65,34,15,4,53,22),
+        c(15,9,46,44,9,39,27,34,34,4))
+
+# Example with variables used as inputs and customised threshold ----------------------
+profile1<-c(3,59,6,24,65,34,15,4,53,22,21,12,11)
+profile2<-c(15,9,46,44,9,39,27,34,34,4,3,4,2)
+ChIPprofileSimilarity:::similarity(profile1, profile2, 
+        ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12)
+
 }
 \keyword{similarity}
