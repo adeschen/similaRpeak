@@ -1,0 +1,88 @@
+---
+title: "ChIPprofileSimilarity"
+output:
+  html_document:
+    theme: null
+    toc: yes
+  pdf_document:
+    theme: null
+    toc: yes
+---
+
+<!-- rmarkdown v1 -->
+<!--
+%\VignetteEngine{knitr::knitr}
+%\VignetteIndexEntry{ChIPprofileSimilarity: similarity between two ChIP profiles}
+-->
+
+
+Metrics which estimate similarity between two ChIP profiles
+====================================================================
+
+Astrid Louise Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, Fabien Claude Lamaze, Rawane Samb, Pascal Belleau and Arnaud Droit.
+
+This package and the underlying ChIPprofileSimilarity code are distributed under the Artistic license 2.0. You are free to use and redistribute this software. 
+
+
+## Introduction
+
+The **ChIPprofileSimilarity** package calculates metrics to estimate the level of similarity between two ChIP profiles.
+
+The four metrics are:
+
+* **RATIO_AREA**: The ratio between the areas. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
+
+* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The difference is always a positive value.
+
+* **RATIO_MAX_MAX**: The ratio between the maximal peaks values. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
+
+* **RATIO_INTERSECT**: The ratio between the intersection area and the total area. `NA` if minimal threshold is not respected.
+   
+
+## Loading ChIPprofileSimilarity package
+
+```{r libraryLoad}
+suppressMessages(library(ChIPprofileSimilarity))
+```
+ 
+ 
+## Inputs
+
+### ChIP profiles vectors
+
+To estimate the level of similarity between two ChIP profiles for a specific region, two `vector` 
+containing the RPM values of the two ChIP profiles for each position of the selected region. 
+Both `vector` should have the same length and should not contain any negative value.
+
+### Threshold values
+
+When the metric includes a ratio calculation, a threshold for the denominator is assigned to the metric. 
+The threshold has to be positive numerical value. When the threshold is not respected, the metric is
+not calculated and the `NA` value is assigned to it.
+
+The three threshold are:
+
+* **ratioAreaThreshold**: The minimum denominator accepted to calculate the ratio of the area between 
+both profiles. Default = 1.
+
+* **ratioMaxMaxThreshold**: The minimum denominator accepted to calculate the ratio of the maximal peaks values between both profiles. Default = 1.
+
+* **ratioIntersectThreshold**: The minimum denominator accepted to calculate the ratio of the intersection area of both profiles over the total area. Default = 1.
+
+
+## Metrics calculation
+
+The metrics are calculated using the `similarity` function which takes as arguments the two ChIP profiles vectors and the threshold values.
+
+```{r metricCalculation}
+profile1<-c(3,59,6,24,65,112,144,77,53,22,21,12,11)
+profile2<-c(15,9,46,44,59,39,27,34,34,4,3,4,2)
+metrics<-ChIPprofileSimilarity:::similarity(profile1, profile2, 
+        ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12)
+```
+
+The `similarity` function returns a list which contains the information about both ChIP-Seq profiles and a list of all four metrics. 
+
+```{r metricReturn}
+metrics
+```
