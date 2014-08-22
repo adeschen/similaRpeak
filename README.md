@@ -27,3 +27,5 @@ For more information on Artistic 2.0 License see [http://opensource.org/licenses
 ## Bugs/Feature requests ##
 
 If you have any bugs or feature requests, [let us know](https://github.com/adeschen/ChIPprofileSimilarity/issues). Thanks!
+
+[![Analytics](https://ga-beacon.appspot.com/UA-54073011-1/chromeskel_a/readme)](https://github.com/igrigorik/ga-beacon)
