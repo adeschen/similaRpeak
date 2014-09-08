@@ -26,7 +26,9 @@
 # Output: 
 #   A list of elements containing information about both profiles and a list of metrics.
 #
-similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1){
+similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThreshold=1, 
+                       ratioIntersectThreshold=1, diffPosMaxThresholdMinValue=1, 
+                       diffPosMaxThresholdMaxDiff=100, diffPosMaxTolerancePercent=1){
     
     #######################################
     # Test prerequisites
@@ -70,6 +72,21 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
         stop("The 'ratioIntersectThreshold' must be a positive numeric value.")
     }
     
+    # The diffPosMaxThresholdMinValue argument is a positive numeric element
+    if (length(diffPosMaxThresholdMinValue)!=1 || !is.numeric(diffPosMaxThresholdMinValue) || (diffPosMaxThresholdMinValue <= 0)){
+        stop("The 'diffPosMaxThresholdMinValue' must be a positive numeric value.")
+    }   
+    
+    # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
+    if (length(diffPosMaxThresholdMaxDiff)!=1 || !is.numeric(diffPosMaxThresholdMaxDiff) || (diffPosMaxThresholdMaxDiff <= 0)){
+        stop("The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value.")
+    }  
+    
+    # The diffPosMaxTolerancePercent argument is a positive numeric element
+    if (length(diffPosMaxTolerancePercent)!=1 || !is.numeric(diffPosMaxTolerancePercent) || (diffPosMaxTolerancePercent <= 0)){
+        stop("The 'diffPosMaxTolerancePercent' must be a positive numeric value.")
+    }  
+    
     # Get information about both profiles
     nbrPos = length(profile1)
     areaProfile1 = sum(profile1, na.rm=T)
@@ -81,7 +98,10 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     
     
     # Create a metric factory object
-    factory = MetricFactory$new(ratioAreaThreshold, ratioMaxMaxThreshold, ratioIntersectThreshold)
+    factory = MetricFactory$new(ratioAreaThreshold, ratioMaxMaxThreshold, 
+                                ratioIntersectThreshold, diffPosMaxThresholdMinValue,
+                                diffPosMaxThresholdMaxDiff, diffPosMaxTolerancePercent)
+    
     # Generate the list of all metrics availables
     metricList = factory$createMetric("ALL", profile1, profile2)
     

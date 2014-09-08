@@ -139,16 +139,16 @@ RatioArea <- R6Class("RatioArea",
 DiffPosMax <- R6Class("DiffPosMax",
                      inherit = Metric,
                      public = list(
-                         initialize = function(profile1, profile2, threshold=NULL) {
+                         initialize = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerancePercent=1) {
                              
                              # Fix the type of metric
                              super$setType("DIFF_POS_MAX")
                              
                              if (!missing(profile1) && !missing(profile2)) {
-                                 self$calculateMetric(profile1, profile2, threshold)   
+                                 self$calculateMetric(profile1, profile2, threshold, thresholdDiff, tolerancePercent)   
                              }
                          },
-                         calculateMetric = function(profile1, profile2, threshold=NULL) {
+                         calculateMetric = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerancePercent=1) {
                              
                              # Reset metric value to NA
                              super$setMetric(NA)
@@ -175,8 +175,8 @@ DiffPosMax <- R6Class("DiffPosMax",
                                  stop("Lengths of 'profile1' and 'profile2' vectors aren't equals. The metric value has been reset to NA.")
                              }
                              
-                             # Calculate and assign the new max max ratio
-                             super$setMetric(diffPosMax(profile1, profile2, threshold))
+                             # Calculate and assign the new difference position maximum
+                             super$setMetric(diffPosMax(profile1, profile2, threshold, thresholdDiff, tolerancePercent))
                          }
                      )
 )  
@@ -231,13 +231,19 @@ RatioIntersect <- R6Class("RatioIntersect",
 )
 
 
-# TODO
+# Class used to create metrics. 
+#
 MetricFactory <- R6Class("MetricFactory",
                           public = list(
-                              initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1) {
+                              initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1,
+                                                    diffPosMaxThresholdMinValue=1, diffPosMaxThresholdMaxDiff=100, 
+                                                    diffPosMaxTolerancePercent=1 ) {
                                   private$ratioAreaThreshold <<- ratioAreaThreshold
                                   private$ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
                                   private$ratioIntersectThreshold <<- ratioIntersectThreshold
+                                  private$diffPosMaxThresholdMinValue <<- diffPosMaxThresholdMinValue
+                                  private$diffPosMaxThresholdMaxDiff <<- diffPosMaxThresholdMaxDiff
+                                  private$diffPosMaxTolerancePercent <<- diffPosMaxTolerancePercent
                               },
                               createMetric = function(metricType, profile1, profile2) {
                                   
@@ -252,8 +258,7 @@ MetricFactory <- R6Class("MetricFactory",
                                       stop("The 'profile2' argument is mandatory.")
                                   }
                                   
-                                  # The profile1 and profile2 arguments are numeric vectors where at 
-                                  # least one element is greater than zero
+                                  # The profile1 and profile2 arguments are numeric vectors 
                                   if (!is.vector(profile1) | !is.numeric(profile1)) {
                                       stop("The 'profile1' argument must be a numeric vector.")
                                   }
@@ -305,7 +310,10 @@ MetricFactory <- R6Class("MetricFactory",
                                   # Threshold values
                                   ratioAreaThreshold = NA,
                                   ratioMaxMaxThreshold = NA,
-                                  ratioIntersectThreshold = NA
+                                  ratioIntersectThreshold = NA,
+                                  diffPosMaxThresholdMinValue = NA,
+                                  diffPosMaxThresholdMaxDiff = NA,
+                                  diffPosMaxTolerancePercent = NA
                           )
                 )
 

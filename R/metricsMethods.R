@@ -51,7 +51,7 @@ ratioMaxMax <- function(profile1, profile2, threshold=1){
     
     # Get the ratio between max1 and max2
     minimum = min(max1, max2)
-    if (minimum > 0 && threshold <= min(max1, max2)){
+    if (minimum > 0 && threshold <= minimum){
         ratio = max(max1, max2)/minimum
     }else {
         ratio = NA
@@ -61,28 +61,53 @@ ratioMaxMax <- function(profile1, profile2, threshold=1){
 }
 
 # Calculate and return the difference between two profiles maximal peaks positions. 
-# The difference is always a positive value.
+# The difference is always a positive value. If the minimum peak is 
+# inferior to the threshold, the function returns NA.
 #
 # Input:   
 #   profile1:                 a first profile/vector containing depths. Each position is 
 #                             associated to a position in particular, which is assumed.
 #   profile2:                 a second profile/vector containing depths. Each position is 
 #                             associated to a position in particular, which is assumed.
-#   threshold:                the threshold is not used in this function.
+#   threshold:                the minimum peak accepted to calculate the difference.
+#   thresholdDist:            the maximum distance accepted between 2 peaks positions 
+#                             in one profile.
+#   tolerancePercent:         the maximum percentage of variation accepted on the maximum 
+#                             value to consider a position as a peak position.                         
 #
 # Output: 
 #   The calculated difference. 
 #
-diffPosMax <- function(profile1, profile2, threshold=NULL){
+diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, tolerancePercent=1){
     
     # Get the position of the maximum element associated to each profile
-    posMax1 = which.max(profile1)
-    posMax2 = which.max(profile2)
+    max1 = max(profile1)
+    max2 = max(profile2)
+    tolerance_multiple = (1 - (tolerancePercent/100))
+    toleranceMax1 = tolerance_multiple * max1
+    toleranceMax2 = tolerance_multiple * max2
+    posMax1 = which(profile1 >= toleranceMax1)
+    posMax2 = which(profile2 >= toleranceMax2)
     
     # Get the absolute difference between posMax1 and posMax2
-    diff = abs(posMax1-posMax2)
-    
-    if(length(diff)==0){diff=NA}
+    minimum = min(posMax1, posMax2)
+    if ((minimum > 0) && (threshold <= min(max1, max2))) {
+        if (length(posMax1)==1 && length(posMax2)==1) {
+            diff = abs(posMax1-posMax2)    
+        } else {
+            maxDiff1 = ifelse(length(posMax1)==1, 0, max(diff(sort(posMax1))))
+            maxDiff2 = ifelse(length(posMax2)==1, 0, max(diff(sort(posMax2))))
+            if (max(maxDiff1, maxDiff2) <= thresholdDist){
+                median1 = median(posMax1)
+                median2 = median(posMax2)
+                diff = abs(median1 - median2)
+            } else {
+                diff = NA
+            }
+        }
+    } else {
+        diff = NA
+    }
     
     return(diff)
 }
