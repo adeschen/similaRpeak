@@ -34,17 +34,15 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     # Test prerequisites
     #######################################
     
-    # The profile1 and profile2 arguments are numeric vectors where at least one element is greater 
-    # than zero
-    if (!is.vector(profile1) | !is.numeric(profile1)) {
+    # The profile1 and profile2 arguments are numeric vectors.  
+    if (!is.vector(profile1) || !is.numeric(profile1)) {
         stop("The 'profile1' argument must be a numeric vector.")
     }
-    if (!is.vector(profile2) | !is.numeric(profile2)) {
+    if (!is.vector(profile2) || !is.numeric(profile2)) {
         stop("The 'profile2' argument must be a numeric vector.")
     }
     
-    # At least one element in profile1 and profile2 is less than zero.
-    
+    # At elements in profile1 and profile2 at to have a value superior to zero   
     if (sum(profile1<0, na.rm=T)>0) {
         stop("The profile1 argument contains at least one negative number.")
     }

@@ -17,7 +17,10 @@
     profile2, 
     ratioAreaThreshold=1, 
     ratioMaxMaxThreshold=1, 
-    ratioIntersectThreshold=1)
+    ratioIntersectThreshold=1,
+    diffPosMaxThresholdMinValue=1, 
+    diffPosMaxThresholdMaxDiff=100, 
+    diffPosMaxTolerancePercent=1)
 }
 
 \arguments{
@@ -37,6 +40,15 @@
   \item{ratioIntersectThreshold}{ The minimum denominator accepted 
     to calculate the ratio of the intersection area of both profiles over
     the total area. Default = 1.}
+    
+  \item{diffPosMaxThresholdMinValue}{ The minimum peak accepted to calculate 
+    the metric. Default = 1.}
+    
+  \item{diffPosMaxThresholdMaxDiff}{ The maximum distance accepted between 2 
+    peaks positions in one profile to calculate the metric. Default=100.}
+        
+  \item{diffPosMaxTolerancePercent}{ The maximum percentage of variation accepted 
+    on the maximum value to consider a position as a peak position.  Default=1.}
 }
 
 \details{
@@ -94,14 +106,14 @@
 
 \examples{
 # Example with vector directly used as inputs -----------------------------------------
-ChIPprofileSimilarity:::similarity(c(3,59,6,24,65,34,15,4,53,22),
-        c(15,9,46,44,9,39,27,34,34,4))
+#ChIPprofileSimilarity:::similarity(c(3,59,6,24,65,34,15,4,53,22),
+#        c(15,9,46,44,9,39,27,34,34,4))
 
 # Example with variables used as inputs and customised threshold ----------------------
-profile1<-c(3,59,6,24,65,34,15,4,53,22,21,12,11)
-profile2<-c(15,9,46,44,9,39,27,34,34,4,3,4,2)
-ChIPprofileSimilarity:::similarity(profile1, profile2, 
-        ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12)
+#profile1<-c(3,59,6,24,65,34,15,4,53,22,21,12,11)
+#profile2<-c(15,9,46,44,9,39,27,34,34,4,3,4,2)
+#ChIPprofileSimilarity:::similarity(profile1, profile2, 
+#        ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12)
 
 }
 \keyword{similarity}

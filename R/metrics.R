@@ -114,10 +114,10 @@ RatioArea <- R6Class("RatioArea",
                                
                                # The profile1 and profile2 arguments are numeric vectors where at 
                                # least one element is greater than zero
-                               if (!is.vector(profile1) | !is.numeric(profile1)) {
+                               if (!is.vector(profile1) || !is.numeric(profile1)) {
                                    stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
                                }
-                               if (!is.vector(profile2) | !is.numeric(profile2)) {
+                               if (!is.vector(profile2) || !is.numeric(profile2)) {
                                    stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
                                }
                                
@@ -163,10 +163,10 @@ DiffPosMax <- R6Class("DiffPosMax",
                              
                              # The profile1 and profile2 arguments are numeric vectors where at 
                              # least one element is greater than zero
-                             if (!is.vector(profile1) | !is.numeric(profile1)) {
+                             if (!is.vector(profile1) || !is.numeric(profile1)) {
                                  stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
-                             if (!is.vector(profile2) | !is.numeric(profile2)) {
+                             if (!is.vector(profile2) || !is.numeric(profile2)) {
                                  stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
                              
@@ -212,10 +212,10 @@ RatioIntersect <- R6Class("RatioIntersect",
                              
                              # The profile1 and profile2 arguments are numeric vectors where at 
                              # least one element is greater than zero
-                             if (!is.vector(profile1) | !is.numeric(profile1)) {
+                             if (!is.vector(profile1) || !is.numeric(profile1)) {
                                  stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
-                             if (!is.vector(profile2) | !is.numeric(profile2)) {
+                             if (!is.vector(profile2) || !is.numeric(profile2)) {
                                  stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
                              
@@ -259,10 +259,10 @@ MetricFactory <- R6Class("MetricFactory",
                                   }
                                   
                                   # The profile1 and profile2 arguments are numeric vectors 
-                                  if (!is.vector(profile1) | !is.numeric(profile1)) {
+                                  if (!is.vector(profile1) || !is.numeric(profile1)) {
                                       stop("The 'profile1' argument must be a numeric vector.")
                                   }
-                                  if (!is.vector(profile2) | !is.numeric(profile2)) {
+                                  if (!is.vector(profile2) || !is.numeric(profile2)) {
                                       stop("The 'profile2' argument must be a numeric vector.")
                                   }
                                   
@@ -285,7 +285,7 @@ MetricFactory <- R6Class("MetricFactory",
                                      result= c(result, metric$getMetric())
                                   }
                                   if (metricType == "ALL" || metricType == "DIFF_POS_MAX") {
-                                      metric = DiffPosMax$new(profile1, profile2)
+                                      metric = DiffPosMax$new(profile1, profile2, private$diffPosMaxThresholdMinValue, private$diffPosMaxThresholdMaxDiff, private$diffPosMaxTolerancePercent)
                                       result_name = c(result_name, metric$getType())
                                       result = c(result, metric$getMetric())
                                   }

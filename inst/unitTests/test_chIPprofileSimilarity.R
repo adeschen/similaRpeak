@@ -168,7 +168,7 @@ test.similarity_profile1_zeros_RATIO_INTERSECT<- function() {
 ## Test the result of zeros vector profile1 and profile2 for the DIFF_POS_MAX value
 test.similarity_profile1_zeros_DIFF_POS_MAX<- function() {
     obs = ChIPprofileSimilarity:::similarity(profile1=c(0,0,0,0,0,0,0,0,0,0), profile2=c(0,0,0,0,0,0,0,0,0,0))
-    exp = 0
+    exp = NA
     checkEquals(obs$metrics$DIFF_POS_MAX, exp , msg="A profile with only zero values did not generate 0 for the RATIO_MAX_MAX")
 }
 
@@ -192,7 +192,7 @@ test.similarity_metadata<- function() {
 }
 
 ## Test the metadata results with some NA in profiles
-test.similarity_na_profile+metadata<- function() {
+test.similarity_na_profile_metadata<- function() {
     obs <- list("nbrPosition"=10,"areaProfile1"=223,"areaProfile2"=212,"maxProfile1"=65,"maxProfile2"=46,"maxPositionProfile1"=5,
                 "maxPositionProfile2"=3)
     exp <- ChIPprofileSimilarity:::similarity(c(NA,NA,6,24,65,34,15,4,53,22), c(NA,9,46,44,9,39,27,NA,34,4))[1:7]
@@ -201,7 +201,7 @@ test.similarity_na_profile+metadata<- function() {
 
 ## Test the result of metric RATIO_AREA
 test.similarity_ratio_area<- function() {
-    obs <- 1.084291
+    obs <- 1.08429118773946
     exp <- ChIPprofileSimilarity:::similarity(c(1,59,6,24,65,34,15,4,53,22), c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_AREA
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
@@ -215,14 +215,14 @@ test.similarity_diff_pos_max<- function() {
 
 ## Test the result of metric RATIO_MAX_MAX
 test.similarity_ratio_max_max<- function() {
-    obs <- 1.477273
+    obs <- 1.41304347826
     exp <- ChIPprofileSimilarity:::similarity(c(1,59,6,24,65,34,15,4,53,22), c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_MAX_MAX
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
 ## Test the result of metric RATIO_INTERSECT
 test.similarity_ratio_intersect<- function() {
-    obs <- 0.4852941
+    obs <- 0.346534653465
     exp <- ChIPprofileSimilarity:::similarity(c(1,59,6,24,65,34,15,4,53,22), c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_INTERSECT
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }

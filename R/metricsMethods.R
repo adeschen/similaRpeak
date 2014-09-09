@@ -62,14 +62,15 @@ ratioMaxMax <- function(profile1, profile2, threshold=1){
 
 # Calculate and return the difference between two profiles maximal peaks positions. 
 # The difference is always a positive value. If the minimum peak is 
-# inferior to the threshold, the function returns NA.
+# inferior to the threshold, the function returns NA. If profile1 or profile2 is
+# not a numerical vector (example: vector of NA only), the funtion returns NA.
 #
 # Input:   
 #   profile1:                 a first profile/vector containing depths. Each position is 
 #                             associated to a position in particular, which is assumed.
 #   profile2:                 a second profile/vector containing depths. Each position is 
 #                             associated to a position in particular, which is assumed.
-#   threshold:                the minimum peak accepted to calculate the difference.
+#   threshold:                the minimum peak accepted to calculate the metric.
 #   thresholdDist:            the maximum distance accepted between 2 peaks positions 
 #                             in one profile.
 #   tolerancePercent:         the maximum percentage of variation accepted on the maximum 
@@ -80,9 +81,14 @@ ratioMaxMax <- function(profile1, profile2, threshold=1){
 #
 diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, tolerancePercent=1){
     
+    # The profile1 and profile2 arguments are numeric vectors. If not, NA is returned. 
+    if (!is.vector(profile1) || !is.numeric(profile1) || !is.vector(profile2) || !is.numeric(profile2)) {
+        return(NA)
+    }
+    
     # Get the position of the maximum element associated to each profile
-    max1 = max(profile1)
-    max2 = max(profile2)
+    max1 = max(profile1, na.rm=T)
+    max2 = max(profile2, na.rm=T)
     tolerance_multiple = (1 - (tolerancePercent/100))
     toleranceMax1 = tolerance_multiple * max1
     toleranceMax2 = tolerance_multiple * max2
