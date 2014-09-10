@@ -30,13 +30,13 @@ The **ChIPprofileSimilarity** package calculates metrics to estimate the level o
 
 The four metrics are:
 
-* **RATIO_AREA**: The ratio between the areas. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
+* **RATIO_AREA**: The ratio between the profile areas. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
 
-* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The difference is always a positive value.
+* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The difference is always a positive value. A profile can have more than one position with the maximum value. In that case, the median position is used. A threshold argument can be set to consider all positions within a certain range of the maximum value.
 
-* **RATIO_MAX_MAX**: The ratio between the maximal peaks values. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
+* **RATIO_MAX_MAX**: The ratio between the maximal peaks values in each profile. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
 
-* **RATIO_INTERSECT**: The ratio between the intersection area and the total area. `NA` if minimal threshold is not respected.
+* **RATIO_INTERSECT**: The ratio between the intersection area and the total area of the two profiles. `NA` if minimal threshold is not respected.
    
 
 ## Loading ChIPprofileSimilarity package
@@ -69,6 +69,11 @@ both profiles. Default = 1.
 
 * **ratioIntersectThreshold**: The minimum denominator accepted to calculate the ratio of the intersection area of both profiles over the total area. Default = 1.
 
+* **diffPosMaxThresholdMinValue**: The smaller maximum value accepted to calculate the metric. When this value is not respected, it is assumed that no preak is present in the profile. Default = 1.
+
+* **diffPosMaxThresholdMaxDiff**: The larger distance accepted between 2 maximum positions in one profile to calculate the metric. When this distance is not respected, it is assumed that more than one peak is present in the profile. Default=100.
+
+* **diffPosMaxTolerancePercent**: The maximum percentage of variation accepted on the maximum value to consider a position as a included in the maximum positions list. Default=1.
 
 ## Metrics calculation
 
