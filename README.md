@@ -6,7 +6,7 @@ This package calculates metrics to estimate a level of similarity between two Ch
 ## NOTE ##
 
 To use this current development version, the use of the development version of the R6 package (>= 2.0) is mandatory.
-```
+
 
 ## Authors ##
 
