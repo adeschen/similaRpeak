@@ -14,6 +14,11 @@
 #   ratioIntersectThreshold:                the minimum denominator accepted to calculate the ratio of
 #                                             the intersection area of both profiles and the total 
 #                                             area. Default = 1.
+#  diffPosMaxThresholdMinValue:
+#
+#  diffPosMaxThresholdMaxDiff:
+#
+#  diffPosMaxTolerancePercent:
 #
 # Prerequisites: 
 #   The 'profile1' argument is a numeric vector where no element is less than zero.
@@ -22,6 +27,10 @@
 #   The 'ratioAreaThreshold' argument is a positive numeric value. 
 #   The 'ratioMaxMaxThreshold' argument is a positive numeric value. 
 #   The 'ratioIntersectThreshold' argument is a positive numeric value. 
+#   The 'diffPosMaxThresholdMinValue' argument is a positive numeric value.
+#   The 'diffPosMaxThresholdMaxDiff' argument is a positive numeric value.
+#   The 'diffPosMaxTolerancePercent' argument is a positive numeric value between 0 and 100.
+#
 #
 # Output: 
 #   A list of elements containing information about both profiles and a list of metrics.
@@ -81,8 +90,8 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     }  
     
     # The diffPosMaxTolerancePercent argument is a positive numeric element
-    if (length(diffPosMaxTolerancePercent)!=1 || !is.numeric(diffPosMaxTolerancePercent) || (diffPosMaxTolerancePercent <= 0)){
-        stop("The 'diffPosMaxTolerancePercent' must be a positive numeric value.")
+    if (length(diffPosMaxTolerancePercent)!=1 || !is.numeric(diffPosMaxTolerancePercent) || (diffPosMaxTolerancePercent < 0) || (diffPosMaxTolerancePercent > 100)){
+        stop("The 'diffPosMaxTolerancePercent' must be a positive numeric value between 0 and 100.")
     }  
     
     # Get information about both profiles
