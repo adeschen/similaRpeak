@@ -30,13 +30,13 @@ The **ChIPprofileSimilarity** package calculates metrics to estimate the level o
 
 The four metrics are:
 
-* **RATIO_AREA**: The ratio between the profile areas. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
+* **RATIO_AREA**: The ratio between the profile areas. The larger value is always divided by the smaller value. `NA` is returned if minimal area threshold is not respected for at least one of the profiles.
 
-* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The difference is always a positive value. A profile can have more than one position with the maximum value. In that case, the median position is used. A threshold argument can be set to consider all positions within a certain range of the maximum value.
+* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The difference is always a positive value. `NA` is returned if minimal peak value is not respected. A profile can have more than one position with the maximum value. In that case, the median position is used. A threshold argument can be set to consider all positions within a certain range of the maximum value. A threshold argument can also be set to ensure that the distance between two maximum values is not too wide. When this distance is not respected, it is assumed that more than one peak is present in the profile and `NA` is returned. 
 
-* **RATIO_MAX_MAX**: The ratio between the maximal peaks values in each profile. The larger value is always divided by the smaller value. `NA` if minimal threshold is not respected.
+* **RATIO_MAX_MAX**: The ratio between the maximal peaks values in each profile. The larger value is always divided by the smaller value. `NA` if minimal peak value threshold is not respected for at least one of the profiles.
 
-* **RATIO_INTERSECT**: The ratio between the intersection area and the total area of the two profiles. `NA` if minimal threshold is not respected.
+* **RATIO_INTERSECT**: The ratio between the intersection area and the total area of the two profiles. `NA` if minimal area threshold is not respected for the intersection area.
    
 
 ## Loading ChIPprofileSimilarity package
@@ -73,20 +73,45 @@ both profiles. Default = 1.
 
 * **diffPosMaxThresholdMaxDiff**: The larger distance accepted between 2 maximum positions in one profile to calculate the metric. When this distance is not respected, it is assumed that more than one peak is present in the profile. Default=100.
 
-* **diffPosMaxTolerancePercent**: The maximum percentage of variation accepted on the maximum value to consider a position as a included in the maximum positions list. Default=1.
+* **diffPosMaxTolerance**: The maximum variation accepted on the maximum value to consider a position as a included in the maximum positions list. Default=0.1.
 
 ## Metrics calculation
 
-The metrics are calculated using the `similarity` function which takes as arguments the two ChIP profiles vectors and the threshold values.
+Let's calculate the metrics for two ChIP profiles vectors called 'profile1' and 'profile2'.
 
-```{r metricCalculation}
+```{r profiles}
 profile1<-c(3,59,6,24,65,112,144,77,53,22,21,12,11)
 profile2<-c(15,9,46,44,59,39,27,34,34,4,3,4,2)
-metrics<-ChIPprofileSimilarity:::similarity(profile1, profile2, ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12)
 ```
 
-The `similarity` function returns a list which contains the information about both ChIP-Seq profiles and a list of all four metrics. 
+The two profiles have those shapes.
+
+```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
+plot(profile1, type="b", col="blue", xlab="", ylab="", ylim=c(0, 150), pch=21, lwd=2)
+par(new=T)
+plot(profile2, type="b", col="darkgreen", xlab="Position", ylab="Reads", ylim=c(0, 150), pch=21, lwd=2)
+legend("topright", c("profile 1","profile 2"), cex=1.2, col=c("blue","darkgreen"), pch=21, lty=1:2)
+```
+
+The metrics are calculated using the `similarity` function which takes as arguments the two ChIP profiles vectors and the threshold values.
+
+
+```{r metricCalculation}
+metrics<-ChIPprofileSimilarity:::similarity(profile1, profile2, ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12, diffPosMaxThresholdMinValue=10, diffPosMaxThresholdMaxDiff=10, diffPosMaxTolerance=0.1)
+```
+
+The `similarity` function returns a list which contains the general information about both ChIP-Seq profiles and a list of all four metrics. 
 
 ```{r metricReturn}
 metrics
 ```
+
+Each specific information can be directly accessed specific by using its name. Some exemples:
+
+```{r getInfo}
+metrics$areaProfile1
+metrics$areaProfile2
+metrics$metrics$DIFF_POS_MAX
+metrics$metrics$RATIO_INTERSECT
+```
+

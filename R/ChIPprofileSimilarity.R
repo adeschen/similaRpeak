@@ -14,11 +14,12 @@
 #   ratioIntersectThreshold:                the minimum denominator accepted to calculate the ratio of
 #                                             the intersection area of both profiles and the total 
 #                                             area. Default = 1.
-#  diffPosMaxThresholdMinValue:
-#
-#  diffPosMaxThresholdMaxDiff:
-#
-#  diffPosMaxTolerancePercent:
+#  diffPosMaxThresholdMinValue:             the minimum peak accepted to calculate the metric. 
+#                                             Default = 1.
+#  diffPosMaxThresholdMaxDiff:              the maximum distance accepted between 2 peaks positions in 
+#                                             one profile to calculate the metric. Default=100.
+#  diffPosMaxTolerance:                     the maximum variation accepted on the maximum 
+#                                             value to consider a position as a peak position. Default=0.01.
 #
 # Prerequisites: 
 #   The 'profile1' argument is a numeric vector where no element is less than zero.
@@ -29,7 +30,7 @@
 #   The 'ratioIntersectThreshold' argument is a positive numeric value. 
 #   The 'diffPosMaxThresholdMinValue' argument is a positive numeric value.
 #   The 'diffPosMaxThresholdMaxDiff' argument is a positive numeric value.
-#   The 'diffPosMaxTolerancePercent' argument is a positive numeric value between 0 and 100.
+#   The 'diffPosMaxTolerance' argument is a positive numeric value between 0 and 1.
 #
 #
 # Output: 
@@ -37,7 +38,7 @@
 #
 similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThreshold=1, 
                        ratioIntersectThreshold=1, diffPosMaxThresholdMinValue=1, 
-                       diffPosMaxThresholdMaxDiff=100, diffPosMaxTolerancePercent=1){
+                       diffPosMaxThresholdMaxDiff=100, diffPosMaxTolerance=0.01){
     
     #######################################
     # Test prerequisites
@@ -89,9 +90,9 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
         stop("The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value.")
     }  
     
-    # The diffPosMaxTolerancePercent argument is a positive numeric element
-    if (length(diffPosMaxTolerancePercent)!=1 || !is.numeric(diffPosMaxTolerancePercent) || (diffPosMaxTolerancePercent < 0) || (diffPosMaxTolerancePercent > 100)){
-        stop("The 'diffPosMaxTolerancePercent' must be a positive numeric value between 0 and 100.")
+    # The diffPosMaxTolerance argument is a positive numeric element
+    if (length(diffPosMaxTolerance)!=1 || !is.numeric(diffPosMaxTolerance) || (diffPosMaxTolerance < 0) || (diffPosMaxTolerance > 1)){
+        stop("The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1.")
     }  
     
     # Get information about both profiles
@@ -107,7 +108,7 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     # Create a metric factory object
     factory = MetricFactory$new(ratioAreaThreshold, ratioMaxMaxThreshold, 
                                 ratioIntersectThreshold, diffPosMaxThresholdMinValue,
-                                diffPosMaxThresholdMaxDiff, diffPosMaxTolerancePercent)
+                                diffPosMaxThresholdMaxDiff, diffPosMaxTolerance)
     
     # Generate the list of all metrics availables
     metricList = factory$createMetric("ALL", profile1, profile2)

@@ -125,19 +125,30 @@ test.similarity_non_numeric_diffPosMaxThresholdMaxDiff<- function() {
     checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxThresholdMaxDiff="g"), msg ="The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value.")
 }
 
-## Test the result of null numeric diffPosMaxTolerancePercent
-test.similarity_null_diffPosMaxTolerancePercent<- function() {
+## Test the result of null numeric diffPosMaxTolerance
+test.similarity_null_diffPosMaxTolerance<- function() {
     checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxTolerancePercent=0), msg ="The 'diffPosMaxTolerancePercent' must be a positive numeric value.")
 }
 
-## Test the result of negative diffPosMaxTolerancePercent
-test.similarity_negative_diffPosMaxTolerancePercent<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxTolerancePercent=-5), msg ="The 'diffPosMaxTolerancePercent' must be a positive numeric value.")
+## Test the result of negative diffPosMaxTolerance
+test.similarity_negative_diffPosMaxTolerance<- function() {
+    obs <- tryCatch(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxTolerance=-0.5), error=conditionMessage)
+    exp <- "The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1."
+    checkIdentical(obs, exp, msg="similarity_negative_diffPosMaxTolerance() - A negative diffPosMaxTolerance did not generate an exception with expected message.")
 }
 
 ## Test the result of non numeric diffPosMaxTolerancePercent
-test.similarity_non_numeric_diffPosMaxTolerancePercent<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxTolerancePercent="g"), msg ="The 'diffPosMaxTolerancePercent' must be a positive numeric value.")
+test.similarity_non_numeric_diffPosMaxTolerance<- function() {
+    obs <- tryCatch(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxTolerance="g"), error=conditionMessage)
+    exp <- "The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1."
+    checkIdentical(obs, exp, msg="similarity_non_numeric_diffPosMaxTolerance() - A non numeric diffPosMaxTolerance did not generate an exception with expected message.")
+}
+
+## Test the result of value superior to 100 for diffPosMaxTolerance
+test.similarity_superior_1_diffPosMaxTolerance<- function() {
+    obs <- tryCatch(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), diffPosMaxTolerance=1.01), error=conditionMessage)
+    exp <- "The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1."
+    checkIdentical(obs, exp, msg="similarity_superior_1_diffPosMaxTolerance() - A diffPosMaxTolerance superior to 1 did not generate an exception with expected message.")
 }
 
 ########################################################################

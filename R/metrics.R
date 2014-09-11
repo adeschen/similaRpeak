@@ -139,16 +139,16 @@ RatioArea <- R6Class("RatioArea",
 DiffPosMax <- R6Class("DiffPosMax",
                      inherit = Metric,
                      public = list(
-                         initialize = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerancePercent=1) {
+                         initialize = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerance=0.01) {
                              
                              # Fix the type of metric
                              super$setType("DIFF_POS_MAX")
                              
                              if (!missing(profile1) && !missing(profile2)) {
-                                 self$calculateMetric(profile1, profile2, threshold, thresholdDiff, tolerancePercent)   
+                                 self$calculateMetric(profile1, profile2, threshold, thresholdDiff, tolerance)   
                              }
                          },
-                         calculateMetric = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerancePercent=1) {
+                         calculateMetric = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerance=0.01) {
                              
                              # Reset metric value to NA
                              super$setMetric(NA)
@@ -176,7 +176,7 @@ DiffPosMax <- R6Class("DiffPosMax",
                              }
                              
                              # Calculate and assign the new difference position maximum
-                             super$setMetric(diffPosMax(profile1, profile2, threshold, thresholdDiff, tolerancePercent))
+                             super$setMetric(diffPosMax(profile1, profile2, threshold, thresholdDiff, tolerance))
                          }
                      )
 )  
@@ -237,13 +237,13 @@ MetricFactory <- R6Class("MetricFactory",
                           public = list(
                               initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1,
                                                     diffPosMaxThresholdMinValue=1, diffPosMaxThresholdMaxDiff=100, 
-                                                    diffPosMaxTolerancePercent=1 ) {
+                                                    diffPosMaxTolerance=0.01 ) {
                                   private$ratioAreaThreshold <<- ratioAreaThreshold
                                   private$ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
                                   private$ratioIntersectThreshold <<- ratioIntersectThreshold
                                   private$diffPosMaxThresholdMinValue <<- diffPosMaxThresholdMinValue
                                   private$diffPosMaxThresholdMaxDiff <<- diffPosMaxThresholdMaxDiff
-                                  private$diffPosMaxTolerancePercent <<- diffPosMaxTolerancePercent
+                                  private$diffPosMaxTolerance <<- diffPosMaxTolerance
                               },
                               createMetric = function(metricType, profile1, profile2) {
                                   
@@ -285,7 +285,7 @@ MetricFactory <- R6Class("MetricFactory",
                                      result= c(result, metric$getMetric())
                                   }
                                   if (metricType == "ALL" || metricType == "DIFF_POS_MAX") {
-                                      metric = DiffPosMax$new(profile1, profile2, private$diffPosMaxThresholdMinValue, private$diffPosMaxThresholdMaxDiff, private$diffPosMaxTolerancePercent)
+                                      metric = DiffPosMax$new(profile1, profile2, private$diffPosMaxThresholdMinValue, private$diffPosMaxThresholdMaxDiff, private$diffPosMaxTolerance)
                                       result_name = c(result_name, metric$getType())
                                       result = c(result, metric$getMetric())
                                   }
@@ -313,7 +313,7 @@ MetricFactory <- R6Class("MetricFactory",
                                   ratioIntersectThreshold = NA,
                                   diffPosMaxThresholdMinValue = NA,
                                   diffPosMaxThresholdMaxDiff = NA,
-                                  diffPosMaxTolerancePercent = NA
+                                  diffPosMaxTolerance = NA
                           )
                 )
 

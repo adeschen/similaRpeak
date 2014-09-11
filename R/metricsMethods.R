@@ -67,19 +67,20 @@ ratioMaxMax <- function(profile1, profile2, threshold=1){
 #
 # Input:   
 #   profile1:                 a first profile/vector containing depths. Each position is 
-#                             associated to a position in particular, which is assumed.
+#                               associated to a position in particular, which is assumed.
 #   profile2:                 a second profile/vector containing depths. Each position is 
-#                             associated to a position in particular, which is assumed.
+#                               associated to a position in particular, which is assumed.
 #   threshold:                the minimum peak accepted to calculate the metric.
 #   thresholdDist:            the maximum distance accepted between 2 peaks positions 
-#                             in one profile.
-#   tolerancePercent:         the maximum percentage of variation accepted on the maximum 
-#                             value to consider a position as a peak position.                         
+#                               in one profile.
+#   tolerance:                the maximum variation accepted on the maximum value to
+#                               consider a position as a peak position. The tolerance must
+#                               be between 0 and 1.
 #
 # Output: 
-#   The calculated difference. 
+#   The calculated position difference if treshold are respected.
 #
-diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, tolerancePercent=1){
+diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, tolerance=0.01){
     
     # The profile1 and profile2 arguments are numeric vectors. If not, NA is returned. 
     if (!is.vector(profile1) || !is.numeric(profile1) || !is.vector(profile2) || !is.numeric(profile2)) {
@@ -89,7 +90,7 @@ diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, toler
     # Get the position of the maximum element associated to each profile
     max1 = max(profile1, na.rm=T)
     max2 = max(profile2, na.rm=T)
-    tolerance_multiple = (1 - (tolerancePercent/100))
+    tolerance_multiple = 1 - tolerance
     toleranceMax1 = tolerance_multiple * max1
     toleranceMax2 = tolerance_multiple * max2
     posMax1 = which(profile1 >= toleranceMax1)
