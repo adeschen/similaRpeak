@@ -45,7 +45,6 @@ The four metrics are:
 suppressMessages(library(ChIPprofileSimilarity))
 ```
  
- 
 ## Inputs
 
 ### ChIP profiles vectors
@@ -95,7 +94,6 @@ legend("topright", c("profile 1","profile 2"), cex=1.2, col=c("blue","darkgreen"
 
 The metrics are calculated using the `similarity` function which takes as arguments the two ChIP profiles vectors and the threshold values.
 
-
 ```{r metricCalculation}
 metrics<-ChIPprofileSimilarity:::similarity(profile1, profile2, ratioAreaThreshold=5, ratioMaxMaxThreshold=5, ratioIntersectThreshold=12, diffPosMaxThresholdMinValue=10, diffPosMaxThresholdMaxDiff=10, diffPosMaxTolerance=0.1)
 ```
@@ -114,4 +112,25 @@ metrics$areaProfile2
 metrics$metrics$DIFF_POS_MAX
 metrics$metrics$RATIO_INTERSECT
 ```
+ 
+## Metrics calculation using MetricFactory object
+ 
+It is possible to create only one selected metric by using the metric factory object (with the possibility of specifying the thresholds) and by passing the name of the metric to create ("RATIO_AREA", "DIFF_POS_MAX", "RATIO_MAX_MAX", "RATIO_INTERSECT"):
 
+```{r factory}
+
+factory = MetricFactory$new(diffPosMaxTolerance=0.04)
+```
+
+The factory has to be iniatized only once and can be used as many times as necessary:
+
+```{r factoryDemo }
+ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4))
+ratio_max_max
+ratio_area <- factory$createMetric(metricType="RATIO_AREA", profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4))
+ratio_area
+ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT", profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4))
+ratio_intersect
+diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX", profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4))
+diff_pos_max
+```
