@@ -72,7 +72,7 @@ both profiles. Default = 1.
 
 * **diffPosMaxThresholdMaxDiff**: The larger distance accepted between 2 maximum positions in one profile to calculate the metric. When this distance is not respected, it is assumed that more than one peak is present in the profile. Default=100.
 
-* **diffPosMaxTolerance**: The maximum variation accepted on the maximum value to consider a position as a included in the maximum positions list. Default=0.1.
+* **diffPosMaxTolerance**: The maximum variation accepted on the maximum value to consider a position as a included in the maximum positions list. Default=0.01.
 
 ## Metrics calculation
 

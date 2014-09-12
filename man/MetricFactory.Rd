@@ -1,8 +1,8 @@
 \name{MetricFactory-class}
 \docType{class}
 
-\alias{MetricFactory}
 \alias{MetricFactory-class}
+\alias{MetricFactory}
 
 \title{
   MetricFactory object.
@@ -22,9 +22,17 @@
     diffPosMaxThresholdMinValue=1, 
     diffPosMaxThresholdMaxDiff=100, 
     diffPosMaxTolerance=0.01)}:
-~~ A description of the constructor and its arguments. ~~
+    Create a MetricFactory object.
+    \describe{
+        \item{\code{ratioAreaThreshold}}{TODO}
+        \item{\code{ratioMaxMaxThreshold}}{TODO}
+        \item{\code{ratioIntersectThreshold}}{TODO}
+        \item{\code{diffPosMaxThresholdMinValue}}{TODO}
+        \item{\code{diffPosMaxThresholdMaxDiff}}{TODO}
+        \item{\code{diffPosMaxTolerance}}{TODO}
+    }
   }
-}
+ }
 }
 
 
