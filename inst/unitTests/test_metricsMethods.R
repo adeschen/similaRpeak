@@ -67,7 +67,6 @@ test.getSimilarityMetrics_ratio_max_max_function_na_only<- function() {
 test.getSimilarityMetrics_ratio_max_max_function_0<- function() {
     obs <- NA
     exp <- ChIPprofileSimilarity:::ratioMaxMax(c(0,0,0,0), c(0,0,0,0))
-    
     checkEquals(obs, exp, msg ="The RATIO_MAX_MAX metric should return NA when only 0 in profiles.")
 }
 
@@ -98,7 +97,6 @@ test.getSimilarityMetrics_ratio_Intersect_function_0<- function() {
     exp <- ChIPprofileSimilarity:::ratioIntersect(c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs, exp, msg ="The DIFF_POS_MAX metric should return NA when only zero in profiles.")
 }
-
 
 #### Using dispersed NA
 

@@ -92,7 +92,7 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     
     # The diffPosMaxTolerance argument is a positive numeric element
     if (length(diffPosMaxTolerance)!=1 || !is.numeric(diffPosMaxTolerance) || (diffPosMaxTolerance < 0) || (diffPosMaxTolerance > 1)){
-        stop("The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1.")
+        stop("The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1 included.")
     }  
     
     # Get information about both profiles
