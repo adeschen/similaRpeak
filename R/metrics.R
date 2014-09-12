@@ -114,10 +114,10 @@ RatioArea <- R6Class("RatioArea",
                                
                                # The profile1 and profile2 arguments are numeric vectors where at 
                                # least one element is greater than zero
-                               if (!is.vector(profile1) | !is.numeric(profile1)) {
+                               if (!is.vector(profile1) || !is.numeric(profile1)) {
                                    stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
                                }
-                               if (!is.vector(profile2) | !is.numeric(profile2)) {
+                               if (!is.vector(profile2) || !is.numeric(profile2)) {
                                    stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
                                }
                                
@@ -139,16 +139,16 @@ RatioArea <- R6Class("RatioArea",
 DiffPosMax <- R6Class("DiffPosMax",
                      inherit = Metric,
                      public = list(
-                         initialize = function(profile1, profile2, threshold=NULL) {
+                         initialize = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerance=0.01) {
                              
                              # Fix the type of metric
                              super$setType("DIFF_POS_MAX")
                              
                              if (!missing(profile1) && !missing(profile2)) {
-                                 self$calculateMetric(profile1, profile2, threshold)   
+                                 self$calculateMetric(profile1, profile2, threshold, thresholdDiff, tolerance)   
                              }
                          },
-                         calculateMetric = function(profile1, profile2, threshold=NULL) {
+                         calculateMetric = function(profile1, profile2, threshold=NULL, thresholdDiff=100, tolerance=0.01) {
                              
                              # Reset metric value to NA
                              super$setMetric(NA)
@@ -163,10 +163,10 @@ DiffPosMax <- R6Class("DiffPosMax",
                              
                              # The profile1 and profile2 arguments are numeric vectors where at 
                              # least one element is greater than zero
-                             if (!is.vector(profile1) | !is.numeric(profile1)) {
+                             if (!is.vector(profile1) || !is.numeric(profile1)) {
                                  stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
-                             if (!is.vector(profile2) | !is.numeric(profile2)) {
+                             if (!is.vector(profile2) || !is.numeric(profile2)) {
                                  stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
                              
@@ -175,8 +175,8 @@ DiffPosMax <- R6Class("DiffPosMax",
                                  stop("Lengths of 'profile1' and 'profile2' vectors aren't equals. The metric value has been reset to NA.")
                              }
                              
-                             # Calculate and assign the new max max ratio
-                             super$setMetric(diffPosMax(profile1, profile2, threshold))
+                             # Calculate and assign the new difference position maximum
+                             super$setMetric(diffPosMax(profile1, profile2, threshold, thresholdDiff, tolerance))
                          }
                      )
 )  
@@ -212,10 +212,10 @@ RatioIntersect <- R6Class("RatioIntersect",
                              
                              # The profile1 and profile2 arguments are numeric vectors where at 
                              # least one element is greater than zero
-                             if (!is.vector(profile1) | !is.numeric(profile1)) {
+                             if (!is.vector(profile1) || !is.numeric(profile1)) {
                                  stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
-                             if (!is.vector(profile2) | !is.numeric(profile2)) {
+                             if (!is.vector(profile2) || !is.numeric(profile2)) {
                                  stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
                              }
                              
@@ -231,13 +231,19 @@ RatioIntersect <- R6Class("RatioIntersect",
 )
 
 
-# TODO
+# Class used to create metrics. 
+#
 MetricFactory <- R6Class("MetricFactory",
                           public = list(
-                              initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1) {
+                              initialize = function(ratioAreaThreshold=1, ratioMaxMaxThreshold=1, ratioIntersectThreshold=1,
+                                                    diffPosMaxThresholdMinValue=1, diffPosMaxThresholdMaxDiff=100, 
+                                                    diffPosMaxTolerance=0.01 ) {
                                   private$ratioAreaThreshold <<- ratioAreaThreshold
                                   private$ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
                                   private$ratioIntersectThreshold <<- ratioIntersectThreshold
+                                  private$diffPosMaxThresholdMinValue <<- diffPosMaxThresholdMinValue
+                                  private$diffPosMaxThresholdMaxDiff <<- diffPosMaxThresholdMaxDiff
+                                  private$diffPosMaxTolerance <<- diffPosMaxTolerance
                               },
                               createMetric = function(metricType, profile1, profile2) {
                                   
@@ -252,12 +258,11 @@ MetricFactory <- R6Class("MetricFactory",
                                       stop("The 'profile2' argument is mandatory.")
                                   }
                                   
-                                  # The profile1 and profile2 arguments are numeric vectors where at 
-                                  # least one element is greater than zero
-                                  if (!is.vector(profile1) | !is.numeric(profile1)) {
+                                  # The profile1 and profile2 arguments are numeric vectors 
+                                  if (!is.vector(profile1) || !is.numeric(profile1)) {
                                       stop("The 'profile1' argument must be a numeric vector.")
                                   }
-                                  if (!is.vector(profile2) | !is.numeric(profile2)) {
+                                  if (!is.vector(profile2) || !is.numeric(profile2)) {
                                       stop("The 'profile2' argument must be a numeric vector.")
                                   }
                                   
@@ -280,7 +285,7 @@ MetricFactory <- R6Class("MetricFactory",
                                      result= c(result, metric$getMetric())
                                   }
                                   if (metricType == "ALL" || metricType == "DIFF_POS_MAX") {
-                                      metric = DiffPosMax$new(profile1, profile2)
+                                      metric = DiffPosMax$new(profile1, profile2, private$diffPosMaxThresholdMinValue, private$diffPosMaxThresholdMaxDiff, private$diffPosMaxTolerance)
                                       result_name = c(result_name, metric$getType())
                                       result = c(result, metric$getMetric())
                                   }
@@ -305,7 +310,10 @@ MetricFactory <- R6Class("MetricFactory",
                                   # Threshold values
                                   ratioAreaThreshold = NA,
                                   ratioMaxMaxThreshold = NA,
-                                  ratioIntersectThreshold = NA
+                                  ratioIntersectThreshold = NA,
+                                  diffPosMaxThresholdMinValue = NA,
+                                  diffPosMaxThresholdMaxDiff = NA,
+                                  diffPosMaxTolerance = NA
                           )
                 )
 
