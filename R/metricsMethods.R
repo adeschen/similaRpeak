@@ -15,8 +15,8 @@
 ratioArea <- function(profile1, profile2, threshold=1){
     
     # Get the total area associated to each profile
-    area1 = sum(profile1, na.rm=T)
-    area2 = sum(profile2, na.rm=T)
+    area1 = sum(profile1, na.rm=TRUE)
+    area2 = sum(profile2, na.rm=TRUE)
     
     # Get the ratio between area1 and area2
     minimum = min(area1, area2)
@@ -46,8 +46,8 @@ ratioArea <- function(profile1, profile2, threshold=1){
 ratioMaxMax <- function(profile1, profile2, threshold=1){
     
     # Get the maximum element associated to each profile
-    max1 = max(profile1, na.rm=T)
-    max2 = max(profile2, na.rm=T)
+    max1 = max(profile1, na.rm=TRUE)
+    max2 = max(profile2, na.rm=TRUE)
     
     # Get the ratio between max1 and max2
     minimum = min(max1, max2)
@@ -88,8 +88,8 @@ diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, toler
     }
     
     # Get the position of the maximum element associated to each profile
-    max1 = max(profile1, na.rm=T)
-    max2 = max(profile2, na.rm=T)
+    max1 = max(profile1, na.rm=TRUE)
+    max2 = max(profile2, na.rm=TRUE)
     tolerance_multiple = 1 - tolerance
     toleranceMax1 = tolerance_multiple * max1
     toleranceMax2 = tolerance_multiple * max2
@@ -136,10 +136,10 @@ diffPosMax <- function(profile1, profile2, threshold=1, thresholdDist=100, toler
 ratioIntersect <- function(profile1, profile2, threshold=1){
     
     # Get the area of the intersection (min of both curves for each position)
-    intersect = sum(unlist(lapply(1:length(profile1), function(x) min(profile1[x], profile2[x]))), na.rm=T)
+    intersect = sum(unlist(lapply(1:length(profile1), function(x) min(profile1[x], profile2[x]))), na.rm=TRUE)
     
     # Get the total area covered by both curves
-    totalArea = sum(profile1, na.rm=T)+sum(profile2, na.rm=T)-intersect
+    totalArea = sum(profile1, na.rm=TRUE)+sum(profile2, na.rm=TRUE)-intersect
  
     # Get the ratio between intersect and totArea
     if (totalArea > 0 && threshold <= totalArea){

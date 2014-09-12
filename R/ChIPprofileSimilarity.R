@@ -53,10 +53,10 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     }
     
     # At elements in profile1 and profile2 at to have a value superior to zero   
-    if (sum(profile1<0, na.rm=T)>0) {
+    if (sum(profile1<0, na.rm=TRUE)>0) {
         stop("The profile1 argument contains at least one negative number.")
     }
-    if (sum(profile2<0, na.rm=T)>0){
+    if (sum(profile2<0, na.rm=TRUE)>0){
         stop("The profile2 argument contains at least one negative number.")
     }
     
@@ -97,10 +97,10 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     
     # Get information about both profiles
     nbrPos = length(profile1)
-    areaProfile1 = sum(profile1, na.rm=T)
-    areaProfile2 = sum(profile2, na.rm=T)
-    maxProfile1 = max(profile1, na.rm=T)
-    maxProfile2 = max(profile2, na.rm=T)
+    areaProfile1 = sum(profile1, na.rm=TRUE)
+    areaProfile2 = sum(profile2, na.rm=TRUE)
+    maxProfile1 = max(profile1, na.rm=TRUE)
+    maxProfile2 = max(profile2, na.rm=TRUE)
     maxPositionProfile1 = which.max(profile1)
     maxPositionProfile2 = which.max(profile2)
     
