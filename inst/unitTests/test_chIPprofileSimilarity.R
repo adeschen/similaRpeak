@@ -17,52 +17,88 @@ if(FALSE) {
 
 ## Test the result of non-numeric profile1
 test.similarity_profile1_non_numeric<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,"a",34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4)), msg ="The 'profile1' argument must be a numeric vector.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,"a",34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+        msg ="The 'profile1' argument must be a numeric vector.")
 }
 
 ## Test the result of non-vector profile1
 test.similarity_profile1_non_vector<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=matrix(c(1,59,6,24,65,34,15,4,53,22), ncol=2), profile2=c(15,9,46,44,9,39,27,34,34,4)), msg ="The 'profile1' argument must be a numeric vector.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=matrix(c(1,59,6,24,65,34,15,4,53,22), ncol=2), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+        msg ="The 'profile1' argument must be a numeric vector.")
 }
 
 ## Test the result of negatives values profile1
 test.similarity_profile1_negatives_values<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(0,0,0,-8,0,0,0,0,0,0), profile2=c(15,9,46,44,9,39,27,34,34,4)), msg ="The profile1 argument contains negatives or is made up of zeros only.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(0,0,0,-8,0,0,0,0,0,0), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+        msg ="The profile1 argument contains negatives or is made up of zeros only.")
 }
 
 ## Test the result of different profiles lengths
 test.similarity_different_profiles_lengths<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(39,27,34,34,4)), msg ="Lengths of 'profile1' and 'profile2' vectors aren't equals.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(39,27,34,34,4)), 
+        msg ="Lengths of 'profile1' and 'profile2' vectors aren't equals.")
 }
 
 ## Test the result of negative ratioAreaThreshold
 test.similarity_negative_ratioAreaThreshold<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), ratioAreaThreshold=-5), msg ="The 'ratioAreaThreshold' must be a positive numeric value.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4), 
+        ratioAreaThreshold=-5), 
+        msg ="The 'ratioAreaThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of non numeric ratioAreaThreshold
 test.similarity_non_numeric_ratioAreaThreshold<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), ratioAreaThreshold="g"), msg ="The 'ratioAreaThreshold' must be a positive numeric value.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4), 
+        ratioAreaThreshold="g"), 
+        msg ="The 'ratioAreaThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of null numeric ratioMaxMaxThreshold
 test.similarity_null_ratioMaxMaxThreshold<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), ratioMaxMaxThreshold=0), msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4), 
+        ratioMaxMaxThreshold=0), 
+        msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of negative ratioMaxMaxThreshold
 test.similarity_negative_ratioMaxMaxThreshold<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), ratioMaxMaxThreshold=-5), msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4), 
+        ratioMaxMaxThreshold=-5), 
+        msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of non numeric ratioMaxMaxThreshold
 test.similarity_non_numeric_ratioMaxMaxThreshold<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), ratioMaxMaxThreshold="g"), msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4), 
+        ratioMaxMaxThreshold="g"), 
+        msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of null numeric ratioIntersectThreshold
 test.similarity_null_ratioIntersectThreshold<- function() {
-    checkException(ChIPprofileSimilarity:::similarity(profile1=c(1,59,6,24,65,34,15,4,53,22), profile2=c(15,9,46,44,9,39,27,34,34,4), ratioIntersectThreshold=0), msg ="The 'ratioIntersectThreshold' must be a positive numeric value.")
+    checkException(ChIPprofileSimilarity:::similarity(
+        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+        profile2=c(15,9,46,44,9,39,27,34,34,4), 
+        ratioIntersectThreshold=0), 
+        msg ="The 'ratioIntersectThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of negative ratioIntersectThreshold
