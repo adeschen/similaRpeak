@@ -30,15 +30,22 @@
 #   The 'ratioIntersectThreshold' argument is a positive numeric value. 
 #   The 'diffPosMaxThresholdMinValue' argument is a positive numeric value.
 #   The 'diffPosMaxThresholdMaxDiff' argument is a positive numeric value.
-#   The 'diffPosMaxTolerance' argument is a positive numeric value between 0 and 1.
+#   The 'diffPosMaxTolerance' argument is a positive numeric value
+#      between 0 and 1.
 #
 #
 # Output: 
-#   A list of elements containing information about both profiles and a list of metrics.
+#   A list of elements containing information about both profiles and a 
+#   list of metrics.
 #
-similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThreshold=1, 
-                       ratioIntersectThreshold=1, diffPosMaxThresholdMinValue=1, 
-                       diffPosMaxThresholdMaxDiff=100, diffPosMaxTolerance=0.01){
+similarity <- function(profile1, 
+                       profile2, 
+                       ratioAreaThreshold=1, 
+                       ratioMaxMaxThreshold=1, 
+                       ratioIntersectThreshold=1, 
+                       diffPosMaxThresholdMinValue=1, 
+                       diffPosMaxThresholdMaxDiff=100, 
+                       diffPosMaxTolerance=0.01){
     
     #######################################
     # Test prerequisites
@@ -66,32 +73,45 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     }
     
     # The ratioAreaThreshold argument is a positive numeric element
-    if (length(ratioAreaThreshold)!=1 || !is.numeric(ratioAreaThreshold) || (ratioAreaThreshold <= 0)){
+    if (length(ratioAreaThreshold)!=1 || 
+            !is.numeric(ratioAreaThreshold) || 
+            (ratioAreaThreshold <= 0)){
         stop("The 'ratioAreaThreshold' must be a positive numeric value.")
     }
     
     # The ratioMaxMaxThreshold argument is a positive numeric element
-    if (length(ratioMaxMaxThreshold)!=1 || !is.numeric(ratioMaxMaxThreshold) || (ratioMaxMaxThreshold <= 0)){
+    if (length(ratioMaxMaxThreshold)!=1 || 
+            !is.numeric(ratioMaxMaxThreshold) || 
+            (ratioMaxMaxThreshold <= 0)){
         stop("The 'ratioMaxMaxThreshold' must be a positive numeric value.")
     }
 
     # The ratioIntersectThreshold argument is a positive numeric element
-    if (length(ratioIntersectThreshold)!=1 || !is.numeric(ratioIntersectThreshold) || (ratioIntersectThreshold <= 0)){
+    if (length(ratioIntersectThreshold)!=1 || 
+            !is.numeric(ratioIntersectThreshold) || 
+            (ratioIntersectThreshold <= 0)){
         stop("The 'ratioIntersectThreshold' must be a positive numeric value.")
     }
     
     # The diffPosMaxThresholdMinValue argument is a positive numeric element
-    if (length(diffPosMaxThresholdMinValue)!=1 || !is.numeric(diffPosMaxThresholdMinValue) || (diffPosMaxThresholdMinValue <= 0)){
+    if (length(diffPosMaxThresholdMinValue)!=1 || 
+            !is.numeric(diffPosMaxThresholdMinValue) || 
+            (diffPosMaxThresholdMinValue <= 0)){
         stop("The 'diffPosMaxThresholdMinValue' must be a positive numeric value.")
     }   
     
     # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
-    if (length(diffPosMaxThresholdMaxDiff)!=1 || !is.numeric(diffPosMaxThresholdMaxDiff) || (diffPosMaxThresholdMaxDiff <= 0)){
+    if (length(diffPosMaxThresholdMaxDiff)!=1 || 
+            !is.numeric(diffPosMaxThresholdMaxDiff) || 
+            (diffPosMaxThresholdMaxDiff <= 0)){
         stop("The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value.")
     }  
     
     # The diffPosMaxTolerance argument is a positive numeric element
-    if (length(diffPosMaxTolerance)!=1 || !is.numeric(diffPosMaxTolerance) || (diffPosMaxTolerance < 0) || (diffPosMaxTolerance > 1)){
+    if (length(diffPosMaxTolerance)!=1 || 
+            !is.numeric(diffPosMaxTolerance) || 
+            (diffPosMaxTolerance < 0) || 
+            (diffPosMaxTolerance > 1)){
         stop("The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1 included.")
     }  
     
@@ -106,16 +126,24 @@ similarity <- function(profile1, profile2, ratioAreaThreshold=1, ratioMaxMaxThre
     
     
     # Create a metric factory object
-    factory = MetricFactory$new(ratioAreaThreshold, ratioMaxMaxThreshold, 
-                                ratioIntersectThreshold, diffPosMaxThresholdMinValue,
-                                diffPosMaxThresholdMaxDiff, diffPosMaxTolerance)
+    factory = MetricFactory$new(ratioAreaThreshold, 
+                                ratioMaxMaxThreshold, 
+                                ratioIntersectThreshold, 
+                                diffPosMaxThresholdMinValue,
+                                diffPosMaxThresholdMaxDiff, 
+                                diffPosMaxTolerance)
     
     # Generate the list of all metrics availables
-    metricList = factory$createMetric("ALL", profile1, profile2)
+    metricList = factory$createMetric("ALL", 
+                                      profile1, 
+                                      profile2)
     
     # Create a list containing all pertinent information and a sub-list with all metrics values
-    result = list(nbrPosition=nbrPos, areaProfile1=areaProfile1, areaProfile2=areaProfile2, 
-                  maxProfile1=maxProfile1, maxProfile2=maxProfile2, 
+    result = list(nbrPosition=nbrPos, 
+                  areaProfile1=areaProfile1, 
+                  areaProfile2=areaProfile2, 
+                  maxProfile1=maxProfile1,
+                  maxProfile2=maxProfile2, 
                   maxPositionProfile1=maxPositionProfile1, 
                   maxPositionProfile2=maxPositionProfile2,
                   metrics=metricList)
