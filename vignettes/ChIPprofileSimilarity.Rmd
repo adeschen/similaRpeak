@@ -19,24 +19,41 @@ output:
 Metrics which estimate similarity between two ChIP profiles
 ====================================================================
 
-Astrid Louise Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, Fabien Claude Lamaze, Rawane Samb, Pascal Belleau and Arnaud Droit.
+Astrid Louise Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, 
+Fabien Claude Lamaze, Rawane Samb, Pascal Belleau and Arnaud Droit.
 
-This package and the underlying ChIPprofileSimilarity code are distributed under the Artistic license 2.0. You are free to use and redistribute this software. 
+This package and the underlying ChIPprofileSimilarity code are distributed 
+under the Artistic license 2.0. You are free to use and redistribute 
+this software. 
 
 
 ## Introduction
 
-The **ChIPprofileSimilarity** package calculates metrics to estimate the level of similarity between two ChIP profiles.
+The **ChIPprofileSimilarity** package calculates metrics to estimate the level 
+of similarity between two ChIP profiles.
 
 The four metrics are:
 
-* **RATIO_AREA**: The ratio between the profile areas. The larger value is always divided by the smaller value. `NA` is returned if minimal area threshold is not respected for at least one of the profiles.
+* **RATIO_AREA**: The ratio between the profile areas. The larger value is 
+always divided by the smaller value. `NA` is returned if minimal area 
+threshold is not respected for at least one of the profiles.
 
-* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The difference is always a positive value. `NA` is returned if minimal peak value is not respected. A profile can have more than one position with the maximum value. In that case, the median position is used. A threshold argument can be set to consider all positions within a certain range of the maximum value. A threshold argument can also be set to ensure that the distance between two maximum values is not too wide. When this distance is not respected, it is assumed that more than one peak is present in the profile and `NA` is returned. 
+* **DIFF_POS_MAX**: The difference between the maximal peaks positions. The 
+difference is always a positive value. `NA` is returned if minimal peak value 
+is not respected. A profile can have more than one position with the maximum 
+value. In that case, the median position is used. A threshold argument can be 
+set to consider all positions within a certain range of the maximum value. A 
+threshold argument can also be set to ensure that the distance between two 
+maximum values is not too wide. When this distance is not respected, it is 
+assumed that more than one peak is present in the profile and `NA` is returned. 
 
-* **RATIO_MAX_MAX**: The ratio between the maximal peaks values in each profile. The larger value is always divided by the smaller value. `NA` if minimal peak value threshold is not respected for at least one of the profiles.
+* **RATIO_MAX_MAX**: The ratio between the maximal peaks values in each 
+profile. The larger value is always divided by the smaller value. `NA` if 
+minimal peak value threshold is not respected for at least one of the profiles.
 
-* **RATIO_INTERSECT**: The ratio between the intersection area and the total area of the two profiles. `NA` if minimal area threshold is not respected for the intersection area.
+* **RATIO_INTERSECT**: The ratio between the intersection area and the total 
+area of the two profiles. `NA` if minimal area threshold is not respected for 
+the intersection area.
    
 
 ## Loading ChIPprofileSimilarity package
@@ -49,34 +66,47 @@ suppressMessages(library(ChIPprofileSimilarity))
 
 ### ChIP profiles vectors
 
-To estimate the level of similarity between two ChIP profiles for a specific region, two `vector` 
-containing the RPM values of the two ChIP profiles for each position of the selected region. 
-Both `vector` should have the same length and should not contain any negative value.
+To estimate the level of similarity between two ChIP profiles for a specific 
+region, two `vector` containing the RPM values of the two ChIP profiles for 
+each position of the selected region. Both `vector` should have the same length 
+and should not contain any negative value.
 
 ### Threshold values
 
-When the metric includes a ratio calculation, a threshold for the denominator is assigned to the metric. 
-The threshold has to be positive numerical value. When the threshold is not respected, the metric is
-not calculated and the `NA` value is assigned to it.
+When the metric includes a ratio calculation, a threshold for the denominator 
+is assigned to the metric. The threshold has to be positive numerical value. 
+When the threshold is not respected, the metric is not calculated and the 
+`NA` value is assigned to it.
 
 The three threshold are:
 
-* **ratioAreaThreshold**: The minimum denominator accepted to calculate the ratio of the area between 
-both profiles. Default = 1.
+* **ratioAreaThreshold**: The minimum denominator accepted to calculate 
+the ratio of the area between both profiles. Default = 1.
 
-* **ratioMaxMaxThreshold**: The minimum denominator accepted to calculate the ratio of the maximal peaks values between both profiles. Default = 1.
+* **ratioMaxMaxThreshold**: The minimum denominator accepted to calculate the 
+ratio of the maximal peaks values between both profiles. Default = 1.
 
-* **ratioIntersectThreshold**: The minimum denominator accepted to calculate the ratio of the intersection area of both profiles over the total area. Default = 1.
+* **ratioIntersectThreshold**: The minimum denominator accepted to calculate 
+the ratio of the intersection area of both profiles over the total area. 
+Default = 1.
 
-* **diffPosMaxThresholdMinValue**: The smaller maximum value accepted to calculate the metric. When this value is not respected, it is assumed that no preak is present in the profile. Default = 1.
+* **diffPosMaxThresholdMinValue**: The smaller maximum value accepted to 
+calculate the metric. When this value is not respected, it is assumed that no 
+peak is present in the profile. Default = 1.
 
-* **diffPosMaxThresholdMaxDiff**: The larger distance accepted between 2 maximum positions in one profile to calculate the metric. When this distance is not respected, it is assumed that more than one peak is present in the profile. Default=100.
+* **diffPosMaxThresholdMaxDiff**: The larger distance accepted between 2 
+maximum positions in one profile to calculate the metric. When this distance 
+is not respected, it is assumed that more than one peak is present in the 
+profile. Default=100.
 
-* **diffPosMaxTolerance**: The maximum variation accepted on the maximum value to consider a position as a included in the maximum positions list. Default=0.01.
+* **diffPosMaxTolerance**: The maximum variation accepted on the maximum value 
+to consider a position as a included in the maximum positions list. 
+Default=0.01.
 
 ## Metrics calculation
 
-Let's calculate the metrics for two ChIP profiles vectors called 'profile1' and 'profile2'.
+Let's calculate the metrics for two ChIP profiles vectors called 'profile1' 
+and 'profile2'.
 
 ```{r profiles}
 profile1<-c(3,59,6,24,65,112,144,77,53,22,21,12,11)
@@ -95,10 +125,12 @@ legend("topright", c("profile 1","profile 2"), cex=1.2,
        col=c("blue","darkgreen"), pch=21, lty=1:2)
 ```
 
-The metrics are calculated using the `similarity` function which takes as arguments the two ChIP profiles vectors and the threshold values.
+The metrics are calculated using the `similarity` function which takes as 
+arguments the two ChIP profiles vectors and the threshold values.
 
 ```{r metricCalculation}
-metrics<-ChIPprofileSimilarity:::similarity(profile1, profile2, 
+metrics<-ChIPprofileSimilarity:::similarity(profile1, 
+                                            profile2, 
                                             ratioAreaThreshold=5, 
                                             ratioMaxMaxThreshold=5, 
                                             ratioIntersectThreshold=12, 
@@ -107,13 +139,15 @@ metrics<-ChIPprofileSimilarity:::similarity(profile1, profile2,
                                             diffPosMaxTolerance=0.1)
 ```
 
-The `similarity` function returns a list which contains the general information about both ChIP-Seq profiles and a list of all four metrics. 
+The `similarity` function returns a list which contains the general 
+information about both ChIP-Seq profiles and a list of all four metrics. 
 
 ```{r metricReturn}
 metrics
 ```
 
-Each specific information can be directly accessed by using its name. Some exemples:
+Each specific information can be directly accessed by using its name. 
+Some exemples:
 
 ```{r getInfo}
 metrics$areaProfile1
@@ -124,33 +158,46 @@ metrics$metrics$RATIO_INTERSECT
  
 ## Metrics calculation using MetricFactory object
  
-It is possible to create only one selected metric by using the **MetricFactory** object (with the possibility of specifying the thresholds) and by passing the name of the metric to create ("RATIO_AREA", "DIFF_POS_MAX", "RATIO_MAX_MAX", "RATIO_INTERSECT"):
+It is possible to create only one selected metric by using the 
+**MetricFactory** object (with the possibility of specifying the thresholds) 
+and by passing the name of the metric to create 
+("RATIO_AREA", "DIFF_POS_MAX", "RATIO_MAX_MAX", "RATIO_INTERSECT"):
 
 ```{r factory}
 
 factory = MetricFactory$new(diffPosMaxTolerance=0.04)
+
 ```
 
 
-The factory has to be iniatized only once and can be used as many times as necessary. It can calculate the same metrics but with different profiles or different metrics with same profiles as long as the thresholds remain the same:
+The factory has to be iniatized only once and can be used as many times as 
+necessary. It can calculate the same metrics but with different profiles or 
+different metrics with same profiles as long as the thresholds remain the same:
 
 ```{r factoryDemo }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
                                       profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                       profile2=c(15,9,46,44,9,39,27,34,34,4))
+
 ratio_max_max
-ratio_max_max_with_diff_profiles <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                                         profile1=c(4,6,5,33,26,88,66,55,33,12,11,2,2), 
-                                                         profile2=c(4,32,11,2,3,4,55,45,44,32,22,1,2))
+
+ratio_max_max_with_diff_profiles <- factory$createMetric(
+                    metricType="RATIO_MAX_MAX", 
+                    profile1=c(4,6,5,33,26,88,66,55,33,12,11,2,2), 
+                    profile2=c(4,32,11,2,3,4,55,45,44,32,22,1,2))
+
 ratio_max_max_with_diff_profiles
+
 ratio_area <- factory$createMetric(metricType="RATIO_AREA", 
                                    profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                    profile2=c(15,9,46,44,9,39,27,34,34,4))
 ratio_area
+
 ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT", 
                                         profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                         profile2=c(15,9,46,44,9,39,27,34,34,4))
 ratio_intersect
+
 diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX", 
                                      profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                      profile2=c(15,9,46,44,9,39,27,34,34,4))
