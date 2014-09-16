@@ -84,18 +84,25 @@ RatioMaxMax <- R6Class("RatioMaxMax",
                                 # least one element is greater than zero
                                 if (!is.vector(profile1) ||
                                         !is.numeric(profile1)) {
-                                    stop("The 'profile1' argument must be a numeric vector. The metric value has been reset to NA.")
+                                    stop(paste("The 'profile1' argument must ",
+                                        "be a numeric vector. The metric ", 
+                                        "value has been reset to NA.", sep=""))
                                 } 
                                 if (!is.vector(profile2) || 
                                         !is.numeric(profile2)) {
-                                    stop("The 'profile2' argument must be a numeric vector. The metric value has been reset to NA.")
+                                    stop(paste("The 'profile2' argument must ",
+                                        "be a numeric vector. The metric ",
+                                        "value has been reset to NA.", sep=""))
                                 }
                                 
                                 # The length of profile1 is equal to the 
                                 # length of profile2
                                 if (length(profile1) != 
                                         length(profile2)) {
-                                    stop("Lengths of 'profile1' and 'profile2' vectors aren't equals. The metric value has been reset to NA.")
+                                    stop(paste("Lengths of 'profile1' and ",
+                                        "'profile2' vectors aren't equals. The",
+                                        "metric value has been reset to NA.",
+                                        sep=""))
                                 }
                                 
                                 # Calculate and assign the new max max ratio
@@ -269,8 +276,8 @@ RatioIntersect <- R6Class("RatioIntersect",
                     inherit = Metric,
                     public = list(
                         initialize = function(profile1, 
-                                               profile2, 
-                                               threshold=1) {
+                                                profile2, 
+                                                threshold=1) {
                              
                             # Fix the type of metric
                             super$setType("RATIO_INTERSECT")
@@ -355,9 +362,8 @@ MetricFactory <- R6Class("MetricFactory",
                                   
                             # Metric, profile1 and profile2 are mandatory
                             if (missing(metricType)) {
-                                stop(paste("The 'metricType' argument is ",
-                                               
-                                           "mandatory.", sep=""))
+                                stop(paste("The 'metricType' argument is ", 
+                                            "mandatory.", sep=""))
                             }
                             
                             if (missing(profile1)) {

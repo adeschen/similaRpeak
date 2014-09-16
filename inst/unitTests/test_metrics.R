@@ -108,8 +108,9 @@ test.metrics_metricfactory_wrong_metric_name<- function() {
                                         c(1,59,6,24,65,34,15,4,53,22), 
                                         c(15,9,46,44,9,39,27,34,34,4)), 
                     error=conditionMessage)
-    exp <- paste("The metricType must be one of those choices:  ALL, ",
-            "RATIO_AREA, DIFF_POS_MAX, RATIO_MAX_MAX, RATIO_INTERSECT", sep="")
+    exp <- paste("The metricType must be one of those choices: ALL, ",
+                "RATIO_AREA, DIFF_POS_MAX, RATIO_MAX_MAX, RATIO_INTERSECT"
+                , sep="")
     checkEquals(obs, 
                 exp, 
                 msg=paste("metrics_metricfactory_wrong_metric_name() - ",

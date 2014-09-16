@@ -214,8 +214,8 @@ test.similarity_negative_diffPosMaxTolerance<- function() {
     exp <- paste("The 'diffPosMaxTolerance' must be a positive numeric ", 
                  "value between 0 and 1 included.", sep="")
     checkIdentical(obs, 
-                   exp, 
-                   msg = paste("similarity_negative_diffPosMaxTolerance() - ",
+                    exp, 
+                    msg = paste("similarity_negative_diffPosMaxTolerance() - ",
                             "A negative diffPosMaxTolerance did not generate ",
                             "an exception with expected message.", sep=""))
 }
@@ -227,8 +227,13 @@ test.similarity_non_numeric_diffPosMaxTolerance<- function() {
         profile2=c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxTolerance="g"), 
         error=conditionMessage)
-    exp <- "The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1 included."
-    checkIdentical(obs, exp, msg="similarity_non_numeric_diffPosMaxTolerance() - A non numeric diffPosMaxTolerance did not generate an exception with expected message.")
+    exp <- paste("The 'diffPosMaxTolerance' must be a positive numeric ",
+                    "value between 0 and 1 included.", sep="")
+    checkIdentical(obs, 
+                    exp, 
+                    msg=paste("similarity_non_numeric_diffPosMaxTolerance() - ",
+                        "A non numeric diffPosMaxTolerance did not generate ",
+                        "an,exception with expected message.", sep=""))
 }
 
 ## Test the result of value superior to 1 for diffPosMaxTolerance
@@ -237,8 +242,14 @@ test.similarity_superior_1_diffPosMaxTolerance<- function() {
         profile1=c(1,59,6,24,65,34,15,4,53,22), 
         profile2=c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxTolerance=1.01), error=conditionMessage)
-    exp <- "The 'diffPosMaxTolerance' must be a positive numeric value between 0 and 1 included."
-    checkIdentical(obs, exp, msg="similarity_superior_1_diffPosMaxTolerance() - A diffPosMaxTolerance superior to 1 did not generate an exception with expected message.")
+    exp <- paste("The 'diffPosMaxTolerance' must be a positive numeric value ",
+                    "between 0 and 1 included.", sep="")
+    checkIdentical(obs, 
+                    exp, 
+                    msg= paste("similarity_superior_1_diffPosMaxTolerance() - ",
+                            "A diffPosMaxTolerance superior to 1 did not ",
+                            "generate an exception with expected message.",
+                            sep=""))
 }
 
 ## Test the result of zero numeric diffPosMaxThresholdMaxDiff
@@ -248,7 +259,11 @@ test.similarity_zero_diffPosMaxThresholdMaxDiff<- function() {
         profile2=c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxThresholdMaxDiff=0), error=conditionMessage)
     exp = "The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value."
-    checkEquals(obs, exp, msg="similarity_zero_diffPosMaxThresholdMaxDiff() - A zero value diffPosMaxThresholdMaxDiff dit not generate the expected exception.")
+    checkEquals(obs, 
+                exp, 
+                msg=paste("similarity_zero_diffPosMaxThresholdMaxDiff() - ",
+                        "A zero value diffPosMaxThresholdMaxDiff dit not ",
+                        "generate the expected exception.", sep=""))
 }
 
 ## Test the result of zero numeric ratioAreaThreshold
@@ -258,7 +273,11 @@ test.similarity_zero_ratioAreaThreshold<- function() {
         profile2=c(15,9,46,44,9,39,27,34,34,4), 
         ratioAreaThreshold=0), error=conditionMessage)
     exp <- "The 'ratioAreaThreshold' must be a positive numeric value."
-    checkEquals(obs, exp, msg="similarity_zero_ratioAreaThreshold() - A zero value ratioAreaThreshold dit not generate the expected exception.")
+    checkEquals(obs, 
+                exp, 
+                msg=paste("similarity_zero_ratioAreaThreshold() - A zero ",
+                        "value ratioAreaThreshold dit not generate the ",
+                        "expected exception.", sep=""))
 }
 
 ########################################################################
@@ -272,7 +291,8 @@ test.similarity_profile1_zeros_RATIO_MAX_MAX<- function() {
         profile2=c(15,9,46,44,9,39,27,34,34,4))
     exp = NA
     checkEquals(obs$metrics$RATIO_MAX_MAX, exp , 
-                msg="A profile with only zero values did not generate NA for the RATIO_MAX_MAX")
+                msg=paste("A profile with only zero values did not generate ",
+                        "NA for the RATIO_MAX_MAX", sep=""))
 }
 
 ## Test the result of zeros vector profile1 for the RATIO_AREA value
@@ -305,7 +325,8 @@ test.similarity_profile1_zeros_DIFF_POS_MAX<- function() {
         profile2=c(0,0,0,0,0,0,0,0,0,0))
     exp = NA
     checkEquals(obs$metrics$DIFF_POS_MAX, exp, 
-                msg="A profile with only zero values did not generate 0 for the RATIO_MAX_MAX")
+                msg=paste("A profile with only zero values did not generate 0 ",
+                        "for the RATIO_MAX_MAX", sep=""))
 }
 
 ## Test the result of zeros vector profile1 and profile2 
@@ -315,7 +336,8 @@ test.similarity_profile1_and_profile2_zeros_RATIO_INTERSECT<- function() {
         profile1=c(0,0,0,0,0,0,0,0,0,0), profile2=c(0,0,0,0,0,0,0,0,0,0))
     exp = NA
     checkEquals(obs$metrics$RATIO_INTERSECT, exp, 
-                msg="Two profiles with only zero values did not generate NA for the RATIO_MAX_MAX")
+                msg=paste("Two profiles with only zero values did not ",
+                        "generate NA for the RATIO_MAX_MAX", sep=""))
 }
 
 ## Test the result of zero numeric diffPosMaxTolerance
@@ -327,7 +349,9 @@ test.similarity_zero_diffPosMaxTolerance<- function() {
     exp <- 3
     checkEquals(obs, exp, 
                 tolerance = .Machine$double.eps^0.5, 
-                msg="similarity_zero_diffPosMaxTolerance() - A zero value diffPosMaxTolerance dit not generate the expected DIFF_POS_MAX value")
+                msg=paste("similarity_zero_diffPosMaxTolerance() - A zero ",
+                        "value diffPosMaxTolerance dit not generate the ",
+                        "expected DIFF_POS_MAX value", sep=""))
 }
 
 

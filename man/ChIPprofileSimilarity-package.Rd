@@ -3,10 +3,12 @@
 \alias{ChIPprofileSimilarity-package}
 \alias{ChIPprofileSimilarity}
 \title{
-ChIPprofileSimilarity: Metrics to estimate a level of similarity between two ChIP profiles
+ChIPprofileSimilarity: Metrics to estimate a level of similarity between two 
+ChIP profiles
 }
 \description{
-\pkg{ChIPprofileSimilarity} is calculing four differents metrics to estimate a level of similarity between two ChIP profiles.
+\pkg{ChIPprofileSimilarity} is calculing four differents metrics to estimate a 
+level of similarity between two ChIP profiles.
 }
 \details{
 The R function \code{\link{similarity}} calculates four differents metrics: 
@@ -23,7 +25,9 @@ The R function \code{\link{similarity}} calculates four differents metrics:
                                 total area. 
 }
 
-The function \code{\link{similarity}} also reports basic information about each ChIP profile such as the number of positions, the area, the maximum value and the position of the maximum value.
+The function \code{\link{similarity}} also reports basic information about each 
+ChIP profile such as the number of positions, the area, the maximum value and 
+the position of the maximum value.
 
 To learn more about \pkg{ChIPprofileSimilarity} package see:
 
@@ -38,7 +42,8 @@ R. Samb,
 P. Belleau and
 A. Droit 
 
-Maintainer: Astrid Louise Deschenes <Astrid-Louise.Deschenes@crchuq.ulaval.ca>
+Maintainer: Astrid Louise Deschenes 
+<Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
 }
 \seealso{
 \code{\link{similarity}}

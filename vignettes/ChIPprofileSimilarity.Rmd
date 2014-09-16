@@ -12,7 +12,8 @@ output:
 <!-- rmarkdown v1 -->
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{ChIPprofileSimilarity: similarity between two ChIP profiles}
+%\VignetteIndexEntry{ChIPprofileSimilarity: similarity between two ChIP 
+profiles}
 -->
 
 
@@ -117,12 +118,12 @@ The two profiles have those shapes.
 
 ```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
 plot(profile1, type="b", col="blue", xlab="", ylab="", ylim=c(0, 150), 
-     pch=21, lwd=2)
+            pch=21, lwd=2)
 par(new=TRUE)
 plot(profile2, type="b", col="darkgreen", xlab="Position", ylab="Reads", 
-     ylim=c(0, 150), pch=21, lwd=2)
+            ylim=c(0, 150), pch=21, lwd=2)
 legend("topright", c("profile 1","profile 2"), cex=1.2, 
-       col=c("blue","darkgreen"), pch=21, lty=1:2)
+            col=c("blue","darkgreen"), pch=21, lty=1:2)
 ```
 
 The metrics are calculated using the `similarity` function which takes as 
@@ -176,21 +177,21 @@ different metrics with same profiles as long as the thresholds remain the same:
 
 ```{r factoryDemo }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                      profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                      profile2=c(15,9,46,44,9,39,27,34,34,4))
+                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
 
 ratio_max_max
 
 ratio_max_max_with_diff_profiles <- factory$createMetric(
-                    metricType="RATIO_MAX_MAX", 
-                    profile1=c(4,6,5,33,26,88,66,55,33,12,11,2,2), 
-                    profile2=c(4,32,11,2,3,4,55,45,44,32,22,1,2))
+                                metricType="RATIO_MAX_MAX", 
+                                profile1=c(4,6,5,33,26,88,66,55,33,12,11,2,2), 
+                                profile2=c(4,32,11,2,3,4,55,45,44,32,22,1,2))
 
 ratio_max_max_with_diff_profiles
 
 ratio_area <- factory$createMetric(metricType="RATIO_AREA", 
-                                   profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                   profile2=c(15,9,46,44,9,39,27,34,34,4))
+                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
 ratio_area
 
 ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT", 
@@ -199,7 +200,7 @@ ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT",
 ratio_intersect
 
 diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX", 
-                                     profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                     profile2=c(15,9,46,44,9,39,27,34,34,4))
+                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
 diff_pos_max
 ```

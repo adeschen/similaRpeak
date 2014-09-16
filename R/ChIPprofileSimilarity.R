@@ -19,12 +19,12 @@
 #   ratioIntersectThreshold:    the minimum denominator accepted to calculate 
 #                                 the ratio of the intersection area of both 
 #                                 profiles and the total area. Default = 1.
-#  diffPosMaxThresholdMinValue: the minimum peak accepted to calculate the 
-#                                 metric.Default = 1.
-#  diffPosMaxThresholdMaxDiff:  the maximum distance accepted between 2 peaks 
+#   diffPosMaxThresholdMinValue: the minimum peak accepted to calculate the 
+#                                 metric. Default = 1.
+#   diffPosMaxThresholdMaxDiff:  the maximum distance accepted between 2 peaks 
 #                                 positions in one profile to calculate the 
 #                                 metric. Default=100.
-#  diffPosMaxTolerance:         the maximum variation accepted on the maximum 
+#   diffPosMaxTolerance:         the maximum variation accepted on the maximum 
 #                                 value to consider a position as a peak 
 #                                 position. Default=0.01.
 #

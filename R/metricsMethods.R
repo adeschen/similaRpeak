@@ -148,7 +148,7 @@ ratioIntersect <- function(profile1, profile2, threshold=1){
     
     # Get the area of the intersection (min of both curves for each position)
     intersect = sum(unlist(lapply(1:length(profile1), 
-                                  function(x) min(profile1[x], profile2[x]))), 
+                                function(x) min(profile1[x], profile2[x]))), 
                     na.rm=TRUE)
     
     # Get the total area covered by both curves
