@@ -12,8 +12,7 @@ output:
 <!-- rmarkdown v1 -->
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{ChIPprofileSimilarity: similarity between two ChIP 
-profiles}
+%\VignetteIndexEntry{GenomicProfiling: similarity between two profiles}
 -->
 
 
