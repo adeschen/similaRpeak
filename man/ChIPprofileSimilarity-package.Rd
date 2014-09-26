@@ -1,13 +1,13 @@
 \docType{package}
-\name{ChIPprofileSimilarity}
-\alias{ChIPprofileSimilarity-package}
-\alias{ChIPprofileSimilarity}
+\name{similaRpeak}
+\alias{similaRpeak-package}
+\alias{similaRpeak}
 \title{
-ChIPprofileSimilarity: Metrics to estimate a level of similarity between two 
+similaRpeak: Metrics to estimate a level of similarity between two 
 ChIP profiles
 }
 \description{
-\pkg{ChIPprofileSimilarity} is calculing four differents metrics to estimate a 
+\pkg{similaRpeak} is calculing four differents metrics to estimate a 
 level of similarity between two ChIP profiles.
 }
 \details{
@@ -29,9 +29,9 @@ The function \code{\link{similarity}} also reports basic information about each
 ChIP profile such as the number of positions, the area, the maximum value and 
 the position of the maximum value.
 
-To learn more about \pkg{ChIPprofileSimilarity} package see:
+To learn more about \pkg{similaRpeak} package see:
 
-\url{https://github.com/adeschen/ChIPprofileSimilarity/wiki}
+\url{https://github.com/adeschen/similaRpeak/wiki}
 }
 \author{
 A.L. Deschenes, 

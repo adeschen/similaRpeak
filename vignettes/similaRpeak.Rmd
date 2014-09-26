@@ -1,5 +1,5 @@
 ---
-title: "ChIPprofileSimilarity"
+title: "similaRpeak: similarity between two profiles"
 output:
   html_document:
     theme: null
@@ -12,7 +12,7 @@ output:
 <!-- rmarkdown v1 -->
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{GenomicProfiling: similarity between two profiles}
+%\VignetteIndexEntry{similaRpeak: similarity between two profiles}
 -->
 
 
@@ -22,14 +22,14 @@ Metrics which estimate similarity between two ChIP profiles
 Astrid Louise Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, 
 Fabien Claude Lamaze, Rawane Samb, Pascal Belleau and Arnaud Droit.
 
-This package and the underlying ChIPprofileSimilarity code are distributed 
+This package and the underlying similaRpeak code are distributed 
 under the Artistic license 2.0. You are free to use and redistribute 
 this software. 
 
 
 ## Introduction
 
-The **ChIPprofileSimilarity** package calculates metrics to estimate the level 
+The **similaRpeak** package calculates metrics to estimate the level 
 of similarity between two ChIP profiles.
 
 The four metrics are:
@@ -56,10 +56,10 @@ area of the two profiles. `NA` if minimal area threshold is not respected for
 the intersection area.
    
 
-## Loading ChIPprofileSimilarity package
+## Loading similaRpeak package
 
 ```{r libraryLoad}
-suppressMessages(library(ChIPprofileSimilarity))
+suppressMessages(library(similaRpeak))
 ```
  
 ## Inputs
@@ -129,7 +129,7 @@ The metrics are calculated using the `similarity` function which takes as
 arguments the two ChIP profiles vectors and the threshold values.
 
 ```{r metricCalculation}
-metrics<-ChIPprofileSimilarity:::similarity(profile1, 
+metrics<-similaRpeak:::similarity(profile1, 
                                             profile2, 
                                             ratioAreaThreshold=5, 
                                             ratioMaxMaxThreshold=5, 

@@ -2,7 +2,7 @@
 ## Test the MetricFactory R6 classes
 ###################################################
 
-factory = ChIPprofileSimilarity:::MetricFactory$new()
+factory = similaRpeak:::MetricFactory$new()
 
 ## Test the result of using "ALL"
 test.metrics_metricfactory_all<- function() {

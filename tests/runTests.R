@@ -1,3 +1,3 @@
-## Run all tests in the ChIPprofileSimilarity package
-BiocGenerics:::testPackage("ChIPprofileSimilarity")
+## Run all tests in the similaRpeak package
+BiocGenerics:::testPackage("similaRpeak")
 
