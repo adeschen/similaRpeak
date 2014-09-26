@@ -22,5 +22,5 @@ For more information on Artistic 2.0 License see [http://opensource.org/licenses
 
 ## Bugs/Feature requests ##
 
-If you have any bugs or feature requests, [let us know](https://github.com/adeschen/ChIPprofileSimilarity/issues). Thanks!
+If you have any bugs or feature requests, [let us know](https://github.com/adeschen/similaRpeak/issues). Thanks!
 
