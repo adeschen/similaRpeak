@@ -4,7 +4,7 @@ Title: similaRpeak: a package to estimate a level of similarity between ChIP pro
 Version: 0.99.0
 Date: 2014-08-08
 Authors@R: c(
-        person("Astrid Louise","Deschenes", email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca", role=c("cre","aut"))
+        person("Astrid Louise","Deschenes", email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca", role=c("cre","aut")),
         person("Elsa", "Bernatchez", email="elsa.bernatchez.1@ulaval.ca", role=c("aut")),
         person("Charles", "Joly Beauparlant", email="charles.joly-beauparlant@crchul.ulaval.ca", role=c("aut")),
         person("Fabien Claude", "Lamaze", email="fabien.lamaze.1@ulaval.ca", role=c("aut")),
