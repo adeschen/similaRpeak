@@ -16,15 +16,15 @@
 ratioArea <- function(profile1, profile2, threshold=1){
     
     # Get the total area associated to each profile
-    area1 = sum(profile1, na.rm=TRUE)
-    area2 = sum(profile2, na.rm=TRUE)
+    area1 <- sum(profile1, na.rm=TRUE)
+    area2 <- sum(profile2, na.rm=TRUE)
     
     # Get the ratio between area1 and area2
-    minimum = min(area1, area2)
+    minimum <- min(area1, area2)
     if (minimum > 0  && threshold <= minimum){
-        ratio = max(area1, area2)/minimum
+        ratio <- max(area1, area2)/minimum
     }else {
-        ratio = NA
+        ratio <- NA
     }
     
     return(ratio)
@@ -48,15 +48,15 @@ ratioArea <- function(profile1, profile2, threshold=1){
 ratioMaxMax <- function(profile1, profile2, threshold=1){
     
     # Get the maximum element associated to each profile
-    max1 = max(profile1, na.rm=TRUE)
-    max2 = max(profile2, na.rm=TRUE)
+    max1 <- max(profile1, na.rm=TRUE)
+    max2 <- max(profile2, na.rm=TRUE)
     
     # Get the ratio between max1 and max2
-    minimum = min(max1, max2)
+    minimum <- min(max1, max2)
     if (minimum > 0 && threshold <= minimum){
-        ratio = max(max1, max2)/minimum
+        ratio <- max(max1, max2)/minimum
     }else {
-        ratio = NA
+        ratio <- NA
     }
     
     return(ratio)
@@ -98,32 +98,32 @@ diffPosMax <- function(profile1,
     }
     
     # Get the position of the maximum element associated to each profile
-    max1 = max(profile1, na.rm=TRUE)
-    max2 = max(profile2, na.rm=TRUE)
+    max1 <- max(profile1, na.rm=TRUE)
+    max2 <- max(profile2, na.rm=TRUE)
     tolerance_multiple = 1 - tolerance
-    toleranceMax1 = tolerance_multiple * max1
-    toleranceMax2 = tolerance_multiple * max2
-    posMax1 = which(profile1 >= toleranceMax1)
-    posMax2 = which(profile2 >= toleranceMax2)
+    toleranceMax1 <- tolerance_multiple * max1
+    toleranceMax2 <- tolerance_multiple * max2
+    posMax1 <- which(profile1 >= toleranceMax1)
+    posMax2 <- which(profile2 >= toleranceMax2)
     
     # Get the absolute difference between posMax1 and posMax2
     minimum = min(posMax1, posMax2)
     if ((minimum > 0) && (threshold <= min(max1, max2))) {
         if (length(posMax1)==1 && length(posMax2)==1) {
-            diff = abs(posMax1-posMax2)    
+            diff <- abs(posMax1-posMax2)    
         } else {
-            maxDiff1 = ifelse(length(posMax1)==1, 0, max(diff(sort(posMax1))))
-            maxDiff2 = ifelse(length(posMax2)==1, 0, max(diff(sort(posMax2))))
+            maxDiff1 <- ifelse(length(posMax1)==1, 0, max(diff(sort(posMax1))))
+            maxDiff2 <- ifelse(length(posMax2)==1, 0, max(diff(sort(posMax2))))
             if (max(maxDiff1, maxDiff2) <= thresholdDist){
-                median1 = median(posMax1)
-                median2 = median(posMax2)
-                diff = abs(median1 - median2)
+                median1 <- median(posMax1)
+                median2 <- median(posMax2)
+                diff <- abs(median1 - median2)
             } else {
-                diff = NA
+                diff <- NA
             }
         }
     } else {
-        diff = NA
+        diff <- NA
     }
     
     return(diff)
@@ -147,19 +147,19 @@ diffPosMax <- function(profile1,
 ratioIntersect <- function(profile1, profile2, threshold=1){
     
     # Get the area of the intersection (min of both curves for each position)
-    intersect = sum(unlist(lapply(1:length(profile1), 
+    intersect <- sum(unlist(lapply(1:length(profile1), 
                                 function(x) min(profile1[x], profile2[x]))), 
                     na.rm=TRUE)
     
     # Get the total area covered by both curves
-    totalArea = sum(profile1, na.rm=TRUE)+
+    totalArea <- sum(profile1, na.rm=TRUE)+
         sum(profile2, na.rm=TRUE) - intersect
  
     # Get the ratio between intersect and totArea
     if (totalArea > 0 && threshold <= totalArea){
-        ratio = intersect/totalArea
+        ratio <- intersect/totalArea
     }else {
-        ratio = NA
+        ratio <- NA
     }
 
     return(ratio)

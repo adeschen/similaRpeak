@@ -68,10 +68,10 @@ similarity <- function(profile1,
     }
     
     # At elements in profile1 and profile2 at to have a value superior to zero   
-    if (sum(profile1<0, na.rm=TRUE)>0) {
+    if (sum(profile1 < 0, na.rm=TRUE) > 0) {
         stop("The profile1 argument contains at least one negative number.")
     }
-    if (sum(profile2<0, na.rm=TRUE)>0){
+    if (sum(profile2 < 0, na.rm=TRUE) > 0){
         stop("The profile2 argument contains at least one negative number.")
     }
     
@@ -81,28 +81,28 @@ similarity <- function(profile1,
     }
     
     # The ratioAreaThreshold argument is a positive numeric element
-    if (length(ratioAreaThreshold)!=1 || 
+    if (length(ratioAreaThreshold) != 1 || 
             !is.numeric(ratioAreaThreshold) || 
             (ratioAreaThreshold <= 0)){
         stop("The 'ratioAreaThreshold' must be a positive numeric value.")
     }
     
     # The ratioMaxMaxThreshold argument is a positive numeric element
-    if (length(ratioMaxMaxThreshold)!=1 || 
+    if (length(ratioMaxMaxThreshold) != 1 || 
             !is.numeric(ratioMaxMaxThreshold) || 
             (ratioMaxMaxThreshold <= 0)){
         stop("The 'ratioMaxMaxThreshold' must be a positive numeric value.")
     }
 
     # The ratioIntersectThreshold argument is a positive numeric element
-    if (length(ratioIntersectThreshold)!=1 || 
+    if (length(ratioIntersectThreshold) != 1 || 
             !is.numeric(ratioIntersectThreshold) || 
             (ratioIntersectThreshold <= 0)){
         stop("The 'ratioIntersectThreshold' must be a positive numeric value.")
     }
     
     # The diffPosMaxThresholdMinValue argument is a positive numeric element
-    if (length(diffPosMaxThresholdMinValue)!=1 || 
+    if (length(diffPosMaxThresholdMinValue) != 1 || 
             !is.numeric(diffPosMaxThresholdMinValue) || 
             (diffPosMaxThresholdMinValue <= 0)){
         stop(paste("The 'diffPosMaxThresholdMinValue' must be a positive ",
@@ -110,7 +110,7 @@ similarity <- function(profile1,
     }   
     
     # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
-    if (length(diffPosMaxThresholdMaxDiff)!=1 || 
+    if (length(diffPosMaxThresholdMaxDiff) != 1 || 
             !is.numeric(diffPosMaxThresholdMaxDiff) || 
             (diffPosMaxThresholdMaxDiff <= 0)){
         stop(paste("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
@@ -118,7 +118,7 @@ similarity <- function(profile1,
     }  
     
     # The diffPosMaxTolerance argument is a positive numeric element
-    if (length(diffPosMaxTolerance)!=1 || 
+    if (length(diffPosMaxTolerance) != 1 || 
             !is.numeric(diffPosMaxTolerance) || 
             (diffPosMaxTolerance < 0) || 
             (diffPosMaxTolerance > 1)){
@@ -127,17 +127,17 @@ similarity <- function(profile1,
     }  
     
     # Get information about both profiles
-    nbrPos = length(profile1)
-    areaProfile1 = sum(profile1, na.rm=TRUE)
-    areaProfile2 = sum(profile2, na.rm=TRUE)
-    maxProfile1 = max(profile1, na.rm=TRUE)
-    maxProfile2 = max(profile2, na.rm=TRUE)
-    maxPositionProfile1 = which.max(profile1)
-    maxPositionProfile2 = which.max(profile2)
+    nbrPos <- length(profile1)
+    areaProfile1 <- sum(profile1, na.rm=TRUE)
+    areaProfile2 <- sum(profile2, na.rm=TRUE)
+    maxProfile1 <- max(profile1, na.rm=TRUE)
+    maxProfile2 <- max(profile2, na.rm=TRUE)
+    maxPositionProfile1 <- which.max(profile1)
+    maxPositionProfile2 <- which.max(profile2)
     
     
     # Create a metric factory object
-    factory = MetricFactory$new(ratioAreaThreshold, 
+    factory <- MetricFactory$new(ratioAreaThreshold, 
                                 ratioMaxMaxThreshold, 
                                 ratioIntersectThreshold, 
                                 diffPosMaxThresholdMinValue,
@@ -145,13 +145,13 @@ similarity <- function(profile1,
                                 diffPosMaxTolerance)
     
     # Generate the list of all metrics availables
-    metricList = factory$createMetric("ALL", 
+    metricList <- factory$createMetric("ALL", 
                                     profile1, 
                                     profile2)
     
     # Create a list containing all pertinent information and 
     # a sub-list with all metrics values
-    result = list(nbrPosition=nbrPos, 
+    result <- list(nbrPosition=nbrPos, 
                 areaProfile1=areaProfile1, 
                 areaProfile2=areaProfile2, 
                 maxProfile1=maxProfile1,
