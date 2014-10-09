@@ -23,10 +23,10 @@
 #                                 metric. Default = 1.
 #   diffPosMaxThresholdMaxDiff:  the maximum distance accepted between 2 peaks 
 #                                 positions in one profile to calculate the 
-#                                 metric. Default=100.
+#                                 metric. Default = 100.
 #   diffPosMaxTolerance:         the maximum variation accepted on the maximum 
 #                                 value to consider a position as a peak 
-#                                 position. Default=0.01.
+#                                 position. Default = 0.01.
 #
 # Prerequisites: 
 #   The 'profile1' argument is a numeric vector where no element is less 
