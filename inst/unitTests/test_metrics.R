@@ -39,7 +39,7 @@ test.metrics_metricfactory_ratio_max_max <- function() {
 
 ## Test the result of using "RATIO_INTERSECT"
 test.metrics_metricfactory_ratio_intersect <- function() {
-    exp <- list("RATIO_INTERSECT"=0.346534653)
+    exp <- list("RATIO_INTERSECT" = 0.346534653)
     obs <- factory$createMetric("RATIO_INTERSECT", 
                                 c(1,59,6,24,65,34,15,4,53,22), 
                                 c(15,9,46,44,9,39,27,34,34,4))
@@ -54,12 +54,12 @@ test.metrics_metricfactory_all_na_only <- function() {
 
 ## Test the result of DIFF_POS_MAX when using profiles with only zero values
 test.metrics_metricfactory_all_0_diff_pos_max <- function() {
-    exp <- list("RATIO_AREA"=NA,"DIFF_POS_MAX"=NA,"RATIO_MAX_MAX"=NA,
-                "RATIO_INTERSECT"=NA)
+    exp <- list("RATIO_AREA"=NA,"DIFF_POS_MAX" = NA,"RATIO_MAX_MAX" = NA,
+                "RATIO_INTERSECT" = NA)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$DIFF_POS_MAX, exp$DIFF_POS_MAX, 
                 msg=paste("The DIFF_POS_MAX is not expected value when only ", 
-                            "zero in profiles."), sep="")
+                            "zero in profiles."), sep = "")
 }
 
 ## Test the result of RATIO_MAX_MAX when using profiles with only zero values

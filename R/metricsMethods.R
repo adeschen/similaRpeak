@@ -13,7 +13,7 @@
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioArea <- function(profile1, profile2, threshold=1){
+ratioArea <- function(profile1, profile2, threshold = 1){
     
     # Get the total area associated to each profile
     area1 <- sum(profile1, na.rm = TRUE)
@@ -84,9 +84,9 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1){
 #
 diffPosMax <- function(profile1, 
                        profile2, 
-                       threshold=1, 
-                       thresholdDist=100, 
-                       tolerance=0.01){
+                       threshold = 1, 
+                       thresholdDist = 100, 
+                       tolerance = 0.01){
     
     # The profile1 and profile2 arguments are numeric vectors. 
     # If not, NA is returned. 
@@ -98,8 +98,8 @@ diffPosMax <- function(profile1,
     }
     
     # Get the position of the maximum element associated to each profile
-    max1 <- max(profile1, na.rm=TRUE)
-    max2 <- max(profile2, na.rm=TRUE)
+    max1 <- max(profile1, na.rm = TRUE)
+    max2 <- max(profile2, na.rm = TRUE)
     
     tolerance_multiple <- 1 - tolerance
     toleranceMax1 <- tolerance_multiple * max1

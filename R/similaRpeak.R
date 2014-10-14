@@ -48,12 +48,12 @@
 #
 similarity <- function(profile1, 
                     profile2, 
-                    ratioAreaThreshold=1, 
-                    ratioMaxMaxThreshold=1, 
-                    ratioIntersectThreshold=1, 
-                    diffPosMaxThresholdMinValue=1, 
-                    diffPosMaxThresholdMaxDiff=100, 
-                    diffPosMaxTolerance=0.01){
+                    ratioAreaThreshold = 1, 
+                    ratioMaxMaxThreshold = 1, 
+                    ratioIntersectThreshold = 1, 
+                    diffPosMaxThresholdMinValue = 1, 
+                    diffPosMaxThresholdMaxDiff = 100, 
+                    diffPosMaxTolerance = 0.01){
     
     #######################################
     # Test prerequisites
@@ -68,10 +68,10 @@ similarity <- function(profile1,
     }
     
     # At elements in profile1 and profile2 at to have a value superior to zero   
-    if (sum(profile1 < 0, na.rm=TRUE) > 0) {
+    if (sum(profile1 < 0, na.rm = TRUE) > 0) {
         stop("The profile1 argument contains at least one negative number.")
     }
-    if (sum(profile2 < 0, na.rm=TRUE) > 0){
+    if (sum(profile2 < 0, na.rm = TRUE) > 0){
         stop("The profile2 argument contains at least one negative number.")
     }
     

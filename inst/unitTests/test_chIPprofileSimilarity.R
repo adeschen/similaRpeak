@@ -28,14 +28,14 @@ test.similarity_profile1_non_vector <- function() {
     checkException(similaRpeak:::similarity(
         profile1 = matrix(c(1,59,6,24,65,34,15,4,53,22), ncol=2), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4)), 
-        msg ="The 'profile1' argument must be a numeric vector.")
+        msg = "The 'profile1' argument must be a numeric vector.")
 }
 
 ## Test the result of negatives values profile1
 test.similarity_profile1_negatives_values <- function() {
     checkException(similaRpeak:::similarity(
-        profile1=c(0,0,0,-8,0,0,0,0,0,0), 
-        profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+        profile1 = c(0,0,0,-8,0,0,0,0,0,0), 
+        profile2 = c(15,9,46,44,9,39,27,34,34,4)), 
         msg = paste("The profile1 argument contains negatives or is ",
                     "made up of zeros only.", sep = ""))
 }
@@ -45,7 +45,7 @@ test.similarity_different_profiles_lengths <- function() {
     checkException(similaRpeak:::similarity(
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(39,27,34,34,4)), 
-        msg ="Lengths of 'profile1' and 'profile2' vectors aren't equals.")
+        msg = "Lengths of 'profile1' and 'profile2' vectors aren't equals.")
 }
 
 ## Test the result of negative ratioAreaThreshold
@@ -54,7 +54,7 @@ test.similarity_negative_ratioAreaThreshold <- function() {
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
         ratioAreaThreshold = -5), 
-        msg ="The 'ratioAreaThreshold' must be a positive numeric value.")
+        msg = "The 'ratioAreaThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of non numeric ratioAreaThreshold
@@ -62,8 +62,8 @@ test.similarity_non_numeric_ratioAreaThreshold <- function() {
     checkException(similaRpeak:::similarity(
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
-        ratioAreaThreshold="g"), 
-        msg ="The 'ratioAreaThreshold' must be a positive numeric value.")
+        ratioAreaThreshold = "g"), 
+        msg = "The 'ratioAreaThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of null numeric ratioMaxMaxThreshold
@@ -155,7 +155,7 @@ test.similarity_negative_diffPosMaxThresholdMaxDiff <- function() {
     checkException(similaRpeak:::similarity(
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
-        diffPosMaxThresholdMaxDiff=-5), 
+        diffPosMaxThresholdMaxDiff = -5), 
         msg = paste("The 'diffPosMaxThresholdMaxDiff' must be a positive ", 
                     "numeric value.", sep = ""))
 }
@@ -254,11 +254,11 @@ test.similarity_superior_1_diffPosMaxTolerance <- function() {
 
 ## Test the result of zero numeric diffPosMaxThresholdMaxDiff
 test.similarity_zero_diffPosMaxThresholdMaxDiff <- function() {
-    obs = tryCatch(similaRpeak:::similarity(
+    obs <- tryCatch(similaRpeak:::similarity(
         profile1=c(1,59,6,24,65,34,15,4,53,22), 
         profile2=c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxThresholdMaxDiff=0), error=conditionMessage)
-    exp = "The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value."
+    exp <- "The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value."
     checkEquals(obs, 
                 exp, 
                 msg=paste("similarity_zero_diffPosMaxThresholdMaxDiff() - ",
@@ -271,7 +271,7 @@ test.similarity_zero_ratioAreaThreshold <- function() {
     obs <- tryCatch(similaRpeak:::similarity(
         profile1=c(1,59,6,24,65,34,53,4,53,22), 
         profile2=c(15,9,46,44,9,39,27,34,34,4), 
-        ratioAreaThreshold=0), error=conditionMessage)
+        ratioAreaThreshold = 0), error=conditionMessage)
     exp <- "The 'ratioAreaThreshold' must be a positive numeric value."
     checkEquals(obs, 
                 exp, 
@@ -286,57 +286,57 @@ test.similarity_zero_ratioAreaThreshold <- function() {
 
 ## Test the result of zeros vector profile1 for the RATIO_MAX_MAX value
 test.similarity_profile1_zeros_RATIO_MAX_MAX <- function() {
-    obs = similaRpeak:::similarity(
-        profile1=c(0,0,0,0,0,0,0,0,0,0), 
-        profile2=c(15,9,46,44,9,39,27,34,34,4))
-    exp = NA
+    obs <- similaRpeak:::similarity(
+        profile1 = c(0,0,0,0,0,0,0,0,0,0), 
+        profile2 = c(15,9,46,44,9,39,27,34,34,4))
+    exp <- NA
     checkEquals(obs$metrics$RATIO_MAX_MAX, exp , 
-                msg=paste("A profile with only zero values did not generate ",
+                msg = paste("A profile with only zero values did not generate ",
                         "NA for the RATIO_MAX_MAX", sep = ""))
 }
 
 ## Test the result of zeros vector profile1 for the RATIO_AREA value
 test.similarity_profile1_zeros_RATIO_AREA <- function() {
-    obs = similaRpeak:::similarity(
+    obs <- similaRpeak:::similarity(
         profile1=c(0,0,0,0,0,0,0,0,0,0), 
         profile2=c(15,9,46,44,9,39,27,34,34,4))
-    exp = NA
+    exp <- NA
     checkEquals(obs$metrics$RATIO_AREA, exp, 
-                msg=paste("A profile with only zero values did not generate ",
+                msg = paste("A profile with only zero values did not generate ",
                             "NA for the RATIO_MAX_MAX", sep = ""))
 }
 
 ## Test the result of zeros vector profile1 for the RATIO_INTERSECT value
 test.similarity_profile1_zeros_RATIO_INTERSECT <- function() {
-    obs = similaRpeak:::similarity(
-        profile1=c(0,0,0,0,0,0,0,0,0,0), 
-        profile2=c(15,9,46,44,9,39,27,34,34,4))
-    exp = 0
+    obs <- similaRpeak:::similarity(
+        profile1 = c(0,0,0,0,0,0,0,0,0,0), 
+        profile2 = c(15,9,46,44,9,39,27,34,34,4))
+    exp <- 0
     checkEquals(obs$metrics$RATIO_INTERSECT, exp, 
-                msg=paste("A profile with only zero values did not generate ",
+                msg = paste("A profile with only zero values did not generate ",
                             "0 for the RATIO_MAX_MAX", sep = ""))
 }
 
 ## Test the result of zeros vector profile1 and profile2 for 
 ## the DIFF_POS_MAX value
 test.similarity_profile1_zeros_DIFF_POS_MAX <- function() {
-    obs = similaRpeak:::similarity(
-        profile1=c(0,0,0,0,0,0,0,0,0,0), 
-        profile2=c(0,0,0,0,0,0,0,0,0,0))
-    exp = NA
+    obs <- similaRpeak:::similarity(
+        profile1 = c(0,0,0,0,0,0,0,0,0,0), 
+        profile2 = c(0,0,0,0,0,0,0,0,0,0))
+    exp <- NA
     checkEquals(obs$metrics$DIFF_POS_MAX, exp, 
-                msg=paste("A profile with only zero values did not generate 0 ",
-                        "for the RATIO_MAX_MAX", sep = ""))
+                msg = paste("A profile with only zero values did not ",
+                        "generate 0 for the RATIO_MAX_MAX", sep = ""))
 }
 
 ## Test the result of zeros vector profile1 and profile2 
 ## for the RATIO_INTERSECT value
 test.similarity_profile1_and_profile2_zeros_RATIO_INTERSECT <- function() {
-    obs = similaRpeak:::similarity(
-        profile1=c(0,0,0,0,0,0,0,0,0,0), profile2=c(0,0,0,0,0,0,0,0,0,0))
-    exp = NA
+    obs <- similaRpeak:::similarity(
+        profile1 = c(0,0,0,0,0,0,0,0,0,0), profile2 = c(0,0,0,0,0,0,0,0,0,0))
+    exp <- NA
     checkEquals(obs$metrics$RATIO_INTERSECT, exp, 
-                msg=paste("Two profiles with only zero values did not ",
+                msg = paste("Two profiles with only zero values did not ",
                         "generate NA for the RATIO_MAX_MAX", sep = ""))
 }
 
@@ -345,11 +345,11 @@ test.similarity_zero_diffPosMaxTolerance <- function() {
     obs <- similaRpeak:::similarity(
         c(1,59,6,24,65,34,15,4,53,22), 
         c(15,99,46,44,5,39,27,34,34,4), 
-        diffPosMaxTolerance=0)$metrics$DIFF_POS_MAX
+        diffPosMaxTolerance = 0)$metrics$DIFF_POS_MAX
     exp <- 3
     checkEquals(obs, exp, 
                 tolerance = .Machine$double.eps^0.5, 
-                msg=paste("similarity_zero_diffPosMaxTolerance() - A zero ",
+                msg = paste("similarity_zero_diffPosMaxTolerance() - A zero ",
                         "value diffPosMaxTolerance dit not generate the ",
                         "expected DIFF_POS_MAX value", sep = ""))
 }
