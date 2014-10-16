@@ -16,7 +16,7 @@ See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/ "Arnaud Droit Lab"
 
 ## License ##
 
-This package and the underlying metagene code are distributed under the Artistic license 2.0. You are free to use and redistribute this software. 
+This package and the underlying similaRpeak code are distributed under the Artistic license 2.0. You are free to use and redistribute this software. 
 
 For more information on Artistic 2.0 License see [http://opensource.org/licenses/Artistic-2.0](http://opensource.org/licenses/Artistic-2.0)
 
