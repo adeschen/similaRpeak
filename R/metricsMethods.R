@@ -118,7 +118,7 @@ diffPosMax <- function(profile1,
                                         max(diff(sort(posMax1))))
             maxDiff2 <- ifelse(length(posMax2) == 1, 0, 
                                         max(diff(sort(posMax2))))
-            if (max(maxDiff1, maxDiff2) <= thresholdDist){
+            if (max(maxDiff1, maxDiff2) <= thresholdDist) {
                 median1 <- median(posMax1)
                 median2 <- median(posMax2)
                 diff <- abs(median1 - median2)
@@ -148,7 +148,7 @@ diffPosMax <- function(profile1,
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioIntersect <- function(profile1, profile2, threshold = 1){
+ratioIntersect <- function(profile1, profile2, threshold = 1) {
     
     # Get the area of the intersection (min of both curves for each position)
     intersect <- sum(unlist(lapply(1:length(profile1), 

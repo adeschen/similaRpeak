@@ -53,7 +53,7 @@ similarity <- function(profile1,
                     ratioIntersectThreshold = 1, 
                     diffPosMaxThresholdMinValue = 1, 
                     diffPosMaxThresholdMaxDiff = 100, 
-                    diffPosMaxTolerance = 0.01){
+                    diffPosMaxTolerance = 0.01) {
     
     #######################################
     # Test prerequisites
@@ -71,7 +71,7 @@ similarity <- function(profile1,
     if (sum(profile1 < 0, na.rm = TRUE) > 0) {
         stop("The profile1 argument contains at least one negative number.")
     }
-    if (sum(profile2 < 0, na.rm = TRUE) > 0){
+    if (sum(profile2 < 0, na.rm = TRUE) > 0) {
         stop("The profile2 argument contains at least one negative number.")
     }
     
@@ -83,28 +83,28 @@ similarity <- function(profile1,
     # The ratioAreaThreshold argument is a positive numeric element
     if (length(ratioAreaThreshold) != 1 || 
             !is.numeric(ratioAreaThreshold) || 
-            (ratioAreaThreshold <= 0)){
+            (ratioAreaThreshold <= 0)) {
         stop("The 'ratioAreaThreshold' must be a positive numeric value.")
     }
     
     # The ratioMaxMaxThreshold argument is a positive numeric element
     if (length(ratioMaxMaxThreshold) != 1 || 
             !is.numeric(ratioMaxMaxThreshold) || 
-            (ratioMaxMaxThreshold <= 0)){
+            (ratioMaxMaxThreshold <= 0)) {
         stop("The 'ratioMaxMaxThreshold' must be a positive numeric value.")
     }
 
     # The ratioIntersectThreshold argument is a positive numeric element
     if (length(ratioIntersectThreshold) != 1 || 
             !is.numeric(ratioIntersectThreshold) || 
-            (ratioIntersectThreshold <= 0)){
+            (ratioIntersectThreshold <= 0)) {
         stop("The 'ratioIntersectThreshold' must be a positive numeric value.")
     }
     
     # The diffPosMaxThresholdMinValue argument is a positive numeric element
     if (length(diffPosMaxThresholdMinValue) != 1 || 
             !is.numeric(diffPosMaxThresholdMinValue) || 
-            (diffPosMaxThresholdMinValue <= 0)){
+            (diffPosMaxThresholdMinValue <= 0)) {
         stop(paste("The 'diffPosMaxThresholdMinValue' must be a positive ",
                 "numeric value.", sep=""))
     }   
@@ -112,7 +112,7 @@ similarity <- function(profile1,
     # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
     if (length(diffPosMaxThresholdMaxDiff) != 1 || 
             !is.numeric(diffPosMaxThresholdMaxDiff) || 
-            (diffPosMaxThresholdMaxDiff <= 0)){
+            (diffPosMaxThresholdMaxDiff <= 0)) {
         stop(paste("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
                 "numeric value.", sep=""))
     }  
@@ -121,7 +121,7 @@ similarity <- function(profile1,
     if (length(diffPosMaxTolerance) != 1 || 
             !is.numeric(diffPosMaxTolerance) || 
             (diffPosMaxTolerance < 0) || 
-            (diffPosMaxTolerance > 1)){
+            (diffPosMaxTolerance > 1)) {
         stop(paste("The 'diffPosMaxTolerance' must be a positive numeric ",
                 "value between 0 and 1 included.", sep=""))
     }  
