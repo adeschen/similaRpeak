@@ -1,4 +1,8 @@
 ###################################################
+# Created by Astrid Deschenes
+# 2014-08-08
+
+###################################################
 ## Test the similarity function
 ###################################################
 
@@ -81,7 +85,7 @@ test.similarity_negative_ratioMaxMaxThreshold <- function() {
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
         ratioMaxMaxThreshold = -5), 
-        msg ="The 'ratioMaxMaxThreshold' must be a positive numeric value.")
+        msg = "The 'ratioMaxMaxThreshold' must be a positive numeric value.")
 }
 
 ## Test the result of non numeric ratioMaxMaxThreshold
@@ -298,8 +302,8 @@ test.similarity_profile1_zeros_RATIO_MAX_MAX <- function() {
 ## Test the result of zeros vector profile1 for the RATIO_AREA value
 test.similarity_profile1_zeros_RATIO_AREA <- function() {
     obs <- similaRpeak:::similarity(
-        profile1=c(0,0,0,0,0,0,0,0,0,0), 
-        profile2=c(15,9,46,44,9,39,27,34,34,4))
+        profile1 = c(0,0,0,0,0,0,0,0,0,0), 
+        profile2 = c(15,9,46,44,9,39,27,34,34,4))
     exp <- NA
     checkEquals(obs$metrics$RATIO_AREA, exp, 
                 msg = paste("A profile with only zero values did not generate ",

@@ -1,8 +1,24 @@
 ###################################################
+# Created by Elsa Bernatchez
+# 2014-08-14
+
+###################################################
+
+###################################################
 ## Test the MetricFactory R6 classes
 ###################################################
 
-factory = similaRpeak:::MetricFactory$new()
+### {{{ --- Test setup ---
+
+if(FALSE) {
+    library( "RUnit" )
+    library( "similaRpeak" )
+}
+
+### }}}
+
+
+factory = MetricFactory$new()
 
 ## Test the result of using "ALL"
 test.metrics_metricfactory_all <- function() {
@@ -49,7 +65,7 @@ test.metrics_metricfactory_ratio_intersect <- function() {
 ## Test the result of using "ALL" and NA or zeros
 test.metrics_metricfactory_all_na_only <- function() {
     checkException(factory$createMetric("ALL", c(NA,NA,NA,NA), c(NA,NA,NA,NA)),
-                   msg ="The 'profile1' argument must be a numeric vector.")
+                   msg = "The 'profile1' argument must be a numeric vector.")
 }
 
 ## Test the result of DIFF_POS_MAX when using profiles with only zero values
@@ -58,7 +74,7 @@ test.metrics_metricfactory_all_0_diff_pos_max <- function() {
                 "RATIO_INTERSECT" = NA)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$DIFF_POS_MAX, exp$DIFF_POS_MAX, 
-                msg=paste("The DIFF_POS_MAX is not expected value when only ", 
+                msg = paste("The DIFF_POS_MAX is not expected value when only ", 
                             "zero in profiles."), sep = "")
 }
 
@@ -68,7 +84,7 @@ test.metrics_metricfactory_all_0_ratio_max_max <- function() {
                 "RATIO_INTERSECT"=NA)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_MAX_MAX, exp$RATIO_MAX_MAX, 
-                msg=paste("The RATIO_MAX_MAX is not expected value when only ",
+                msg = paste("The RATIO_MAX_MAX is not expected value when only ",
                             "zero in profiles.", sep=""))
 }
 
@@ -78,7 +94,7 @@ test.metrics_metricfactory_all_0_ratio_intersect <- function() {
                 "RATIO_INTERSECT"=NA)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_INTERSECT, exp$RATIO_INTERSECT, 
-                msg=paste("The RATIO_INTERSECT is not expected value when ",
+                msg = paste("The RATIO_INTERSECT is not expected value when ",
                             "only zero in profiles.", sep=""))
 }
 
@@ -88,7 +104,7 @@ test.metrics_metricfactory_all_0_ratio_area <- function() {
                 "RATIO_INTERSECT"=NA)
     exp <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_AREA, exp$RATIO_AREA, 
-                msg=paste("The RATIO_AREA is not expected value when only ",
+                msg = paste("The RATIO_AREA is not expected value when only ",
                             "zero in profiles.", sep=""))
 }
 
@@ -112,7 +128,7 @@ test.metrics_metricfactory_wrong_metric_name <- function() {
                 , sep="")
     checkEquals(obs, 
                 exp, 
-                msg=paste("metrics_metricfactory_wrong_metric_name() - ",
+                msg = paste("metrics_metricfactory_wrong_metric_name() - ",
                             "A wrong metricType name did not generated the ",
                             "expected exception.", sep=""))
 }
@@ -152,12 +168,8 @@ test.metrics_metricfactory_missing_profile2 <- function() {
     exp <- "The 'profile2' argument is mandatory."
     checkEquals(obs, 
                 exp, 
-                msg =paste("metrics_metricfactory_missing_profile2() ",
+                msg = paste("metrics_metricfactory_missing_profile2() ",
                     "- The 'profile2' argument is mandatory.", sep=""))
 }
-
-
-
-
 
 
