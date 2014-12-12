@@ -109,8 +109,8 @@ Let's calculate the metrics for two ChIP profiles vectors called 'profile1'
 and 'profile2'.
 
 ```{r profiles}
-profile1<-c(3,59,6,24,65,112,144,77,53,22,21,12,11)
-profile2<-c(15,9,46,44,59,39,27,34,34,4,3,4,2)
+profile1 <- c(3,59,6,24,65,112,144,77,53,22,21,12,11)
+profile2 <- c(15,9,46,44,59,39,27,34,34,4,3,4,2)
 ```
 
 The two profiles have those shapes.
@@ -129,14 +129,14 @@ The metrics are calculated using the `similarity` function which takes as
 arguments the two ChIP profiles vectors and the threshold values.
 
 ```{r metricCalculation}
-metrics<-similaRpeak:::similarity(profile1, 
-                                            profile2, 
-                                            ratioAreaThreshold=5, 
-                                            ratioMaxMaxThreshold=5, 
-                                            ratioIntersectThreshold=12, 
-                                            diffPosMaxThresholdMinValue=10, 
-                                            diffPosMaxThresholdMaxDiff=10, 
-                                            diffPosMaxTolerance=0.1)
+metrics <- similarity(profile1, 
+                            profile2, 
+                            ratioAreaThreshold=5, 
+                            ratioMaxMaxThreshold=5, 
+                            ratioIntersectThreshold=12, 
+                            diffPosMaxThresholdMinValue=10, 
+                            diffPosMaxThresholdMaxDiff=10, 
+                            diffPosMaxTolerance=0.1)
 ```
 
 The `similarity` function returns a list which contains the general 
