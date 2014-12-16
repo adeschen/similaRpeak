@@ -34,9 +34,9 @@ of similarity between two ChIP profiles.
 
 The four metrics are:
 
-* **RATIO_AREA**: The ratio between the profile areas. The larger value is 
-always divided by the smaller value. `NA` is returned if minimal area 
-threshold is not respected for at least one of the profiles.
+* **RATIO_AREA**: The natural logarithm of the ratio between the profile areas. 
+The first profile is always divided by the second profile. `NA` is returned 
+if minimal area threshold is not respected for at least one of the profiles.
 
 * **DIFF_POS_MAX**: The difference between the maximal peaks positions. The 
 difference is always a positive value. `NA` is returned if minimal peak value 
@@ -47,9 +47,10 @@ threshold argument can also be set to ensure that the distance between two
 maximum values is not too wide. When this distance is not respected, it is 
 assumed that more than one peak is present in the profile and `NA` is returned. 
 
-* **RATIO_MAX_MAX**: The ratio between the maximal peaks values in each 
-profile. The larger value is always divided by the smaller value. `NA` if 
-minimal peak value threshold is not respected for at least one of the profiles.
+* **RATIO_MAX_MAX**: The natural logarithm of the ratio between the peaks values 
+in each profile. The first profile is always divided by the second profile. `NA` 
+if minimal peak value threshold is not respected for at least one of the 
+profiles.
 
 * **RATIO_INTERSECT**: The ratio between the intersection area and the total 
 area of the two profiles. `NA` if minimal area threshold is not respected for 

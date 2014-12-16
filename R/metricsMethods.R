@@ -22,7 +22,7 @@ ratioArea <- function(profile1, profile2, threshold = 1){
     # Get the ratio between area1 and area2
     minimum <- min(area1, area2)
     if (minimum > 0  && threshold <= minimum){
-        ratio <- max(area1, area2)/minimum
+        ratio <- log(area1 / area2)
     }else {
         ratio <- NA
     }
@@ -54,7 +54,7 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1){
     # Get the ratio between max1 and max2
     minimum <- min(max1, max2)
     if (minimum > 0 && threshold <= minimum){
-        ratio <- max(max1, max2)/minimum
+        ratio <- log(max1/max2)
     }else {
         ratio <- NA
     }

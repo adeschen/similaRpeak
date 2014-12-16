@@ -22,8 +22,9 @@ factory = MetricFactory$new()
 
 ## Test the result of using "ALL"
 test.metrics_metricfactory_all <- function() {
-    exp <- list("RATIO_AREA" = 1.084291188, "DIFF_POS_MAX" = 2,
-                "RATIO_MAX_MAX" = 1.413043478, "RATIO_INTERSECT" = 0.346534653)
+    exp <- list("RATIO_AREA" = log(1.084291188), "DIFF_POS_MAX" = 2,
+                "RATIO_MAX_MAX" = log(1.413043478), 
+                "RATIO_INTERSECT" = 0.346534653)
     obs <- factory$createMetric("ALL", c(1,59,6,24,65,34,15,4,53,22), 
                                 c(15,9,46,44,9,39,27,34,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -31,7 +32,7 @@ test.metrics_metricfactory_all <- function() {
 
 ## Test the result of using "RATIO_AREA"
 test.metrics_metricfactory_ratio_area <- function() {
-    exp <- list("RATIO_AREA"=1.084291188)
+    exp <- list("RATIO_AREA" = log(1.084291188))
     obs <- factory$createMetric("RATIO_AREA", c(1,59,6,24,65,34,15,4,53,22), 
                                 c(15,9,46,44,9,39,27,34,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -47,7 +48,7 @@ test.metrics_metricfactory_diff_pos_max <- function() {
 
 ## Test the result of using "RATIO_MAX_MAX"
 test.metrics_metricfactory_ratio_max_max <- function() {
-    exp <- list("RATIO_MAX_MAX"=1.413043478)
+    exp <- list("RATIO_MAX_MAX" = log(1.413043478))
     obs <- factory$createMetric("RATIO_MAX_MAX", c(1,59,6,24,65,34,15,4,53,22), 
                                 c(15,9,46,44,9,39,27,34,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -110,8 +111,8 @@ test.metrics_metricfactory_all_0_ratio_area <- function() {
 
 ## Test the result of using "ALL" with some NA in profiles
 test.metrics_metricfactory_all_with_some_na <- function() {
-    exp <- list("RATIO_AREA"=1.05188679245,"DIFF_POS_MAX"=2,
-                "RATIO_MAX_MAX"=1.41304347826,"RATIO_INTERSECT"=0.40776699)
+    exp <- list("RATIO_AREA"=log(1.05188679245),"DIFF_POS_MAX"=2,
+                "RATIO_MAX_MAX"=log(1.41304347826),"RATIO_INTERSECT"=0.40776699)
     obs <- factory$createMetric("ALL", c(NA,NA,6,24,65,34,15,4,53,22), 
                                 c(NA,9,46,44,9,39,27,NA,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
