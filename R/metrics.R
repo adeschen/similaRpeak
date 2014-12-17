@@ -337,6 +337,84 @@ RatioIntersect <- R6Class("RatioIntersect",
                     )
 )
 
+# Class representing an Intersect Ratio metric which is the ratio of profiles 
+# intersection area between two ChIP profiles covering the same range and 
+# those profiles total areas
+#
+MetricsNormalized <- R6Class("MetricsNormalized",
+                          inherit = Metric,
+                          public = list(
+                              initialize = function(profile1, 
+                                                    profile2, 
+                                                    factory=NULL) {
+                                  
+                                  # Fix the type of metric
+                                  super$setType("ALL_NORMALIZED")
+                                  
+                                  if (!missing(profile1) && !missing(profile2)) {
+                                      
+                                      self$calculateMetric(profile1, 
+                                                           profile2, 
+                                                           factory)   
+                                  }
+                              },
+                              calculateMetric = function(profile1, 
+                                                         profile2, 
+                                                         factory=NULL) {
+                                  
+                                  # Reset metric value to NA
+                                  super$setMetric(NA)
+                                  
+                                  # Profile1 and profile2 are mandatory
+                                  if (missing(profile1)) {
+                                      stop(paste("The 'profile1' argument is ",
+                                                 "mandatory. The metric value has been ",
+                                                 "reset to NA.", sep = ""))
+                                  }
+                                  if (missing(profile2)) {
+                                      stop(paste("The 'profile2' argument is ", 
+                                                 "mandatory. The metric value has been ",
+                                                 "reset to NA.", sep = ""))
+                                  }
+                                  
+                                  # The profile1 and profile2 arguments are numeric 
+                                  # vectors where at 
+                                  # least one element is greater than zero
+                                  if (!is.vector(profile1) || !is.numeric(profile1)) {
+                                      stop(paste("The 'profile1' argument must be a ",
+                                                 "numeric vector. The metric value has ",
+                                                 "been reset to NA.", sep = ""))
+                                  }
+                                  if (!is.vector(profile2) || !is.numeric(profile2)) {
+                                      stop(paste("The 'profile2' argument must be a ",
+                                                 "numeric vector. The metric value has ",
+                                                 "been reset to NA.", sep = ""))
+                                  }
+                                  
+                                  # The length of profile1 is equal to the length 
+                                  # of profile2
+                                  if (length(profile1) != length(profile2)) {
+                                      stop(paste("Lengths of 'profile1' and ",
+                                                 "'profile2' vectors aren't equals. The ",
+                                                 "metric value has been reset to NA."
+                                                 , sep = ""))
+                                  }
+                                  
+                                  
+                                  meanProfile1 <- sum(profile1, na.rm=TRUE)/length(profile1)
+                                  meanProfile2 <- sum(profile2, na.rm=TRUE)/length(profile2)
+                                  
+                                  # Calculate and assign the new max max ratio
+                                  super$setMetric(factory$createMetric(super$getType(), 
+                                                                       profile1=meanProfile1, 
+                                                                       profile2=meanProfile2))
+                                  
+                              }
+                          )
+)
+
+
+
 
 # Class used to create metrics. 
 #
@@ -407,7 +485,7 @@ MetricFactory <- R6Class("MetricFactory",
                             result_name = list()
                             result =list()
                                   
-                            if (metricType == "ALL" || 
+                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_AREA") {
                                 metric = RatioArea$new(profile1, 
                                                 profile2, 
@@ -417,7 +495,7 @@ MetricFactory <- R6Class("MetricFactory",
                                 result= c(result, metric$getMetric())
                             }
                                 
-                            if (metricType == "ALL" || 
+                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "DIFF_POS_MAX") {
                                 metric = DiffPosMax$new(profile1, 
                                             profile2, 
@@ -428,7 +506,7 @@ MetricFactory <- R6Class("MetricFactory",
                                 result = c(result, metric$getMetric())
                             }
                             
-                            if (metricType == "ALL" || 
+                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_MAX_MAX") {
                                 metric = RatioMaxMax$new(profile1, 
                                                 profile2, 
@@ -438,13 +516,23 @@ MetricFactory <- R6Class("MetricFactory",
                                 result= c(result, metric$getMetric())
                                 }
                             
-                            if (metricType == "ALL" || 
+                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_INTERSECT") {
                                 metric = RatioIntersect$new(profile1, 
                                             profile2, 
                                             private$ratioIntersectThreshold)
                                 result_name = c(result_name, 
                                                     metric$getType())
+                                result = c(result, metric$getMetric())
+                            }
+                            
+                            if (metricType == "ALL" || 
+                                    metricType == "METRICS_NORMALIXED") {
+                                metric = MetricsNormalized$new(profile1, 
+                                                            profile2, 
+                                                            self)
+                                result_name = c(result_name, 
+                                                metric$getType())
                                 result = c(result, metric$getMetric())
                             }
                                   
@@ -454,11 +542,12 @@ MetricFactory <- R6Class("MetricFactory",
                         }
                     ), private = list(
                         # Vector of all existing types of metrics
-                        metricVector = c("ALL", 
+                        metricVector = c("ALL", "ALL_NORMALIZED",
                                             "RATIO_AREA", 
                                             "DIFF_POS_MAX", 
                                             "RATIO_MAX_MAX", 
-                                            "RATIO_INTERSECT"),
+                                            "RATIO_INTERSECT",
+                                            "METRICS_NORMALIXED"),
                             # Threshold values
                             ratioAreaThreshold = NA,
                             ratioMaxMaxThreshold = NA,
