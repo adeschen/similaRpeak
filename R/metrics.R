@@ -401,13 +401,21 @@ MetricsNormalized <- R6Class("MetricsNormalized",
                                   }
                                   
                                   
-                                  meanProfile1 <- sum(profile1, na.rm=TRUE)/length(profile1)
-                                  meanProfile2 <- sum(profile2, na.rm=TRUE)/length(profile2)
+                                  meanProfile1 <- profile1*(length(profile1)/sum(profile1, 
+                                                                                 na.rm=TRUE))
+                                  meanProfile2 <- profile2*(length(profile2)/sum(profile2, 
+                                                                                 na.rm=TRUE))
                                   
                                   # Calculate and assign the new max max ratio
-                                  super$setMetric(factory$createMetric(super$getType(), 
-                                                                       profile1=meanProfile1, 
-                                                                       profile2=meanProfile2))
+                                  metrics <- factory$createMetric(super$getType(), 
+                                                            profile1=meanProfile1, 
+                                                            profile2=meanProfile2)
+                                  
+                                  names(metrics) <- paste("NORMALIZED", 
+                                                          names(metrics), 
+                                                          sep="_")
+                                  
+                                  super$setMetric(metrics)
                                   
                               }
                           )
@@ -487,56 +495,60 @@ MetricFactory <- R6Class("MetricFactory",
                                   
                             if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_AREA") {
-                                metric = RatioArea$new(profile1, 
+                                metric <- RatioArea$new(profile1, 
                                                 profile2, 
                                                 private$ratioAreaThreshold)
-                                result_name = c(result_name, 
+                                result_name <- c(result_name, 
                                                     metric$getType())
-                                result= c(result, metric$getMetric())
+                                result <- c(result, metric$getMetric())
                             }
                                 
                             if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "DIFF_POS_MAX") {
-                                metric = DiffPosMax$new(profile1, 
+                                metric <- DiffPosMax$new(profile1, 
                                             profile2, 
                                             private$diffPosMaxThresholdMinValue, 
                                             private$diffPosMaxThresholdMaxDiff, 
                                             private$diffPosMaxTolerance)
-                                result_name = c(result_name, metric$getType())
-                                result = c(result, metric$getMetric())
+                                result_name <- c(result_name, metric$getType())
+                                result <- c(result, metric$getMetric())
                             }
                             
                             if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_MAX_MAX") {
-                                metric = RatioMaxMax$new(profile1, 
+                                metric <- RatioMaxMax$new(profile1, 
                                                 profile2, 
                                                 private$ratioMaxMaxThreshold)
-                                result_name = c(result_name, 
+                                result_name <- c(result_name, 
                                                     metric$getType())
-                                result= c(result, metric$getMetric())
+                                result <- c(result, metric$getMetric())
                                 }
                             
-                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
+                            if (metricType == "ALL" || 
+                                    metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_INTERSECT") {
-                                metric = RatioIntersect$new(profile1, 
+                                metric <- RatioIntersect$new(profile1, 
                                             profile2, 
                                             private$ratioIntersectThreshold)
-                                result_name = c(result_name, 
+                                result_name <- c(result_name, 
                                                     metric$getType())
-                                result = c(result, metric$getMetric())
+                                result <- c(result, metric$getMetric())
                             }
                             
                             if (metricType == "ALL" || 
                                     metricType == "METRICS_NORMALIXED") {
-                                metric = MetricsNormalized$new(profile1, 
+                                metric <- MetricsNormalized$new(profile1, 
                                                             profile2, 
                                                             self)
-                                result_name = c(result_name, 
-                                                metric$getType())
-                                result = c(result, metric$getMetric())
+                               
+                                metricResults <- metric$getMetric()                 
+                                result_name <- c(result_name, 
+                                                names(metricResults))
+                                result <- append(result, metricResults)
                             }
                                   
-                            names(result) = result_name
+                            names(result) <- result_name
+                            
                             return(result)
                                   
                         }
