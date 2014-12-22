@@ -337,10 +337,11 @@ RatioIntersect <- R6Class("RatioIntersect",
                     )
 )
 
-# Class representing an Intersect Ratio metric which is the ratio of profiles 
-# intersection area between two ChIP profiles covering the same range and 
-# those profiles total areas
-#
+# Class representing an Normalized Metrics which are all defined metrics 
+# (ratio of the area, ratio of the maximum values, difference in the maximum
+# position and ratio of the intersection area) using normalized profiles values
+# which is, for each profile, the profile values multiplied by the length 
+# of the profile and divided by the area of the profile
 MetricsNormalized <- R6Class("MetricsNormalized",
                           inherit = Metric,
                           public = list(
@@ -400,28 +401,26 @@ MetricsNormalized <- R6Class("MetricsNormalized",
                                                  , sep = ""))
                                   }
                                   
-                                  
-                                  meanProfile1 <- profile1*(length(profile1)/sum(profile1, 
+                                  # Normalized profiles values
+                                  normProfile1 <- profile1*(length(profile1)/sum(profile1, 
                                                                                  na.rm=TRUE))
-                                  meanProfile2 <- profile2*(length(profile2)/sum(profile2, 
+                                  normProfile2 <- profile2*(length(profile2)/sum(profile2, 
                                                                                  na.rm=TRUE))
                                   
-                                  # Calculate and assign the new max max ratio
+                                  # Calculate and assign the new metrics using
+                                  # the normalized profiles
                                   metrics <- factory$createMetric(super$getType(), 
-                                                            profile1=meanProfile1, 
-                                                            profile2=meanProfile2)
+                                                            profile1=normProfile1, 
+                                                            profile2=normProfile2)
                                   
                                   names(metrics) <- paste("NORMALIZED", 
                                                           names(metrics), 
                                                           sep="_")
                                   
                                   super$setMetric(metrics)
-                                  
                               }
                           )
 )
-
-
 
 
 # Class used to create metrics. 

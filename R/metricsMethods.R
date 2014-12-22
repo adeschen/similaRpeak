@@ -1,7 +1,8 @@
-# Calculate and return the area ratio between two ChIP profiles covering the 
-# same range. The maximum area is always divided by the minimum area. 
-# If the minimum area is inferior to the threshold, 
-# the function returns NA. The threshold has to be a positive value.
+# Calculate and return the base 2 logarithm of the area ratio between two ChIP 
+# profiles covering the same range. The area from profile1 is always divided by
+# area from profile2. If the minimum area between profile1 and profile2 is 
+# inferior to the threshold, the function returns NA. 
+# The threshold has to be a positive value.
 #
 # Input:   
 #   profile1:    a first profile/vector containing depths. Each position is 
@@ -22,7 +23,7 @@ ratioArea <- function(profile1, profile2, threshold = 1){
     # Get the ratio between area1 and area2
     minimum <- min(area1, area2)
     if (minimum > 0  && threshold <= minimum){
-        ratio <- log(area1 / area2)
+        ratio <- log2(area1 / area2)
     }else {
         ratio <- NA
     }
@@ -30,10 +31,10 @@ ratioArea <- function(profile1, profile2, threshold = 1){
     return(ratio)
 }
 
-# Calculate and return the ratio between profiles maximal peaks between two 
-# ChIP profiles covering the same range. The maximum peak is always divided
-# by the minimum peak. If the minimum peak is inferior to the threshold, 
-# the function returns NA.
+# Calculate and return the base 2 logarithm of the ratio of profiles 
+# maximal peaks between two ChIP profiles covering the same range. The profile1 
+# maximal peak is always divided by the profile2 minimum peak. If the minimum 
+# peak is inferior to the threshold, the function returns NA.
 #
 # Input:   
 #   profile1:   a first profile/vector containing depths. Each position is 
@@ -54,7 +55,7 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1){
     # Get the ratio between max1 and max2
     minimum <- min(max1, max2)
     if (minimum > 0 && threshold <= minimum){
-        ratio <- log(max1/max2)
+        ratio <- log2(max1/max2)
     }else {
         ratio <- NA
     }
@@ -63,8 +64,9 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1){
 }
 
 # Calculate and return the difference between two profiles maximal peaks 
-# positions. The difference is always a positive value. If the minimum peak is 
-# inferior to the threshold, the function returns NA. If profile1 or profile2 is
+# positions. The difference is always the profile1 maximal position minus the 
+# profile2 maximum position. If the minimum peak is inferior to the threshold, 
+# the function returns NA. If profile1 or profile2 is
 # not a numerical vector (example: vector of NA only), the funtion returns NA.
 #
 # Input:   
@@ -121,7 +123,7 @@ diffPosMax <- function(profile1,
             if (max(maxDiff1, maxDiff2) <= thresholdDist) {
                 median1 <- median(posMax1)
                 median2 <- median(posMax2)
-                diff <- abs(median1 - median2)
+                diff <- median1 - median2
             } else {
                 diff <- NA
             }
