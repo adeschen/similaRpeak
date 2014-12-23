@@ -1,4 +1,4 @@
-# Calculate and return the base 2 logarithm of the area ratio between two ChIP 
+# Calculate and return the area ratio between two ChIP 
 # profiles covering the same range. The area from profile1 is always divided by
 # area from profile2. If the minimum area between profile1 and profile2 is 
 # inferior to the threshold, the function returns NA. 
@@ -23,7 +23,7 @@ ratioArea <- function(profile1, profile2, threshold = 1){
     # Get the ratio between area1 and area2
     minimum <- min(area1, area2)
     if (minimum > 0  && threshold <= minimum){
-        ratio <- log2(area1 / area2)
+        ratio <- area1 / area2
     }else {
         ratio <- NA
     }
@@ -31,8 +31,8 @@ ratioArea <- function(profile1, profile2, threshold = 1){
     return(ratio)
 }
 
-# Calculate and return the base 2 logarithm of the ratio of profiles 
-# maximal peaks between two ChIP profiles covering the same range. The profile1 
+# Calculate and return the ratio of profiles maximal peaks between two ChIP 
+# profiles covering the same range. The profile1 
 # maximal peak is always divided by the profile2 minimum peak. If the minimum 
 # peak is inferior to the threshold, the function returns NA.
 #
@@ -55,7 +55,7 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1){
     # Get the ratio between max1 and max2
     minimum <- min(max1, max2)
     if (minimum > 0 && threshold <= minimum){
-        ratio <- log2(max1/max2)
+        ratio <- max1/max2
     }else {
         ratio <- NA
     }

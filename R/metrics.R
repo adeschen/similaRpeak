@@ -189,7 +189,7 @@ RatioArea <- R6Class("RatioArea",
 
 # Class representing a Positions Difference metric which is the difference 
 # of profiles maximal peaks positions 
-# between two ChIP profiles covering the same range
+# between two ChIP profiles covering the same range.
 #
 DiffPosMax <- R6Class("DiffPosMax",
                 inherit = Metric,
@@ -269,7 +269,7 @@ DiffPosMax <- R6Class("DiffPosMax",
 
 # Class representing an Intersect Ratio metric which is the ratio of profiles 
 # intersection area between two ChIP profiles covering the same range and 
-# those profiles total areas
+# those profiles total areas.
 #
 RatioIntersect <- R6Class("RatioIntersect",
                     inherit = Metric,
@@ -329,7 +329,7 @@ RatioIntersect <- R6Class("RatioIntersect",
                                     , sep = ""))
                             }
                              
-                            # Calculate and assign the new max max ratio
+                            # Calculate and assign the new intersect ratio
                             super$setMetric(ratioIntersect(profile1, 
                                                             profile2, 
                                                             threshold))
@@ -337,31 +337,33 @@ RatioIntersect <- R6Class("RatioIntersect",
                     )
 )
 
-# Class representing an Normalized Metrics which are all defined metrics 
-# (ratio of the area, ratio of the maximum values, difference in the maximum
-# position and ratio of the intersection area) using normalized profiles values
-# which is, for each profile, the profile values multiplied by the length 
-# of the profile and divided by the area of the profile
-MetricsNormalized <- R6Class("MetricsNormalized",
+
+# Class representing a Normalized Intersect Ratio metric which is the ratio of 
+# profiles intersection area between two normalized ChIP profiles covering 
+# the same range and those profiles total areas. The ChIP profiles are 
+# normalized by multiplying the profile values with the length 
+# of the profile and dividind it by the area of the profile.
+# normalized values = profile values * length(profile)/area(profile)
+#
+RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
                           inherit = Metric,
                           public = list(
                               initialize = function(profile1, 
                                                     profile2, 
-                                                    factory=NULL) {
+                                                    threshold = 1) {
                                   
                                   # Fix the type of metric
-                                  super$setType("ALL_NORMALIZED")
+                                  super$setType("RATIO_NORMALIZED_INTERSECT")
                                   
                                   if (!missing(profile1) && !missing(profile2)) {
-                                      
                                       self$calculateMetric(profile1, 
                                                            profile2, 
-                                                           factory)   
+                                                           threshold)   
                                   }
                               },
                               calculateMetric = function(profile1, 
                                                          profile2, 
-                                                         factory=NULL) {
+                                                         threshold = 1) {
                                   
                                   # Reset metric value to NA
                                   super$setMetric(NA)
@@ -402,22 +404,17 @@ MetricsNormalized <- R6Class("MetricsNormalized",
                                   }
                                   
                                   # Normalized profiles values
-                                  normProfile1 <- profile1*(length(profile1)/sum(profile1, 
-                                                                                 na.rm=TRUE))
-                                  normProfile2 <- profile2*(length(profile2)/sum(profile2, 
-                                                                                 na.rm=TRUE))
+                                  normProfile1 <- profile1*(length(profile1)
+                                                            /sum(profile1, 
+                                                                 na.rm=TRUE))
+                                  normProfile2 <- profile2*(length(profile2)
+                                                            /sum(profile2, 
+                                                                 na.rm=TRUE))
                                   
-                                  # Calculate and assign the new metrics using
-                                  # the normalized profiles
-                                  metrics <- factory$createMetric(super$getType(), 
-                                                            profile1=normProfile1, 
-                                                            profile2=normProfile2)
-                                  
-                                  names(metrics) <- paste("NORMALIZED", 
-                                                          names(metrics), 
-                                                          sep="_")
-                                  
-                                  super$setMetric(metrics)
+                                  # Calculate and assign the normalized intersect ratio
+                                  super$setMetric(ratioIntersect(normProfile1, 
+                                                                 normProfile2, 
+                                                                 threshold))
                               }
                           )
 )
@@ -430,12 +427,14 @@ MetricFactory <- R6Class("MetricFactory",
                         initialize = function(ratioAreaThreshold = 1, 
                                                 ratioMaxMaxThreshold = 1, 
                                                 ratioIntersectThreshold = 1,
+                                                ratioNormalizedIntersectThreshold = 1,
                                                 diffPosMaxThresholdMinValue = 1, 
                                                 diffPosMaxThresholdMaxDiff = 100, 
                                                 diffPosMaxTolerance = 0.01 ) {
             private$ratioAreaThreshold <<- ratioAreaThreshold
             private$ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
             private$ratioIntersectThreshold <<- ratioIntersectThreshold
+            private$ratioNormalizedIntersectThreshold <<- ratioNormalizedIntersectThreshold
             private$diffPosMaxThresholdMinValue <<- diffPosMaxThresholdMinValue
             private$diffPosMaxThresholdMaxDiff <<- diffPosMaxThresholdMaxDiff
             private$diffPosMaxTolerance <<- diffPosMaxTolerance
@@ -492,17 +491,17 @@ MetricFactory <- R6Class("MetricFactory",
                             result_name = list()
                             result =list()
                                   
-                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
+                            if (metricType == "ALL" || 
                                     metricType == "RATIO_AREA") {
                                 metric <- RatioArea$new(profile1, 
-                                                profile2, 
-                                                private$ratioAreaThreshold)
+                                            profile2, 
+                                            private$ratioAreaThreshold)
                                 result_name <- c(result_name, 
                                                     metric$getType())
                                 result <- c(result, metric$getMetric())
                             }
                                 
-                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
+                            if (metricType == "ALL" || 
                                     metricType == "DIFF_POS_MAX") {
                                 metric <- DiffPosMax$new(profile1, 
                                             profile2, 
@@ -513,18 +512,17 @@ MetricFactory <- R6Class("MetricFactory",
                                 result <- c(result, metric$getMetric())
                             }
                             
-                            if (metricType == "ALL" || metricType == "ALL_NORMALIZED" ||
+                            if (metricType == "ALL" || 
                                     metricType == "RATIO_MAX_MAX") {
                                 metric <- RatioMaxMax$new(profile1, 
-                                                profile2, 
-                                                private$ratioMaxMaxThreshold)
+                                            profile2, 
+                                            private$ratioMaxMaxThreshold)
                                 result_name <- c(result_name, 
                                                     metric$getType())
                                 result <- c(result, metric$getMetric())
                                 }
                             
                             if (metricType == "ALL" || 
-                                    metricType == "ALL_NORMALIZED" ||
                                     metricType == "RATIO_INTERSECT") {
                                 metric <- RatioIntersect$new(profile1, 
                                             profile2, 
@@ -535,15 +533,14 @@ MetricFactory <- R6Class("MetricFactory",
                             }
                             
                             if (metricType == "ALL" || 
-                                    metricType == "METRICS_NORMALIXED") {
-                                metric <- MetricsNormalized$new(profile1, 
-                                                            profile2, 
-                                                            self)
+                                    metricType == "RATIO_NORMALIZED_INTERSECT") {
+                                metric <- RatioNormalizedIntersect$new(profile1, 
+                                            profile2, 
+                                            private$ratioNormalizedIntersectThreshold)
                                
-                                metricResults <- metric$getMetric()                 
                                 result_name <- c(result_name, 
-                                                names(metricResults))
-                                result <- append(result, metricResults)
+                                                 metric$getType())
+                                result <- c(result, metric$getMetric())
                             }
                                   
                             names(result) <- result_name
@@ -553,16 +550,17 @@ MetricFactory <- R6Class("MetricFactory",
                         }
                     ), private = list(
                         # Vector of all existing types of metrics
-                        metricVector = c("ALL", "ALL_NORMALIZED",
+                        metricVector = c("ALL",
                                             "RATIO_AREA", 
                                             "DIFF_POS_MAX", 
                                             "RATIO_MAX_MAX", 
                                             "RATIO_INTERSECT",
-                                            "METRICS_NORMALIXED"),
+                                            "RATIO_NORMALIZED_INTERSECT"),
                             # Threshold values
                             ratioAreaThreshold = NA,
                             ratioMaxMaxThreshold = NA,
                             ratioIntersectThreshold = NA,
+                            ratioNormalizedIntersectThreshold = NA,
                             diffPosMaxThresholdMinValue = NA,
                             diffPosMaxThresholdMaxDiff = NA,
                             diffPosMaxTolerance = NA
