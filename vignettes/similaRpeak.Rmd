@@ -34,7 +34,7 @@ of similarity between two ChIP profiles.
 
 The metrics are:
 
-* **RATIO_AREA**: The base 2 logarithm of the ratio between the profile areas. 
+* **RATIO_AREA**: The ratio between the profile areas. 
 The first profile is always divided by the second profile. `NA` is returned 
 if minimal area threshold is not respected for at least one of the profiles.
 
@@ -48,7 +48,7 @@ set to ensure that the distance between two maximum values is not too wide.
 When this distance is not respected, it is assumed that more than one peak 
 is present in the profile and `NA` is returned. 
 
-* **RATIO_MAX_MAX**: The base 2 logarithm of the ratio between the peaks values 
+* **RATIO_MAX_MAX**: The ratio between the peaks values 
 in each profile. The first profile is always divided by the second profile. `NA` 
 if minimal peak value threshold is not respected for at least one of the 
 profiles.
@@ -57,6 +57,10 @@ profiles.
 area of the two profiles. `NA` if minimal area threshold is not respected for 
 the intersection area.
    
+* **RATIO_NORMALIZED_INTERSECT**: The ratio between the intersection area and 
+the total area of two normalized profiles. The profiles are normalized by 
+divinding then by their average value. `NA` if minimal area threshold is not 
+respected for the intersection area.
 
 ## Loading similaRpeak package
 
@@ -91,6 +95,10 @@ ratio of the maximal peaks values between both profiles. Default = 1.
 * **ratioIntersectThreshold**: The minimum denominator accepted to calculate 
 the ratio of the intersection area of both profiles over the total area. 
 Default = 1.
+
+* **ratioNormalizedIntersectThreshold**: The minimum denominator accepted to 
+calculate the ratio of the intersection area of both profiles over the total 
+area for normalized profiles. Default = 1.
 
 * **diffPosMaxThresholdMinValue**: The smaller maximum value accepted to 
 calculate the metric. When this value is not respected, it is assumed that no 
@@ -136,6 +144,7 @@ metrics <- similarity(profile1,
                             ratioAreaThreshold=5, 
                             ratioMaxMaxThreshold=2, 
                             ratioIntersectThreshold=5, 
+                            ratioNormalizedIntersectThreshold=2,
                             diffPosMaxThresholdMinValue=10, 
                             diffPosMaxThresholdMaxDiff=10, 
                             diffPosMaxTolerance=0.1)
@@ -199,6 +208,11 @@ ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT",
                                         profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                         profile2=c(15,9,46,44,9,39,27,34,34,4))
 ratio_intersect
+
+ratio_normalized_intersect <- factory$createMetric(metricType="RATIO_NORMALIZED_INTERSECT", 
+                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
+                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
+ratio_normalized_intersect
 
 diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX", 
                                         profile1=c(1,59,6,24,65,34,15,4,53,22), 
