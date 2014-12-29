@@ -141,3 +141,4 @@ test.getSimilarityMetrics_ratio_Intersect_function_na<- function() {
         c(NA,9,46,44,9,39,27,NA,34,4))
     checkEqualsNumeric(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
+
