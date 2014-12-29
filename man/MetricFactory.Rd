@@ -20,6 +20,7 @@
     ratioAreaThreshold=1, 
     ratioMaxMaxThreshold=1, 
     ratioIntersectThreshold=1,
+    ratioNormalizedIntersectThreshold=1,
     diffPosMaxThresholdMinValue=1, 
     diffPosMaxThresholdMaxDiff=100, 
     diffPosMaxTolerance=0.01)}:
@@ -34,6 +35,10 @@
         \item{\code{ratioIntersectThreshold}}{ The minimum denominator accepted 
                         to calculate the ratio of the intersection area of both 
                         profiles and the total area. Default = 1.}
+        \item{\code{ratioIntersectThreshold}}{ The minimum denominator accepted 
+                        to calculate the ratio of the intersection area of both 
+                        profiles and the total area for normalized profiles. 
+                        Default = 1.}
         \item{\code{diffPosMaxThresholdMinValue}}{ The minimum peak accepted to 
                         calculate the metric. Default = 1.}
         \item{\code{diffPosMaxThresholdMaxDiff}}{ The maximum distance accepted 
@@ -53,7 +58,7 @@
   available metrics for different profiles, as long as the thresholds set in
   the \code{MetricFactory} instance are appropriate for the calculation. The
   thresholds are set during the \code{MetricFactory} object creation and cannot
-  cannot be changed afterwards. If different thresholds are needed, a new 
+  be changed afterwards. If different thresholds are needed, a new 
   \code{MetricFactory} object, with the new thresholds, must be instantiated.
 }
 
