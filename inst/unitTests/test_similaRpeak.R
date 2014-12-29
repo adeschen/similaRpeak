@@ -385,7 +385,7 @@ test.similarity_na_profile_metadata <- function() {
 
 ## Test the result of metric RATIO_AREA
 test.similarity_ratio_area <- function() {
-    obs <- log(1.08429118773946)
+    obs <- 1.08429118773946
     exp <- similarity(c(1,59,6,24,65,34,15,4,53,22), 
                             c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_AREA
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -401,7 +401,7 @@ test.similarity_diff_pos_max <- function() {
 
 ## Test the result of metric RATIO_MAX_MAX
 test.similarity_ratio_max_max <- function() {
-    obs <- log(1.41304347826)
+    obs <- 1.41304347826
     exp <- similarity(c(1,59,6,24,65,34,15,4,53,22), 
                         c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_MAX_MAX
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -412,6 +412,14 @@ test.similarity_ratio_intersect <- function() {
     obs <- 0.346534653465
     exp <- similarity(c(1,59,6,24,65,34,15,4,53,22), 
                         c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_INTERSECT
+    checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
+}
+
+## Test the result of metric RATIO_NORMALIZED_INTERSECT
+test.similarity_ratio_intersect <- function() {
+    obs <- 0.343525474289
+    exp <- similarity(c(1,59,6,24,65,34,15,4,53,22), 
+                      c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_NORMALIZED_INTERSECT
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
