@@ -17,7 +17,7 @@ if(FALSE) {
 
 ## Test the result of ratioArea
 test.getSimilarityMetrics_ratio_area_function<- function() {
-    obs <- log(1.084291188)
+    obs <- 1.084291188
     exp <- similaRpeak:::ratioArea(c(1,59,6,24,65,34,15,4,53,22), 
                                              c(15,9,46,44,9,39,27,34,34,4))
     checkEqualsNumeric(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -25,7 +25,7 @@ test.getSimilarityMetrics_ratio_area_function<- function() {
 
 ## Test the result of ratioMaxMax
 test.getSimilarityMetrics_ratio_max_max_function<- function() {
-    obs <- log(1.413043478)
+    obs <- 1.413043478
     exp <- similaRpeak:::ratioMaxMax(c(1,59,6,24,65,34,15,4,53,22), 
                                                c(15,9,46,44,9,39,27,34,34,4))
     checkEqualsNumeric(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -111,7 +111,7 @@ test.getSimilarityMetrics_ratio_Intersect_function_0<- function() {
 
 ## Test the result of ratioArea
 test.getSimilarityMetrics_ratio_area_function_na<- function() {
-    obs <- log(1.051886792)
+    obs <- 1.051886792
     exp <- similaRpeak:::ratioArea(c(NA,NA,6,24,65,34,15,4,53,22), 
                                              c(NA,9,46,44,9,39,27,NA,34,4))
     checkEqualsNumeric(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -119,7 +119,7 @@ test.getSimilarityMetrics_ratio_area_function_na<- function() {
 
 ## Test the result of ratioMaxMax
 test.getSimilarityMetrics_ratio_max_max_function_na<- function() {
-    obs <- log(1.413043478)
+    obs <- 1.413043478
     exp <- similaRpeak:::ratioMaxMax(c(NA,NA,6,24,65,34,15,4,53,22), 
                                                c(NA,9,46,44,9,39,27,NA,34,4))
     checkEqualsNumeric(obs, exp, tolerance = .Machine$double.eps^0.5)
