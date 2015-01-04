@@ -2,15 +2,16 @@
 \alias{similarity}
 
 \title{
-  Calculate 4 metrics which estimate the level of similarity between two 
+  Calculate metrics which estimate the level of similarity between two 
   ChIP-Seq profiles.
 }
 
 \description{
   Return a list containing information about both ChIP-Seq profiles and a 
-  \code{list} of all four similarity metrics: the ratio of the maximum values, 
+  \code{list} of all similarity metrics: the ratio of the maximum values, 
   the ratio of the areas, the ratio between the intersection area and the 
-  total area, the difference between two profiles maximal peaks positions.
+  total area (for normalized and non-normalized profiles), the difference 
+  between two profiles maximal peaks positions.
 }
 
 \usage{
@@ -94,7 +95,8 @@
                           \code{NA} if minimal threshold is not
                           respected.
         \item DIFF_POS_MAX: The difference between the maximal peaks positions. 
-                            The difference is always a positive value. 
+                            The difference is always the first profile value 
+                            minus the second profile value. 
                             \code{NA} is returned if minimal peak value is not 
                             respected. A profile can have more than one 
                             position with the maximum value. In that case, 
@@ -107,8 +109,8 @@
                             it is assumed that more than one peak is present 
                             in the profile  and \code{NA} is returned.
         \item RATIO_MAX_MAX: The ratio between the maximal peaks values. 
-                            The larger value is always divided by the smaller
-                            value. \code{NA} if minimal threshold is not
+                            The first profile is always divided by the second 
+                            profile. \code{NA} if minimal threshold is not
                             respected.
         \item RATIO_INTERSECT: The ratio between the intersection area and the 
                                 total area. \code{NA} if minimal threshold is 
