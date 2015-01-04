@@ -20,6 +20,7 @@
     ratioAreaThreshold=1, 
     ratioMaxMaxThreshold=1, 
     ratioIntersectThreshold=1,
+    ratioNormalizedIntersectThreshold=1,
     diffPosMaxThresholdMinValue=1, 
     diffPosMaxThresholdMaxDiff=100, 
     diffPosMaxTolerance=0.01)
@@ -43,6 +44,10 @@
   \item{ratioIntersectThreshold}{ The minimum denominator accepted 
     to calculate the ratio of the intersection area of both profiles over
     the total area. The value has to be positive. Default = 1.}
+    
+  \item{ratioNormalizedIntersectThreshold}{ The minimum denominator accepted 
+    to calculate the ratio of the intersection area of both normalized profiles 
+    over the total area. The value has to be positive. Default = 1.}
     
   \item{diffPosMaxThresholdMinValue}{ The minimum peak accepted to calculate 
     the metric. The value has to be positive. Default = 1.}
@@ -77,9 +82,9 @@
     \item areaProfile2: The area of the second profile.
     \item maxProfile1: The maximum value in the first profile.
     \item maxProfile2: The maximum value in the second profile.
-    \item maxPositionProfile1: The position of the maximum value in the 
+    \item maxPositionProfile1: The list of positions of the maximum value in the 
         first profile.
-    \item maxPositionProfile2: The position of the maximum value in the 
+    \item maxPositionProfile2: The list of positions of the maximum value in the 
         second profile.
     \item metrics: A \code{list} with the
       following items:
@@ -108,6 +113,10 @@
         \item RATIO_INTERSECT: The ratio between the intersection area and the 
                                 total area. \code{NA} if minimal threshold is 
                                 not respected.
+        \item RATIO_NORMALIZED_INTERSECT: The ratio between the intersection 
+                                area and the total area of normalized profiles. 
+                                \code{NA} if minimal threshold is 
+                                not respected.                         
         }
   }
 }
@@ -132,6 +141,7 @@ similarity(profile1, profile2,
                         ratioAreaThreshold=5, 
                         ratioMaxMaxThreshold=5, 
                         ratioIntersectThreshold=12,
+                        ratioNormalizedIntersectThreshold=2.2,
                         diffPosMaxThresholdMinValue=2, 
                         diffPosMaxThresholdMaxDiff=130, 
                         diffPosMaxTolerance=0.03)

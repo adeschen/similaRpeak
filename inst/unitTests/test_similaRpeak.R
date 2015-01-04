@@ -415,4 +415,12 @@ test.similarity_ratio_intersect <- function() {
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
+## Test the result of metric RATIO_NORMALIZED_INTERSECT
+test.similarity_ratio_intersect <- function() {
+    obs <- 0.343525474289
+    exp <- similarity(c(1,59,6,24,65,34,15,4,53,22), 
+                      c(15,9,46,44,9,39,27,34,34,4))$metrics$RATIO_NORMALIZED_INTERSECT
+    checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
+}
+
 
