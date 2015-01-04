@@ -59,7 +59,7 @@ the intersection area.
    
 * **RATIO_NORMALIZED_INTERSECT**: The ratio between the intersection area and 
 the total area of two normalized profiles. The profiles are normalized by 
-divinding then by their average value. `NA` if minimal area threshold is not 
+divinding them by their average value. `NA` if minimal area threshold is not 
 respected for the intersection area.
 
 ## Loading similaRpeak package
