@@ -77,14 +77,14 @@ region, two `vector` containing the RPM values of the two ChIP profiles for
 each position of the selected region. Both `vector` should have the same length 
 and should not contain any negative value.
 
-### Threshold values
+### Threshold variables
 
 When the metric includes a ratio calculation, a threshold for the denominator 
 is assigned to the metric. The threshold has to be positive numerical value. 
 When the threshold is not respected, the metric is not calculated and the 
 `NA` value is assigned to it.
 
-The three threshold are:
+The threshold variables are:
 
 * **ratioAreaThreshold**: The minimum denominator accepted to calculate 
 the ratio of the area between both profiles. Default = 1.
@@ -115,8 +115,16 @@ Default=0.01.
 
 ## Metrics calculation
 
-Let's calculate the metrics for two ChIP profiles vectors called 'profile1' 
-and 'profile2'.
+Super-enhancer regions found in the mouse embryonic stem cells thought to be 
+important for the cell fate as being highly active and connected regions have
+been selected (Whyte et al. 2013 & Dowen et al. 2014). Using Encyclopedia of 
+DNA Elements (ENCODE) data (Dunham I et al. 2012), the epigenetic landscape 
+overlap surrounding those super-enhancer regions at two histone 
+post-transcriptional modifications linked to highly active enhancers H3K27ac 
+(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY). 
+
+A region, chr7:61968807-61969730, shows interesting profiles for both histones.
+Let's calculate the metrics for this region.
 
 ```{r profiles}
 profile1 <- c(3,59,6,24,65,112,144,77,53,22,21,12,11)
@@ -219,3 +227,8 @@ diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX",
                                         profile2=c(15,9,46,44,9,39,27,34,34,4))
 diff_pos_max
 ```
+
+## References
+
+Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia of DNA 
+elements in the human genome. Nature. 2012 Sep 6;489(7414):57–74.
