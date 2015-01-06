@@ -196,7 +196,7 @@ DiffPosMax <- R6Class("DiffPosMax",
                 public = list(
                 initialize = function(profile1, 
                                            profile2, 
-                                           threshold = NULL, 
+                                           threshold = 1, 
                                            thresholdDiff = 100, 
                                            tolerance = 0.01) {
                              
@@ -213,7 +213,7 @@ DiffPosMax <- R6Class("DiffPosMax",
                 },
                 calculateMetric = function(profile1, 
                                             profile2, 
-                                            threshold = NULL, 
+                                            threshold = 1, 
                                             thresholdDiff = 100, 
                                             tolerance = 0.01) {
                              
@@ -232,9 +232,9 @@ DiffPosMax <- R6Class("DiffPosMax",
                                     "The metric value has been reset ",
                                     "to NA.", sep = ""))
                     }
-                             
+                      
                     # The profile1 and profile2 arguments are numeric 
-                    #vectors where at 
+                    # vectors where at 
                     # least one element is greater than zero
                     if (!is.vector(profile1) || !is.numeric(profile1)) {
                         stop(paste("The 'profile1' argument must be a ",
@@ -247,14 +247,14 @@ DiffPosMax <- R6Class("DiffPosMax",
                                     "numeric vector. The metric value has ",
                                     "been reset to NA.", sep = ""))
                     }
-                             
+                     
                     # The length of profile1 is equal to the length of profile2
                     if (length(profile1) != length(profile2)) {
                         stop(paste("Lengths of 'profile1' and 'profile2' ",
                                     "vectors aren't equals. The metric value ",
                                     "has been reset to NA.", sep = ""))
                     }
-                             
+                    
                     # Calculate and assign the new difference 
                     # position maximum
                     super$setMetric(diffPosMax(profile1, 
