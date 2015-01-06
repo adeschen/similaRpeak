@@ -39,7 +39,7 @@ The first profile is always divided by the second profile. `NA` is returned
 if minimal area threshold is not respected for at least one of the profiles.
 
 * **DIFF_POS_MAX**: The difference between the maximal peaks positions. The 
-difference is always the first profile value minue the second profile value. 
+difference is always the first profile value minus the second profile value. 
 `NA` is returned if minimal peak value is not respected. A profile can have 
 more than one position with the maximum value. In that case, the median 
 position is used. A threshold argument can be set to consider all positions 
@@ -113,7 +113,28 @@ profile. Default=100.
 to consider a position as a included in the maximum positions list. 
 Default=0.01.
 
-## Metrics calculation
+
+## Metric definition
+
+Mathematicaly, a metric is considered as a function that quantifies the 
+similarity between two objects.The function must return zero when the two 
+objects are similar (identity of indiscernibles) and a non-negative value when 
+are dissimilar. 
+
+The metrics present in the **similaRpeak** package do not strictly respect this
+standard but can all be translated to respect it.
+
+By using the absolute value of the **DIFF_POS_MAX** metric, the definition of 
+a metric is formally respected. However, the respective position of the 
+maximum peak of profiles is lost.
+
+By using the absolute value of the logarithm of the 
+**RATIO_AREA**, **RATIO_MAX_MAX**, **RATIO_INTERSECT** and 
+**RATIO_NORMALIZED_INTERSECT** metrics, the definition of a metric is formally 
+respected.
+
+
+## Metrics calculation - General approach
 
 Super-enhancer regions found in the mouse embryonic stem cells thought to be 
 important for the cell fate as being highly active and connected regions have
@@ -127,35 +148,36 @@ A region, chr7:61968807-61969730, shows interesting profiles for both histones.
 Let's calculate the metrics for this region.
 
 ```{r profiles}
-profile1 <- c(3,59,6,24,65,112,144,77,53,22,21,12,11)
-profile2 <- c(15,9,46,44,59,59,27,34,34,4,3,4,2)
+load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
+
+head(H3K27ac_profile, n=15)
+head(H3K4me1_profile, n=15)
 ```
 
-The two profiles have those shapes.
+H3K27ac and H3K4me1 profiles have those shapes:
 
 ```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
-plot(profile1, type="b", col="blue", xlab="", ylab="", ylim=c(0, 150), 
-            pch=21, lwd=2)
+plot(H3K27ac_profile, type="l", col="blue", xlab="", ylab="", ylim=c(0, 700))
 par(new=TRUE)
-plot(profile2, type="b", col="darkgreen", xlab="Position", ylab="Reads", 
-            ylim=c(0, 150), pch=21, lwd=2)
-legend("topright", c("profile 1","profile 2"), cex=1.2, 
-            col=c("blue","darkgreen"), pch=21, lty=1:2)
+plot(H3K4me1_profile, type="l", col="darkgreen", xlab="Position", ylab="Reads", 
+            ylim=c(0, 700))
+legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
+            col=c("blue","darkgreen"), lty=1)
 ```
 
 The metrics are calculated using the `similarity` function which takes as 
 arguments the two ChIP profiles vectors and the threshold values.
 
 ```{r metricCalculation}
-metrics <- similarity(profile1, 
-                            profile2, 
+metrics <- similarity(H3K27ac_profile, 
+                            H3K4me1_profile, 
                             ratioAreaThreshold=5, 
                             ratioMaxMaxThreshold=2, 
                             ratioIntersectThreshold=5, 
                             ratioNormalizedIntersectThreshold=2,
                             diffPosMaxThresholdMinValue=10, 
                             diffPosMaxThresholdMaxDiff=10, 
-                            diffPosMaxTolerance=0.1)
+                            diffPosMaxTolerance=0.01)
 ```
 
 The `similarity` function returns a list which contains the general 
@@ -165,33 +187,51 @@ information about both ChIP-Seq profiles and a list of all four metrics.
 metrics
 ```
 
-Each specific information can be directly accessed by using its name. 
-Some exemples:
+Each specific information can be directly accessed. Some examples:
 
 ```{r getInfo}
 metrics$areaProfile1
 metrics$areaProfile2
-metrics$metrics$DIFF_POS_MAX
 metrics$metrics$RATIO_INTERSECT
 ```
- 
+
+The **RATIO_INTERSECT** value of `r round(metrics$metrics$RATIO_INTERSECT, 2)` 
+and the **RATIO_MAX_MAX** value of `r round(metrics$metrics$RATIO_MAX_MAX, 2)` 
+are quite low. Both ratios values can be explained by the large difference in 
+coverage between profiles. Those values could be interpreted as two profiles 
+with low level of similarity. However, the **RATIO_NORMALIZED_INTERSECT** of 
+`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. It 
+could be a sign that the profiles, once normalized, are quite similar.
+This hypothesis can be validated by a graph of the normalized profiles :
+
+```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
+plot(H3K27ac_profile*length(H3K27ac_profile)/sum(H3K27ac_profile, na.rm=T), 
+     type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
+par(new=TRUE)
+plot(H3K4me1_profile*length(H3K4me1_profile)/sum(H3K4me1_profile, na.rm=T), 
+     type="l", col="darkgreen", xlab="Position", ylab="Normalized Reads", 
+            ylim=c(0, 3.5))
+legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
+            col=c("blue","darkgreen"), lty=1)
+```
+
+
 ## Metrics calculation using MetricFactory object
  
 It is possible to create only one selected metric by using the 
 **MetricFactory** object (with the possibility of specifying the thresholds) 
 and by passing the name of the metric to create 
-("RATIO_AREA", "DIFF_POS_MAX", "RATIO_MAX_MAX", "RATIO_INTERSECT"):
+(**RATIO_AREA**, **DIFF_POS_MAX**, **RATIO_MAX_MAX**, **RATIO_INTERSECT**, 
+**RATIO_NORMALIZED_INTERSECT**):
 
 ```{r factory}
-
 factory = MetricFactory$new(diffPosMaxTolerance=0.04)
-
 ```
-
 
 The factory has to be iniatized only once and can be used as many times as 
 necessary. It can calculate the same metrics but with different profiles or 
-different metrics with same profiles as long as the thresholds remain the same:
+different metrics with same profiles as long as the thresholds values 
+remain the same:
 
 ```{r factoryDemo }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
@@ -200,33 +240,12 @@ ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX",
 
 ratio_max_max
 
-ratio_max_max_with_diff_profiles <- factory$createMetric(
-                                metricType="RATIO_MAX_MAX", 
-                                profile1=c(4,6,5,33,26,88,66,55,33,12,11,2,2), 
-                                profile2=c(4,32,11,2,3,4,55,45,44,32,22,1,2))
-
-ratio_max_max_with_diff_profiles
-
-ratio_area <- factory$createMetric(metricType="RATIO_AREA", 
-                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
-ratio_area
-
-ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT", 
-                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
-ratio_intersect
-
 ratio_normalized_intersect <- factory$createMetric(metricType="RATIO_NORMALIZED_INTERSECT", 
                                         profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                         profile2=c(15,9,46,44,9,39,27,34,34,4))
 ratio_normalized_intersect
-
-diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX", 
-                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
-diff_pos_max
 ```
+
 
 ## References
 
