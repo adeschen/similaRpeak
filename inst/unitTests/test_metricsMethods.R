@@ -134,7 +134,7 @@ test.getSimilarityMetrics_diff_pos_max_function_na<- function() {
 }
 
 ## Test the result of ratioIntersect
-test.getSimilarityMetrics_ratio_Intersect_function_na<- function() {
+test.getSimilarityMetrics_ratio_intersect_function_na<- function() {
     obs <- 0.40776699
     exp <- similaRpeak:::ratioIntersect(
         c(NA,NA,6,24,65,34,15,4,53,22), 

@@ -95,7 +95,9 @@ diffPosMax <- function(profile1,
     if (!is.vector(profile1) || 
             !is.numeric(profile1) || 
             !is.vector(profile2) || 
-            !is.numeric(profile2)) {
+            !is.numeric(profile2) ||
+            all(is.na(profile1)) ||
+            all(is.na(profile2))) {
         return(NA)
     }
     
@@ -110,11 +112,13 @@ diffPosMax <- function(profile1,
     posMax1 <- which(profile1 >= toleranceMax1)
     posMax2 <- which(profile2 >= toleranceMax2)
     
-    # Get the absolute difference between posMax1 and posMax2
+    # Get the difference between posMax1 and posMax2
     minimum = min(posMax1, posMax2)
+    # The metric is only calculated if the minimal peak value is
+    # respected
     if ((minimum > 0) && (threshold <= min(max1, max2))) {
         if (length(posMax1) == 1 && length(posMax2) == 1) {
-            diff <- abs(posMax1-posMax2)    
+            diff <- posMax1-posMax2    
         } else {
             maxDiff1 <- ifelse(length(posMax1) == 1, 0, 
                                         max(diff(sort(posMax1))))
