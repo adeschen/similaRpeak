@@ -110,13 +110,13 @@ is not respected, it is assumed that more than one peak is present in the
 profile. Default=100.
 
 * **diffPosMaxTolerance**: The maximum variation accepted on the maximum value 
-to consider a position as a included in the maximum positions list. 
-Default=0.01.
+to include a position in the maximum positions list and use it to calculate the
+metric. Default=0.01.
 
 
 ## Metric definition
 
-Mathematicaly, a metric is considered as a function that quantifies the 
+Mathematically, a metric is considered as a function that quantifies the 
 similarity between two objects.The function must return zero when the two 
 objects are similar (identity of indiscernibles) and a non-negative value when 
 are dissimilar. 
@@ -176,7 +176,7 @@ metrics <- similarity(H3K27ac_profile,
                             ratioIntersectThreshold=5, 
                             ratioNormalizedIntersectThreshold=2,
                             diffPosMaxThresholdMinValue=10, 
-                            diffPosMaxThresholdMaxDiff=10, 
+                            diffPosMaxThresholdMaxDiff=100, 
                             diffPosMaxTolerance=0.01)
 ```
 
@@ -215,13 +215,19 @@ legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2,
             col=c("blue","darkgreen"), lty=1)
 ```
 
+## Metrics - Ratio area
+
+
+
+
+
 
 ## Metrics calculation using MetricFactory object
  
 It is possible to create only one selected metric by using the 
 **MetricFactory** object (with the possibility of specifying the thresholds) 
 and by passing the name of the metric to create 
-(**RATIO_AREA**, **DIFF_POS_MAX**, **RATIO_MAX_MAX**, **RATIO_INTERSECT**, 
+(**RATIO_AREA**, **DIFF_POS_MAX**, **RATIO_MAX_MAX**, **RATIO_INTERSECT** or 
 **RATIO_NORMALIZED_INTERSECT**):
 
 ```{r factory}
@@ -249,5 +255,13 @@ ratio_normalized_intersect
 
 ## References
 
+Dowen JM, Peng Fan Z, Hnisz D, Ren G, et al. (2014) Control of Cell Identity 
+Genes Occurs in Insulated Neighborhoods in Mammalian Chromosomes.
+Cell 159:374-387. doi: 10.1016/j.cell.2014.09.030
+
 Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia of DNA 
 elements in the human genome. Nature. 2012 Sep 6;489(7414):57–74.
+
+Whyte WA, Orlando DA, Hnisz D, Abraham BJ, Lin CY, et al. (2013) Master 
+transcription factors and mediator establish super-enhancers at key cell 
+identity genes. Cell 153:307–319. doi: 10.1016/j.cell.2013.03.035
