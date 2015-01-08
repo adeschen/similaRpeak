@@ -50,16 +50,16 @@ Let's load the data for this region.
 ```{r profiles, collapse=T}
 load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
 
-head(H3K27ac_profile, n=15)
-head(H3K4me1_profile, n=15)
+head(H3K27ac_chr7_profile, n=15)
+head(H3K4me1_chr7_profile, n=15)
 ```
 
 H3K27ac and H3K4me1 profiles have those shapes:
 
 ```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_profile, type="l", col="blue", xlab="", ylab="", ylim=c(0, 700))
+plot(H3K27ac_chr7_profile, type="l", col="blue", xlab="", ylab="", ylim=c(0, 700))
 par(new=TRUE)
-plot(H3K4me1_profile, type="l", col="darkgreen", xlab="Position", 
+plot(H3K4me1_chr7_profile, type="l", col="darkgreen", xlab="Position", 
      ylab="Coverage", ylim=c(0, 700))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
             col=c("blue","darkgreen"), lty=1)
@@ -69,8 +69,8 @@ The metrics are calculated using the `similarity` function which takes as
 arguments the two ChIP profiles vectors and the threshold values.
 
 ```{r metricCalculation}
-metrics <- similarity(H3K27ac_profile, 
-                            H3K4me1_profile, 
+metrics <- similarity(H3K27ac_chr7_profile, 
+                            H3K4me1_chr7_profile, 
                             ratioAreaThreshold=5, 
                             ratioMaxMaxThreshold=2, 
                             ratioIntersectThreshold=5, 
@@ -106,14 +106,14 @@ This hypothesis can be validated by looking at a graph of the normalized
 profiles :
 
 ```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_profile*length(H3K27ac_profile)/sum(H3K27ac_profile, na.rm=T), 
-     type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
+plot(H3K27ac_chr7_profile*length(H3K27ac_chr7_profile)/sum(H3K27ac_chr7_profile,
+        na.rm=T), type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
 par(new=TRUE)
-plot(H3K4me1_profile*length(H3K4me1_profile)/sum(H3K4me1_profile, na.rm=T), 
-     type="l", col="darkgreen", xlab="Position", 
-     ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
+plot(H3K4me1_chr7_profile*length(H3K4me1_chr7_profile)/sum(H3K4me1_chr7_profile,
+        na.rm=T), type="l", col="darkgreen", xlab="Position", 
+        ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
-            col=c("blue","darkgreen"), lty=1)
+        col=c("blue","darkgreen"), lty=1)
 ```
 
 
