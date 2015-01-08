@@ -118,36 +118,43 @@ metric. Default=0.01.
 
 Mathematically, a metric is considered as a function that quantifies the 
 similarity between two objects.The function must return zero when the two 
-objects are similar (identity of indiscernibles) and a non-negative value when 
-are dissimilar. 
+objects are perfectly similar (identity of indiscernibles) and a non-negative 
+value when are dissimilar. 
 
 The metrics present in the **similaRpeak** package do not strictly respect this
-standard but can all be translated to respect it.
+standard but can all be translated to pseudometrics. A pseudometric is a 
+function d which satisfies the axioms for a metric, except that instead of the
+identity of indiscernibles axiom, the metric must only return zero when it 
+compare an object to itself.
 
 By using the absolute value of the **DIFF_POS_MAX** metric, the definition of 
-a metric is formally respected. However, the respective position of the 
+a pseudometric is formally respected. However, the respective position of the 
 maximum peak of profiles is lost.
+
+$$ |DIFF\_POS\_MAX| $$
 
 By using the absolute value of the logarithm of the 
 **RATIO_AREA**, **RATIO_MAX_MAX**, **RATIO_INTERSECT** and 
-**RATIO_NORMALIZED_INTERSECT** metrics, the definition of a metric is formally 
-respected.
+**RATIO_NORMALIZED_INTERSECT** metrics, the definition of a pseudometric is 
+formally respected.
 
+$$ \log(RATIO) $$
 
-## Metrics calculation - General approach
+## Metrics calculation - Quick Start
 
-Super-enhancer regions found in the mouse embryonic stem cells thought to be 
+Enhancer regions found in the mouse embryonic stem cells thought to be 
 important for the cell fate as being highly active and connected regions have
 been selected (Whyte et al. 2013 & Dowen et al. 2014). Using Encyclopedia of 
 DNA Elements (ENCODE) data (Dunham I et al. 2012), the epigenetic landscape 
-overlap surrounding those super-enhancer regions at two histone 
+overlap surrounding those enhancer regions at two histone 
 post-transcriptional modifications linked to highly active enhancers H3K27ac 
-(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY). 
+(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) for human
+specie has been studied. 
 
 A region, chr7:61968807-61969730, shows interesting profiles for both histones.
 Let's calculate the metrics for this region.
 
-```{r profiles}
+```{r profiles, collapse=T}
 load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
 
 head(H3K27ac_profile, n=15)
@@ -159,8 +166,8 @@ H3K27ac and H3K4me1 profiles have those shapes:
 ```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
 plot(H3K27ac_profile, type="l", col="blue", xlab="", ylab="", ylim=c(0, 700))
 par(new=TRUE)
-plot(H3K4me1_profile, type="l", col="darkgreen", xlab="Position", ylab="Reads", 
-            ylim=c(0, 700))
+plot(H3K4me1_profile, type="l", col="darkgreen", xlab="Position", 
+     ylab="Coverage", ylim=c(0, 700))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
             col=c("blue","darkgreen"), lty=1)
 ```
@@ -183,13 +190,13 @@ metrics <- similarity(H3K27ac_profile,
 The `similarity` function returns a list which contains the general 
 information about both ChIP-Seq profiles and a list of all four metrics. 
 
-```{r metricReturn}
+```{r metricReturn, collapse=T}
 metrics
 ```
 
 Each specific information can be directly accessed. Some examples:
 
-```{r getInfo}
+```{r getInfo, collapse=T}
 metrics$areaProfile1
 metrics$areaProfile2
 metrics$metrics$RATIO_INTERSECT
@@ -209,8 +216,8 @@ plot(H3K27ac_profile*length(H3K27ac_profile)/sum(H3K27ac_profile, na.rm=T),
      type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
 par(new=TRUE)
 plot(H3K4me1_profile*length(H3K4me1_profile)/sum(H3K4me1_profile, na.rm=T), 
-     type="l", col="darkgreen", xlab="Position", ylab="Normalized Reads", 
-            ylim=c(0, 3.5))
+     type="l", col="darkgreen", xlab="Position", 
+     ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
             col=c("blue","darkgreen"), lty=1)
 ```
@@ -239,7 +246,7 @@ necessary. It can calculate the same metrics but with different profiles or
 different metrics with same profiles as long as the thresholds values 
 remain the same:
 
-```{r factoryDemo }
+```{r factoryDemo, collapse=T }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
                                         profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                         profile2=c(15,9,46,44,9,39,27,34,34,4))
