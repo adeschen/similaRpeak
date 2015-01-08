@@ -27,6 +27,96 @@ under the Artistic license 2.0. You are free to use and redistribute
 this software. 
 
 
+## Quick Start
+
+Enhancer regions found in the mouse embryonic stem cells thought to be 
+important for the cell fate as being highly active and connected regions have
+been selected (Whyte et al. 2013 & Dowen et al. 2014). Using Encyclopedia of 
+DNA Elements (ENCODE) data (Dunham I et al. 2012), the epigenetic landscape 
+overlap surrounding those enhancer regions at two histone 
+post-transcriptional modifications linked to highly active enhancers H3K27ac 
+(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) for human
+specie has been studied. 
+
+First, the `similaRpeak` package nust be loaded.
+
+```{r libraryLoad}
+suppressMessages(library(similaRpeak))
+```
+
+A region, chr7:61968807-61969730, shows interesting profiles for both histones.
+Let's load the data for this region.
+
+```{r profiles, collapse=T}
+load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
+
+head(H3K27ac_profile, n=15)
+head(H3K4me1_profile, n=15)
+```
+
+H3K27ac and H3K4me1 profiles have those shapes:
+
+```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
+plot(H3K27ac_profile, type="l", col="blue", xlab="", ylab="", ylim=c(0, 700))
+par(new=TRUE)
+plot(H3K4me1_profile, type="l", col="darkgreen", xlab="Position", 
+     ylab="Coverage", ylim=c(0, 700))
+legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
+            col=c("blue","darkgreen"), lty=1)
+```
+
+The metrics are calculated using the `similarity` function which takes as 
+arguments the two ChIP profiles vectors and the threshold values.
+
+```{r metricCalculation}
+metrics <- similarity(H3K27ac_profile, 
+                            H3K4me1_profile, 
+                            ratioAreaThreshold=5, 
+                            ratioMaxMaxThreshold=2, 
+                            ratioIntersectThreshold=5, 
+                            ratioNormalizedIntersectThreshold=2,
+                            diffPosMaxThresholdMinValue=10, 
+                            diffPosMaxThresholdMaxDiff=100, 
+                            diffPosMaxTolerance=0.01)
+```
+
+The `similarity` function returns a list which contains the general 
+information about both ChIP-Seq profiles and a list of all four metrics. 
+
+```{r metricReturn, collapse=T}
+metrics
+```
+
+Each specific information can be directly accessed. Some examples:
+
+```{r getInfo, collapse=T}
+metrics$areaProfile1
+metrics$areaProfile2
+metrics$metrics$RATIO_INTERSECT
+```
+
+The **RATIO_INTERSECT** value of `r round(metrics$metrics$RATIO_INTERSECT, 2)` 
+and the **RATIO_MAX_MAX** value of `r round(metrics$metrics$RATIO_MAX_MAX, 2)` 
+are quite low. Both values can be explained by the large difference in 
+coverage between profiles. Those values could be interpreted as two profiles 
+with low level of similarity. However, the **RATIO_NORMALIZED_INTERSECT** of 
+`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. It 
+could be a sign that the profiles, once normalized, are quite similar.
+This hypothesis can be validated by looking at a graph of the normalized
+profiles :
+
+```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
+plot(H3K27ac_profile*length(H3K27ac_profile)/sum(H3K27ac_profile, na.rm=T), 
+     type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
+par(new=TRUE)
+plot(H3K4me1_profile*length(H3K4me1_profile)/sum(H3K4me1_profile, na.rm=T), 
+     type="l", col="darkgreen", xlab="Position", 
+     ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
+legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
+            col=c("blue","darkgreen"), lty=1)
+```
+
+
 ## Introduction
 
 The **similaRpeak** package calculates metrics to estimate the level 
@@ -61,12 +151,6 @@ the intersection area.
 the total area of two normalized profiles. The profiles are normalized by 
 divinding them by their average value. `NA` if minimal area threshold is not 
 respected for the intersection area.
-
-## Loading similaRpeak package
-
-```{r libraryLoad}
-suppressMessages(library(similaRpeak))
-```
  
 ## Inputs
 
@@ -140,89 +224,8 @@ formally respected.
 
 $$ \log(RATIO) $$
 
-## Metrics calculation - Quick Start
 
-Enhancer regions found in the mouse embryonic stem cells thought to be 
-important for the cell fate as being highly active and connected regions have
-been selected (Whyte et al. 2013 & Dowen et al. 2014). Using Encyclopedia of 
-DNA Elements (ENCODE) data (Dunham I et al. 2012), the epigenetic landscape 
-overlap surrounding those enhancer regions at two histone 
-post-transcriptional modifications linked to highly active enhancers H3K27ac 
-(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) for human
-specie has been studied. 
-
-A region, chr7:61968807-61969730, shows interesting profiles for both histones.
-Let's calculate the metrics for this region.
-
-```{r profiles, collapse=T}
-load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
-
-head(H3K27ac_profile, n=15)
-head(H3K4me1_profile, n=15)
-```
-
-H3K27ac and H3K4me1 profiles have those shapes:
-
-```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_profile, type="l", col="blue", xlab="", ylab="", ylim=c(0, 700))
-par(new=TRUE)
-plot(H3K4me1_profile, type="l", col="darkgreen", xlab="Position", 
-     ylab="Coverage", ylim=c(0, 700))
-legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
-            col=c("blue","darkgreen"), lty=1)
-```
-
-The metrics are calculated using the `similarity` function which takes as 
-arguments the two ChIP profiles vectors and the threshold values.
-
-```{r metricCalculation}
-metrics <- similarity(H3K27ac_profile, 
-                            H3K4me1_profile, 
-                            ratioAreaThreshold=5, 
-                            ratioMaxMaxThreshold=2, 
-                            ratioIntersectThreshold=5, 
-                            ratioNormalizedIntersectThreshold=2,
-                            diffPosMaxThresholdMinValue=10, 
-                            diffPosMaxThresholdMaxDiff=100, 
-                            diffPosMaxTolerance=0.01)
-```
-
-The `similarity` function returns a list which contains the general 
-information about both ChIP-Seq profiles and a list of all four metrics. 
-
-```{r metricReturn, collapse=T}
-metrics
-```
-
-Each specific information can be directly accessed. Some examples:
-
-```{r getInfo, collapse=T}
-metrics$areaProfile1
-metrics$areaProfile2
-metrics$metrics$RATIO_INTERSECT
-```
-
-The **RATIO_INTERSECT** value of `r round(metrics$metrics$RATIO_INTERSECT, 2)` 
-and the **RATIO_MAX_MAX** value of `r round(metrics$metrics$RATIO_MAX_MAX, 2)` 
-are quite low. Both ratios values can be explained by the large difference in 
-coverage between profiles. Those values could be interpreted as two profiles 
-with low level of similarity. However, the **RATIO_NORMALIZED_INTERSECT** of 
-`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. It 
-could be a sign that the profiles, once normalized, are quite similar.
-This hypothesis can be validated by a graph of the normalized profiles :
-
-```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_profile*length(H3K27ac_profile)/sum(H3K27ac_profile, na.rm=T), 
-     type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
-par(new=TRUE)
-plot(H3K4me1_profile*length(H3K4me1_profile)/sum(H3K4me1_profile, na.rm=T), 
-     type="l", col="darkgreen", xlab="Position", 
-     ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
-legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
-            col=c("blue","darkgreen"), lty=1)
-```
-
-## Metrics - Ratio area
+## RATIO_AREA Metric
 
 
 
