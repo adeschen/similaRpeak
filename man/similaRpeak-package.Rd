@@ -15,14 +15,18 @@ The R function \code{\link{similarity}} calculates four differents metrics:
 
 \itemize{
         \item RATIO_AREA: The ratio between the areas. The larger 
-                          value is always divided by the smaller value.
+                            value is always divided by the smaller value.
         \item DIFF_POS_MAX: The difference between the maximal peaks positions. 
                             The difference is always a positive value.
         \item RATIO_MAX_MAX: The ratio between the maximal peaks values. 
                             The larger value is always divided by the smaller
                             value. 
         \item RATIO_INTERSECT: The ratio between the intersection area and the 
-                                total area. 
+                            total area.
+        \item RATIO_NORMALIZED_INTERSECT: The ratio between the intersection 
+                            area and the total area of two normalized profiles. 
+                            The profiles are normalized by divinding them by 
+                            their average value.
 }
 
 The function \code{\link{similarity}} also reports basic information about each 
