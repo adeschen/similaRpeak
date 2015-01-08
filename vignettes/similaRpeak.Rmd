@@ -151,6 +151,8 @@ the intersection area.
 the total area of two normalized profiles. The profiles are normalized by 
 divinding them by their average value. `NA` if minimal area threshold is not 
 respected for the intersection area.
+
+![alt text](figure/metrics_small.gif "Metrics")
  
 ## Inputs
 
@@ -227,9 +229,57 @@ $$ \log(RATIO) $$
 
 ## RATIO_AREA Metric
 
+The **RATIO_AREA** metric is the ratio between the profile areas. The first 
+profile (`profile1` parameter) is always divided by the second profile 
+(`profile2` parameter). `NA` is returned if minimal area threshold 
+(`ratioAreaThreshold` parameter) is not respected for at least one of the 
+profiles.
 
 
+## DIFF_POS_MAX Metric
 
+The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
+positions. The difference is always the first profile value 
+(`profile1` parameter) minus the second profile value 
+(`profile2` parameter). `NA` is returned if minimal peak value is not respected. 
+A profile can have more than one position with the maximum value. In that case, 
+the median position is used. A threshold (`diffPosMaxTolerance` parameter) can 
+be set to consider all positions within a certain range of the maximum value. A 
+threshold (`diffPosMaxThresholdMaxDiff` parameter) can also be set to ensure 
+that the distance between two maximum values is not too wide. When this 
+distance is not respected, it is assumed that more than one peak is present 
+in the profile and `NA` is returned. Finally, a threshold 
+(`diffPosMaxThresholdMinValue` parameter) can be set to ensure that the maxumum
+value is egal or superior to a minimal value. When this minimum value is not 
+respected, it is assumed that no peak is present in the profile and `NA` is 
+returned. 
+
+
+## RATIO_MAX_MAX Metric
+
+The **RATIO_MAX_MAX** metric is the ratio between the peaks values 
+in each profile. The first profile (`profile1` parameter) is always divided by 
+the second profile (`profile2` parameter). `NA` if minimal peak value threshold 
+(`ratioMaxMaxThreshold` parameter) is not respected for at least one of the 
+profiles.
+
+
+## RATIO_INTERSECT Metric
+
+The **RATIO_INTERSECT** metric is the ratio between the intersection area and the 
+total area of the two profiles. `NA` if minimal area threshold 
+(`ratioIntersectThreshold` parameter) is not respected for the intersection 
+area.
+
+
+## RATIO_NORMALIZED_INTERSECT Metric
+
+The **RATIO_NORMALIZED_INTERSECT** metric is the ratio between the intersection 
+area and the total area of the two normalized profiles.  The profiles are 
+normalized by divinding them by their average value (total area of the profile 
+divided by profile lenght). `NA` if minimal area threshold 
+(`ratioNormalizedIntersectThreshold` parameter) is not respected for 
+the intersection area.
 
 
 ## Metrics calculation using MetricFactory object
