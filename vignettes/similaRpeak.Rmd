@@ -583,8 +583,8 @@ Genes Occurs in Insulated Neighborhoods in Mammalian Chromosomes.
 Cell 159:374-387. doi: 10.1016/j.cell.2014.09.030
 
 Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia of DNA 
-elements in the human genome. Nature. 2012 Sep 6;489(7414):57–74.
+elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
 
 Whyte WA, Orlando DA, Hnisz D, Abraham BJ, Lin CY, et al. (2013) Master 
 transcription factors and mediator establish super-enhancers at key cell 
-identity genes. Cell 153:307–319. doi: 10.1016/j.cell.2013.03.035
+identity genes. Cell 153:307-319. doi: 10.1016/j.cell.2013.03.035
