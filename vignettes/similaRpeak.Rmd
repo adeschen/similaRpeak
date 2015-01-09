@@ -287,6 +287,9 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "RATIO_AREA=0.12", cex=1.5, col="red")
 ```
 
+The **RATIO_AREA** metric can be useful to detect regions with similar 
+coverage even if the profiles are different. 
+
 ## DIFF_POS_MAX Metric
 
 The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
@@ -355,6 +358,7 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
 ```
 
+The **DIFF_POS_MAX** metric can be useful to detect regions with shifted peaks.
 
 ## RATIO_MAX_MAX Metric
 
@@ -414,6 +418,8 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "RATIO_MAX_MAX=0.12", cex=1.5, col="red")
 ```
 
+The **RATIO_MAX_MAX** metric can be useful to detect regions with peaks with 
+similar (or dissimilar) amplitude.
 
 ## RATIO_INTERSECT Metric
 
@@ -472,6 +478,9 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
         col=c("blue","darkgreen"), lty=1)
 text(275, 225, "RATIO_INTERSECT=0.12", cex=1.5, col="red")
 ```
+
+The **RATIO_INTERSECT** metric can be useful to detect regions with possibily 
+similar profiles.
 
 
 ## RATIO_NORMALIZED_INTERSECT Metric
@@ -544,6 +553,8 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 7, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(275, 6, "INTERSECT=0.84", cex=1.5, col="red")
 ```
+
+The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with possibily similar profiles even if their have different amplitude.
 
 ## Metrics calculation using MetricFactory object
  
