@@ -96,7 +96,7 @@
                           respected.
         \item DIFF_POS_MAX: The difference between the maximal peaks positions. 
                             The difference is always the first profile value 
-                            less the second profile value. 
+                            minus the second profile value. 
                             \code{NA} is returned if minimal peak value is not 
                             respected. A profile can have more than one 
                             position with the maximum value. In that case, 
