@@ -287,6 +287,20 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "RATIO_AREA=0.12", cex=1.5, col="red")
 ```
 
+```{r ratio_area_calculation, collapse=T}
+metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics$metric$RATIO_AREA
+
+metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics$metric$RATIO_AREA
+
+metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics$metric$RATIO_AREA
+
+metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics$metric$RATIO_AREA
+```
+
 The **RATIO_AREA** metric can be useful to detect regions with similar 
 coverage even if the profiles are different. 
 
@@ -358,6 +372,21 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
 ```
 
+```{r diff_pos_max_calculation, collapse=T}
+metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics$metric$DIFF_POS_MAX
+
+metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics$metric$DIFF_POS_MAX
+
+metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics$metric$DIFF_POS_MAX
+
+metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics$metric$DIFF_POS_MAX
+```
+
+
 The **DIFF_POS_MAX** metric can be useful to detect regions with shifted peaks.
 
 ## RATIO_MAX_MAX Metric
@@ -416,6 +445,20 @@ plot(H3K4me1_chr19_profile,
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(275, 225, "RATIO_MAX_MAX=0.12", cex=1.5, col="red")
+```
+
+```{r ratio_max_max_calculation, collapse=T}
+metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics$metric$RATIO_MAX_MAX
+
+metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics$metric$RATIO_MAX_MAX
+
+metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics$metric$RATIO_MAX_MAX
+
+metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics$metric$RATIO_MAX_MAX
 ```
 
 The **RATIO_MAX_MAX** metric can be useful to detect regions with peaks with 
@@ -477,6 +520,20 @@ plot(H3K4me1_chr19_profile,
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(275, 225, "RATIO_INTERSECT=0.12", cex=1.5, col="red")
+```
+
+```{r ratio_intersect_calculation, collapse=T}
+metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics$metric$RATIO_INTERSECT
+
+metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics$metric$RATIO_INTERSECT
+
+metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics$metric$RATIO_INTERSECT
+
+metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics$metric$RATIO_INTERSECT
 ```
 
 The **RATIO_INTERSECT** metric can be useful to detect regions with possibily 
@@ -552,6 +609,20 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
         col=c("blue","darkgreen"), lty=1)
 text(275, 7, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(275, 6, "INTERSECT=0.84", cex=1.5, col="red")
+```
+
+```{r ratio_normalized_intersect_calculation, collapse=T}
+metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics$metric$RATIO_NORMALIZED_INTERSECT
+
+metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics$metric$RATIO_NORMALIZED_INTERSECT
+
+metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics$metric$RATIO_NORMALIZED_INTERSECT
+
+metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics$metric$RATIO_NORMALIZED_INTERSECT
 ```
 
 The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with possibily similar profiles even if their have different amplitude.
