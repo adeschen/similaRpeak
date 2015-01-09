@@ -218,14 +218,14 @@ By using the absolute value of the **DIFF_POS_MAX** metric, the definition of
 a pseudometric is formally respected. However, the respective position of the 
 maximum peak of profiles is lost.
 
-$$ |DIFF\_POS\_MAX| $$
+$$ \Huge |DIFF\_POS\_MAX| $$
 
 By using the absolute value of the logarithm of the 
 **RATIO_AREA**, **RATIO_MAX_MAX**, **RATIO_INTERSECT** and 
 **RATIO_NORMALIZED_INTERSECT** metrics, the definition of a pseudometric is 
 formally respected.
 
-$$ \log(RATIO) $$
+$$ \Huge \log(RATIO) $$ 
 
 
 ## RATIO_AREA Metric
