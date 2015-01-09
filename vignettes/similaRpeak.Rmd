@@ -130,7 +130,7 @@ The first profile is always divided by the second profile. `NA` is returned
 if minimal area threshold is not respected for at least one of the profiles.
 
 * **DIFF_POS_MAX**: The difference between the maximal peaks positions. The 
-difference is always the first profile value minus the second profile value. 
+difference is always the first profile value less the second profile value. 
 `NA` is returned if minimal peak value is not respected. A profile can have 
 more than one position with the maximum value. In that case, the median 
 position is used. A threshold argument can be set to consider all positions 
@@ -291,7 +291,7 @@ text(275, 225, "RATIO_AREA=0.12", cex=1.5, col="red")
 
 The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
 positions. The difference is always the first profile value 
-(`profile1` parameter) minus the second profile value 
+(`profile1` parameter) less the second profile value 
 (`profile2` parameter). `NA` is returned if minimal peak value is not respected. 
 A profile can have more than one position with the maximum value. In that case, 
 the median position is used. A threshold (`diffPosMaxTolerance` parameter) can 
