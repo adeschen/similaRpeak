@@ -1,11 +1,13 @@
 similaRpeak
 =====================
 
-This package calculates metrics to estimate a level of similarity between two ChIP profiles.
+This package calculates metrics to estimate a level of similarity between two 
+ChIP-Seq profiles.
 
 ## NOTE ##
 
-To use this current development version, the use of the development version of the R6 package (>= 2.0) is mandatory.
+To use this current development version, the use of the development version of 
+the R6 package (>= 2.0) is mandatory.
 
 
 ## Authors ##
@@ -16,7 +18,8 @@ See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/ "Arnaud Droit Lab"
 
 ## License ##
 
-This package and the underlying similaRpeak code are distributed under the Artistic license 2.0. You are free to use and redistribute this software. 
+This package and the underlying similaRpeak code are distributed under the 
+Artistic license 2.0. You are free to use and redistribute this software. 
 
 For more information on Artistic 2.0 License see [http://opensource.org/licenses/Artistic-2.0](http://opensource.org/licenses/Artistic-2.0)
 

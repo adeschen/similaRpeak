@@ -47,7 +47,7 @@ suppressMessages(library(similaRpeak))
 A region, chr7:61968807-61969730, shows interesting profiles for both histones.
 Let's load the data for this region.
 
-```{r profiles, collapse=T}
+```{r profiles, collapse=TRUE}
 load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
 
 head(H3K27ac_chr7_profile, n=15)
@@ -84,13 +84,13 @@ metrics <- similarity(H3K27ac_chr7_profile,
 The `similarity` function returns a list which contains the general 
 information about both ChIP-Seq profiles and a list of all four metrics. 
 
-```{r metricReturn, collapse=T}
+```{r metricReturn, collapse=TRUE}
 metrics
 ```
 
 Each specific information can be directly accessed. Some examples:
 
-```{r getInfo, collapse=T}
+```{r getInfo, collapse=TRUE}
 metrics$areaProfile1
 metrics$areaProfile2
 metrics$metrics$RATIO_INTERSECT
@@ -108,10 +108,10 @@ profiles :
 
 ```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
 plot(H3K27ac_chr7_profile*length(H3K27ac_chr7_profile)/sum(H3K27ac_chr7_profile,
-        na.rm=T), type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
+        na.rm=TRUE), type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
 par(new=TRUE)
 plot(H3K4me1_chr7_profile*length(H3K4me1_chr7_profile)/sum(H3K4me1_chr7_profile,
-        na.rm=T), type="l", col="darkgreen", xlab="Position", 
+        na.rm=TRUE), type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
@@ -236,7 +236,7 @@ profile (`profile1` parameter) is always divided by the second profile
 (`ratioAreaThreshold` parameter) is not respected for at least one of the 
 profiles.
 
-```{r ratio_area, echo=F, fig.width=11, fig.height=8}
+```{r ratio_area, echo=FALSE, fig.width=11, fig.height=8}
 load(system.file("extdata/demo_profiles.RData", package = "similaRpeak"))
 
 par(mar = c(2,4,2,2))
@@ -322,7 +322,7 @@ value is egal or superior to a minimal value. When this minimum value is not
 respected, it is assumed that no peak is present in the profile and `NA` is 
 returned. 
 
-```{r diff_pos_max, echo=F, fig.width=11, fig.height=8}
+```{r diff_pos_max, echo=FALSE, fig.width=11, fig.height=8}
 
 par(mar = c(2,4,2,2))
 par(mfrow = c(2,2)) 
@@ -397,7 +397,7 @@ the second profile (`profile2` parameter). `NA` if minimal peak value threshold
 (`ratioMaxMaxThreshold` parameter) is not respected for at least one of the 
 profiles.
 
-```{r ratio_max_max, echo=F, fig.width=11, fig.height=8}
+```{r ratio_max_max, echo=FALSE, fig.width=11, fig.height=8}
 
 par(mar = c(2,4,2,2))
 par(mfrow = c(2,2)) 
@@ -471,7 +471,7 @@ total area of the two profiles. `NA` if minimal area threshold
 (`ratioIntersectThreshold` parameter) is not respected for the intersection 
 area.
 
-```{r ratio_intersect, echo=F, fig.width=11, fig.height=8}
+```{r ratio_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
 par(mar = c(2,4,2,2))
 par(mfrow = c(2,2)) 
@@ -549,7 +549,7 @@ divided by profile lenght). `NA` if minimal area threshold
 (`ratioNormalizedIntersectThreshold` parameter) is not respected for 
 the intersection area.
 
-```{r ratio_normalized_intersect, echo=F, fig.width=11, fig.height=8}
+```{r ratio_normalized_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
 par(mar = c(2,4,2,2))
 par(mfrow = c(2,2)) 
@@ -569,12 +569,12 @@ text(250, 2, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(250, 1.75, "INTERSECT=0.63", cex=1.5, col="red")
 
 plot(H3K27ac_chr8_profile*length(H3K27ac_chr8_profile)/
-         sum(H3K27ac_chr8_profile, na.rm = T),
+         sum(H3K27ac_chr8_profile, na.rm = TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr8:43092918-43093442")
 par(new=TRUE)
 plot(H3K4me1_chr8_profile*length(H3K4me1_chr8_profile)/
-         sum(H3K4me1_chr8_profile, na.rm = T),
+         sum(H3K4me1_chr8_profile, na.rm = TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -583,12 +583,12 @@ text(375, 8, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(375, 7, "INTERSECT=0.89", cex=1.5, col="red")
 
 plot(H3K27ac_chr3_profile*length(H3K27ac_chr3_profile)/
-         sum(H3K27ac_chr3_profile, na.rm = T),
+         sum(H3K27ac_chr3_profile, na.rm = TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 8),
         main="chr3:73159773-73160145")
 par(new=TRUE)
 plot(H3K4me1_chr3_profile*length(H3K4me1_chr3_profile)/
-         sum(H3K4me1_chr3_profile, na.rm = T),
+         sum(H3K4me1_chr3_profile, na.rm = TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 8))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -597,12 +597,12 @@ text(288, 6, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(288, 5.3, "INTERSECT=0.78", cex=1.5, col="red")
 
 plot(H3K27ac_chr19_profile*length(H3K27ac_chr19_profile)/
-         sum(H3K27ac_chr19_profile, na.rm = T),
+         sum(H3K27ac_chr19_profile, na.rm = TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr19:27739373-27739767")
 par(new=TRUE)
 plot(H3K4me1_chr19_profile*length(H3K4me1_chr19_profile)/
-         sum(H3K4me1_chr19_profile, na.rm = T),
+         sum(H3K4me1_chr19_profile, na.rm = TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
