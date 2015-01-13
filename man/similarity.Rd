@@ -3,7 +3,7 @@
 
 \title{
   Calculate metrics which estimate the level of similarity between two 
-  ChIP-Seq profiles.
+  ChIP-Seq profiles
 }
 
 \description{

@@ -1,6 +1,6 @@
 Package: similaRpeak
 Type: Package
-Title: similaRpeak: a package to estimate a level of similarity between ChIP
+Title: similaRpeak: a package to estimate a level of similarity between ChIP-Seq
     profiles.
 Version: 0.99.1
 Date: 2014-08-08
@@ -16,7 +16,7 @@ Authors@R: c( person("Astrid Louise","Deschenes",
     person("Arnaud", "Droit", email="arnaud.droit@crchuq.ulaval.ca",
     role=c("aut")))
 Description: This package calculates metrics which assign a level of similarity
-    between ChIP profiles.
+    between ChIP-Seq profiles.
 biocViews: BiologicalQuestion, ChIPSeq, Genetics, MultipleComparison,
     DifferentialExpression
 Depends:

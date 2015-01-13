@@ -8,7 +8,7 @@ ChIP profiles
 }
 \description{
 \pkg{similaRpeak} is calculing four differents metrics to estimate a 
-level of similarity between two ChIP profiles.
+level of similarity between two ChIP profiles
 }
 \details{
 The R function \code{\link{similarity}} calculates four differents metrics: 

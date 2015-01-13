@@ -5,7 +5,7 @@
 \alias{MetricFactory}
 
 \title{
-  MetricFactory object.
+  MetricFactory object
 }
 
 \description{

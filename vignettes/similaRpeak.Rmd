@@ -1,5 +1,5 @@
 ---
-title: "similaRpeak: similarity between two profiles"
+title: "similaRpeak: similarity between two ChIP-Seq profiles"
 output:
   html_document:
     theme: null
@@ -12,11 +12,11 @@ output:
 <!-- rmarkdown v1 -->
 <!--
 %\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{similaRpeak: similarity between two profiles}
+%\VignetteIndexEntry{similaRpeak: similarity between two ChIP-Seq profiles}
 -->
 
 
-Metrics which estimate similarity between two ChIP profiles
+Metrics which estimate similarity between two ChIP-Seq profiles
 ====================================================================
 
 Astrid Louise Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, 
@@ -67,7 +67,7 @@ legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2,
 ```
 
 The metrics are calculated using the `similarity` function which takes as 
-arguments the two ChIP profiles vectors and the threshold values.
+arguments the two ChIP-Seq profiles vectors and the threshold values.
 
 ```{r metricCalculation}
 metrics <- similarity(H3K27ac_chr7_profile, 
@@ -121,7 +121,7 @@ legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2,
 ## Introduction
 
 The **similaRpeak** package calculates metrics to estimate the level 
-of similarity between two ChIP profiles.
+of similarity between two ChIP-Seq profiles.
 
 The metrics are:
 
@@ -157,10 +157,10 @@ respected for the intersection area.
  
 ## Inputs
 
-### ChIP profiles vectors
+### ChIP-Seq profiles vectors
 
-To estimate the level of similarity between two ChIP profiles for a specific 
-region, two `vector` containing the RPM values of the two ChIP profiles for 
+To estimate the level of similarity between two ChIP-Seq profiles for a specific 
+region, two `vector` containing the RPM values of the two ChIP-Seq profiles for 
 each position of the selected region. Both `vector` should have the same length 
 and should not contain any negative value.
 
