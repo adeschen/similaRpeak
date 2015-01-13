@@ -3,15 +3,15 @@
 \alias{similaRpeak-package}
 \alias{similaRpeak}
 \title{
-similaRpeak: Metrics to estimate a level of similarity between two 
-ChIP profiles
+    similaRpeak: Metrics to estimate a level of similarity between two 
+    ChIP profiles
 }
 \description{
 \pkg{similaRpeak} is calculing four differents metrics to estimate a 
 level of similarity between two ChIP profiles
 }
 \details{
-The R function \code{\link{similarity}} calculates four differents metrics: 
+    The R function \code{\link{similarity}} calculates four differents metrics: 
 
 \itemize{
         \item RATIO_AREA: The ratio between the areas. The larger 

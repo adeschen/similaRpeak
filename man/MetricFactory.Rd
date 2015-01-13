@@ -5,7 +5,7 @@
 \alias{MetricFactory}
 
 \title{
-  MetricFactory object
+     MetricFactory object
 }
 
 \description{
@@ -53,24 +53,24 @@
 }
 
 \details{
-  The \code{MetricFactory} object is inspired from the factory design pattern. 
-  Only one instance of \code{MetricFactory} object is necessary to calculate all
-  available metrics for different profiles, as long as the thresholds set in
-  the \code{MetricFactory} instance are appropriate for the calculation. The
-  thresholds are set during the \code{MetricFactory} object creation and cannot
-  be changed afterwards. If different thresholds are needed, a new 
-  \code{MetricFactory} object, with the new thresholds, must be instantiated.
+    The \code{MetricFactory} object is inspired from the factory design pattern. 
+    Only one instance of \code{MetricFactory} object is necessary to calculate 
+    all available metrics for different profiles, as long as the thresholds set 
+    in the \code{MetricFactory} instance are appropriate for the calculation. 
+    The thresholds are set during the \code{MetricFactory} object creation and 
+    cannot be changed afterwards. If different thresholds are needed, a new 
+    \code{MetricFactory} object, with the new thresholds, must be instantiated.
 }
 
 \value{
-  \code{MetricFactory$new} returns a \code{MetricFactory} object which 
-  contains the information about the thresholds used to calculate each metric. 
-  It can be used, as many times needed, to calculate the specified metrics. 
+    \code{MetricFactory$new} returns a \code{MetricFactory} object which 
+    contains the information about the thresholds used to calculate each metric. 
+    It can be used, as many times needed, to calculate the specified metrics. 
 }
 
 \author{
-  Astrid Louise Deschenes
-  <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca> 
+    Astrid Louise Deschenes
+    <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca> 
 }
 
 \examples{

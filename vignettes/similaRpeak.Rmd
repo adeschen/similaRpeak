@@ -48,7 +48,7 @@ A region, chr7:61968807-61969730, shows interesting profiles for both histones.
 Let's load the data for this region.
 
 ```{r profiles, collapse=TRUE}
-load(system.file("extdata/chr7_profiles.RData", package = "similaRpeak"))
+load(system.file("extdata/chr7_profiles.RData", package="similaRpeak"))
 
 head(H3K27ac_chr7_profile, n=15)
 head(H3K4me1_chr7_profile, n=15)
@@ -237,10 +237,10 @@ profile (`profile1` parameter) is always divided by the second profile
 profiles.
 
 ```{r ratio_area, echo=FALSE, fig.width=11, fig.height=8}
-load(system.file("extdata/demo_profiles.RData", package = "similaRpeak"))
+load(system.file("extdata/demo_profiles.RData", package="similaRpeak"))
 
-par(mar = c(2,4,2,2))
-par(mfrow = c(2,2)) 
+par(mar=c(2,4,2,2))
+par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
@@ -324,8 +324,8 @@ returned.
 
 ```{r diff_pos_max, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar = c(2,4,2,2))
-par(mfrow = c(2,2)) 
+par(mar=c(2,4,2,2))
+par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
@@ -399,8 +399,8 @@ profiles.
 
 ```{r ratio_max_max, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar = c(2,4,2,2))
-par(mfrow = c(2,2)) 
+par(mar=c(2,4,2,2))
+par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
@@ -466,15 +466,15 @@ similar (or dissimilar) amplitude.
 
 ## RATIO_INTERSECT Metric
 
-The **RATIO_INTERSECT** metric is the ratio between the intersection area and the 
-total area of the two profiles. `NA` if minimal area threshold 
+The **RATIO_INTERSECT** metric is the ratio between the intersection area and 
+the total area of the two profiles. `NA` if minimal area threshold 
 (`ratioIntersectThreshold` parameter) is not respected for the intersection 
 area.
 
 ```{r ratio_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar = c(2,4,2,2))
-par(mfrow = c(2,2)) 
+par(mar=c(2,4,2,2))
+par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
@@ -555,12 +555,12 @@ par(mar = c(2,4,2,2))
 par(mfrow = c(2,2)) 
 
 plot(H3K27ac_chr2_profile*length(H3K27ac_chr2_profile)/
-         sum(H3K27ac_chr2_profile, na.rm = T),
+         sum(H3K27ac_chr2_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 3),
         main="chr2:70360770-70361098")
 par(new=TRUE)
 plot(H3K4me1_chr2_profile*length(H3K4me1_chr2_profile)/
-         sum(H3K4me1_chr2_profile, na.rm = T),
+         sum(H3K4me1_chr2_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -569,12 +569,12 @@ text(250, 2, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(250, 1.75, "INTERSECT=0.63", cex=1.5, col="red")
 
 plot(H3K27ac_chr8_profile*length(H3K27ac_chr8_profile)/
-         sum(H3K27ac_chr8_profile, na.rm = TRUE),
+         sum(H3K27ac_chr8_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr8:43092918-43093442")
 par(new=TRUE)
 plot(H3K4me1_chr8_profile*length(H3K4me1_chr8_profile)/
-         sum(H3K4me1_chr8_profile, na.rm = TRUE),
+         sum(H3K4me1_chr8_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -583,12 +583,12 @@ text(375, 8, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(375, 7, "INTERSECT=0.89", cex=1.5, col="red")
 
 plot(H3K27ac_chr3_profile*length(H3K27ac_chr3_profile)/
-         sum(H3K27ac_chr3_profile, na.rm = TRUE),
+         sum(H3K27ac_chr3_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 8),
         main="chr3:73159773-73160145")
 par(new=TRUE)
 plot(H3K4me1_chr3_profile*length(H3K4me1_chr3_profile)/
-         sum(H3K4me1_chr3_profile, na.rm = TRUE),
+         sum(H3K4me1_chr3_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 8))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -597,12 +597,12 @@ text(288, 6, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(288, 5.3, "INTERSECT=0.78", cex=1.5, col="red")
 
 plot(H3K27ac_chr19_profile*length(H3K27ac_chr19_profile)/
-         sum(H3K27ac_chr19_profile, na.rm = TRUE),
+         sum(H3K27ac_chr19_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr19:27739373-27739767")
 par(new=TRUE)
 plot(H3K4me1_chr19_profile*length(H3K4me1_chr19_profile)/
-         sum(H3K4me1_chr19_profile, na.rm = TRUE),
+         sum(H3K4me1_chr19_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -611,7 +611,7 @@ text(275, 7, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(275, 6, "INTERSECT=0.84", cex=1.5, col="red")
 ```
 
-```{r ratio_normalized_intersect_calculation, collapse=T}
+```{r ratio_normalized_intersect_calculation, collapse=TRUE}
 metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 
@@ -625,7 +625,8 @@ metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 ```
 
-The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with possibily similar profiles even if their have different amplitude.
+The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with 
+possibily similar profiles even if their have different amplitude.
 
 ## Metrics calculation using MetricFactory object
  
@@ -644,16 +645,17 @@ necessary. It can calculate the same metrics but with different profiles or
 different metrics with same profiles as long as the thresholds values 
 remain the same:
 
-```{r factoryDemo, collapse=T }
+```{r factoryDemo, collapse=TRUE }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
+                                        profile1=H3K27ac_chr2_profile, 
+                                        profile2=H3K4me1_chr2_profile)
 
 ratio_max_max
 
-ratio_normalized_intersect <- factory$createMetric(metricType="RATIO_NORMALIZED_INTERSECT", 
-                                        profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                        profile2=c(15,9,46,44,9,39,27,34,34,4))
+ratio_normalized_intersect <- factory$createMetric(
+                                        metricType="RATIO_NORMALIZED_INTERSECT", 
+                                        profile1=H3K27ac_chr2_profile, 
+                                        profile2=H3K4me1_chr2_profile)
 ratio_normalized_intersect
 ```
 
