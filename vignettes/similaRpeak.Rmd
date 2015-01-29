@@ -29,14 +29,14 @@ this software.
 
 ## Quick Start
 
-Enhancer regions found in the mouse embryonic stem cells thought to be 
-important for the cell fate as being highly active and connected regions have
-been selected (Whyte et al. 2013 & Dowen et al. 2014). Using Encyclopedia of 
-DNA Elements (ENCODE) data (Dunham I et al. 2012), the epigenetic landscape 
-overlap surrounding those enhancer regions at two histone 
-post-transcriptional modifications linked to highly active enhancers H3K27ac 
-(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) for human
-specie has been studied. 
+Highly active enhancer regions are thought to be important for the cell fate 
+(Adersson et al. 2014, FANTOM5 consortium, Hnisz et al. 2013). Highly active 
+enhancers regions have been selected in GM12878 cells. Similarity of ChIP-seq 
+profiles has been tested using two histone post-transcriptional modifications 
+linked to highly active enhancers H3K27ac (DCC accession: ENCFF000ASG) and 
+H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements 
+(ENCODE) data (Dunham I et al. 2012). Accordingly with the literature, 
+similarity between the profiles of these two histone marks has been identified. 
 
 First, the `similaRpeak` package nust be loaded.
 
@@ -662,13 +662,16 @@ ratio_normalized_intersect
 
 ## References
 
-Dowen JM, Peng Fan Z, Hnisz D, Ren G, et al. (2014) Control of Cell Identity 
-Genes Occurs in Insulated Neighborhoods in Mammalian Chromosomes.
-Cell 159:374-387. doi: 10.1016/j.cell.2014.09.030
+Andersson R, Gebhard C, Miguel-Escalada I, Hoof I, Bornholdt J, et al. (2014) 
+An atlas of active enhancers across human cell types and tissues. 
+Nature, 507(7493), 455-461.
 
 Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia of DNA 
 elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
 
-Whyte WA, Orlando DA, Hnisz D, Abraham BJ, Lin CY, et al. (2013) Master 
-transcription factors and mediator establish super-enhancers at key cell 
-identity genes. Cell 153:307-319. doi: 10.1016/j.cell.2013.03.035
+Forrest AR, Kawaji H, Rehli M, Baillie JK, de Hoon MJ, et al. (2014) A 
+promoter-level mammalian expression atlas. Nature, 507(7493):462-470.
+
+Hnisz D, Abraham BJ, Lee TI, Lau A, Saint-André V, et al. (2013) 
+Super-enhancers in the control of cell identity and disease. Cell, 155(4), 
+934-947.
