@@ -672,6 +672,6 @@ elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
 Forrest AR, Kawaji H, Rehli M, Baillie JK, de Hoon MJ, et al. (2014) A 
 promoter-level mammalian expression atlas. Nature, 507(7493):462-470.
 
-Hnisz D, Abraham BJ, Lee TI, Lau A, Saint-André V, et al. (2013) 
+Hnisz D, Abraham BJ, Lee TI, Lau A, Saint-Andr&eacute; V, et al. (2013) 
 Super-enhancers in the control of cell identity and disease. Cell, 155(4), 
 934-947.
