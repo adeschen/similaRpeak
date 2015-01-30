@@ -30,7 +30,7 @@ this software.
 ## Quick Start
 
 Highly active enhancer regions are thought to be important for the cell fate 
-(Adersson et al. 2014, FANTOM5 consortium, Hnisz et al. 2013). Highly active 
+(Andersson et al. 2014, FANTOM5 consortium, Hnisz et al. 2013). Highly active 
 enhancers regions have been selected in GM12878 cells. Similarity of ChIP-seq 
 profiles has been tested using two histone post-transcriptional modifications 
 linked to highly active enhancers H3K27ac (DCC accession: ENCFF000ASG) and 
