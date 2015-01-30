@@ -174,3 +174,27 @@ ratioIntersect <- function(profile1, profile2, threshold = 1) {
 
     return(ratio)
 }
+
+# Calculate and return the ratio between the intersection area of two profiles 
+# and the total area covered by those profiles. If the total area is inferior 
+# to the threshold, the function returns NA. The threshold has to be a positive 
+# value.
+#
+# Input:   
+#   profile1:    a first curve/vector containing depths. Each position is 
+#                associated to a position in particular, which is assumed.
+#   profile2:    a second curve/vector containing depths. Each position is 
+#                associated to a position in particular, which is assumed.
+#   threshold:   the minimum denominator accepted to calculate a ratio.
+#
+# Output: 
+#   The calculated ratio or NA if threshold is not respected.
+#
+spearmanCorr <- function(profile1, profile2) {
+    
+    correlation <- suppressWarnings(cor(x=profile1, y=profile2, 
+                                        use="pairwise.complete.obs", 
+                       method="spearman")) 
+
+    return(correlation)
+}

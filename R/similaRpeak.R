@@ -161,9 +161,7 @@ similarity <- function(profile1,
                                 diffPosMaxTolerance)
     
     # Generate the list of all metrics availables
-    metricList <- factory$createMetric("ALL", 
-                                    profile1, 
-                                    profile2)
+    metricList <- factory$createMetric("ALL", profile1, profile2)
     
     # Create a list containing all pertinent information and 
     # a sub-list with all metrics values

@@ -25,7 +25,8 @@ test.metrics_metricfactory_all <- function() {
     exp <- list("RATIO_AREA" = 1.084291188, "DIFF_POS_MAX" = 2,
                 "RATIO_MAX_MAX" = 1.413043478, 
                 "RATIO_INTERSECT" = 0.346534653,
-                "RATIO_NORMALIZED_INTERSECT" = 0.343525474)
+                "RATIO_NORMALIZED_INTERSECT" = 0.343525474,
+                "SPEARMAN_CORRELATION" = -0.256102322)
     obs <- factory$createMetric("ALL", c(1,59,6,24,65,34,15,4,53,22), 
                                 c(15,9,46,44,9,39,27,34,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -135,7 +136,8 @@ test.metrics_metricfactory_all_0_ratio_area <- function() {
 test.metrics_metricfactory_all_with_some_na <- function() {
     exp <- list("RATIO_AREA"=1.05188679245,"DIFF_POS_MAX"=2,
                 "RATIO_MAX_MAX"=1.41304347826,"RATIO_INTERSECT"=0.40776699,
-                "RATIO_NORMALIZED_INTERSECT" = 0.40445316)
+                "RATIO_NORMALIZED_INTERSECT" = 0.40445316,
+                "SPEARMAN_CORRELATION" = -0.32142857)
     obs <- factory$createMetric("ALL", c(NA,NA,6,24,65,34,15,4,53,22), 
                                 c(NA,9,46,44,9,39,27,NA,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
@@ -149,7 +151,7 @@ test.metrics_metricfactory_wrong_metric_name <- function() {
                     error=conditionMessage)
     exp <- paste("The metricType must be one of those choices: ALL, ",
                 "RATIO_AREA, DIFF_POS_MAX, RATIO_MAX_MAX, RATIO_INTERSECT, ", 
-                "RATIO_NORMALIZED_INTERSECT", sep="")
+                "RATIO_NORMALIZED_INTERSECT, SPEARMAN_CORRELATION", sep="")
     checkEquals(obs, 
                 exp, 
                 msg = paste("metrics_metricfactory_wrong_metric_name() - ",
