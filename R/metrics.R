@@ -5,36 +5,33 @@
 # between two ChIP profiles covering the same range.
 #
 Metric <- R6Class("Metric",
-                public = list(
-                    initialize = function() {  
-                    },
-                    getType = function() {
-                        return(private$type)
-                    },
-                    getMetric = function() {
-                        return(private$metric)
-                    },
-                    calculateMetric = function(profile1, 
-                                                    profile2, 
-                                                    threshold = NULL) {
-                    },
-                    getInfo = function() {
-                        cat(paste0("Metric type: ", 
-                                        private$type, ". Metric value: ", 
-                                        private$metric, "\n"))
-                    }
-                ),  
-                private = list(
-                    metric = NA,
-                    type = NA,
-                    setMetric = function(val){
-                        private$metric <<- val
-                    },
-                    setType = function(val){
-                        private$type <<- val
-                    }
-                )
-            )
+    public = list(
+        initialize = function() {  
+        },
+        getType = function() {
+            return(private$type)
+        },
+        getMetric = function() {
+            return(private$metric)
+        },
+        calculateMetric = function(profile1, profile2, threshold = NULL) {
+        },
+        getInfo = function() {
+            cat(paste0("Metric type: ", private$type, ". Metric value: ", 
+                    private$metric, "\n"))
+        }
+    ),  
+    private = list(
+        metric = NA,
+        type = NA,
+        setMetric = function(val){
+            private$metric <<- val
+        },
+        setType = function(val){
+            private$type <<- val
+        }
+    )
+)
 
 
 # Class representing a Max Max Ratio metric which is the ratio of profiles 
