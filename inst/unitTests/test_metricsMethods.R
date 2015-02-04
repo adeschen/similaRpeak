@@ -53,48 +53,50 @@ test.getSimilarityMetrics_ratio_Intersect_function<- function() {
 
 ## Test the result of ratioArea when only NA in profiles
 test.getSimilarityMetrics_ratio_area_function_na_only<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::ratioArea(c(NA,NA,NA,NA), c(NA,NA,NA,NA))
-    checkEquals(obs, exp, msg ="The RATIO_AREA metric should return NA when only NA in profiles.")
+    checkEquals(obs, exp, msg = paste0("The RATIO_AREA metric should return ", 
+                                       "NA when only NA in profiles."))
 }
 
 ## Test the result of diffPosMax when only 0 in profiles
 test.getSimilarityMetrics_ratio_area_function_0<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::ratioArea(c(0,0,0,0), c(0,0,0,0))
-    checkEquals(obs, exp, msg ="The RATIO_AREA metric should return NA when only zero in profiles.")
+    checkEquals(obs, exp, msg = paste0("The RATIO_AREA metric should return ", 
+                                       "NA when only zero in profiles."))
 }
 
 ## Test the result of ratioMaxMax when only NA in profiles
 test.getSimilarityMetrics_ratio_max_max_function_na_only<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::ratioMaxMax(c(NA,NA,NA,NA), c(NA,NA,NA,NA))
     checkEquals(obs, exp, msg ="The RATIO_MAX_MAX metric should return NA when only NA in profiles.")
 }
 ## Test the result of ratioMaxMax when only zero in profiles
 test.getSimilarityMetrics_ratio_max_max_function_0<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::ratioMaxMax(c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs, exp, msg ="The RATIO_MAX_MAX metric should return NA when only 0 in profiles.")
 }
 
 ## Test the result of diffPosMax when only NA in profiles
 test.getSimilarityMetrics_diff_pos_max_function_na_only<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::diffPosMax(c(NA,NA,NA,NA), c(NA,NA,NA,NA))    
     checkEquals(obs, exp, msg ="The DIFF_POS_MAX metric should return NA when only NA in profiles.")
 }
 
 ## Test the result of diffPosMax when only 0 in profiles
 test.getSimilarityMetrics_diff_pos_max_function_0<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::diffPosMax(c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs, exp, msg ="The DIFF_POS_MAX metric should return NA when only zero in profiles.")
 }
 
 ## Test the result of ratioIntersect when only NA in profiles
 test.getSimilarityMetrics_ratio_Intersect_function_na_only<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::ratioIntersect(c(NA,NA,NA,NA), 
                                                   c(NA,NA,NA,NA))
     checkEquals(obs, exp, msg ="The RATIO_INTERSECT metric should return NA when only NA in profiles.")
@@ -102,9 +104,28 @@ test.getSimilarityMetrics_ratio_Intersect_function_na_only<- function() {
 
 ## Test the result of ratioIntersect when only 0 in profiles
 test.getSimilarityMetrics_ratio_Intersect_function_0<- function() {
-    obs <- NA
+    obs <- as.numeric(NA)
     exp <- similaRpeak:::ratioIntersect(c(0,0,0,0), c(0,0,0,0))
-    checkEquals(obs, exp, msg ="The DIFF_POS_MAX metric should return NA when only zero in profiles.")
+    message <- paste0("The DIFF_POS_MAX metric should return NA when only ", 
+                      "zero in profiles.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result of spearmanCorr when only NA in profiles
+test.getSimilarityMetrics_spearman_corr_function_na_only<- function() {
+    obs <- as.numeric(NA)
+    exp <- similaRpeak:::spearmanCorr(c(NA,NA,NA,NA), c(NA,NA,NA,NA))
+    message <- paste0("The SPEARMAN_CORRELATION metric should return NA ", 
+                      "when only NA in profiles.")
+    checkEquals(obs, exp, msg = message) 
+}
+
+## Test the result of ratioIntersect when only 0 in profiles
+test.getSimilarityMetrics_spearman_corr_function_0<- function() {
+    obs <- as.numeric(NA)
+    exp <- similaRpeak:::spearmanCorr(c(0,0,0,0), c(0,0,0,0))
+    checkEquals(obs, exp, msg = paste0("The SPEARMAN_CORRELATION metric ",
+        "should return NA when only zero in profiles."))
 }
 
 #### Using dispersed NA

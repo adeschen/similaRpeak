@@ -14,7 +14,7 @@
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioArea <- function(profile1, profile2, threshold = 1){
+ratioArea <- function(profile1, profile2, threshold = 1) {
     
     # Get the total area associated to each profile
     area1 <- sum(profile1, na.rm = TRUE)
@@ -25,7 +25,7 @@ ratioArea <- function(profile1, profile2, threshold = 1){
     if (minimum > 0  && threshold <= minimum){
         ratio <- area1 / area2
     }else {
-        ratio <- NA
+        ratio <- as.numeric(NA)
     }
     
     return(ratio)
@@ -46,7 +46,7 @@ ratioArea <- function(profile1, profile2, threshold = 1){
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioMaxMax <- function(profile1, profile2, threshold = 1){
+ratioMaxMax <- function(profile1, profile2, threshold = 1) {
     
     # Get the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
@@ -57,7 +57,7 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1){
     if (minimum > 0 && threshold <= minimum){
         ratio <- max1/max2
     }else {
-        ratio <- NA
+        ratio <- as.numeric(NA)
     }
     
     return(ratio)
@@ -88,17 +88,17 @@ diffPosMax <- function(profile1,
                        profile2, 
                        threshold = 1, 
                        thresholdDist = 100, 
-                       tolerance = 0.01){
+                       tolerance = 0.01) {
     
     # The profile1 and profile2 arguments are numeric vectors. 
     # If not, NA is returned. 
-    if (!is.vector(profile1) || 
+    if (!is.vector(profile1)      || 
             !is.numeric(profile1) || 
-            !is.vector(profile2) || 
+            !is.vector(profile2)  || 
             !is.numeric(profile2) ||
-            all(is.na(profile1)) ||
+            all(is.na(profile1))  ||
             all(is.na(profile2))) {
-        return(NA)
+        return(as.numeric(NA))
     }
     
     # Get the position of the maximum element associated to each profile
@@ -129,11 +129,11 @@ diffPosMax <- function(profile1,
                 median2 <- median(posMax2)
                 diff <- median1 - median2
             } else {
-                diff <- NA
+                diff <- as.numeric(NA)
             }
         }
     } else {
-        diff <- NA
+        diff <- as.numeric(NA)
     }
     
     return(diff)
@@ -166,35 +166,41 @@ ratioIntersect <- function(profile1, profile2, threshold = 1) {
         sum(profile2, na.rm = TRUE) - intersect
  
     # Get the ratio between intersect and totArea
-    if (totalArea > 0 && threshold <= totalArea){
+    if (totalArea > 0 && threshold <= totalArea) {
         ratio <- intersect/totalArea
     }else {
-        ratio <- NA
+        ratio <- as.numeric(NA)
     }
 
     return(ratio)
 }
 
-# Calculate and return the ratio between the intersection area of two profiles 
-# and the total area covered by those profiles. If the total area is inferior 
-# to the threshold, the function returns NA. The threshold has to be a positive 
-# value.
+# Calculate and return the Spearman's rho statistic of two profiles. If there 
+# is not complete element pairs between the profiles.
 #
 # Input:   
 #   profile1:    a first curve/vector containing depths. Each position is 
 #                associated to a position in particular, which is assumed.
 #   profile2:    a second curve/vector containing depths. Each position is 
 #                associated to a position in particular, which is assumed.
-#   threshold:   the minimum denominator accepted to calculate a ratio.
 #
 # Output: 
-#   The calculated ratio or NA if threshold is not respected.
+#   The calculated Spearman's rho statistic or NA when no complete element pairs
+#   are present between the two profiles.
 #
 spearmanCorr <- function(profile1, profile2) {
     
-    correlation <- suppressWarnings(cor(x=profile1, y=profile2, 
-                                        use="pairwise.complete.obs", 
-                       method="spearman")) 
+    if (sum(is.na(profile1)) == length(profile1)      || 
+        sum(is.na(profile2)) == length(profile2)      ||
+        sum(complete.cases(profile1, profile2)) == 0  || 
+        (sd(profile1, na.rm = TRUE) < 1e-8)           ||  
+        (sd(profile2, na.rm = TRUE) < 1e-8))  {
+        correlation <- as.numeric(NA)
+    } else {
+        # Spearman correlation
+        correlation <- cor(x=profile1, y=profile2, use="complete.obs", 
+                       method="spearman")
+    }
 
     return(correlation)
 }

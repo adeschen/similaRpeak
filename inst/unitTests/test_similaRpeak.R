@@ -293,7 +293,7 @@ test.similarity_profile1_zeros_RATIO_MAX_MAX <- function() {
     obs <- similarity(
         profile1 = c(0,0,0,0,0,0,0,0,0,0), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4))
-    exp <- NA
+    exp <- as.numeric(NA)
     checkEquals(obs$metrics$RATIO_MAX_MAX, exp , 
                 msg = paste("A profile with only zero values did not generate ",
                         "NA for the RATIO_MAX_MAX", sep = ""))
@@ -304,7 +304,7 @@ test.similarity_profile1_zeros_RATIO_AREA <- function() {
     obs <- similarity(
         profile1 = c(0,0,0,0,0,0,0,0,0,0), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4))
-    exp <- NA
+    exp <- as.numeric(NA)
     checkEquals(obs$metrics$RATIO_AREA, exp, 
                 msg = paste("A profile with only zero values did not generate ",
                             "NA for the RATIO_MAX_MAX", sep = ""))
@@ -327,7 +327,7 @@ test.similarity_profile1_zeros_DIFF_POS_MAX <- function() {
     obs <- similarity(
         profile1 = c(0,0,0,0,0,0,0,0,0,0), 
         profile2 = c(0,0,0,0,0,0,0,0,0,0))
-    exp <- NA
+    exp <- as.numeric(NA)
     checkEquals(obs$metrics$DIFF_POS_MAX, exp, 
                 msg = paste("A profile with only zero values did not ",
                         "generate 0 for the RATIO_MAX_MAX", sep = ""))
@@ -338,7 +338,7 @@ test.similarity_profile1_zeros_DIFF_POS_MAX <- function() {
 test.similarity_profile1_and_profile2_zeros_RATIO_INTERSECT <- function() {
     obs <- similarity(
         profile1 = c(0,0,0,0,0,0,0,0,0,0), profile2 = c(0,0,0,0,0,0,0,0,0,0))
-    exp <- NA
+    exp <- as.numeric(NA)
     checkEquals(obs$metrics$RATIO_INTERSECT, exp, 
                 msg = paste("Two profiles with only zero values did not ",
                         "generate NA for the RATIO_MAX_MAX", sep = ""))

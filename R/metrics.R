@@ -52,7 +52,7 @@ RatioMaxMax <- R6Class("RatioMaxMax",
         calculateMetric = function(profile1, profile2, threshold = 1) {
                                 
             # Reset metric value to NA
-            super$setMetric(NA)
+            super$setMetric(as.numeric(NA))
                                 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
@@ -115,7 +115,7 @@ RatioArea <- R6Class("RatioArea",
                                                       threshold = 1) {
                                
                                # Reset metric value to NA
-                               super$setMetric(NA)
+                               super$setMetric(as.numeric(NA))
                                
                                # Profile1 and profile2 are mandatory
                                if (missing(profile1)) {
@@ -246,7 +246,7 @@ RatioIntersect <- R6Class("RatioIntersect",
         calculateMetric = function(profile1, profile2, threshold = 1) {
                              
             # Reset metric value to NA
-            super$setMetric(NA)
+            super$setMetric(as.numeric(NA))
                              
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
@@ -305,7 +305,7 @@ RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
         calculateMetric = function(profile1, profile2, threshold = 1) {
                                   
             # Reset metric value to NA
-            super$setMetric(NA)
+            super$setMetric(as.numeric(NA))
                                   
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
@@ -366,7 +366,7 @@ SpearmanCorrelation <- R6Class("SpearmanCorrelation",
         calculateMetric = function(profile1, profile2, threshold = NULL) {
                                             
             # Reset metric value to NA
-            super$setMetric(NA)
+            super$setMetric(as.numeric(NA))
                                             
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
@@ -426,15 +426,15 @@ MetricFactory <- R6Class("MetricFactory",
                                   
             # Metric, profile1 and profile2 are mandatory
             if (missing(metricType)) {
-                stop(paste("The 'metricType' argument is mandatory.", sep = ""))
+                stop(paste0("The 'metricType' argument is mandatory."))
             }
                             
             if (missing(profile1)) {
-                stop(paste("The 'profile1' argument is mandatory.", sep = ""))
+                stop(paste0("The 'profile1' argument is mandatory."))
             }
                             
             if (missing(profile2)) {
-                stop(paste("The 'profile2' argument is mandatory.", sep = ""))
+                stop(paste0("The 'profile2' argument is mandatory."))
             }
                                   
             # The profile1 and profile2 arguments are numeric vectors 
@@ -450,8 +450,8 @@ MetricFactory <- R6Class("MetricFactory",
                                   
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals.", sep = ""))
+                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals."))
             }
                                   
             # Metric type must exist

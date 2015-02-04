@@ -74,7 +74,6 @@ test.metrics_metricfactory_ratio_intersect <- function() {
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
-
 ## Test the result of using "ALL" and NA or zeros
 test.metrics_metricfactory_all_na_only <- function() {
     checkException(factory$createMetric("ALL", c(NA,NA,NA,NA), c(NA,NA,NA,NA)),
@@ -83,8 +82,10 @@ test.metrics_metricfactory_all_na_only <- function() {
 
 ## Test the result of DIFF_POS_MAX when using profiles with only zero values
 test.metrics_metricfactory_all_0_diff_pos_max <- function() {
-    exp <- list("RATIO_AREA" = NA,"DIFF_POS_MAX" = NA,"RATIO_MAX_MAX" = NA,
-                "RATIO_INTERSECT" = NA, "RATIO_NORMALIZED_INTERSECT" = NA)
+    naValue <- as.numeric(NA)
+    exp <- list("RATIO_AREA" = naValue,"DIFF_POS_MAX" = naValue,
+                "RATIO_MAX_MAX" = naValue, "RATIO_INTERSECT" = naValue, 
+                "RATIO_NORMALIZED_INTERSECT" = naValue)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$DIFF_POS_MAX, exp$DIFF_POS_MAX, 
                 msg = paste("The DIFF_POS_MAX is not expected value when only ", 
@@ -93,8 +94,10 @@ test.metrics_metricfactory_all_0_diff_pos_max <- function() {
 
 ## Test the result of RATIO_MAX_MAX when using profiles with only zero values
 test.metrics_metricfactory_all_0_ratio_max_max <- function() {
-    exp <- list("RATIO_AREA"=NA,"DIFF_POS_MAX"=NA,"RATIO_MAX_MAX"=NA,
-                "RATIO_INTERSECT"=NA, "RATIO_NORMALIZED_INTERSECT" = NA)
+    naValue <- as.numeric(NA)
+    exp <- list("RATIO_AREA"= naValue,"DIFF_POS_MAX"= naValue,
+                "RATIO_MAX_MAX"= naValue, "RATIO_INTERSECT"= naValue, 
+                "RATIO_NORMALIZED_INTERSECT" =  naValue)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_MAX_MAX, exp$RATIO_MAX_MAX, 
                 msg = paste("The RATIO_MAX_MAX is not expected value when only ",
@@ -103,8 +106,10 @@ test.metrics_metricfactory_all_0_ratio_max_max <- function() {
 
 ## Test the result of RATIO_INTERSECT when using profiles with only zero values
 test.metrics_metricfactory_all_0_ratio_intersect <- function() {
-    exp <- list("RATIO_AREA"=NA,"DIFF_POS_MAX"=NA,"RATIO_MAX_MAX"=NA,
-                "RATIO_INTERSECT"=NA, "RATIO_NORMALIZED_INTERSECT" = NA)
+    naValue <- as.numeric(NA)
+    exp <- list("RATIO_AREA"= naValue, "DIFF_POS_MAX"= naValue,
+                "RATIO_MAX_MAX"= naValue, "RATIO_INTERSECT"= naValue, 
+                "RATIO_NORMALIZED_INTERSECT" = naValue)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_INTERSECT, exp$RATIO_INTERSECT, 
                 msg = paste("The RATIO_INTERSECT is not expected value when ",
@@ -114,8 +119,10 @@ test.metrics_metricfactory_all_0_ratio_intersect <- function() {
 ## Test the result of RATIO_NORMALIZED_INTERSECT when using profiles with 
 ## only zero values
 test.metrics_metricfactory_all_0_ratio_normalized_intersect <- function() {
-    exp <- list("RATIO_AREA"=NA,"DIFF_POS_MAX"=NA,"RATIO_MAX_MAX"=NA,
-                "RATIO_INTERSECT"=NA, "RATIO_NORMALIZED_INTERSECT" = NA)
+    naValue <- as.numeric(NA)
+    exp <- list("RATIO_AREA" = naValue, "DIFF_POS_MAX"= naValue,
+                "RATIO_MAX_MAX" = naValue, "RATIO_INTERSECT"= naValue,
+                "RATIO_NORMALIZED_INTERSECT" = naValue)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_NORMALIZED_INTERSECT, exp$RATIO_INTERSECT, 
                 msg = paste("The RATIO_NORMALIZED_INTERSECT is not expected ",
@@ -124,8 +131,10 @@ test.metrics_metricfactory_all_0_ratio_normalized_intersect <- function() {
 
 ## Test the result of RATIO_AREA when using a profiles with only zero values
 test.metrics_metricfactory_all_0_ratio_area <- function() {
-    obs <- list("RATIO_AREA"=NA,"DIFF_POS_MAX"=NA,"RATIO_MAX_MAX"=NA,
-                "RATIO_INTERSECT"=NA, "RATIO_NORMALIZED_INTERSECT" = NA)
+    naValue <- as.numeric(NA)
+    obs <- list("RATIO_AREA"= naValue,"DIFF_POS_MAX"= naValue,
+                "RATIO_MAX_MAX"= naValue, "RATIO_INTERSECT"= naValue, 
+                "RATIO_NORMALIZED_INTERSECT" = naValue)
     exp <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
     checkEquals(obs$RATIO_AREA, exp$RATIO_AREA, 
                 msg = paste("The RATIO_AREA is not expected value when only ",
@@ -140,6 +149,17 @@ test.metrics_metricfactory_all_with_some_na <- function() {
                 "SPEARMAN_CORRELATION" = -0.32142857)
     obs <- factory$createMetric("ALL", c(NA,NA,6,24,65,34,15,4,53,22), 
                                 c(NA,9,46,44,9,39,27,NA,34,4))
+    checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
+}
+
+## Test the result of using "ALL" with no complete element pairs in profiles
+test.metrics_metricfactory_all_with_no_complete_element_pairs <- function() {
+    exp <- list("RATIO_AREA"=1.69565217391,"DIFF_POS_MAX"=2,
+                "RATIO_MAX_MAX"=1.41304347826,"RATIO_INTERSECT"=0.0839160839161,
+                "RATIO_NORMALIZED_INTERSECT" = 0.0655737704918,
+                "SPEARMAN_CORRELATION" = as.numeric(NA))
+    obs <- factory$createMetric("ALL", c(NA,NA,NA,24,65,34,15,4,53,NA), 
+                                c(12,9,46,44,NA,NA,NA,NA,NA,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
@@ -168,9 +188,9 @@ test.metrics_metricfactory_missing_metric_type <- function() {
     exp <- "The 'metricType' argument is mandatory."
     checkEquals(obs, 
                 exp, 
-                msg = paste("metrics_metricfactory_missing_metric_type() - ",
+                msg = paste0("metrics_metricfactory_missing_metric_type() - ",
                         "The missing 'metricType' argument did not generated ",
-                        "the expected excpetion.", sep=""))
+                        "the expected excpetion."))
 }
 
 ## Test the result of missing profile1
