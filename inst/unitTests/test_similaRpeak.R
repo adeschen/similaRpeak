@@ -306,8 +306,8 @@ test.similarity_profile1_zeros_RATIO_AREA <- function() {
         profile2 = c(15,9,46,44,9,39,27,34,34,4))
     exp <- as.numeric(NA)
     checkEquals(obs$metrics$RATIO_AREA, exp, 
-                msg = paste("A profile with only zero values did not generate ",
-                            "NA for the RATIO_MAX_MAX", sep = ""))
+                msg = paste0("A profile with only zero values did not generate ",
+                            "NA for the RATIO_MAX_MAX"))
 }
 
 ## Test the result of zeros vector profile1 for the RATIO_INTERSECT value
@@ -317,8 +317,8 @@ test.similarity_profile1_zeros_RATIO_INTERSECT <- function() {
         profile2 = c(15,9,46,44,9,39,27,34,34,4))
     exp <- 0
     checkEquals(obs$metrics$RATIO_INTERSECT, exp, 
-                msg = paste("A profile with only zero values did not generate ",
-                            "0 for the RATIO_MAX_MAX", sep = ""))
+            msg = paste0("A profile with only zero values did not generate ",
+                            "0 for the RATIO_MAX_MAX"))
 }
 
 ## Test the result of zeros vector profile1 and profile2 for 
@@ -329,8 +329,8 @@ test.similarity_profile1_zeros_DIFF_POS_MAX <- function() {
         profile2 = c(0,0,0,0,0,0,0,0,0,0))
     exp <- as.numeric(NA)
     checkEquals(obs$metrics$DIFF_POS_MAX, exp, 
-                msg = paste("A profile with only zero values did not ",
-                        "generate 0 for the RATIO_MAX_MAX", sep = ""))
+                msg = paste0("A profile with only zero values did not ",
+                        "generate 0 for the RATIO_MAX_MAX"))
 }
 
 ## Test the result of zeros vector profile1 and profile2 
@@ -340,8 +340,8 @@ test.similarity_profile1_and_profile2_zeros_RATIO_INTERSECT <- function() {
         profile1 = c(0,0,0,0,0,0,0,0,0,0), profile2 = c(0,0,0,0,0,0,0,0,0,0))
     exp <- as.numeric(NA)
     checkEquals(obs$metrics$RATIO_INTERSECT, exp, 
-                msg = paste("Two profiles with only zero values did not ",
-                        "generate NA for the RATIO_MAX_MAX", sep = ""))
+                msg = paste0("Two profiles with only zero values did not ",
+                        "generate NA for the RATIO_MAX_MAX"))
 }
 
 ## Test the result of zero numeric diffPosMaxTolerance
@@ -353,9 +353,9 @@ test.similarity_zero_diffPosMaxTolerance <- function() {
     exp <- 3
     checkEquals(obs, exp, 
                 tolerance = .Machine$double.eps^0.5, 
-                msg = paste("similarity_zero_diffPosMaxTolerance() - A zero ",
+                msg = paste0("similarity_zero_diffPosMaxTolerance() - A zero ",
                         "value diffPosMaxTolerance dit not generate the ",
-                        "expected DIFF_POS_MAX value", sep = ""))
+                        "expected DIFF_POS_MAX value"))
 }
 
 

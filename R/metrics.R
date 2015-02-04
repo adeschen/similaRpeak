@@ -56,32 +56,29 @@ RatioMaxMax <- R6Class("RatioMaxMax",
                                 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste("The 'profile1' argument is mandatory. The metric ", 
-                    "value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile1' argument is mandatory. The metric ", 
+                    "value has been reset to NA."))
             }
             if (missing(profile2)) {
-                stop(paste("The 'profile2' argument is mandatory.The metric ", 
-                    "value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile2' argument is mandatory.The metric ", 
+                    "value has been reset to NA."))
             }
                                 
             # The profile1 and profile2 arguments are 
             # numeric vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste("The 'profile1' argument must ",
-                    "be a numeric vector. The metric ", 
-                    "value has been reset to NA.",  sep = ""))
+                stop(paste0("The 'profile1' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA."))
             } 
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste("The 'profile2' argument must ",
-                    "be a numeric vector. The metric ",
-                    "value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile2' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA."))
             }
                                 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA.",
-                    sep = ""))
+                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA."))
             }
                                 
             # Calculate and assign the new max max ratio
@@ -92,76 +89,57 @@ RatioMaxMax <- R6Class("RatioMaxMax",
             
 
 # Class representing an Area Ratio metric which is the ratio of profiles
-# total areas between two ChIP profiles covering the same range
+# total areas between two ChIP profiles covering the same range.
 #
 RatioArea <- R6Class("RatioArea",
-                       inherit = Metric,
-                       public = list(
-                           initialize = function(profile1, 
-                                                 profile2, 
-                                                 threshold = 1) {
+    inherit = Metric,
+    public = list(
+        initialize = function(profile1, profile2, threshold = 1) {
                                
-                               # Fix the type of metric
-                               super$setType("RATIO_AREA")
+            # Fix the type of metric
+            super$setType("RATIO_AREA")
                                
-                               if (!missing(profile1) && !missing(profile2)) {
-                                   self$calculateMetric(profile1, 
-                                                        profile2, 
-                                                        threshold)   
-                               }
-                           },
-                           calculateMetric = function(profile1, 
-                                                      profile2, 
-                                                      threshold = 1) {
+            if (!missing(profile1) && !missing(profile2)) {
+                self$calculateMetric(profile1, profile2, threshold)   
+            }
+        },
+        calculateMetric = function(profile1, profile2, threshold = 1) {
                                
-                               # Reset metric value to NA
-                               super$setMetric(as.numeric(NA))
+            # Reset metric value to NA
+            super$setMetric(as.numeric(NA))
                                
-                               # Profile1 and profile2 are mandatory
-                               if (missing(profile1)) {
-                                   stop(paste("The 'profile1' argument is ", 
-                                            "mandatory. The metric value has ",
-                                            "been reset to NA.", sep = ""))
-                               }
-                               if (missing(profile2)) {
-                                   stop(paste("The 'profile2' argument is ",
-                                            "mandatory. The metric value has ",
-                                            "been reset to NA.", sep = ""))
-                               }
+            # Profile1 and profile2 are mandatory
+            if (missing(profile1)) {
+                stop(paste0("The 'profile1' argument is mandatory. The metric ",
+                            "value has been reset to NA."))
+            }
+            if (missing(profile2)) {
+                stop(paste0("The 'profile2' argument is mandatory. The metric ",
+                            "value has been reset to NA."))
+            }
                                
-                               # The profile1 and profile2 arguments are 
-                               # numeric vectors where at 
-                               # least one element is greater than zero
-                               if (!is.vector(profile1) || 
-                                       !is.numeric(profile1)) {
-                                   stop(paste("The 'profile1' argument must ",
-                                            "be a numeric vector. The metric ",
-                                            "value has been reset to NA.", 
-                                            sep = ""))
-                               }
-                               if (!is.vector(profile2) || 
-                                       !is.numeric(profile2)) {
-                                   stop(paste("The 'profile2' argument must ",
-                                            "be a numeric vector. The metric ",
-                                            "value has been reset to NA.",
-                                            sep = ""))
-                               }
+            # The profile1 and profile2 arguments are numeric vectors where at 
+            # least one element is greater than zero
+            if (!is.vector(profile1) || !is.numeric(profile1)) {
+                stop(paste0("The 'profile1' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA."))
+            }
+            if (!is.vector(profile2) || !is.numeric(profile2)) {
+                stop(paste0("The 'profile2' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA."))
+            }
                                
-                               # The length of profile1 is equal to the length 
-                               # of profile2
-                               if (length(profile1) != length(profile2)) {
-                                   stop(paste("Lengths of 'profile1' and ", 
-                                            "'profile2' vectors aren't equals.",
-                                            " The metric value has been reset ",
-                                            "to NA.", sep = ""))
-                               }
+            # The length of profile1 is equal to the length  of profile2
+            if (length(profile1) != length(profile2)) {
+                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
+                            "aren't equals. The metric value has been reset ",
+                            "to NA."))
+            }
                                
-                               # Calculate and assign the new max max ratio
-                               super$setMetric(ratioArea(profile1, 
-                                                         profile2, 
-                                                         threshold))
-                           }
-                       )
+            # Calculate and assign the new max max ratio
+            super$setMetric(ratioArea(profile1, profile2, threshold))
+        }
+    )
 )  
 
 
@@ -363,41 +341,40 @@ SpearmanCorrelation <- R6Class("SpearmanCorrelation",
                 self$calculateMetric(profile1, profile2, threshold)   
             }
         },
-        calculateMetric = function(profile1, profile2, threshold = NULL) {
+        calculateMetric = function(profile1, profile2, threshold = 1e-8) {
                                             
             # Reset metric value to NA
             super$setMetric(as.numeric(NA))
                                             
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste("The 'profile1' argument is mandatory. The metric ", 
-                    "value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile1' argument is mandatory. The metric ", 
+                    "value has been reset to NA."))
             }
             if (missing(profile2)) {
-                stop(paste("The 'profile2' argument is mandatory. The ",
-                    "metric value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile2' argument is mandatory. The ",
+                    "metric value has been reset to NA."))
             }
                                             
             # The profile1 and profile2 arguments are numeric 
             # vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste("The 'profile1' argument must be a numeric vector. ",
-                    "The metric value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile1' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA."))
             }
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste("The 'profile2' argument must be a numeric vector. ",
-                    "The metric value has been reset to NA.", sep = ""))
+                stop(paste0("The 'profile2' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA."))
             }
-                                            
+                  
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA.",
-                    sep = ""))
+                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA."))
             }
                                             
             # Calculate and assign the spearman correlation
-            super$setMetric(spearmanCorr(profile1, profile2))
+            super$setMetric(spearmanCorr(profile1, profile2, threshold))
         }
     )
 )
@@ -412,7 +389,8 @@ MetricFactory <- R6Class("MetricFactory",
                                 ratioNormalizedIntersectThreshold = 1,
                                 diffPosMaxThresholdMinValue = 1, 
                                 diffPosMaxThresholdMaxDiff = 100, 
-                                diffPosMaxTolerance = 0.01 ) {
+                                diffPosMaxTolerance = 0.01,
+                                spearmanCorrSDThreashold = 1e-8) {
             
             private$ratioAreaThreshold <<- ratioAreaThreshold
             private$ratioMaxMaxThreshold <<- ratioMaxMaxThreshold
@@ -421,6 +399,7 @@ MetricFactory <- R6Class("MetricFactory",
             private$diffPosMaxThresholdMinValue <<- diffPosMaxThresholdMinValue
             private$diffPosMaxThresholdMaxDiff <<- diffPosMaxThresholdMaxDiff
             private$diffPosMaxTolerance <<- diffPosMaxTolerance
+            private$spearmanCorrSDThreashold <<- spearmanCorrSDThreashold
         },
         createMetric = function(metricType, profile1, profile2) {
                                   
@@ -439,13 +418,13 @@ MetricFactory <- R6Class("MetricFactory",
                                   
             # The profile1 and profile2 arguments are numeric vectors 
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste("The 'profile1' argument must be a numeric vector.",
-                    sep = ""))
+                stop(paste0("The 'profile1' argument must be a numeric ", 
+                            "vector."))
             }
                             
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste("The 'profile2' argument must be a numeric vector.",
-                    sep = ""))
+                stop(paste0("The 'profile2' argument must be a numeric ", 
+                            "vector."))
             }
                                   
             # The length of profile1 is equal to the length of profile2
@@ -456,8 +435,8 @@ MetricFactory <- R6Class("MetricFactory",
                                   
             # Metric type must exist
             if (!metricType %in% private$metricVector) {
-                stop(paste("The metricType must be one of those choices: ", 
-                    paste(private$metricVector, collapse = ", "), sep = "")) 
+                stop(paste0("The metricType must be one of those choices: ", 
+                    paste(private$metricVector, collapse = ", "))) 
             }
                                   
             result_name = list()
@@ -508,7 +487,8 @@ MetricFactory <- R6Class("MetricFactory",
             
             if (metricType == "ALL" || 
                     metricType == "SPEARMAN_CORRELATION") {
-                metric <- SpearmanCorrelation$new(profile1, profile2, 1)
+                metric <- SpearmanCorrelation$new(profile1, profile2, 
+                                                  private$spearmanCorrSDThreashold)
                 
                 result_name <- c(result_name,metric$getType())
                 result <- c(result, metric$getMetric())
@@ -535,7 +515,8 @@ MetricFactory <- R6Class("MetricFactory",
             ratioNormalizedIntersectThreshold = NA,
             diffPosMaxThresholdMinValue = NA,
             diffPosMaxThresholdMaxDiff = NA,
-            diffPosMaxTolerance = NA
+            diffPosMaxTolerance = NA,
+            spearmanCorrSDThreashold = NA
     )
 )
 

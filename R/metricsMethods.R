@@ -183,18 +183,21 @@ ratioIntersect <- function(profile1, profile2, threshold = 1) {
 #                associated to a position in particular, which is assumed.
 #   profile2:    a second curve/vector containing depths. Each position is 
 #                associated to a position in particular, which is assumed.
+#   threshold:   the minimum standard deviation accepted to calculate 
+#                the Spearman's rho statistic.
 #
 # Output: 
-#   The calculated Spearman's rho statistic or NA when no complete element pairs
-#   are present between the two profiles.
+#   The calculated Spearman's rho statistic or NA when no complete element pair
+#   is present between the two profiles or when one of the profile has a  
+#   standard deviation inferior to threshold.
 #
-spearmanCorr <- function(profile1, profile2) {
+spearmanCorr <- function(profile1, profile2, threshold = 1e-8) {
     
-    if (sum(is.na(profile1)) == length(profile1)      || 
-        sum(is.na(profile2)) == length(profile2)      ||
-        sum(complete.cases(profile1, profile2)) == 0  || 
-        (sd(profile1, na.rm = TRUE) < 1e-8)           ||  
-        (sd(profile2, na.rm = TRUE) < 1e-8))  {
+    # Validate that each profile has at least one complete element pair
+    # and that the standard deviation of each profile is superior to threshold
+    if (sum(complete.cases(profile1, profile2)) == 0  || 
+        (sd(profile1, na.rm = TRUE) < threshold)      ||  
+        (sd(profile2, na.rm = TRUE) < threshold))  {
         correlation <- as.numeric(NA)
     } else {
         # Spearman correlation

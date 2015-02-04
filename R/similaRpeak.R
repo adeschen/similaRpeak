@@ -30,7 +30,9 @@
 #   diffPosMaxTolerance:         the maximum variation accepted on the maximum 
 #                                 value to consider a position as a peak 
 #                                 position. Default = 0.01.
-#
+#   spearmanCorrSDThreashold:    the minimum standard deviation accepted on both
+#                                 profiles to calculate the metric.
+#                                 Default = 1e-8.
 # Prerequisites: 
 #   The 'profile1' argument is a numeric vector where no element is less 
 #      than zero.
@@ -46,6 +48,7 @@
 #   The 'diffPosMaxThresholdMaxDiff' argument is a positive numeric value.
 #   The 'diffPosMaxTolerance' argument is a positive numeric value
 #      between 0 and 1.
+#   The 'spearmanCorrSDThreashold' argument is a positive numeric value.
 #
 # Output: 
 #   A list of elements containing information about both profiles and a 
@@ -59,7 +62,8 @@ similarity <- function(profile1,
                     ratioNormalizedIntersectThreshold = 1,
                     diffPosMaxThresholdMinValue = 1, 
                     diffPosMaxThresholdMaxDiff = 100, 
-                    diffPosMaxTolerance = 0.01) {
+                    diffPosMaxTolerance = 0.01,
+                    spearmanCorrSDThreashold = 1e-8) {
     
     #######################################
     # Test prerequisites
@@ -112,33 +116,42 @@ similarity <- function(profile1,
     if (length(ratioNormalizedIntersectThreshold) != 1 || 
             !is.numeric(ratioNormalizedIntersectThreshold) || 
             (ratioNormalizedIntersectThreshold <= 0)) {
-        stop(paste("The 'ratioNormalizedIntersectThreshold' must be",
-                , " a positive numeric value.", sep=""))
+        stop(paste0("The 'ratioNormalizedIntersectThreshold' must be",
+                , " a positive numeric value."))
     }
     
     # The diffPosMaxThresholdMinValue argument is a positive numeric element
     if (length(diffPosMaxThresholdMinValue) != 1 || 
             !is.numeric(diffPosMaxThresholdMinValue) || 
             (diffPosMaxThresholdMinValue <= 0)) {
-        stop(paste("The 'diffPosMaxThresholdMinValue' must be a positive ",
-                "numeric value.", sep=""))
+        stop(paste0("The 'diffPosMaxThresholdMinValue' must be a positive ",
+                "numeric value."))
     }   
     
     # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
     if (length(diffPosMaxThresholdMaxDiff) != 1 || 
             !is.numeric(diffPosMaxThresholdMaxDiff) || 
             (diffPosMaxThresholdMaxDiff <= 0)) {
-        stop(paste("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
-                "numeric value.", sep=""))
+        stop(paste0("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
+                "numeric value."))
     }  
     
-    # The diffPosMaxTolerance argument is a positive numeric element
+    # The diffPosMaxTolerance argument is a positive numeric element between
+    # zero and one
     if (length(diffPosMaxTolerance) != 1 || 
             !is.numeric(diffPosMaxTolerance) || 
             (diffPosMaxTolerance < 0) || 
             (diffPosMaxTolerance > 1)) {
-        stop(paste("The 'diffPosMaxTolerance' must be a positive numeric ",
-                "value between 0 and 1 included.", sep=""))
+        stop(paste0("The 'diffPosMaxTolerance' must be a positive numeric ",
+                "value between 0 and 1 included."))
+    } 
+    
+    # The spearmanCorrSDThreashold argument is a positive numeric element
+    if (length(spearmanCorrSDThreashold) != 1 || 
+            !is.numeric(spearmanCorrSDThreashold) || 
+            (spearmanCorrSDThreashold <= 0)) {
+        stop(paste0("The 'spearmanCorrSDThreashold' must be a positive ",
+                    "numeric value."))
     }  
     
     # Get information about both profiles
@@ -158,7 +171,8 @@ similarity <- function(profile1,
                                 ratioNormalizedIntersectThreshold,
                                 diffPosMaxThresholdMinValue,
                                 diffPosMaxThresholdMaxDiff, 
-                                diffPosMaxTolerance)
+                                diffPosMaxTolerance,
+                                spearmanCorrSDThreashold)
     
     # Generate the list of all metrics availables
     metricList <- factory$createMetric("ALL", profile1, profile2)
