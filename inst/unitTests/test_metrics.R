@@ -99,9 +99,9 @@ test.metrics_metricfactory_all_0_ratio_max_max <- function() {
                 "RATIO_MAX_MAX"= naValue, "RATIO_INTERSECT"= naValue, 
                 "RATIO_NORMALIZED_INTERSECT" =  naValue)
     obs <- factory$createMetric("ALL", c(0,0,0,0), c(0,0,0,0))
-    checkEquals(obs$RATIO_MAX_MAX, exp$RATIO_MAX_MAX, 
-                msg = paste("The RATIO_MAX_MAX is not expected value when only ",
-                            "zero in profiles.", sep=""))
+    message <- paste0("The RATIO_MAX_MAX is not expected value when only ",
+                        "zero in profiles.")
+    checkEquals(obs$RATIO_MAX_MAX, exp$RATIO_MAX_MAX, msg = message)
 }
 
 ## Test the result of RATIO_INTERSECT when using profiles with only zero values
@@ -172,8 +172,7 @@ test.metrics_metricfactory_wrong_metric_name <- function() {
     exp <- paste("The metricType must be one of those choices: ALL, ",
                 "RATIO_AREA, DIFF_POS_MAX, RATIO_MAX_MAX, RATIO_INTERSECT, ", 
                 "RATIO_NORMALIZED_INTERSECT, SPEARMAN_CORRELATION", sep="")
-    checkEquals(obs, 
-                exp, 
+    checkEquals(obs, exp, 
                 msg = paste("metrics_metricfactory_wrong_metric_name() - ",
                             "A wrong metricType name did not generated the ",
                             "expected exception.", sep=""))
@@ -186,8 +185,7 @@ test.metrics_metricfactory_missing_metric_type <- function() {
                                         profile2=c(15,9,46,44,9,39,27,34,34,4)), 
                     error=conditionMessage)
     exp <- "The 'metricType' argument is mandatory."
-    checkEquals(obs, 
-                exp, 
+    checkEquals(obs, exp, 
                 msg = paste0("metrics_metricfactory_missing_metric_type() - ",
                         "The missing 'metricType' argument did not generated ",
                         "the expected excpetion."))
@@ -196,14 +194,13 @@ test.metrics_metricfactory_missing_metric_type <- function() {
 ## Test the result of missing profile1
 test.metrics_metricfactory_missing_profile1 <- function() {
     obs <- tryCatch(factory$createMetric(metricType="ALL", 
-                                    profile2=c(15,9,46,44,9,39,27,34,34,4)), 
-                    error=conditionMessage)
+                        profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+                        error=conditionMessage)
     exp <- "The 'profile1' argument is mandatory."
-    checkEquals(obs, 
-                exp, 
-                msg = paste("metrics_metricfactory_missing_profile1() ",
+    message <- paste0("metrics_metricfactory_missing_profile1() ",
                         "- The missing 'profile1' argument did not ",
-                        "generated the expected exception.", sep=""))
+                        "generated the expected exception.")
+    checkEquals(obs, exp, msg = message)
 }
 
 ## Test the result of missing profile2
@@ -212,10 +209,9 @@ test.metrics_metricfactory_missing_profile2 <- function() {
                             profile1=c(15,9,46,44,9,39,27,34,34,4)), 
                             error=conditionMessage)
     exp <- "The 'profile2' argument is mandatory."
-    checkEquals(obs, 
-                exp, 
-                msg = paste("metrics_metricfactory_missing_profile2() ",
-                    "- The 'profile2' argument is mandatory.", sep=""))
+    message <- paste0("metrics_metricfactory_missing_profile2() ",
+                      "- The 'profile2' argument is mandatory.")
+    checkEquals(obs, exp, msg = message)
 }
 
 

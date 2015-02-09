@@ -130,8 +130,8 @@ test.similarity_null_diffPosMaxThresholdMinValue <- function() {
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxThresholdMinValue=0), 
-        msg = paste("The 'diffPosMaxThresholdMinValue' must be a positive ",
-                    "numeric value.", sep = ""))
+        msg = paste0("The 'diffPosMaxThresholdMinValue' must be a positive ",
+                    "numeric value."))
 }
 
 ## Test the result of negative diffPosMaxThresholdMinValue
@@ -140,8 +140,8 @@ test.similarity_negative_diffPosMaxThresholdMinValue <- function() {
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxThresholdMinValue = -5), 
-        msg = paste("The 'diffPosMaxThresholdMinValue' must be a positive ",
-                "numeric value.", sep = ""))
+        msg = paste0("The 'diffPosMaxThresholdMinValue' must be a positive ",
+                "numeric value."))
 }
 
 ## Test the result of non numeric diffPosMaxThresholdMinValue
@@ -150,8 +150,8 @@ test.similarity_non_numeric_diffPosMaxThresholdMinValue <- function() {
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxThresholdMinValue = "g"), 
-        msg = paste("The 'diffPosMaxThresholdMinValue' must be a positive ", 
-                    "numeric value.", sep = ""))
+        msg = paste0("The 'diffPosMaxThresholdMinValue' must be a positive ", 
+                    "numeric value."))
 }
 
 ## Test the result of negative diffPosMaxThresholdMaxDiff
@@ -160,8 +160,8 @@ test.similarity_negative_diffPosMaxThresholdMaxDiff <- function() {
         profile1 = c(1,59,6,24,65,34,15,4,53,22), 
         profile2 = c(15,9,46,44,9,39,27,34,34,4), 
         diffPosMaxThresholdMaxDiff = -5), 
-        msg = paste("The 'diffPosMaxThresholdMaxDiff' must be a positive ", 
-                    "numeric value.", sep = ""))
+        msg = paste0("The 'diffPosMaxThresholdMaxDiff' must be a positive ", 
+                    "numeric value."))
 }
 
 ## Test the result of non numeric diffPosMaxThresholdMaxDiff
@@ -187,10 +187,10 @@ test.similarity_negative_diffPosMaxThresholdMaxDiff <- function() {
     exp <- "The 'diffPosMaxThresholdMaxDiff' must be a positive numeric value."
     checkIdentical(obs, 
                     exp, 
-                    msg=paste("similarity_negative_diffPosMaxThresholdMax",
+                    msg=paste0("similarity_negative_diffPosMaxThresholdMax",
                             "Diff() - A negative diffPosMaxThresholdMaxDiff ",
                             "did not generate an exception with expected ",
-                            "message.", sep = ""))
+                            "message."))
 }
 
 ## Test the result of non numeric diffPosMaxTolerance
@@ -201,8 +201,7 @@ test.similarity_non_numeric_diffPosMaxThresholdMaxDiff <- function() {
         diffPosMaxTolerance = "g"), error = conditionMessage)
     exp <- paste("The 'diffPosMaxTolerance' must be a positive numeric ",
                     "value between 0 and 1 included.", sep = "")
-    checkIdentical(obs, 
-                    exp, 
+    checkIdentical(obs, exp, 
                     msg=paste("similarity_non_numeric_",
                     "diffPosMaxThresholdMaxDiff() - A non numerical ",
                     "diffPosMaxThresholdMaxDiff did not generate an ",
@@ -217,8 +216,7 @@ test.similarity_negative_diffPosMaxTolerance <- function() {
         diffPosMaxTolerance = -0.5), error = conditionMessage)
     exp <- paste("The 'diffPosMaxTolerance' must be a positive numeric ", 
                  "value between 0 and 1 included.", sep = "")
-    checkIdentical(obs, 
-                    exp, 
+    checkIdentical(obs, exp, 
                     msg = paste("similarity_negative_diffPosMaxTolerance() - ",
                             "A negative diffPosMaxTolerance did not generate ",
                             "an exception with expected message.", sep = ""))
@@ -233,8 +231,7 @@ test.similarity_non_numeric_diffPosMaxTolerance <- function() {
         error=conditionMessage)
     exp <- paste("The 'diffPosMaxTolerance' must be a positive numeric ",
                     "value between 0 and 1 included.", sep = "")
-    checkIdentical(obs, 
-                    exp, 
+    checkIdentical(obs, exp, 
                     msg=paste("similarity_non_numeric_diffPosMaxTolerance() - ",
                         "A non numeric diffPosMaxTolerance did not generate ",
                         "an,exception with expected message.", sep = ""))
@@ -295,8 +292,8 @@ test.similarity_profile1_zeros_RATIO_MAX_MAX <- function() {
         profile2 = c(15,9,46,44,9,39,27,34,34,4))
     exp <- as.numeric(NA)
     checkEquals(obs$metrics$RATIO_MAX_MAX, exp , 
-                msg = paste("A profile with only zero values did not generate ",
-                        "NA for the RATIO_MAX_MAX", sep = ""))
+                msg = paste("A profile with only zero values did not generate",
+                        " NA for the RATIO_MAX_MAX", sep = ""))
 }
 
 ## Test the result of zeros vector profile1 for the RATIO_AREA value

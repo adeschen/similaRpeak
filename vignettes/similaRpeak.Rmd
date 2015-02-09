@@ -36,7 +36,7 @@ profiles has been tested using two histone post-transcriptional modifications
 linked to highly active enhancers H3K27ac (DCC accession: ENCFF000ASG) and 
 H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements 
 (ENCODE) data (Dunham I et al. 2012). Accordingly with the literature, 
-similarity between the profiles of these two histone marks has been identified. 
+similarity between the profiles of these two histone marks has been identified.
 
 First, the `similaRpeak` package nust be loaded.
 
@@ -58,12 +58,12 @@ H3K27ac and H3K4me1 profiles have those shapes:
 
 ```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
 plot(H3K27ac_chr7_profile, type="l", col="blue", xlab="", ylab="", 
-     ylim=c(0, 700), main="chr7:61968807-61969730")
+        ylim=c(0, 700), main="chr7:61968807-61969730")
 par(new=TRUE)
 plot(H3K4me1_chr7_profile, type="l", col="darkgreen", xlab="Position", 
-     ylab="Coverage", ylim=c(0, 700))
+        ylab="Coverage", ylim=c(0, 700))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
-            col=c("blue","darkgreen"), lty=1)
+        col=c("blue","darkgreen"), lty=1)
 ```
 
 The metrics are calculated using the `similarity` function which takes as 
@@ -101,18 +101,20 @@ and the **RATIO_MAX_MAX** value of `r round(metrics$metrics$RATIO_MAX_MAX, 2)`
 are quite low. Both values can be explained by the large difference in 
 coverage between profiles. Those values could be interpreted as two profiles 
 with low level of similarity. However, the **RATIO_NORMALIZED_INTERSECT** of 
-`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. It 
-could be a sign that the profiles, once normalized, are quite similar.
+`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. 
+It could be a sign that the profiles, once normalized, are quite similar.
 This hypothesis can be validated by looking at a graph of the normalized
 profiles :
 
 ```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_chr7_profile*length(H3K27ac_chr7_profile)/sum(H3K27ac_chr7_profile,
-        na.rm=TRUE), type="l", col="blue", xlab="", ylab="", ylim=c(0, 3.5))
+plot(H3K27ac_chr7_profile*length(H3K27ac_chr7_profile)/
+        sum(H3K27ac_chr7_profile, na.rm=TRUE), type="l", col="blue", 
+        xlab="", ylab="", ylim=c(0, 3.5))
 par(new=TRUE)
-plot(H3K4me1_chr7_profile*length(H3K4me1_chr7_profile)/sum(H3K4me1_chr7_profile,
-        na.rm=TRUE), type="l", col="darkgreen", xlab="Position", 
-        ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3.5))
+plot(H3K4me1_chr7_profile*length(H3K4me1_chr7_profile)/
+        sum(H3K4me1_chr7_profile, na.rm=TRUE), type="l", col="darkgreen", 
+        xlab="Position", ylab="Normalized Coverage (Coverage/Mean Coverage)", 
+        ylim=c(0, 3.5))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 ```
@@ -140,29 +142,29 @@ When this distance is not respected, it is assumed that more than one peak
 is present in the profile and `NA` is returned. 
 
 * **RATIO_MAX_MAX**: The ratio between the peaks values 
-in each profile. The first profile is always divided by the second profile. `NA` 
-if minimal peak value threshold is not respected for at least one of the 
+in each profile. The first profile is always divided by the second profile. 
+`NA` if minimal peak value threshold is not respected for at least one of the 
 profiles.
 
 * **RATIO_INTERSECT**: The ratio between the intersection area and the total 
 area of the two profiles. `NA` if minimal area threshold is not respected for 
 the intersection area.
-   
+
 * **RATIO_NORMALIZED_INTERSECT**: The ratio between the intersection area and 
 the total area of two normalized profiles. The profiles are normalized by 
 dividing them by their average value. `NA` if minimal area threshold is not 
 respected for the intersection area.
 
 ![alt text](figure/metrics_small.gif "Metrics")
- 
+
 ## Inputs
 
 ### ChIP-Seq profiles vectors
 
-To estimate the level of similarity between two ChIP-Seq profiles for a specific 
-region, two `vector` containing the RPM values of the two ChIP-Seq profiles for 
-each position of the selected region. Both `vector` should have the same length 
-and should not contain any negative value.
+To estimate the level of similarity between two ChIP-Seq profiles for a 
+specific region, two `vector` containing the RPM values of the two ChIP-Seq 
+profiles for each position of the selected region. Both `vector` should have 
+the same length and should not contain any negative value.
 
 ### Threshold variables
 
@@ -309,18 +311,18 @@ coverage even if the profiles are different.
 The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
 positions. The difference is always the first profile value 
 (`profile1` parameter) minus the second profile value 
-(`profile2` parameter). `NA` is returned if minimal peak value is not respected. 
-A profile can have more than one position with the maximum value. In that case, 
-the median position is used. A threshold (`diffPosMaxTolerance` parameter) can 
-be set to consider all positions within a certain range of the maximum value. A 
-threshold (`diffPosMaxThresholdMaxDiff` parameter) can also be set to ensure 
-that the distance between two maximum values is not too wide. When this 
-distance is not respected, it is assumed that more than one peak is present 
-in the profile and `NA` is returned. Finally, a threshold 
-(`diffPosMaxThresholdMinValue` parameter) can be set to ensure that the maximum
-value is egal or superior to a minimal value. When this minimum value is not 
-respected, it is assumed that no peak is present in the profile and `NA` is 
-returned. 
+(`profile2` parameter). `NA` is returned if minimal peak value is not 
+respected. A profile can have more than one position with the maximum value. 
+In that case, the median position is used. A threshold (`diffPosMaxTolerance` 
+parameter) can be set to consider all positions within a certain range of the 
+maximum value. A threshold (`diffPosMaxThresholdMaxDiff` parameter) can also 
+be set to ensure that the distance between two maximum values is not too wide. 
+When this distance is not respected, it is assumed that more than one peak is 
+present in the profile and `NA` is returned. Finally, a threshold 
+(`diffPosMaxThresholdMinValue` parameter) can be set to ensure that the 
+maximum value is egal or superior to a minimal value. When this minimum value 
+is not respected, it is assumed that no peak is present in the profile and 
+`NA` is returned. 
 
 ```{r diff_pos_max, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -555,12 +557,12 @@ par(mar = c(2,4,2,2))
 par(mfrow = c(2,2)) 
 
 plot(H3K27ac_chr2_profile*length(H3K27ac_chr2_profile)/
-         sum(H3K27ac_chr2_profile, na.rm=TRUE),
+        sum(H3K27ac_chr2_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 3),
         main="chr2:70360770-70361098")
 par(new=TRUE)
 plot(H3K4me1_chr2_profile*length(H3K4me1_chr2_profile)/
-         sum(H3K4me1_chr2_profile, na.rm=TRUE),
+        sum(H3K4me1_chr2_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -569,7 +571,7 @@ text(250, 2, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(250, 1.75, "INTERSECT=0.63", cex=1.5, col="red")
 
 plot(H3K27ac_chr8_profile*length(H3K27ac_chr8_profile)/
-         sum(H3K27ac_chr8_profile, na.rm=TRUE),
+        sum(H3K27ac_chr8_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr8:43092918-43093442")
 par(new=TRUE)
@@ -583,12 +585,12 @@ text(375, 8, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(375, 7, "INTERSECT=0.89", cex=1.5, col="red")
 
 plot(H3K27ac_chr3_profile*length(H3K27ac_chr3_profile)/
-         sum(H3K27ac_chr3_profile, na.rm=TRUE),
+        sum(H3K27ac_chr3_profile, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 8),
         main="chr3:73159773-73160145")
 par(new=TRUE)
 plot(H3K4me1_chr3_profile*length(H3K4me1_chr3_profile)/
-         sum(H3K4me1_chr3_profile, na.rm=TRUE),
+        sum(H3K4me1_chr3_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 8))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -602,7 +604,7 @@ plot(H3K27ac_chr19_profile*length(H3K27ac_chr19_profile)/
         main="chr19:27739373-27739767")
 par(new=TRUE)
 plot(H3K4me1_chr19_profile*length(H3K4me1_chr19_profile)/
-         sum(H3K4me1_chr19_profile, na.rm=TRUE),
+        sum(H3K4me1_chr19_profile, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -647,15 +649,15 @@ remain the same:
 
 ```{r factoryDemo, collapse=TRUE }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                        profile1=H3K27ac_chr2_profile, 
-                                        profile2=H3K4me1_chr2_profile)
+                                    profile1=H3K27ac_chr2_profile, 
+                                    profile2=H3K4me1_chr2_profile)
 
 ratio_max_max
 
 ratio_normalized_intersect <- factory$createMetric(
-                                        metricType="RATIO_NORMALIZED_INTERSECT", 
-                                        profile1=H3K27ac_chr2_profile, 
-                                        profile2=H3K4me1_chr2_profile)
+                                    metricType="RATIO_NORMALIZED_INTERSECT", 
+                                    profile1=H3K27ac_chr2_profile, 
+                                    profile2=H3K4me1_chr2_profile)
 ratio_normalized_intersect
 ```
 

@@ -30,8 +30,8 @@
 #   diffPosMaxTolerance:         the maximum variation accepted on the maximum 
 #                                 value to consider a position as a peak 
 #                                 position. Default = 0.01.
-#   spearmanCorrSDThreashold:    the minimum standard deviation accepted on both
-#                                 profiles to calculate the metric.
+#   spearmanCorrSDThreashold:    the minimum standard deviation accepted on 
+#                                 both profiles to calculate the metric.
 #                                 Default = 1e-8.
 # Prerequisites: 
 #   The 'profile1' argument is a numeric vector where no element is less 
@@ -77,7 +77,7 @@ similarity <- function(profile1,
         stop("The 'profile2' argument must be a numeric vector.")
     }
     
-    # At elements in profile1 and profile2 at to have a value superior to zero   
+    # At elements in profile1 and profile2 at to have a value superior to zero 
     if (sum(profile1 < 0, na.rm = TRUE) > 0) {
         stop("The profile1 argument contains at least one negative number.")
     }
@@ -151,7 +151,7 @@ similarity <- function(profile1,
             !is.numeric(spearmanCorrSDThreashold) || 
             (spearmanCorrSDThreashold <= 0)) {
         stop(paste0("The 'spearmanCorrSDThreashold' must be a positive ",
-                    "numeric value."))
+                "numeric value."))
     }  
     
     # Get information about both profiles

@@ -15,11 +15,11 @@
 #   The calculated ratio or NA if threshold is not respected.
 #
 ratioArea <- function(profile1, profile2, threshold = 1) {
-    
+
     # Get the total area associated to each profile
     area1 <- sum(profile1, na.rm = TRUE)
     area2 <- sum(profile2, na.rm = TRUE)
-    
+
     # Get the ratio between area1 and area2
     minimum <- min(area1, area2)
     if (minimum > 0  && threshold <= minimum){
@@ -27,7 +27,7 @@ ratioArea <- function(profile1, profile2, threshold = 1) {
     }else {
         ratio <- as.numeric(NA)
     }
-    
+
     return(ratio)
 }
 
@@ -47,11 +47,11 @@ ratioArea <- function(profile1, profile2, threshold = 1) {
 #   The calculated ratio or NA if threshold is not respected.
 #
 ratioMaxMax <- function(profile1, profile2, threshold = 1) {
-    
+
     # Get the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
     max2 <- max(profile2, na.rm = TRUE)
-    
+
     # Get the ratio between max1 and max2
     minimum <- min(max1, max2)
     if (minimum > 0 && threshold <= minimum){
@@ -59,7 +59,7 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1) {
     }else {
         ratio <- as.numeric(NA)
     }
-    
+
     return(ratio)
 }
 
@@ -89,7 +89,7 @@ diffPosMax <- function(profile1,
                        threshold = 1, 
                        thresholdDist = 100, 
                        tolerance = 0.01) {
-    
+
     # The profile1 and profile2 arguments are numeric vectors. 
     # If not, NA is returned. 
     if (!is.vector(profile1)      || 
@@ -100,22 +100,21 @@ diffPosMax <- function(profile1,
             all(is.na(profile2))) {
         return(as.numeric(NA))
     }
-    
+
     # Get the position of the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
     max2 <- max(profile2, na.rm = TRUE)
-    
+
     tolerance_multiple <- 1 - tolerance
     toleranceMax1 <- tolerance_multiple * max1
     toleranceMax2 <- tolerance_multiple * max2
-    
+
     posMax1 <- which(profile1 >= toleranceMax1)
     posMax2 <- which(profile2 >= toleranceMax2)
-    
+
     # Get the difference between posMax1 and posMax2
     minimum = min(posMax1, posMax2)
-    # The metric is only calculated if the minimal peak value is
-    # respected
+    # The metric is only calculated if the minimal peak value is respected
     if ((minimum > 0) && (threshold <= min(max1, max2))) {
         if (length(posMax1) == 1 && length(posMax2) == 1) {
             diff <- posMax1-posMax2    
@@ -135,7 +134,7 @@ diffPosMax <- function(profile1,
     } else {
         diff <- as.numeric(NA)
     }
-    
+
     return(diff)
 }
 
@@ -155,16 +154,16 @@ diffPosMax <- function(profile1,
 #   The calculated ratio or NA if threshold is not respected.
 #
 ratioIntersect <- function(profile1, profile2, threshold = 1) {
-    
+
     # Get the area of the intersection (min of both curves for each position)
     intersect <- sum(unlist(lapply(1:length(profile1), 
                                 function(x) min(profile1[x], profile2[x]))), 
                     na.rm = TRUE)
-    
+
     # Get the total area covered by both curves
     totalArea <- sum(profile1, na.rm = TRUE) +
         sum(profile2, na.rm = TRUE) - intersect
- 
+
     # Get the ratio between intersect and totArea
     if (totalArea > 0 && threshold <= totalArea) {
         ratio <- intersect/totalArea
@@ -192,7 +191,7 @@ ratioIntersect <- function(profile1, profile2, threshold = 1) {
 #   standard deviation inferior to threshold.
 #
 spearmanCorr <- function(profile1, profile2, threshold = 1e-8) {
-    
+
     # Validate that each profile has at least one complete element pair
     # and that the standard deviation of each profile is superior to threshold
     if (sum(complete.cases(profile1, profile2)) == 0  || 
