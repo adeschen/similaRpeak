@@ -7,11 +7,11 @@
     ChIP profiles
 }
 \description{
-\pkg{similaRpeak} is calculing four differents metrics to estimate a 
+\pkg{similaRpeak} is calculing five differents metrics to estimate a 
 level of similarity between two ChIP profiles
 }
 \details{
-    The R function \code{\link{similarity}} calculates four differents metrics: 
+    The R function \code{\link{similarity}} calculates five differents metrics: 
 
 \itemize{
         \item RATIO_AREA: The ratio between the areas. The larger 
@@ -50,6 +50,11 @@ Maintainer: Astrid Louise Deschenes
 <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
 }
 \seealso{
-\code{\link{similarity}}
+    \itemize{
+        \item \code{\link{MetricFactory}} for using a interface to calculate all 
+                        available metrics separately.
+        \item \code{\link{similarity}} for calculating all available metrics 
+                        between two ChIP-Seq profiles.
+    }
 }
 \keyword{package}
