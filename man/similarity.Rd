@@ -78,7 +78,7 @@
 \value{
     \code{similarity} returns a \code{list} which contains the
     information about both ChIP-Seq profiles and a \code{list} of 
-    all four metrics.
+    all metrics.
 
     The data structure is a \code{list}  of \code{list}.
 
@@ -141,11 +141,11 @@
 }
 
 \examples{
-# Example with vectors directly used as inputs ---------------------------------
+# Example with vectors directly used as inputs
 similarity(c(3,59,6,24,65,34,15,4,53,22),
                     c(15,9,46,44,9,39,27,34,34,4))
 
-# Example with variables used as inputs and customised threshold ---------------
+# Example with variables used as inputs and customised threshold
 profile1<-c(3,59,6,24,65,34,15,4,53,22,21,12,11)
 profile2<-c(15,9,46,44,9,39,27,34,34,4,3,4,2)
 similarity(profile1, profile2, 
@@ -158,5 +158,11 @@ similarity(profile1, profile2,
                         diffPosMaxTolerance=0.03,
                         spearmanCorrSDThreashold=1e-3)
 
+}
+\seealso{
+    \itemize{
+        \item \code{\link{MetricFactory}} for using a interface to calculate all 
+                                available metrics separately.
+    }
 }
 \keyword{similarity}

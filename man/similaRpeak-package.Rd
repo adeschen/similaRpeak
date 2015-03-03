@@ -11,8 +11,7 @@
 level of similarity between two ChIP-Seq profiles
 }
 \details{
-    The R function \code{\link{similarity}} calculates six differents metrics: 
-
+    The R function \code{\link{similarity}} calculates six differents metrics:
 \itemize{
         \item RATIO_AREA: The ratio between the areas. The larger 
                             value is always divided by the smaller value.
@@ -52,6 +51,11 @@ Maintainer: Astrid Louise Deschenes
 <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
 }
 \seealso{
-\code{\link{similarity}}
+    \itemize{
+        \item \code{\link{MetricFactory}} for using a interface to calculate all 
+                        available metrics separately.
+        \item \code{\link{similarity}} for calculating all available metrics 
+                        between two ChIP-Seq profiles.
+    }
 }
 \keyword{package}

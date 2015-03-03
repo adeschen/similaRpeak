@@ -78,12 +78,12 @@
 }
 
 \examples{
-# Initialized the factory object -----------------------------------------------
+# Initialized the factory object
 factory = MetricFactory$new(ratioAreaThreshold=100,
                             ratioIntersectThreshold=20,
                             diffPosMaxTolerance=0.04)
 
-# Use the factory object to calculate each metric separatly --------------------
+# Use the factory object to calculate each metric separatly
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
                                 profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                 profile2=c(15,9,46,44,9,39,27,34,34,4))
@@ -103,5 +103,11 @@ diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX",
                                 profile1=c(1,59,6,24,65,34,15,4,53,22), 
                                 profile2=c(15,9,46,44,9,39,27,34,34,4))
 diff_pos_max
+}
+\seealso{
+    \itemize{
+        \item \code{\link{similarity}} for calculating all available metrics 
+                            between two ChIP-Seq profiles.
+    }
 }
 \keyword{MetricFactory}
