@@ -73,7 +73,7 @@
 \value{
     \code{similarity} returns a \code{list} which contains the
     information about both ChIP-Seq profiles and a \code{list} of 
-    all four metrics.
+    all metrics.
 
     The data structure is a \code{list}  of \code{list}.
 

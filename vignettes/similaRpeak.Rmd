@@ -82,7 +82,7 @@ metrics <- similarity(H3K27ac_chr7_profile,
 ```
 
 The `similarity` function returns a list which contains the general 
-information about both ChIP-Seq profiles and a list of all four metrics. 
+information about both ChIP-Seq profiles and a list of all calculated metrics. 
 
 ```{r metricReturn, collapse=TRUE}
 metrics
