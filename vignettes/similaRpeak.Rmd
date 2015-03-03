@@ -1,15 +1,3 @@
----
-title: "similaRpeak: similarity between two ChIP-Seq profiles"
-output:
-  html_document:
-    theme: null
-    toc: yes
-  pdf_document:
-    theme: null
-    toc: yes
----
-
-<!-- rmarkdown v1 -->
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{similaRpeak: similarity between two ChIP-Seq profiles}
@@ -25,100 +13,6 @@ Fabien Claude Lamaze, Rawane Samb, Pascal Belleau and Arnaud Droit.
 This package and the underlying similaRpeak code are distributed 
 under the Artistic license 2.0. You are free to use and redistribute 
 this software. 
-
-
-## Quick Start
-
-Highly active enhancer regions are thought to be important for the cell fate 
-(Andersson et al. 2014, FANTOM5 consortium, Hnisz et al. 2013). Highly active 
-enhancers regions have been selected in GM12878 cells. Similarity of ChIP-seq 
-profiles has been tested using two histone post-transcriptional modifications 
-linked to highly active enhancers H3K27ac (DCC accession: ENCFF000ASG) and 
-H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements 
-(ENCODE) data (Dunham I et al. 2012). Accordingly with the literature, 
-similarity between the profiles of these two histone marks has been identified.
-
-First, the `similaRpeak` package nust be loaded.
-
-```{r libraryLoad}
-suppressMessages(library(similaRpeak))
-```
-
-A region, chr7:61968807-61969730, shows interesting profiles for both histones.
-Let's load the data for this region.
-
-```{r profiles, collapse=TRUE}
-load(system.file("extdata/chr7_profiles.RData", package="similaRpeak"))
-
-head(H3K27ac_chr7_profile, n=15)
-head(H3K4me1_chr7_profile, n=15)
-```
-
-H3K27ac and H3K4me1 profiles have those shapes:
-
-```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_chr7_profile, type="l", col="blue", xlab="", ylab="", 
-        ylim=c(0, 700), main="chr7:61968807-61969730")
-par(new=TRUE)
-plot(H3K4me1_chr7_profile, type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage", ylim=c(0, 700))
-legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
-        col=c("blue","darkgreen"), lty=1)
-```
-
-The metrics are calculated using the `similarity` function which takes as 
-arguments the two ChIP-Seq profiles vectors and the threshold values.
-
-```{r metricCalculation}
-metrics <- similarity(H3K27ac_chr7_profile, 
-                            H3K4me1_chr7_profile, 
-                            ratioAreaThreshold=5, 
-                            ratioMaxMaxThreshold=2, 
-                            ratioIntersectThreshold=5, 
-                            ratioNormalizedIntersectThreshold=2,
-                            diffPosMaxThresholdMinValue=10, 
-                            diffPosMaxThresholdMaxDiff=100, 
-                            diffPosMaxTolerance=0.01)
-```
-
-The `similarity` function returns a list which contains the general 
-information about both ChIP-Seq profiles and a list of all calculated metrics. 
-
-```{r metricReturn, collapse=TRUE}
-metrics
-```
-
-Each specific information can be directly accessed. Some examples:
-
-```{r getInfo, collapse=TRUE}
-metrics$areaProfile1
-metrics$areaProfile2
-metrics$metrics$RATIO_INTERSECT
-```
-
-The **RATIO_INTERSECT** value of `r round(metrics$metrics$RATIO_INTERSECT, 2)` 
-and the **RATIO_MAX_MAX** value of `r round(metrics$metrics$RATIO_MAX_MAX, 2)` 
-are quite low. Both values can be explained by the large difference in 
-coverage between profiles. Those values could be interpreted as two profiles 
-with low level of similarity. However, the **RATIO_NORMALIZED_INTERSECT** of 
-`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. 
-It could be a sign that the profiles, once normalized, are quite similar.
-This hypothesis can be validated by looking at a graph of the normalized
-profiles :
-
-```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
-plot(H3K27ac_chr7_profile*length(H3K27ac_chr7_profile)/
-        sum(H3K27ac_chr7_profile, na.rm=TRUE), type="l", col="blue", 
-        xlab="", ylab="", ylim=c(0, 3.5))
-par(new=TRUE)
-plot(H3K4me1_chr7_profile*length(H3K4me1_chr7_profile)/
-        sum(H3K4me1_chr7_profile, na.rm=TRUE), type="l", col="darkgreen", 
-        xlab="Position", ylab="Normalized Coverage (Coverage/Mean Coverage)", 
-        ylim=c(0, 3.5))
-legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
-        col=c("blue","darkgreen"), lty=1)
-```
-
 
 ## Introduction
 
@@ -155,16 +49,27 @@ the total area of two normalized profiles. The profiles are normalized by
 dividing them by their average value. `NA` if minimal area threshold is not 
 respected for the intersection area.
 
+* **SPEARMAN_CORRELATION**: The Spearman's rho statistic between profiles.
+
 ![alt text](figure/metrics_small.gif "Metrics")
+
+
+## Loading similaRpeak package
+
+```{r loadingPackage} 
+suppressMessages(library(similaRpeak))
+```
+
 
 ## Inputs
 
 ### ChIP-Seq profiles vectors
 
 To estimate the level of similarity between two ChIP-Seq profiles for a 
-specific region, two `vector` containing the RPM values of the two ChIP-Seq 
-profiles for each position of the selected region. Both `vector` should have 
-the same length and should not contain any negative value.
+specific region, two `vector` containing  the profiles values, as reported in 
+reads per million (RPM)s for each position of the selected region are needed. 
+Both `vector` should have the same length and should not contain any negative 
+value.
 
 ### Threshold variables
 
@@ -202,6 +107,8 @@ profile. Default=100.
 to include a position in the maximum positions list and use it to calculate the
 metric. Default=0.01.
 
+* **spearmanCorrSDThreashold**: The minimum standard deviation accepted on both
+profiles to calculate the metric. Default=1e-8.
 
 ## Metric definition
 
@@ -629,6 +536,181 @@ metrics$metric$RATIO_NORMALIZED_INTERSECT
 
 The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with 
 possibily similar profiles even if their have different amplitude.
+
+
+## SPEARMAN_CORRELATION Metric
+
+The **SPEARMAN_CORRELATION** metric is the Spearman's rho statistic calculated
+usign the two profiles.`NA` if minimal standard deviation
+(`spearmanCorrSDThreashold` parameter) is not respected for at least one of the
+profiles.
+
+```{r spearman_corr_graphs, echo=FALSE, fig.width=11, fig.height=8}
+
+par(mar=c(2,4,2,2))
+par(mfrow=c(2,2)) 
+
+plot(H3K27ac_chr2_profile,
+        type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
+        main="chr2:70360770-70361098")
+par(new=TRUE)
+plot(H3K4me1_chr2_profile,
+        type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage",  ylim=c(0, 25))
+legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+text(230, 17, "SPEARMAN_CORRELATION", cex=1.5, col="red")
+text(230, 14, "=0.06", cex=1.5, col="red")
+
+plot(H3K27ac_chr8_profile,
+        type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
+        main="chr8:43092918-43093442")
+par(new=TRUE)
+plot(H3K4me1_chr8_profile,
+        type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage",  ylim=c(0, 1500))
+legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+text(325, 1000, "SPEARMAN_CORRELATION", cex=1.5, col="red")
+text(325, 850, "=0.82", cex=1.5, col="red")
+
+plot(H3K27ac_chr3_profile,
+        type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
+        main="chr3:73159773-73160145")
+par(new=TRUE)
+plot(H3K4me1_chr3_profile,
+        type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage",  ylim=c(0, 125))
+legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+text(288, 92, "SPEARMAN_", cex=1.5, col="red")
+text(288, 78, "CORRELATION=0.95", cex=1.5, col="red")
+
+plot(H3K27ac_chr19_profile,
+        type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
+        main="chr19:27739373-27739767")
+par(new=TRUE)
+plot(H3K4me1_chr19_profile,
+        type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage",  ylim=c(0, 350))
+legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+text(275, 225, "SPEARMAN_CORRELATION", cex=1.5, col="red")
+text(275, 192, "=0.62", cex=1.5, col="red")
+
+```
+
+```{r spearman_correlation_calculation, collapse=TRUE}
+metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics$metric$SPEARMAN_CORRELATION
+
+metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics$metric$SPEARMAN_CORRELATION
+
+metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics$metric$SPEARMAN_CORRELATION
+
+metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics$metric$SPEARMAN_CORRELATION
+```
+
+As the **RATIO_NORMALIZED_INTERSECT** metric, the **SPEARMAN_CORRELATION** 
+metric can be useful to detect regions with possibily similar profiles even if 
+their have different amplitude.
+
+
+## Quick Start
+
+Highly active enhancer regions are thought to be important for the cell fate 
+(Andersson et al. 2014, FANTOM5 consortium, Hnisz et al. 2013). Highly active 
+enhancers regions have been selected in GM12878 cells. Similarity of ChIP-seq 
+profiles has been tested using two histone post-transcriptional modifications 
+linked to highly active enhancers H3K27ac (DCC accession: ENCFF000ASG) and 
+H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements 
+(ENCODE) data (Dunham I et al. 2012). Accordingly with the literature, 
+similarity between the profiles of these two histone marks has been identified.
+
+First, the `similaRpeak` package must be loaded.
+
+```{r libraryLoad}
+suppressMessages(library(similaRpeak))
+```
+
+A region, chr7:61968807-61969730, shows interesting profiles for both histones.
+Let's load the data for this region.
+
+```{r profiles, collapse=TRUE}
+load(system.file("extdata/chr7_profiles.RData", package="similaRpeak"))
+
+head(H3K27ac_chr7_profile, n=15)
+head(H3K4me1_chr7_profile, n=15)
+```
+
+H3K27ac and H3K4me1 profiles have those shapes:
+
+```{r graphProfiles, echo=FALSE, fig.align='center', fig.height=6 }
+plot(H3K27ac_chr7_profile, type="l", col="blue", xlab="", ylab="", 
+        ylim=c(0, 700), main="chr7:61968807-61969730")
+par(new=TRUE)
+plot(H3K4me1_chr7_profile, type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage", ylim=c(0, 700))
+legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+```
+
+The metrics are calculated using the `similarity` function which takes as 
+arguments the two ChIP-Seq profiles vectors and the threshold values.
+
+```{r metricCalculation}
+metrics <- similarity(H3K27ac_chr7_profile, 
+                            H3K4me1_chr7_profile, 
+                            ratioAreaThreshold=5, 
+                            ratioMaxMaxThreshold=2, 
+                            ratioIntersectThreshold=5, 
+                            ratioNormalizedIntersectThreshold=2,
+                            diffPosMaxThresholdMinValue=10, 
+                            diffPosMaxThresholdMaxDiff=100, 
+                            diffPosMaxTolerance=0.01)
+```
+
+The `similarity` function returns a list which contains the general 
+information about both ChIP-Seq profiles and a list of all calculated metrics. 
+
+```{r metricReturn, collapse=TRUE}
+metrics
+```
+
+Each specific information can be directly accessed. Some examples:
+
+```{r getInfo, collapse=TRUE}
+metrics$areaProfile1
+metrics$areaProfile2
+metrics$metrics$RATIO_INTERSECT
+```
+
+The **RATIO_INTERSECT** value of `r round(metrics$metrics$RATIO_INTERSECT, 2)` 
+and the **RATIO_MAX_MAX** value of `r round(metrics$metrics$RATIO_MAX_MAX, 2)` 
+are quite low. Both values can be explained by the large difference in 
+coverage between profiles. Those values could be interpreted as two profiles 
+with low level of similarity. However, the **RATIO_NORMALIZED_INTERSECT** of 
+`r round(metrics$metrics$RATIO_NORMALIZED_INTERSECT, 2)` is much closer to 1. 
+It could be a sign that the profiles, once normalized, are quite similar.
+This hypothesis can be validated by looking at a graph of the normalized
+profiles :
+
+```{r graphProfilesNorm, echo=FALSE, fig.align='center', fig.height=6 }
+plot(H3K27ac_chr7_profile*length(H3K27ac_chr7_profile)/
+        sum(H3K27ac_chr7_profile, na.rm=TRUE), type="l", col="blue", 
+        xlab="", ylab="", ylim=c(0, 3.5))
+par(new=TRUE)
+plot(H3K4me1_chr7_profile*length(H3K4me1_chr7_profile)/
+        sum(H3K4me1_chr7_profile, na.rm=TRUE), type="l", col="darkgreen", 
+        xlab="Position", ylab="Normalized Coverage (Coverage/Mean Coverage)", 
+        ylim=c(0, 3.5))
+legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+```
+
 
 ## Metrics calculation using MetricFactory object
  
