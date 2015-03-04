@@ -135,6 +135,20 @@ By using the absolute value of the logarithm of the
 formally respected.
 
 $$ \Huge \log(RATIO) $$ 
+            
+                
+  
+## Demonstation ChIP-Seq profiles
+
+To ease comparaison, the same ChIP-Seq profiles are used in each metric 
+description section. Those are ChIP-Seq profiles of two histone 
+post-transcriptional modifications linked to highly active enhancers H3K27ac 
+(DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) from 
+the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
+
+```{r demo_profiles_loading}
+data("demo_profiles")
+```
 
 
 ## RATIO_AREA Metric
@@ -145,9 +159,7 @@ profile (`profile1` parameter) is always divided by the second profile
 (`ratioAreaThreshold` parameter) is not respected for at least one of the 
 profiles.
 
-```{r ratio_area, echo=FALSE, fig.width=11, fig.height=8}
-load(system.file("extdata/demo_profiles.RData", package="similaRpeak"))
-
+```{r ratio_area_graph, echo=FALSE, fig.width=11, fig.height=8}
 par(mar=c(2,4,2,2))
 par(mfrow=c(2,2)) 
 
