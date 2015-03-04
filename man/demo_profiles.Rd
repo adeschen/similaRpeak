@@ -2,9 +2,8 @@
 \alias{demo_profiles}
 \docType{data}
 \title{
-Selected ChIP-seq profiles of two histone post-transcriptional modifications 
-linked to highly active enhancers H3K27ac and H3K4me1 (for demonstration 
-purpose)
+Selected ChIP-seq profiles related to enhancers 
+H3K27ac and H3K4me1 (for demonstration purpose)
 }
 \description{
 ChIP-seq profiles of two histone post-transcriptional modifications 

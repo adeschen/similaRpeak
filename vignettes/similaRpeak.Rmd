@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{similaRpeak: similarity between two ChIP-Seq profiles}
@@ -66,7 +69,7 @@ suppressMessages(library(similaRpeak))
 ### ChIP-Seq profiles vectors
 
 To estimate the level of similarity between two ChIP-Seq profiles for a 
-specific region, two `vector` containing  the profiles values, as reported in 
+specific region, two `vector` containing the profiles values, as reported in 
 reads per million (RPM)s for each position of the selected region are needed. 
 Both `vector` should have the same length and should not contain any negative 
 value.
@@ -169,7 +172,7 @@ plot(H3K27ac_chr2_profile,
 par(new=TRUE)
 plot(H3K4me1_chr2_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 25))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(250, 17, "RATIO_AREA=1.03", cex=1.5, col="red")
@@ -180,7 +183,7 @@ plot(H3K27ac_chr8_profile,
 par(new=TRUE)
 plot(H3K4me1_chr8_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 1500))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(375, 1000, "RATIO_AREA=0.06", cex=1.5, col="red")
@@ -191,7 +194,7 @@ plot(H3K27ac_chr3_profile,
 par(new=TRUE)
 plot(H3K4me1_chr3_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 125))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(275, 80, "RATIO_AREA=2.23", cex=1.5, col="red")
@@ -202,7 +205,7 @@ plot(H3K27ac_chr19_profile,
 par(new=TRUE)
 plot(H3K4me1_chr19_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 350))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(275, 225, "RATIO_AREA=0.12", cex=1.5, col="red")
@@ -254,7 +257,7 @@ plot(H3K27ac_chr2_profile,
 par(new=TRUE)
 plot(H3K4me1_chr2_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 25))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(250, 17, "DIFF_POS_MAX=-20", cex=1.5, col="red")
@@ -265,7 +268,7 @@ plot(H3K27ac_chr8_profile,
 par(new=TRUE)
 plot(H3K4me1_chr8_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 1500))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(375, 1000, "DIFF_POS_MAX=-0.5", cex=1.5, col="red")
@@ -276,7 +279,7 @@ plot(H3K27ac_chr3_profile,
 par(new=TRUE)
 plot(H3K4me1_chr3_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 125))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(282, 80, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
@@ -287,7 +290,7 @@ plot(H3K27ac_chr19_profile,
 par(new=TRUE)
 plot(H3K4me1_chr19_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 350))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(275, 225, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
@@ -665,7 +668,7 @@ plot(H3K27ac_chr7_profile, type="l", col="blue", xlab="", ylab="",
         ylim=c(0, 700), main="chr7:61968807-61969730")
 par(new=TRUE)
 plot(H3K4me1_chr7_profile, type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage", ylim=c(0, 700))
+        ylab="Coverage in reads per million (RPM)", ylim=c(0, 700))
 legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 ```
