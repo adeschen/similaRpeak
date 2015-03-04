@@ -1,6 +1,3 @@
----
-output: html_document
----
 <!--
 %\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{similaRpeak: similarity between two ChIP-Seq profiles}
@@ -70,7 +67,7 @@ suppressMessages(library(similaRpeak))
 
 To estimate the level of similarity between two ChIP-Seq profiles for a 
 specific region, two `vector` containing the profiles values, as reported in 
-reads per million (RPM)s for each position of the selected region are needed. 
+reads per million (RPM) for each position of the selected region are needed. 
 Both `vector` should have the same length and should not contain any negative 
 value.
 
@@ -141,16 +138,23 @@ $$ \Huge \log(RATIO) $$
             
                 
   
-## Demonstation ChIP-Seq profiles
+## Demonstration ChIP-Seq profiles
 
-To ease comparaison, the same ChIP-Seq profiles are used in each metric 
+To ease comparison, the same ChIP-Seq profiles are used in each metric 
 description section. Those are ChIP-Seq profiles of two histone 
 post-transcriptional modifications linked to highly active enhancers H3K27ac 
 (DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) from 
 the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
 
-```{r demo_profiles_loading}
+Here is how to load the `demo_profiles` used in following sections. The 
+ChIP-Seq profiles of the enhancers H3K27ac and H3K4me1 for the region are 
+shown for the region chr19:27739373-27739767. The profiles are in reads 
+per millions (RPM).
+
+```{r demo_profiles_loading, collapse=T}
 data("demo_profiles")
+str(H3K27ac_chr19_profile, vec.len = 15)
+str(H3K4me1_chr19_profile, vec.len = 15)
 ```
 
 
@@ -163,7 +167,7 @@ profile (`profile1` parameter) is always divided by the second profile
 profiles.
 
 ```{r ratio_area_graph, echo=FALSE, fig.width=11, fig.height=8}
-par(mar=c(2,4,2,2))
+par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
@@ -197,7 +201,7 @@ plot(H3K4me1_chr3_profile,
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(275, 80, "RATIO_AREA=2.23", cex=1.5, col="red")
+text(285, 80, "RATIO_AREA=2.23", cex=1.5, col="red")
 
 plot(H3K27ac_chr19_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
@@ -248,7 +252,7 @@ is not respected, it is assumed that no peak is present in the profile and
 
 ```{r diff_pos_max, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar=c(2,4,2,2))
+par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
@@ -282,7 +286,7 @@ plot(H3K4me1_chr3_profile,
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(282, 80, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
+text(285, 80, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
 
 plot(H3K27ac_chr19_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
@@ -323,7 +327,7 @@ profiles.
 
 ```{r ratio_max_max, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar=c(2,4,2,2))
+par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
@@ -332,7 +336,7 @@ plot(H3K27ac_chr2_profile,
 par(new=TRUE)
 plot(H3K4me1_chr2_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 25))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(250, 17, "RATIO_MAX_MAX=0.95", cex=1.5, col="red")
@@ -343,10 +347,10 @@ plot(H3K27ac_chr8_profile,
 par(new=TRUE)
 plot(H3K4me1_chr8_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 1500))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(375, 1000, "RATIO_MAX_MAX=0.06", cex=1.5, col="red")
+text(380, 1000, "RATIO_MAX_MAX=0.06", cex=1.5, col="red")
 
 plot(H3K27ac_chr3_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
@@ -354,7 +358,7 @@ plot(H3K27ac_chr3_profile,
 par(new=TRUE)
 plot(H3K4me1_chr3_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 125))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(290, 80, "RATIO_MAX_MAX=2.5", cex=1.5, col="red")
@@ -365,10 +369,10 @@ plot(H3K27ac_chr19_profile,
 par(new=TRUE)
 plot(H3K4me1_chr19_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 350))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(275, 225, "RATIO_MAX_MAX=0.12", cex=1.5, col="red")
+text(280, 225, "RATIO_MAX_MAX=0.12", cex=1.5, col="red")
 ```
 
 ```{r ratio_max_max_calculation, collapse=T}
@@ -397,7 +401,7 @@ area.
 
 ```{r ratio_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar=c(2,4,2,2))
+par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
@@ -406,7 +410,7 @@ plot(H3K27ac_chr2_profile,
 par(new=TRUE)
 plot(H3K4me1_chr2_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 25))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(242, 17, "RATIO_INTERSECT=0.63", cex=1.5, col="red")
@@ -417,7 +421,7 @@ plot(H3K27ac_chr8_profile,
 par(new=TRUE)
 plot(H3K4me1_chr8_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 1500))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(375, 1000, "RATIO_INTERSECT=0.06", cex=1.5, col="red")
@@ -428,11 +432,11 @@ plot(H3K27ac_chr3_profile,
 par(new=TRUE)
 plot(H3K4me1_chr3_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 125))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(288, 92, "RATIO_INTERSECT=", cex=1.5, col="red")
-text(288, 80, "0.43", cex=1.5, col="red")
+text(288, 87, "RATIO_INTERSECT=", cex=1.5, col="red")
+text(288, 75, "0.43", cex=1.5, col="red")
 
 plot(H3K27ac_chr19_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
@@ -440,7 +444,7 @@ plot(H3K27ac_chr19_profile,
 par(new=TRUE)
 plot(H3K4me1_chr19_profile,
         type="l", col="darkgreen", xlab="Position", 
-        ylab="Coverage",  ylim=c(0, 350))
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(275, 225, "RATIO_INTERSECT=0.12", cex=1.5, col="red")
@@ -475,7 +479,7 @@ the intersection area.
 
 ```{r ratio_normalized_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar = c(2,4,2,2))
+par(mar = c(6,4,2,2))
 par(mfrow = c(2,2)) 
 
 plot(H3K27ac_chr2_profile*length(H3K27ac_chr2_profile)/
@@ -489,8 +493,8 @@ plot(H3K4me1_chr2_profile*length(H3K4me1_chr2_profile)/
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(250, 2, "RATIO_NORMALIZED_", cex=1.5, col="red")
-text(250, 1.75, "INTERSECT=0.63", cex=1.5, col="red")
+text(245, 2, "RATIO_NORMALIZED_", cex=1.5, col="red")
+text(245, 1.75, "INTERSECT=0.63", cex=1.5, col="red")
 
 plot(H3K27ac_chr8_profile*length(H3K27ac_chr8_profile)/
         sum(H3K27ac_chr8_profile, na.rm=TRUE),
@@ -503,8 +507,8 @@ plot(H3K4me1_chr8_profile*length(H3K4me1_chr8_profile)/
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(375, 8, "RATIO_NORMALIZED_", cex=1.5, col="red")
-text(375, 7, "INTERSECT=0.89", cex=1.5, col="red")
+text(370, 8, "RATIO_NORMALIZED_", cex=1.5, col="red")
+text(370, 7, "INTERSECT=0.89", cex=1.5, col="red")
 
 plot(H3K27ac_chr3_profile*length(H3K27ac_chr3_profile)/
         sum(H3K27ac_chr3_profile, na.rm=TRUE),
@@ -517,8 +521,8 @@ plot(H3K4me1_chr3_profile*length(H3K4me1_chr3_profile)/
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 8))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(288, 6, "RATIO_NORMALIZED_", cex=1.5, col="red")
-text(288, 5.3, "INTERSECT=0.78", cex=1.5, col="red")
+text(288, 5.5, "RATIO_NORMALIZED_", cex=1.5, col="red")
+text(288, 4, "INTERSECT=0.78", cex=1.5, col="red")
 
 plot(H3K27ac_chr19_profile*length(H3K27ac_chr19_profile)/
          sum(H3K27ac_chr19_profile, na.rm=TRUE),
@@ -562,7 +566,7 @@ profiles.
 
 ```{r spearman_corr_graphs, echo=FALSE, fig.width=11, fig.height=8}
 
-par(mar=c(2,4,2,2))
+par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
 plot(H3K27ac_chr2_profile,
@@ -574,8 +578,8 @@ plot(H3K4me1_chr2_profile,
         ylab="Coverage",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(230, 17, "SPEARMAN_CORRELATION", cex=1.5, col="red")
-text(230, 14, "=0.06", cex=1.5, col="red")
+text(225, 17, "SPEARMAN_CORRELATION", cex=1.5, col="red")
+text(225, 14, "=0.06", cex=1.5, col="red")
 
 plot(H3K27ac_chr8_profile,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
@@ -610,8 +614,8 @@ plot(H3K4me1_chr19_profile,
         ylab="Coverage",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
-text(275, 225, "SPEARMAN_CORRELATION", cex=1.5, col="red")
-text(275, 192, "=0.62", cex=1.5, col="red")
+text(270, 225, "SPEARMAN_CORRELATION", cex=1.5, col="red")
+text(270, 192, "=0.62", cex=1.5, col="red")
 
 ```
 
@@ -629,7 +633,9 @@ metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
 metrics$metric$SPEARMAN_CORRELATION
 ```
 
-As the **RATIO_NORMALIZED_INTERSECT** metric, the **SPEARMAN_CORRELATION** 
+The **SPEARMAN_CORRELATION** assesses how well the relationship between the two
+ChIP-Seq profiles can be described using a monotonic function. As the 
+**RATIO_NORMALIZED_INTERSECT** metric, the **SPEARMAN_CORRELATION** 
 metric can be useful to detect regions with possibily similar profiles even if 
 their have different amplitude.
 
