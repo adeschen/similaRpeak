@@ -23,7 +23,8 @@
     ratioNormalizedIntersectThreshold=1,
     diffPosMaxThresholdMinValue=1, 
     diffPosMaxThresholdMaxDiff=100, 
-    diffPosMaxTolerance=0.01)}:
+    diffPosMaxTolerance=0.01,
+    spearmanCorrSDThreashold=1e-8)}:
     Create a MetricFactory object.
     \describe{
         \item{\code{ratioAreaThreshold}}{ The minimum denominator accepted to 
@@ -47,6 +48,9 @@
         \item{\code{diffPosMaxTolerance}}{The maximum variation accepted on the 
                         maximum value to consider a position as a peak 
                         position. Default=0.01.}
+        \item{\code{spearmanCorrSDThreashold}}{The minimum standard deviation
+                        accepted on both profiles to consider to calculate 
+                        the metric. Default=1e-8.}
     }
   }
  }

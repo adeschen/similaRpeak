@@ -4,15 +4,14 @@
 \alias{similaRpeak}
 \title{
     similaRpeak: Metrics to estimate a level of similarity between two 
-    ChIP profiles
+    ChIP-Seq profiles
 }
 \description{
-\pkg{similaRpeak} is calculing five differents metrics to estimate a 
-level of similarity between two ChIP profiles
+\pkg{similaRpeak} is calculing four differents metrics to estimate a 
+level of similarity between two ChIP-Seq profiles
 }
 \details{
-    The R function \code{\link{similarity}} calculates five differents metrics: 
-
+    The R function \code{\link{similarity}} calculates six differents metrics:
 \itemize{
         \item RATIO_AREA: The ratio between the areas. The larger 
                             value is always divided by the smaller value.
@@ -27,6 +26,8 @@ level of similarity between two ChIP profiles
                             area and the total area of two normalized profiles. 
                             The profiles are normalized by divinding them by 
                             their average value.
+        \item SPEARMAN_CORRELATION: The Spearman's rho statistic between 
+                            profiles. 
 }
 
 The function \code{\link{similarity}} also reports basic information about each 

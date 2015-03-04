@@ -14,20 +14,20 @@
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioArea <- function(profile1, profile2, threshold = 1){
-    
+ratioArea <- function(profile1, profile2, threshold = 1) {
+
     # Get the total area associated to each profile
     area1 <- sum(profile1, na.rm = TRUE)
     area2 <- sum(profile2, na.rm = TRUE)
-    
+
     # Get the ratio between area1 and area2
     minimum <- min(area1, area2)
     if (minimum > 0  && threshold <= minimum){
         ratio <- area1 / area2
     }else {
-        ratio <- NA
+        ratio <- as.numeric(NA)
     }
-    
+
     return(ratio)
 }
 
@@ -46,20 +46,20 @@ ratioArea <- function(profile1, profile2, threshold = 1){
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioMaxMax <- function(profile1, profile2, threshold = 1){
-    
+ratioMaxMax <- function(profile1, profile2, threshold = 1) {
+
     # Get the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
     max2 <- max(profile2, na.rm = TRUE)
-    
+
     # Get the ratio between max1 and max2
     minimum <- min(max1, max2)
     if (minimum > 0 && threshold <= minimum){
         ratio <- max1/max2
     }else {
-        ratio <- NA
+        ratio <- as.numeric(NA)
     }
-    
+
     return(ratio)
 }
 
@@ -88,34 +88,33 @@ diffPosMax <- function(profile1,
                        profile2, 
                        threshold = 1, 
                        thresholdDist = 100, 
-                       tolerance = 0.01){
-    
+                       tolerance = 0.01) {
+
     # The profile1 and profile2 arguments are numeric vectors. 
     # If not, NA is returned. 
-    if (!is.vector(profile1) || 
+    if (!is.vector(profile1)      || 
             !is.numeric(profile1) || 
-            !is.vector(profile2) || 
+            !is.vector(profile2)  || 
             !is.numeric(profile2) ||
-            all(is.na(profile1)) ||
+            all(is.na(profile1))  ||
             all(is.na(profile2))) {
-        return(NA)
+        return(as.numeric(NA))
     }
-    
+
     # Get the position of the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
     max2 <- max(profile2, na.rm = TRUE)
-    
+
     tolerance_multiple <- 1 - tolerance
     toleranceMax1 <- tolerance_multiple * max1
     toleranceMax2 <- tolerance_multiple * max2
-    
+
     posMax1 <- which(profile1 >= toleranceMax1)
     posMax2 <- which(profile2 >= toleranceMax2)
-    
+
     # Get the difference between posMax1 and posMax2
     minimum = min(posMax1, posMax2)
-    # The metric is only calculated if the minimal peak value is
-    # respected
+    # The metric is only calculated if the minimal peak value is respected
     if ((minimum > 0) && (threshold <= min(max1, max2))) {
         if (length(posMax1) == 1 && length(posMax2) == 1) {
             diff <- posMax1-posMax2    
@@ -129,13 +128,13 @@ diffPosMax <- function(profile1,
                 median2 <- median(posMax2)
                 diff <- median1 - median2
             } else {
-                diff <- NA
+                diff <- as.numeric(NA)
             }
         }
     } else {
-        diff <- NA
+        diff <- as.numeric(NA)
     }
-    
+
     return(diff)
 }
 
@@ -155,22 +154,55 @@ diffPosMax <- function(profile1,
 #   The calculated ratio or NA if threshold is not respected.
 #
 ratioIntersect <- function(profile1, profile2, threshold = 1) {
-    
+
     # Get the area of the intersection (min of both curves for each position)
     intersect <- sum(unlist(lapply(1:length(profile1), 
                                 function(x) min(profile1[x], profile2[x]))), 
                     na.rm = TRUE)
-    
+
     # Get the total area covered by both curves
     totalArea <- sum(profile1, na.rm = TRUE) +
         sum(profile2, na.rm = TRUE) - intersect
- 
+
     # Get the ratio between intersect and totArea
-    if (totalArea > 0 && threshold <= totalArea){
+    if (totalArea > 0 && threshold <= totalArea) {
         ratio <- intersect/totalArea
     }else {
-        ratio <- NA
+        ratio <- as.numeric(NA)
     }
 
     return(ratio)
+}
+
+# Calculate and return the Spearman's rho statistic of two profiles. If there 
+# is not complete element pairs between the profiles.
+#
+# Input:   
+#   profile1:    a first curve/vector containing depths. Each position is 
+#                associated to a position in particular, which is assumed.
+#   profile2:    a second curve/vector containing depths. Each position is 
+#                associated to a position in particular, which is assumed.
+#   threshold:   the minimum standard deviation accepted to calculate 
+#                the Spearman's rho statistic.
+#
+# Output: 
+#   The calculated Spearman's rho statistic or NA when no complete element pair
+#   is present between the two profiles or when one of the profile has a  
+#   standard deviation inferior to threshold.
+#
+spearmanCorr <- function(profile1, profile2, threshold = 1e-8) {
+
+    # Validate that each profile has at least one complete element pair
+    # and that the standard deviation of each profile is superior to threshold
+    if (sum(complete.cases(profile1, profile2)) == 0  || 
+        (sd(profile1, na.rm = TRUE) < threshold)      ||  
+        (sd(profile2, na.rm = TRUE) < threshold))  {
+        correlation <- as.numeric(NA)
+    } else {
+        # Spearman correlation
+        correlation <- cor(x=profile1, y=profile2, use="complete.obs", 
+                       method="spearman")
+    }
+
+    return(correlation)
 }

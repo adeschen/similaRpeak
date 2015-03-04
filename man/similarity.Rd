@@ -11,7 +11,8 @@
     \code{list} of all similarity metrics: the ratio of the maximum values, 
     the ratio of the areas, the ratio between the intersection area and the 
     total area (for normalized and non-normalized profiles), the difference 
-    between two profiles maximal peaks positions.
+    between two profiles maximal peaks positions and the Spearman's rho 
+    statistic.
 }
 
 \usage{
@@ -24,7 +25,8 @@
         ratioNormalizedIntersectThreshold=1,
         diffPosMaxThresholdMinValue=1, 
         diffPosMaxThresholdMaxDiff=100, 
-        diffPosMaxTolerance=0.01)
+        diffPosMaxTolerance=0.01,
+        spearmanCorrSDThreashold=1e-8)
 }
 
 \arguments{
@@ -61,6 +63,9 @@
     \item{diffPosMaxTolerance}{ The maximum of variation accepted 
         on the maximum value to consider a position as a peak position. The 
         value can be between 0 and 1. Default=0.01.}
+        
+    \item{spearmanCorrSDThreashold}{ The minimum standard deviation accepted 
+        on both profiles to calculate the metric. Default=1e-8.}
 }
 
 \details{
@@ -116,10 +121,13 @@
             \item RATIO_INTERSECT: The ratio between the intersection area and 
                         the total area. \code{NA} if minimal threshold is 
                         not respected.
-        \item RATIO_NORMALIZED_INTERSECT: The ratio between the intersection 
+            \item RATIO_NORMALIZED_INTERSECT: The ratio between the intersection 
                         area and the total area of normalized profiles. 
-                        \code{NA} if minimal threshold is 
-                        not respected.                         
+                        \code{NA} if minimal threshold is not respected.
+            \item SPEARMAN_CORRELATION: The Spearman's rho statistic between 
+                        profiles. \code{NA} if minimal threshold is 
+                        not respected or when no complete element pair is 
+                        present between both profiles.
         }
   }
 }
@@ -147,7 +155,8 @@ similarity(profile1, profile2,
                         ratioNormalizedIntersectThreshold=2.2,
                         diffPosMaxThresholdMinValue=2, 
                         diffPosMaxThresholdMaxDiff=130, 
-                        diffPosMaxTolerance=0.03)
+                        diffPosMaxTolerance=0.03,
+                        spearmanCorrSDThreashold=1e-3)
 
 }
 \seealso{
