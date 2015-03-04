@@ -33,20 +33,21 @@
         \item{\code{ratioMaxMaxThreshold}}{ The minimum denominator accepted 
                         to calculate the ratio of the maximum values between 
                         both profiles. Default = 1.}
-        \item{\code{ratioIntersectThreshold}}{ The minimum denominator accepted 
-                        to calculate the ratio of the intersection area of both 
-                        profiles and the total area. Default = 1.}
-        \item{\code{ratioIntersectThreshold}}{ The minimum denominator accepted 
-                        to calculate the ratio of the intersection area of both 
-                        profiles and the total area for normalized profiles. 
+        \item{\code{ratioIntersectThreshold}}{ The minimum denominator 
+                        accepted to calculate the ratio of the intersection 
+                        area of both profiles and the total area. 
                         Default = 1.}
-        \item{\code{diffPosMaxThresholdMinValue}}{ The minimum peak accepted to 
-                        calculate the metric. Default = 1.}
-        \item{\code{diffPosMaxThresholdMaxDiff}}{ The maximum distance accepted 
-                        between 2 peaks positions in one profile to calculate 
-                        the metric. Default=100.}
-        \item{\code{diffPosMaxTolerance}}{The maximum variation accepted on the 
-                        maximum value to consider a position as a peak 
+        \item{\code{ratioIntersectThreshold}}{ The minimum denominator 
+                        accepted to calculate the ratio of the intersection 
+                        area of both profiles and the total area for 
+                        normalized profiles. Default = 1.}
+        \item{\code{diffPosMaxThresholdMinValue}}{ The minimum peak accepted 
+                        to calculate the metric. Default = 1.}
+        \item{\code{diffPosMaxThresholdMaxDiff}}{ The maximum distance 
+                        accepted between 2 peaks positions in one profile to 
+                        calculate the metric. Default=100.}
+        \item{\code{diffPosMaxTolerance}}{The maximum variation accepted on 
+                        the maximum value to consider a position as a peak 
                         position. Default=0.01.}
         \item{\code{spearmanCorrSDThreashold}}{The minimum standard deviation
                         accepted on both profiles to consider to calculate 
@@ -57,19 +58,21 @@
 }
 
 \details{
-    The \code{MetricFactory} object is inspired from the factory design pattern. 
-    Only one instance of \code{MetricFactory} object is necessary to calculate 
-    all available metrics for different profiles, as long as the thresholds set 
-    in the \code{MetricFactory} instance are appropriate for the calculation. 
-    The thresholds are set during the \code{MetricFactory} object creation and 
-    cannot be changed afterwards. If different thresholds are needed, a new 
-    \code{MetricFactory} object, with the new thresholds, must be instantiated.
+    The \code{MetricFactory} object is inspired from the factory design 
+    pattern. Only one instance of \code{MetricFactory} object is necessary to 
+    calculate all available metrics for different profiles, as long as the 
+    thresholds set in the \code{MetricFactory} instance are appropriate for 
+    the calculation. The thresholds are set during the \code{MetricFactory} 
+    object creation and cannot be changed afterwards. If different thresholds 
+    are needed, a new \code{MetricFactory} object, with the new thresholds, 
+    must be instantiated.
 }
 
 \value{
     \code{MetricFactory$new} returns a \code{MetricFactory} object which 
-    contains the information about the thresholds used to calculate each metric. 
-    It can be used, as many times needed, to calculate the specified metrics. 
+    contains the information about the thresholds used to calculate each 
+    metric. It can be used, as many times needed, to calculate the specified 
+    metrics. 
 }
 
 \author{

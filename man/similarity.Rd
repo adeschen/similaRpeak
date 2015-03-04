@@ -37,8 +37,8 @@
         profile for each position of the selected region.}
 
     \item{ratioAreaThreshold}{ The minimum denominator accepted 
-        to calculate the ratio of the area between both profiles. The value has 
-        to be positive. Default = 1.}
+        to calculate the ratio of the area between both profiles. The value 
+        has to be positive. Default = 1.}
 
     \item{ratioMaxMaxThreshold}{ The minimum denominator accepted 
         to calculate the ratio of the maximal peaks values between both 
@@ -50,7 +50,8 @@
     
     \item{ratioNormalizedIntersectThreshold}{ The minimum denominator accepted 
         to calculate the ratio of the intersection area of both normalized 
-        profiles over the total area. The value has to be positive. Default = 1.
+        profiles over the total area. The value has to be positive. 
+        Default = 1.
         }
     
     \item{diffPosMaxThresholdMinValue}{ The minimum peak accepted to calculate 
@@ -121,9 +122,10 @@
             \item RATIO_INTERSECT: The ratio between the intersection area and 
                         the total area. \code{NA} if minimal threshold is 
                         not respected.
-            \item RATIO_NORMALIZED_INTERSECT: The ratio between the intersection 
-                        area and the total area of normalized profiles. 
-                        \code{NA} if minimal threshold is not respected.
+            \item RATIO_NORMALIZED_INTERSECT: The ratio between the 
+                        intersection area and the total area of normalized 
+                        profiles. \code{NA} if minimal threshold is not 
+                        respected.
             \item SPEARMAN_CORRELATION: The Spearman's rho statistic between 
                         profiles. \code{NA} if minimal threshold is 
                         not respected or when no complete element pair is 
@@ -137,17 +139,17 @@
     <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca> 
   
     Elsa Bernatchez
-    <elsa.bernatchez.1@ulaval.ca>
 }
 
 \examples{
-# Example with vectors directly used as inputs
-similarity(c(3,59,6,24,65,34,15,4,53,22),
-                    c(15,9,46,44,9,39,27,34,34,4))
-
-# Example with variables used as inputs and customised threshold
+# Defining two CHiP-Seq profiles 
 profile1<-c(3,59,6,24,65,34,15,4,53,22,21,12,11)
 profile2<-c(15,9,46,44,9,39,27,34,34,4,3,4,2)
+
+# Example usign default thresholds
+similarity(profile1, profile2)
+
+# Example using customised thresholds
 similarity(profile1, profile2, 
                         ratioAreaThreshold=5, 
                         ratioMaxMaxThreshold=5, 
@@ -161,8 +163,9 @@ similarity(profile1, profile2,
 }
 \seealso{
     \itemize{
-        \item \code{\link{MetricFactory}} for using a interface to calculate all 
-                                available metrics separately.
+        \item \code{\link{MetricFactory}} for using a interface to calculate 
+                                all available metrics separately.
+        \item \code{\link[=../doc/similaRpeak.html]{similarRpeak vignette}}}
     }
 }
 \keyword{similarity}
