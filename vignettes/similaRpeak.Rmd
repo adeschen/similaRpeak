@@ -755,15 +755,16 @@ remain the same:
 
 ```{r factoryDemo, collapse=TRUE }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                    profile1=H3K27ac_chr2_profile, 
-                                    profile2=H3K4me1_chr2_profile)
+                        profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
 
 ratio_max_max
 
 ratio_normalized_intersect <- factory$createMetric(
-                                    metricType="RATIO_NORMALIZED_INTERSECT", 
-                                    profile1=H3K27ac_chr2_profile, 
-                                    profile2=H3K4me1_chr2_profile)
+                        metricType="RATIO_NORMALIZED_INTERSECT",
+                        profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
+
 ratio_normalized_intersect
 ```
 
