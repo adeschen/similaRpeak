@@ -155,6 +155,9 @@ per millions (RPM).
 data("demo_profiles")
 str(H3K27ac_chr19_profile, vec.len = 15)
 str(H3K4me1_chr19_profile, vec.len = 15)
+
+data("demoProfiles")
+str(demoProfiles)
 ```
 
 
@@ -170,44 +173,44 @@ profiles.
 par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
-plot(H3K27ac_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
         main="chr2:70360770-70361098")
 par(new=TRUE)
-plot(H3K4me1_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(250, 17, "RATIO_AREA=1.03", cex=1.5, col="red")
 
-plot(H3K27ac_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
         main="chr8:43092918-43093442")
 par(new=TRUE)
-plot(H3K4me1_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(375, 1000, "RATIO_AREA=0.06", cex=1.5, col="red")
 
-plot(H3K27ac_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
         main="chr3:73159773-73160145")
 par(new=TRUE)
-plot(H3K4me1_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(285, 80, "RATIO_AREA=2.23", cex=1.5, col="red")
 
-plot(H3K27ac_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
         main="chr19:27739373-27739767")
 par(new=TRUE)
-plot(H3K4me1_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
