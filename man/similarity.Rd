@@ -142,14 +142,14 @@
 }
 
 \examples{
-# Defining two CHiP-Seq profiles 
+## Defining two CHiP-Seq profiles 
 profile1<-c(3,59,6,24,65,34,15,4,53,22,21,12,11)
 profile2<-c(15,9,46,44,9,39,27,34,34,4,3,4,2)
 
-# Example usign default thresholds
+## Example usign default thresholds
 similarity(profile1, profile2)
 
-# Example using customised thresholds
+## Example using customised thresholds
 similarity(profile1, profile2, 
                         ratioAreaThreshold=5, 
                         ratioMaxMaxThreshold=5, 
@@ -160,14 +160,44 @@ similarity(profile1, profile2,
                         diffPosMaxTolerance=0.03,
                         spearmanCorrSDThreashold=1e-3)
 
-# You can refer to the vignette to see exemples using ChIP-Seq profiles
-# extractedfrom the Encyclopedia of DNA Elements (ENCODE) data.
+## Example using ChIP-Seq profiles of H3K27ac (DCC accession: ENCFF000ASG) 
+## and H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA  
+## Elements (ENCODE) for the region 
+data(demoProfiles)
+
+## Visualize ChIP-Seq profiles 
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac,
+        type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
+        main="chr2:70360770-70361098")
+par(new=TRUE)
+plot(demoProfiles$chr2.70360770.70361098$H3K4me1,
+        type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
+legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+
+# Calculate metrics
+similarity(demoProfiles$chr2.70360770.70361098$H3K4me1, 
+            demoProfiles$chr2.70360770.70361098$H3K27ac, 
+            ratioAreaThreshold=15, 
+            ratioMaxMaxThreshold=5, 
+            ratioIntersectThreshold=12,
+            ratioNormalizedIntersectThreshold=2.2,
+            diffPosMaxThresholdMinValue=2, 
+            diffPosMaxThresholdMaxDiff=130, 
+            diffPosMaxTolerance=0.03,
+            spearmanCorrSDThreashold=0.1)
+
+
+## You can refer to the vignette to see more exemples using ChIP-Seq profiles
+## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
 }
 \seealso{
     \itemize{
-        \item \code{\link{MetricFactory}} for using a interface to calculate 
-                                all available metrics separately.
-        \item \code{\link[=../doc/similaRpeak.html]{similarRpeak vignette}}
+        \item \code{\link{MetricFactory}} {for using a interface to calculate 
+                                all available metrics separately.}
+        \item \code{\link{demoProfiles}} {for more informations about ChIP-Seq
+                profiles present in the demoProfiles data.}
     }
 }
 \keyword{similarity}

@@ -71,6 +71,29 @@ reads per million (RPM) for each position of the selected region are needed.
 Both `vector` should have the same length and should not contain any negative 
 value.
 
+ChIP-seq combines chromatin immunoprecipitation (ChIP) with massively parallel 
+DNA sequencing to identify the binding sites of DNA-associated proteins. For a
+specific region, the read count of aligned sequences at each position of the 
+region is used to generate the ChIP-Seq profile for the region.
+
+From a BAM file where aligned sequences are stored, the coverage for a specific
+region can be extracted.
+
+```{r bam_extract} 
+suppressMessages(library(GenomicAlignments))
+suppressMessages(library(rtracklayer))
+
+bamFile <- system.file("extdata/align1.bam", package = "similaRpeak")
+regions <- system.file("extdata/list1.bed", package = "similaRpeak")
+regions <- import(regions)
+param <- ScanBamParam(which = regions)
+alignments <- readGAlignments(bamFile, param = param)
+coverages <- coverage(alignments)
+coverages <- coverages[regions]
+coverages <- lapply(coverages, as.numeric)
+```
+
+
 ### Threshold variables
 
 When the metric includes a ratio calculation, a threshold for the denominator 
@@ -151,7 +174,7 @@ ChIP-Seq profiles of the enhancers H3K27ac and H3K4me1 for 4 specifics regions
 are in reads per million (RPM).
 
 ```{r demo_profiles_loading, collapse=T}
-data("demoProfiles")
+data(demoProfiles)
 str(demoProfiles)
 ```
 
@@ -484,10 +507,10 @@ similar profiles.
 
 ## RATIO_NORMALIZED_INTERSECT Metric
 
-The **RATIO_NORMALIZED_INTERSECT** metric is the ratio between the intersection 
-area and the total area of the two normalized profiles.  The profiles are 
-normalized by divinding them by their average value (total area of the profile 
-divided by profile lenght). `NA` if minimal area threshold 
+The **RATIO_NORMALIZED_INTERSECT** metric is the ratio between the 
+intersection area and the total area of the two normalized profiles.  The 
+profiles are normalized by divinding them by their average value (total area 
+of the profile divided by profile lenght). `NA` if minimal area threshold 
 (`ratioNormalizedIntersectThreshold` parameter) is not respected for 
 the intersection area.
 

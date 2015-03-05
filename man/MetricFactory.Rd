@@ -17,14 +17,14 @@
     \describe{
         \item{}{
             \code{MetricFactory$new(
-    ratioAreaThreshold=1, 
-    ratioMaxMaxThreshold=1, 
-    ratioIntersectThreshold=1,
-    ratioNormalizedIntersectThreshold=1,
-    diffPosMaxThresholdMinValue=1, 
-    diffPosMaxThresholdMaxDiff=100, 
-    diffPosMaxTolerance=0.01,
-    spearmanCorrSDThreashold=1e-8)}:
+                    ratioAreaThreshold=1, 
+                    ratioMaxMaxThreshold=1, 
+                    ratioIntersectThreshold=1,
+                    ratioNormalizedIntersectThreshold=1,
+                    diffPosMaxThresholdMinValue=1, 
+                    diffPosMaxThresholdMaxDiff=100, 
+                    diffPosMaxTolerance=0.01,
+                    spearmanCorrSDThreashold=1e-8)}:
     Create a MetricFactory object.
     \describe{
         \item{\code{ratioAreaThreshold}}{ The minimum denominator accepted to 
@@ -81,36 +81,58 @@
 }
 
 \examples{
-# Initialized the factory object
+## Initialized the factory object
 factory = MetricFactory$new(ratioAreaThreshold=100,
                             ratioIntersectThreshold=20,
                             diffPosMaxTolerance=0.04)
 
-# Use the factory object to calculate each metric separatly
+## Define 2 ChIP-Seq profiles
+profile1=c(1,59,6,24,65,34,15,4,53,22)
+profile2=c(15,9,46,44,9,39,27,34,34,4)
+
+## Use the factory object to calculate each metric separatly
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                profile2=c(15,9,46,44,9,39,27,34,34,4))
+                                profile1, profile2)
 ratio_max_max
 
-ratio_area <- factory$createMetric(metricType="RATIO_AREA", 
-                                profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                profile2=c(15,9,46,44,9,39,27,34,34,4))
-ratio_area
-
-ratio_intersect <- factory$createMetric(metricType="RATIO_INTERSECT", 
-                                profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                profile2=c(15,9,46,44,9,39,27,34,34,4))
-ratio_intersect
-
-diff_pos_max <- factory$createMetric(metricType="DIFF_POS_MAX", 
-                                profile1=c(1,59,6,24,65,34,15,4,53,22), 
-                                profile2=c(15,9,46,44,9,39,27,34,34,4))
+diff_pos_max <- factory$createMetric(metric="DIFF_POS_MAX", profile1, profile2)
 diff_pos_max
+
+## Example using ChIP-Seq profiles of H3K27ac (DCC accession: ENCFF000ASG) 
+## and H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA  
+## Elements (ENCODE) for the region 
+data(demoProfiles)
+
+## Visualize ChIP-Seq profiles 
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac,
+        type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
+        main="chr3:73159773-73160145")
+par(new=TRUE)
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1,
+        type="l", col="darkgreen", xlab="Position", 
+        ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
+legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
+        col=c("blue","darkgreen"), lty=1)
+
+## Calculate metrics using factory object 
+
+ratio_norm_intersect <- factory$createMetric(metricType = 
+                        "RATIO_NORMALIZED_INTERSECT", 
+                        profile1=demoProfiles$chr3.73159773.73160145$H3K4me1, 
+                        profile2=demoProfiles$chr3.73159773.73160145$H3K27ac)
+ratio_norm_intersect
+
+ratio_area <- factory$createMetric(metricType="RATIO_AREA", 
+                        profile1=demoProfiles$chr3.73159773.73160145$H3K4me1, 
+                        profile2=demoProfiles$chr3.73159773.73160145$H3K27ac)
+ratio_area
 }
 \seealso{
     \itemize{
         \item \code{\link{similarity}} for calculating all available metrics 
                             between two ChIP-Seq profiles.
+        \item \code{\link{demoProfiles}} {for more informations about ChIP-Seq
+                profiles present in the demoProfiles data.}
     }
 }
 \keyword{MetricFactory}
