@@ -160,12 +160,14 @@ similarity(profile1, profile2,
                         diffPosMaxTolerance=0.03,
                         spearmanCorrSDThreashold=1e-3)
 
+# You can refer to the vignette to see exemples using ChIP-Seq profiles
+# extractedfrom the Encyclopedia of DNA Elements (ENCODE) data.
 }
 \seealso{
     \itemize{
         \item \code{\link{MetricFactory}} for using a interface to calculate 
                                 all available metrics separately.
-        \item \code{\link[=../doc/similaRpeak.html]{similarRpeak vignette}}}
+        \item \code{\link[=../doc/similaRpeak.html]{similarRpeak vignette}}
     }
 }
 \keyword{similarity}

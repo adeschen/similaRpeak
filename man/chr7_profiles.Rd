@@ -15,7 +15,7 @@ and H3K4me1 (for demonstration purpose)
   Two vectors of length 924.
   \describe{
     \item{\code{H3K27ac_chr7_profile}}{a numeric vector containing the
-                profiles values related to the  enhancer H3K27ac, as reported 
+                profiles values related to the enhancer H3K27ac, as reported 
                 in reads per million (RPM), for the region 
                 chr7:61968807-61969730. The first entry of the vector is for
                 position chr7:61968807 while the last entry is for position
