@@ -572,11 +572,11 @@ profiles.
 par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
-plot(H3K27ac_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
         main="chr2:70360770-70361098")
 par(new=TRUE)
-plot(H3K4me1_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -623,16 +623,20 @@ text(270, 192, "=0.62", cex=1.5, col="red")
 ```
 
 ```{r spearman_correlation_calculation, collapse=TRUE}
-metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                      demoProfiles$chr2.70360770.70361098$H3K4me1)
 metrics$metric$SPEARMAN_CORRELATION
 
-metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics <- similarity(demoProfiles$chr8.43092918.43093442$H3K27ac, 
+                      demoProfiles$chr8.43092918.43093442$H3K4me1)
 metrics$metric$SPEARMAN_CORRELATION
 
-metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                      demoProfiles$chr3.73159773.73160145$H3K4me1)
 metrics$metric$SPEARMAN_CORRELATION
 
-metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac, 
+                      demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$SPEARMAN_CORRELATION
 ```
 
@@ -755,15 +759,16 @@ remain the same:
 
 ```{r factoryDemo, collapse=TRUE }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                                    profile1=H3K27ac_chr2_profile, 
-                                    profile2=H3K4me1_chr2_profile)
+                    profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                    profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
 
 ratio_max_max
 
 ratio_normalized_intersect <- factory$createMetric(
-                                    metricType="RATIO_NORMALIZED_INTERSECT", 
-                                    profile1=H3K27ac_chr2_profile, 
-                                    profile2=H3K4me1_chr2_profile)
+                    metricType="RATIO_NORMALIZED_INTERSECT", 
+                    profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                    profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
+
 ratio_normalized_intersect
 ```
 
