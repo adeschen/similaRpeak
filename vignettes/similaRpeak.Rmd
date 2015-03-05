@@ -146,16 +146,11 @@ post-transcriptional modifications linked to highly active enhancers H3K27ac
 (DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) from 
 the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
 
-Here is how to load the `demo_profiles` used in following sections. The 
-ChIP-Seq profiles of the enhancers H3K27ac and H3K4me1 for the region are 
-shown for the region chr19:27739373-27739767. The profiles are in reads 
-per millions (RPM).
+Here is how to load the `demoProfiles` data used in following sections. The 
+ChIP-Seq profiles of the enhancers H3K27ac and H3K4me1 for 4 specifics regions
+are in reads per million (RPM).
 
 ```{r demo_profiles_loading, collapse=T}
-data("demo_profiles")
-str(H3K27ac_chr19_profile, vec.len = 15)
-str(H3K4me1_chr19_profile, vec.len = 15)
-
 data("demoProfiles")
 str(demoProfiles)
 ```
@@ -219,16 +214,20 @@ text(275, 225, "RATIO_AREA=0.12", cex=1.5, col="red")
 ```
 
 ```{r ratio_area_calculation, collapse=T}
-metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        demoProfiles$chr2.70360770.70361098$H3K4me1)
 metrics$metric$RATIO_AREA
 
-metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics <- similarity(demoProfiles$chr8.43092918.43093442$H3K27ac, 
+                        demoProfiles$chr8.43092918.43093442$H3K4me1)
 metrics$metric$RATIO_AREA
 
-metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                        demoProfiles$chr3.73159773.73160145$H3K4me1)
 metrics$metric$RATIO_AREA
 
-metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac, 
+                        demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$RATIO_AREA
 ```
 
@@ -258,44 +257,44 @@ is not respected, it is assumed that no peak is present in the profile and
 par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
-plot(H3K27ac_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
         main="chr2:70360770-70361098")
 par(new=TRUE)
-plot(H3K4me1_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(250, 17, "DIFF_POS_MAX=-20", cex=1.5, col="red")
 
-plot(H3K27ac_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
         main="chr8:43092918-43093442")
 par(new=TRUE)
-plot(H3K4me1_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(375, 1000, "DIFF_POS_MAX=-0.5", cex=1.5, col="red")
 
-plot(H3K27ac_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
         main="chr3:73159773-73160145")
 par(new=TRUE)
-plot(H3K4me1_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(285, 80, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
 
-plot(H3K27ac_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
         main="chr19:27739373-27739767")
 par(new=TRUE)
-plot(H3K4me1_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -304,16 +303,20 @@ text(275, 225, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
 ```
 
 ```{r diff_pos_max_calculation, collapse=T}
-metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        demoProfiles$chr2.70360770.70361098$H3K4me1)
 metrics$metric$DIFF_POS_MAX
 
-metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics <- similarity(demoProfiles$chr8.43092918.43093442$H3K27ac, 
+                        demoProfiles$chr8.43092918.43093442$H3K4me1)
 metrics$metric$DIFF_POS_MAX
 
-metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                        demoProfiles$chr3.73159773.73160145$H3K4me1)
 metrics$metric$DIFF_POS_MAX
 
-metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac, 
+                        demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$DIFF_POS_MAX
 ```
 
@@ -333,44 +336,44 @@ profiles.
 par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
-plot(H3K27ac_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
         main="chr2:70360770-70361098")
 par(new=TRUE)
-plot(H3K4me1_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(250, 17, "RATIO_MAX_MAX=0.95", cex=1.5, col="red")
 
-plot(H3K27ac_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
         main="chr8:43092918-43093442")
 par(new=TRUE)
-plot(H3K4me1_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(380, 1000, "RATIO_MAX_MAX=0.06", cex=1.5, col="red")
 
-plot(H3K27ac_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
         main="chr3:73159773-73160145")
 par(new=TRUE)
-plot(H3K4me1_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(290, 80, "RATIO_MAX_MAX=2.5", cex=1.5, col="red")
 
-plot(H3K27ac_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
         main="chr19:27739373-27739767")
 par(new=TRUE)
-plot(H3K4me1_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -379,16 +382,20 @@ text(280, 225, "RATIO_MAX_MAX=0.12", cex=1.5, col="red")
 ```
 
 ```{r ratio_max_max_calculation, collapse=T}
-metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        demoProfiles$chr2.70360770.70361098$H3K4me1)
 metrics$metric$RATIO_MAX_MAX
 
-metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics <- similarity(demoProfiles$chr8.43092918.43093442$H3K27ac, 
+                        demoProfiles$chr8.43092918.43093442$H3K4me1)
 metrics$metric$RATIO_MAX_MAX
 
-metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                        demoProfiles$chr3.73159773.73160145$H3K4me1)
 metrics$metric$RATIO_MAX_MAX
 
-metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac, 
+                        demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$RATIO_MAX_MAX
 ```
 
@@ -407,33 +414,33 @@ area.
 par(mar=c(6,4,2,2))
 par(mfrow=c(2,2)) 
 
-plot(H3K27ac_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 25),
         main="chr2:70360770-70361098")
 par(new=TRUE)
-plot(H3K4me1_chr2_profile,
+plot(demoProfiles$chr2.70360770.70361098$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 25))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(242, 17, "RATIO_INTERSECT=0.63", cex=1.5, col="red")
 
-plot(H3K27ac_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
         main="chr8:43092918-43093442")
 par(new=TRUE)
-plot(H3K4me1_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
         col=c("blue","darkgreen"), lty=1)
 text(375, 1000, "RATIO_INTERSECT=0.06", cex=1.5, col="red")
 
-plot(H3K27ac_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
         main="chr3:73159773-73160145")
 par(new=TRUE)
-plot(H3K4me1_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -441,11 +448,11 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(288, 87, "RATIO_INTERSECT=", cex=1.5, col="red")
 text(288, 75, "0.43", cex=1.5, col="red")
 
-plot(H3K27ac_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
         main="chr19:27739373-27739767")
 par(new=TRUE)
-plot(H3K4me1_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage in reads per million (RPM)",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -454,16 +461,20 @@ text(275, 225, "RATIO_INTERSECT=0.12", cex=1.5, col="red")
 ```
 
 ```{r ratio_intersect_calculation, collapse=T}
-metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                      demoProfiles$chr2.70360770.70361098$H3K4me1)
 metrics$metric$RATIO_INTERSECT
 
-metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics <- similarity(demoProfiles$chr8.43092918.43093442$H3K27ac, 
+                      demoProfiles$chr8.43092918.43093442$H3K4me1)
 metrics$metric$RATIO_INTERSECT
 
-metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                      demoProfiles$chr3.73159773.73160145$H3K4me1)
 metrics$metric$RATIO_INTERSECT
 
-metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac, 
+                      demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$RATIO_INTERSECT
 ```
 
@@ -485,13 +496,15 @@ the intersection area.
 par(mar = c(6,4,2,2))
 par(mfrow = c(2,2)) 
 
-plot(H3K27ac_chr2_profile*length(H3K27ac_chr2_profile)/
-        sum(H3K27ac_chr2_profile, na.rm=TRUE),
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac*
+        length(demoProfiles$chr2.70360770.70361098$H3K27ac)/
+        sum(demoProfiles$chr2.70360770.70361098$H3K27ac, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 3),
         main="chr2:70360770-70361098")
 par(new=TRUE)
-plot(H3K4me1_chr2_profile*length(H3K4me1_chr2_profile)/
-        sum(H3K4me1_chr2_profile, na.rm=TRUE),
+plot(demoProfiles$chr2.70360770.70361098$H3K27ac*
+        length(demoProfiles$chr2.70360770.70361098$H3K27ac)/
+        sum(demoProfiles$chr2.70360770.70361098$H3K27ac, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 3))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -499,13 +512,15 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(245, 2, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(245, 1.75, "INTERSECT=0.63", cex=1.5, col="red")
 
-plot(H3K27ac_chr8_profile*length(H3K27ac_chr8_profile)/
-        sum(H3K27ac_chr8_profile, na.rm=TRUE),
+plot(demoProfiles$chr8.43092918.43093442$H3K27ac*
+        length(demoProfiles$chr8.43092918.43093442$H3K27ac)/
+        sum(demoProfiles$chr8.43092918.43093442$H3K27ac, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr8:43092918-43093442")
 par(new=TRUE)
-plot(H3K4me1_chr8_profile*length(H3K4me1_chr8_profile)/
-         sum(H3K4me1_chr8_profile, na.rm=TRUE),
+plot(demoProfiles$chr8.43092918.43093442$H3K4me1*
+        length(demoProfiles$chr8.43092918.43093442$H3K4me1)/
+        sum(demoProfiles$chr8.43092918.43093442$H3K4me1, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -513,13 +528,15 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(370, 8, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(370, 7, "INTERSECT=0.89", cex=1.5, col="red")
 
-plot(H3K27ac_chr3_profile*length(H3K27ac_chr3_profile)/
-        sum(H3K27ac_chr3_profile, na.rm=TRUE),
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac*
+        length(demoProfiles$chr3.73159773.73160145$H3K27ac)/
+        sum(demoProfiles$chr3.73159773.73160145$H3K27ac, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 8),
         main="chr3:73159773-73160145")
 par(new=TRUE)
-plot(H3K4me1_chr3_profile*length(H3K4me1_chr3_profile)/
-        sum(H3K4me1_chr3_profile, na.rm=TRUE),
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1*
+        length(demoProfiles$chr3.73159773.73160145$H3K4me)/
+        sum(demoProfiles$chr3.73159773.73160145$H3K4me, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 8))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -527,13 +544,15 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(288, 5.5, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(288, 4, "INTERSECT=0.78", cex=1.5, col="red")
 
-plot(H3K27ac_chr19_profile*length(H3K27ac_chr19_profile)/
-         sum(H3K27ac_chr19_profile, na.rm=TRUE),
+plot(demoProfiles$chr19.27739373.27739767$H3K27ac*
+         length(demoProfiles$chr19.27739373.27739767$H3K27ac)/
+         sum(demoProfiles$chr19.27739373.27739767$H3K27ac, na.rm=TRUE),
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 12),
         main="chr19:27739373-27739767")
 par(new=TRUE)
-plot(H3K4me1_chr19_profile*length(H3K4me1_chr19_profile)/
-        sum(H3K4me1_chr19_profile, na.rm=TRUE),
+plot(demoProfiles$chr19.27739373.27739767$H3K4me1*
+        length(demoProfiles$chr19.27739373.27739767$H3K4me1)/
+        sum(demoProfiles$chr19.27739373.27739767$H3K4me1, na.rm=TRUE),
         type="l", col="darkgreen", xlab="Position", 
         ylab="Normalized Coverage (Coverage/Mean Coverage)",  ylim=c(0, 12))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -543,16 +562,20 @@ text(275, 6, "INTERSECT=0.84", cex=1.5, col="red")
 ```
 
 ```{r ratio_normalized_intersect_calculation, collapse=TRUE}
-metrics <- similarity(H3K27ac_chr2_profile, H3K4me1_chr2_profile)
+metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                      demoProfiles$chr2.70360770.70361098$H3K4me1)
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 
-metrics <- similarity(H3K27ac_chr8_profile, H3K4me1_chr8_profile)
+metrics <- similarity(demoProfiles$chr8.43092918.43093442$H3K27ac, 
+                      demoProfiles$chr8.43092918.43093442$H3K4me1)
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 
-metrics <- similarity(H3K27ac_chr3_profile, H3K4me1_chr3_profile)
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                      demoProfiles$chr3.73159773.73160145$H3K4me1)
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 
-metrics <- similarity(H3K27ac_chr19_profile, H3K4me1_chr19_profile)
+metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac, 
+                      demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 ```
 
@@ -584,11 +607,11 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(225, 17, "SPEARMAN_CORRELATION", cex=1.5, col="red")
 text(225, 14, "=0.06", cex=1.5, col="red")
 
-plot(H3K27ac_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 1500),
         main="chr8:43092918-43093442")
 par(new=TRUE)
-plot(H3K4me1_chr8_profile,
+plot(demoProfiles$chr8.43092918.43093442$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage",  ylim=c(0, 1500))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -596,11 +619,11 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(325, 1000, "SPEARMAN_CORRELATION", cex=1.5, col="red")
 text(325, 850, "=0.82", cex=1.5, col="red")
 
-plot(H3K27ac_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 125),
         main="chr3:73159773-73160145")
 par(new=TRUE)
-plot(H3K4me1_chr3_profile,
+plot(demoProfiles$chr3.73159773.73160145$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage",  ylim=c(0, 125))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
@@ -608,11 +631,11 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(288, 92, "SPEARMAN_", cex=1.5, col="red")
 text(288, 78, "CORRELATION=0.95", cex=1.5, col="red")
 
-plot(H3K27ac_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K27ac,
         type="l", col="blue", xlab="", ylab="", ylim=c(0, 350),
         main="chr19:27739373-27739767")
 par(new=TRUE)
-plot(H3K4me1_chr19_profile,
+plot(demoProfiles$chr19.27739373.27739767$H3K4me1,
         type="l", col="darkgreen", xlab="Position", 
         ylab="Coverage",  ylim=c(0, 350))
 legend("topright", c("H3K27ac","H3K4me1"), cex=1.2, 
