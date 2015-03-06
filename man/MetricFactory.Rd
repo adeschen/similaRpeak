@@ -126,6 +126,10 @@ ratio_area <- factory$createMetric(metricType="RATIO_AREA",
                         profile1=demoProfiles$chr3.73159773.73160145$H3K4me1, 
                         profile2=demoProfiles$chr3.73159773.73160145$H3K27ac)
 ratio_area
+
+
+## You can refer to the vignette to see more examples using ChIP-Seq profiles
+## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
 }
 \seealso{
     \itemize{

@@ -76,23 +76,63 @@ DNA sequencing to identify the binding sites of DNA-associated proteins. For a
 specific region, the read count of aligned sequences at each position of the 
 region is used to generate the ChIP-Seq profile for the region.
 
-From a BAM file where aligned sequences are stored, the coverage for a specific
-region can be extracted.
+Aligned sequences are usually stored in BAM files. As example, a slimmed BAM 
+file (align1.bam) is selected as well as a specific region 
+(chr1:172081530-172083529). Using BAM file and 
+region information, represented by as a `GRanges` object, the coverage for the 
+specified region is extracted using specialized Bioconductor packages. 
 
-```{r bam_extract} 
+```{r bam_extract_coverage, collapse=TRUE} 
 suppressMessages(library(GenomicAlignments))
 suppressMessages(library(rtracklayer))
+suppressMessages(library(Rsamtools))
 
-bamFile <- system.file("extdata/align1.bam", package = "similaRpeak")
-regions <- system.file("extdata/list1.bed", package = "similaRpeak")
-regions <- import(regions)
-param <- ScanBamParam(which = regions)
-alignments <- readGAlignments(bamFile, param = param)
-coverages <- coverage(alignments)
-coverages <- coverages[regions]
-coverages <- lapply(coverages, as.numeric)
+bamFile01 <- system.file("extdata/align1.bam", package = "similaRpeak")
+
+region <- GRanges(Rle(c("chr1")), IRanges(start = 172081530, end = 172083529), 
+                strand= Rle(strand(c("*"))))
+
+param <- ScanBamParam(which = region)
+
+alignments01 <- readGAlignments(bamFile01, param = param)
+
+coveragesRegion01 <- coverage(alignments01)[region]
+str(coveragesRegion01)
 ```
 
+The `coverages01` can 
+easily be transformed to a vector of numerical value to obtain the raw
+ChIP-Seq profile for the selected region.
+
+```{r iranges_to_vector, collapse=TRUE}
+coveragesRegion01 <- lapply(coveragesRegion01, as.numeric)
+str(coveragesRegion01)
+```
+
+To convert the raw coverage to reads per million (RPM), the total number of 
+reads present in the BAM file is needed to assign a weight at the `coverage` 
+function.
+
+```{r bam_count, collapse=TRUE}
+param <- ScanBamParam(flag = scanBamFlag(isUnmappedQuery=FALSE))
+count01 <- countBam(bamFile01, param = param)$records
+coveragesRPMRegion01 <- coverage(alignments01, weight=1000000/count01)[region]
+coveragesRPMRegion01 <- lapply(coveragesRPMRegion01, as.numeric)
+str(coveragesRPMRegion01)
+```
+
+The read per millions values are quite low for the `coveragesRPMRegion01` 
+because the original BAM file has been reduced in size to simplify the example.
+
+Other examples are available on the worflows section of the 
+[Bioconductor website](http://www.bioconductor.org/help/workflows/high-throughput-sequencing/ 
+"high-throughput-sequencing").
+
+Finally, the 
+[metagene package](http://bioconductor.org/packages/release/bioc/html/metagene.html)
+, available on [Bioconductor](http://bioconductor.org), can also be used to 
+generate ChIP-Seq profiles. An example is available on 
+[metagene wiki](https://github.com/CharlesJB/metagene/wiki/Extract-ChIP-Seq-profiles-using-metagene). 
 
 ### Threshold variables
 
@@ -150,14 +190,14 @@ By using the absolute value of the **DIFF_POS_MAX** metric, the definition of
 a pseudometric is formally respected. However, the respective position of the 
 maximum peak of profiles is lost.
 
-$$ \Huge |DIFF\_POS\_MAX| $$
+$$ |DIFF\_POS\_MAX| $$
 
 By using the absolute value of the logarithm of the 
 **RATIO_AREA**, **RATIO_MAX_MAX**, **RATIO_INTERSECT** and 
 **RATIO_NORMALIZED_INTERSECT** metrics, the definition of a pseudometric is 
 formally respected.
 
-$$ \Huge \log(RATIO) $$ 
+$$ |\log(RATIO)| $$ 
             
                 
   
@@ -186,6 +226,9 @@ profile (`profile1` parameter) is always divided by the second profile
 (`profile2` parameter). `NA` is returned if minimal area threshold 
 (`ratioAreaThreshold` parameter) is not respected for at least one of the 
 profiles.
+
+The **RATIO_AREA** metric can be useful to detect regions with similar 
+coverage even if the profiles are different. 
 
 ```{r ratio_area_graph, echo=FALSE, fig.width=11, fig.height=8}
 par(mar=c(6,4,2,2))
@@ -254,8 +297,6 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_AREA
 ```
 
-The **RATIO_AREA** metric can be useful to detect regions with similar 
-coverage even if the profiles are different. 
 
 ## DIFF_POS_MAX Metric
 
@@ -274,6 +315,8 @@ present in the profile and `NA` is returned. Finally, a threshold
 maximum value is egal or superior to a minimal value. When this minimum value 
 is not respected, it is assumed that no peak is present in the profile and 
 `NA` is returned. 
+
+The **DIFF_POS_MAX** metric can be useful to detect regions with shifted peaks.
 
 ```{r diff_pos_max, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -344,8 +387,6 @@ metrics$metric$DIFF_POS_MAX
 ```
 
 
-The **DIFF_POS_MAX** metric can be useful to detect regions with shifted peaks.
-
 ## RATIO_MAX_MAX Metric
 
 The **RATIO_MAX_MAX** metric is the ratio between the peaks values 
@@ -353,6 +394,9 @@ in each profile. The first profile (`profile1` parameter) is always divided by
 the second profile (`profile2` parameter). `NA` if minimal peak value threshold 
 (`ratioMaxMaxThreshold` parameter) is not respected for at least one of the 
 profiles.
+
+The **RATIO_MAX_MAX** metric can be useful to detect regions with peaks with 
+similar (or dissimilar) amplitude.
 
 ```{r ratio_max_max, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -422,8 +466,6 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_MAX_MAX
 ```
 
-The **RATIO_MAX_MAX** metric can be useful to detect regions with peaks with 
-similar (or dissimilar) amplitude.
 
 ## RATIO_INTERSECT Metric
 
@@ -431,6 +473,9 @@ The **RATIO_INTERSECT** metric is the ratio between the intersection area and
 the total area of the two profiles. `NA` if minimal area threshold 
 (`ratioIntersectThreshold` parameter) is not respected for the intersection 
 area.
+
+The **RATIO_INTERSECT** metric can be useful to detect regions with possibily 
+similar profiles.
 
 ```{r ratio_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -501,9 +546,6 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_INTERSECT
 ```
 
-The **RATIO_INTERSECT** metric can be useful to detect regions with possibily 
-similar profiles.
-
 
 ## RATIO_NORMALIZED_INTERSECT Metric
 
@@ -513,6 +555,9 @@ profiles are normalized by divinding them by their average value (total area
 of the profile divided by profile lenght). `NA` if minimal area threshold 
 (`ratioNormalizedIntersectThreshold` parameter) is not respected for 
 the intersection area.
+
+The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with 
+possibily similar profiles even if their have different amplitude.
 
 ```{r ratio_normalized_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -602,9 +647,6 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 ```
 
-The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with 
-possibily similar profiles even if their have different amplitude.
-
 
 ## SPEARMAN_CORRELATION Metric
 
@@ -612,6 +654,12 @@ The **SPEARMAN_CORRELATION** metric is the Spearman's rho statistic calculated
 usign the two profiles.`NA` if minimal standard deviation
 (`spearmanCorrSDThreashold` parameter) is not respected for at least one of the
 profiles.
+
+The **SPEARMAN_CORRELATION** assesses how well the relationship between the two
+ChIP-Seq profiles can be described using a monotonic function. As the 
+**RATIO_NORMALIZED_INTERSECT** metric, the **SPEARMAN_CORRELATION** 
+metric can be useful to detect regions with possibily similar profiles even if 
+their have different amplitude.
 
 ```{r spearman_corr_graphs, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -685,12 +733,6 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
                       demoProfiles$chr19.27739373.27739767$H3K4me1)
 metrics$metric$SPEARMAN_CORRELATION
 ```
-
-The **SPEARMAN_CORRELATION** assesses how well the relationship between the two
-ChIP-Seq profiles can be described using a monotonic function. As the 
-**RATIO_NORMALIZED_INTERSECT** metric, the **SPEARMAN_CORRELATION** 
-metric can be useful to detect regions with possibily similar profiles even if 
-their have different amplitude.
 
 
 ## Quick Start
@@ -807,15 +849,15 @@ remain the same:
 
 ```{r factoryDemo, collapse=TRUE }
 ratio_max_max <- factory$createMetric(metricType="RATIO_MAX_MAX", 
-                    profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
-                    profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
+                        profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
 
 ratio_max_max
 
 ratio_normalized_intersect <- factory$createMetric(
-                    metricType="RATIO_NORMALIZED_INTERSECT", 
-                    profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
-                    profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
+                        metricType="RATIO_NORMALIZED_INTERSECT",
+                        profile1=demoProfiles$chr2.70360770.70361098$H3K27ac, 
+                        profile2=demoProfiles$chr2.70360770.70361098$H3K4me1)
 
 ratio_normalized_intersect
 ```

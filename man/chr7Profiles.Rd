@@ -1,6 +1,6 @@
 \name{chr7Profiles}
-\alias{chr7Profiles}
 \docType{data}
+\alias{chr7Profiles}
 \title{
 ChIP-Seq profiles of region chr7:61968807-61969730 related to enhancers 
 H3K27ac and H3K4me1 (for demonstration purpose)
@@ -36,13 +36,16 @@ the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
   }
 }
 \source{
+The Encyclopedia of DNA Elements (ENCODE) data
+}
+\references{
 Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia of DNA 
 elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
 }
 \examples{
 data(chr7Profiles)
 
-## Calculating all metrics for the chr7.61968807.61969730 region 
+## Calculating all metrics for the "chr7.61968807.61969730" region 
 metrics <- similarity(chr7Profiles$chr7.61968807.61969730$H3K4me1, 
                         chr7Profiles$chr7.61968807.61969730$H3K27ac, 
                         ratioAreaThreshold=10, 
@@ -53,6 +56,10 @@ metrics <- similarity(chr7Profiles$chr7.61968807.61969730$H3K4me1,
                         diffPosMaxThresholdMaxDiff=100, 
                         diffPosMaxTolerance=0.10)
 metrics
+
+
+## You can refer to the vignette to see more examples using ChIP-Seq profiles
+## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
 }\seealso{
     \itemize{
         \item \code{\link{MetricFactory}} {for using a interface to calculate 
