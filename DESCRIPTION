@@ -23,7 +23,8 @@ Depends:
     R6 (>= 2.0)
 Imports:
     rtracklayer,
-    GenomicAlignments
+    GenomicAlignments,
+    Rsamtools
 Suggests:
     RUnit,
     BiocGenerics,

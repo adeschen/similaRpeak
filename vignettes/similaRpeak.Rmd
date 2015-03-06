@@ -76,23 +76,57 @@ DNA sequencing to identify the binding sites of DNA-associated proteins. For a
 specific region, the read count of aligned sequences at each position of the 
 region is used to generate the ChIP-Seq profile for the region.
 
-From a BAM file where aligned sequences are stored, the coverage for a specific
-region can be extracted.
+Aligned sequences are usually stored in BAM files. As example, a slimmed BAM 
+file (align1.bam) is selected as well as a specific region 
+(chr1:172081530-172083529). Using BAM file and 
+region information, represented by as a `GRanges` object, the coverage for the 
+specified region is extracted using specialized Bioconductor packages. 
 
-```{r bam_extract} 
+```{r bam_extract_coverage, collapse=TRUE} 
 suppressMessages(library(GenomicAlignments))
 suppressMessages(library(rtracklayer))
+suppressMessages(library(Rsamtools))
 
-bamFile <- system.file("extdata/align1.bam", package = "similaRpeak")
-regions <- system.file("extdata/list1.bed", package = "similaRpeak")
-regions <- import(regions)
-param <- ScanBamParam(which = regions)
-alignments <- readGAlignments(bamFile, param = param)
-coverages <- coverage(alignments)
-coverages <- coverages[regions]
-coverages <- lapply(coverages, as.numeric)
+bamFile01 <- system.file("extdata/align1.bam", package = "similaRpeak")
+
+region <- GRanges(Rle(c("chr1")), IRanges(start = 172081530, end = 172083529), 
+                strand= Rle(strand(c("*"))))
+
+param <- ScanBamParam(which = region)
+
+alignments01 <- readGAlignments(bamFile01, param = param)
+
+coveragesRegion01 <- coverage(alignments01)[region]
+str(coveragesRegion01)
 ```
 
+The `coverages01` can 
+easily be transformed to a vector of numerical value to obtain the raw
+ChIP-Seq profile for the selected region.
+
+```{r iranges_to_vector, collapse=TRUE}
+coveragesRegion01 <- lapply(coveragesRegion01, as.numeric)
+str(coveragesRegion01)
+```
+
+To convert the raw coverage to reads per million (RPM), the total number of 
+reads present in the BAM file is needed to assign a weight at the `coverage` 
+function.
+
+```{r bam_count, collapse=TRUE}
+param <- ScanBamParam(flag = scanBamFlag(isUnmappedQuery=FALSE))
+count01 <- countBam(bamFile01, param = param)$records
+coveragesRPMRegion01 <- coverage(alignments01, weight=1000000/count01)[region]
+coveragesRPMRegion01 <- lapply(coveragesRPMRegion01, as.numeric)
+str(coveragesRPMRegion01)
+```
+
+The read per millions values are quite low for the `coveragesRPMRegion01` 
+because the original BAM file has been reduced in size to simplify the example.
+
+Other examples are available on the worflows section of the 
+[Bioconductor website](http://www.bioconductor.org/help/workflows/high-throughput-sequencing/ 
+"high-throughput-sequencing").
 
 ### Threshold variables
 
