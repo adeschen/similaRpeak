@@ -1,6 +1,6 @@
 \name{demoProfiles}
-\alias{demoProfiles}
 \docType{data}
+\alias{demoProfiles}
 \title{
 Selected ChIP-seq profiles related to enhancers 
 H3K27ac and H3K4me1 (for demonstration purpose)
@@ -49,19 +49,23 @@ H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements
                 chr3:73160145 }
   }
 }
-\details{
-%%  ~~ If necessary, more details than the __description__ above ~~
-}
 \source{
-Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia of DNA 
-elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
+The Encyclopedia of DNA Elements (ENCODE) data
 }
 \references{
-%%  ~~ possibly secondary sources and usages ~~
+Dunham I, Kundaje A, Aldred SF, et al. \emph{An integrated encyclopedia of DNA 
+elements in the human genome.} Nature. 2012 Sep 6;489(7414):57-74.
 }
 \examples{
 data(demoProfiles)
 
+# Calculate metrics for the "chr3:73159773-73160145" region
+metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+                        demoProfiles$chr3.73159773.73160145$H3K4me1)
+metrics
+
+## You can refer to the vignette to see more examples using ChIP-Seq profiles
+## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
 }
 \seealso{
     \itemize{

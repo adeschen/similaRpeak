@@ -189,7 +189,7 @@ similarity(demoProfiles$chr2.70360770.70361098$H3K4me1,
             spearmanCorrSDThreashold=0.1)
 
 
-## You can refer to the vignette to see more exemples using ChIP-Seq profiles
+## You can refer to the vignette to see more examples using ChIP-Seq profiles
 ## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
 }
 \seealso{
