@@ -7,7 +7,7 @@
     ChIP-Seq profiles
 }
 \description{
-\pkg{similaRpeak} is calculing six differents metrics to estimate a 
+\pkg{similaRpeak} is calculating six differents metrics to estimate a 
 level of similarity between two ChIP-Seq profiles
 }
 \details{
