@@ -54,7 +54,7 @@ respected for the intersection area.
 ![alt text](figure/metrics_small.gif "Metrics")
 
 
-## Loading similaRpeak package
+## Loading the similaRpeak package
 
 ```{r loadingPackage} 
 suppressMessages(library(similaRpeak))
@@ -830,7 +830,7 @@ legend("topleft", c("H3K27ac","H3K4me1"), cex=1.2,
 ```
 
 
-## Metrics calculation using MetricFactory object
+## Metrics calculation using a MetricFactory object
  
 It is possible to create only one selected metric by using the 
 **MetricFactory** object (with the possibility of specifying the thresholds) 
