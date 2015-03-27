@@ -67,7 +67,7 @@ suppressMessages(library(similaRpeak))
 
 To estimate the level of similarity between two ChIP-Seq profiles for a 
 specific region, two `vector` containing the profiles values, as reported in 
-reads per million (RPM) for each position of the selected region are needed. 
+reads per million (RPM) for each position of the selected region, are needed. 
 Both `vector` should have the same length and should not contain any negative 
 value.
 
