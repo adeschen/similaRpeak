@@ -97,7 +97,7 @@ param <- ScanBamParam(which = region)
 alignments01 <- readGAlignments(bamFile01, param = param)
 
 coveragesRegion01 <- coverage(alignments01)[region]
-str(coveragesRegion01)
+coveragesRegion01
 ```
 
 The `coverages01` can 
@@ -105,8 +105,9 @@ easily be transformed to a vector of numerical value to obtain the raw
 ChIP-Seq profile for the selected region.
 
 ```{r iranges_to_vector, collapse=TRUE}
-coveragesRegion01 <- lapply(coveragesRegion01, as.numeric)
-str(coveragesRegion01)
+coveragesRegion01 <- as.numeric(coveragesRegion01$chr1)
+length(coveragesRegion01)
+summary(coveragesRegion01)
 ```
 
 To convert the raw coverage to reads per million (RPM), the total number of 
@@ -117,8 +118,9 @@ function.
 param <- ScanBamParam(flag = scanBamFlag(isUnmappedQuery=FALSE))
 count01 <- countBam(bamFile01, param = param)$records
 coveragesRPMRegion01 <- coverage(alignments01, weight=1000000/count01)[region]
-coveragesRPMRegion01 <- lapply(coveragesRPMRegion01, as.numeric)
-str(coveragesRPMRegion01)
+coveragesRPMRegion01 <- as.numeric(coveragesRPMRegion01$chr1)
+length(coveragesRPMRegion01)
+summary(coveragesRPMRegion01)
 ```
 
 The read per millions values are quite low for the `coveragesRPMRegion01` 
