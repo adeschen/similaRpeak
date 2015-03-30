@@ -65,16 +65,16 @@ suppressMessages(library(similaRpeak))
 
 ### ChIP-Seq profiles vectors
 
+ChIP-seq combines chromatin immunoprecipitation (ChIP) with massively parallel 
+DNA sequencing to identify the binding sites of DNA-associated proteins. For a
+specific region, the read count of aligned sequences at each position of the 
+region is used to generate the ChIP-Seq profile for the region.
+
 To estimate the level of similarity between two ChIP-Seq profiles for a 
 specific region, two `vector` containing the profiles values, as reported in 
 reads per million (RPM) for each position of the selected region, are needed. 
 Both `vector` should have the same length and should not contain any negative 
 value.
-
-ChIP-seq combines chromatin immunoprecipitation (ChIP) with massively parallel 
-DNA sequencing to identify the binding sites of DNA-associated proteins. For a
-specific region, the read count of aligned sequences at each position of the 
-region is used to generate the ChIP-Seq profile for the region.
 
 Aligned sequences are usually stored in BAM files. As example, a slimmed BAM 
 file (align1.bam) is selected as well as a specific region 
@@ -173,7 +173,9 @@ metric. Default=0.01.
 * **spearmanCorrSDThreashold**: The minimum standard deviation accepted on both
 profiles to calculate the metric. Default=1e-8.
 
-## Metric definition
+## Metrics
+
+### Metric definition
 
 Mathematically, a metric is considered as a function that quantifies the 
 similarity between two objects.The function must return zero when the two 
@@ -199,9 +201,9 @@ formally respected.
 
 $$ |\log(RATIO)| $$ 
             
-                
-  
-## Demonstration ChIP-Seq profiles
+<br>
+
+### Metrics demonstration
 
 To ease comparison, the same ChIP-Seq profiles are used in each metric 
 description section. Those are ChIP-Seq profiles of two histone 
@@ -218,8 +220,9 @@ data(demoProfiles)
 str(demoProfiles)
 ```
 
+<br>
 
-## RATIO_AREA Metric
+#### RATIO_AREA Metric
 
 The **RATIO_AREA** metric is the ratio between the profile areas. The first 
 profile (`profile1` parameter) is always divided by the second profile 
@@ -297,8 +300,9 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_AREA
 ```
 
+<br>
 
-## DIFF_POS_MAX Metric
+#### DIFF_POS_MAX Metric
 
 The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
 positions. The difference is always the first profile value 
@@ -386,8 +390,9 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$DIFF_POS_MAX
 ```
 
+<br>
 
-## RATIO_MAX_MAX Metric
+#### RATIO_MAX_MAX Metric
 
 The **RATIO_MAX_MAX** metric is the ratio between the peaks values 
 in each profile. The first profile (`profile1` parameter) is always divided by 
@@ -466,8 +471,9 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_MAX_MAX
 ```
 
+<br>
 
-## RATIO_INTERSECT Metric
+#### RATIO_INTERSECT Metric
 
 The **RATIO_INTERSECT** metric is the ratio between the intersection area and 
 the total area of the two profiles. `NA` if minimal area threshold 
@@ -546,8 +552,9 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_INTERSECT
 ```
 
+<br>
 
-## RATIO_NORMALIZED_INTERSECT Metric
+#### RATIO_NORMALIZED_INTERSECT Metric
 
 The **RATIO_NORMALIZED_INTERSECT** metric is the ratio between the 
 intersection area and the total area of the two normalized profiles.  The 
@@ -647,8 +654,9 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$RATIO_NORMALIZED_INTERSECT
 ```
 
+<br>
 
-## SPEARMAN_CORRELATION Metric
+#### SPEARMAN_CORRELATION Metric
 
 The **SPEARMAN_CORRELATION** metric is the Spearman's rho statistic calculated
 usign the two profiles.`NA` if minimal standard deviation
@@ -734,8 +742,9 @@ metrics <- similarity(demoProfiles$chr19.27739373.27739767$H3K27ac,
 metrics$metric$SPEARMAN_CORRELATION
 ```
 
+<br>
 
-## Quick Start
+## Using similaRpeak on real ChIP-Seq profiles
 
 Highly active enhancer regions are thought to be important for the cell fate 
 (Andersson et al. 2014, FANTOM5 consortium, Hnisz et al. 2013). Highly active 
