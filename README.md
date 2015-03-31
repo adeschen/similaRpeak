@@ -1,4 +1,4 @@
-similaRpeak : Metrics to estimate the level of similarity between two ChIP profiles.
+similaRpeak : metrics to estimate the level of similarity between two ChIP profiles.
 =====================
 
 This package calculates metrics to estimate a level of similarity between two 
