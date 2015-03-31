@@ -4,6 +4,11 @@ similaRpeak
 This package calculates metrics to estimate a level of similarity between two 
 ChIP-Seq profiles.
 
+## Download package ##
+
+The official releases can be downloaded from:
+[Release website](https://github.com/adeschen/similaRpeak/releases)
+
 ## NOTE ##
 
 To use this current development version, the use of the development version of 
