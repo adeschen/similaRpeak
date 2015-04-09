@@ -136,45 +136,6 @@ Finally, the
 generate ChIP-Seq profiles. An example is available on 
 [metagene wiki](https://github.com/CharlesJB/metagene/wiki/Extract-ChIP-Seq-profiles-using-metagene). 
 
-### Threshold variables
-
-When the metric includes a ratio calculation, a threshold for the denominator 
-is assigned to the metric. The threshold has to be positive numerical value. 
-When the threshold is not respected, the metric is not calculated and the 
-`NA` value is assigned to it.
-
-The threshold variables are:
-
-* **ratioAreaThreshold**: The minimum denominator accepted to calculate 
-the ratio of the area between both profiles. Default = 1.
-
-* **ratioMaxMaxThreshold**: The minimum denominator accepted to calculate the 
-ratio of the maximal peaks values between both profiles. Default = 1.
-
-* **ratioIntersectThreshold**: The minimum denominator accepted to calculate 
-the ratio of the intersection area of both profiles over the total area. 
-Default = 1.
-
-* **ratioNormalizedIntersectThreshold**: The minimum denominator accepted to 
-calculate the ratio of the intersection area of both profiles over the total 
-area for normalized profiles. Default = 1.
-
-* **diffPosMaxThresholdMinValue**: The smaller maximum value accepted to 
-calculate the metric. When this value is not respected, it is assumed that no 
-peak is present in the profile. Default = 1.
-
-* **diffPosMaxThresholdMaxDiff**: The larger distance accepted between 2 
-maximum positions in one profile to calculate the metric. When this distance 
-is not respected, it is assumed that more than one peak is present in the 
-profile. Default=100.
-
-* **diffPosMaxTolerance**: The maximum variation accepted on the maximum value 
-to include a position in the maximum positions list and use it to calculate the
-metric. Default=0.01.
-
-* **spearmanCorrSDThreashold**: The minimum standard deviation accepted on both
-profiles to calculate the metric. Default=1e-8.
-
 ## Metrics
 
 ### Metric definition
