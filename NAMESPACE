@@ -1,0 +1,6 @@
+export(similarity)
+export(MetricFactory)
+import(R6)
+importFrom(rtracklayer, import)
+importFrom(GenomicAlignments, readGAlignments)
+importFrom(Rsamtools, ScanBamParam)
