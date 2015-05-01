@@ -11,8 +11,7 @@ The official releases can be downloaded from:
 
 ## NOTE ##
 
-To use this current development version, the use of the development version of 
-the R6 package (>= 2.0) is mandatory.
+To use this current similaRpeak version, the use of the R6 package (>= 2.0) is mandatory.
 
 
 ## Authors ##
