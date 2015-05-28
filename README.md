@@ -6,8 +6,13 @@ ChIP-Seq profiles.
 
 ## Download package ##
 
-The official releases can be downloaded from:
-[Release website](https://github.com/adeschen/similaRpeak/releases)
+The current release can be dowloaded from [Bioconductor](http://bioconductor.org/) website:
+[Current Release](http://bioconductor.org/packages/release/bioc/html/similaRpeak.html)
+
+However, all official releases can be downloaded from this site:
+[All Releases](https://github.com/adeschen/similaRpeak/releases)
+
+
 
 ## NOTE ##
 
