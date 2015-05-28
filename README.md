@@ -4,14 +4,13 @@ similaRpeak : metrics to estimate the level of similarity between two ChIP profi
 This package calculates metrics to estimate a level of similarity between two 
 ChIP-Seq profiles.
 
-## Download package ##
+## Bioconductor Package ##
 
-The current release can be dowloaded from [Bioconductor](http://bioconductor.org/) website:
-[Current Release](http://bioconductor.org/packages/release/bioc/html/similaRpeak.html)
+similaRpeak is now an official package of [Bioconductor](http://bioconductor.org/). The current release can be directly downloaded from their website:
+[Current release](http://bioconductor.org/packages/release/bioc/html/similaRpeak.html)
 
 However, all official releases can be downloaded from this site:
-[All Releases](https://github.com/adeschen/similaRpeak/releases)
-
+[All releases](https://github.com/adeschen/similaRpeak/releases)
 
 
 ## NOTE ##
