@@ -1,0 +1,20 @@
+language: r
+sudo: required
+
+# Packages from Bioconductor needed
+bioc_required: true
+
+# Be strict when checking package
+warnings_are_errors: true
+
+# Package dependencies from CRAN
+r_binary_packages:
+  - RUnit
+  - knitr
+
+# Package dependencies from Bioconductor
+bioc_packages:
+  - GenomicAlignments
+  - BiocGenerics
+  - Rsamtools
+  - rtracklayer
