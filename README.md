@@ -1,6 +1,8 @@
 similaRpeak : metrics to estimate the level of similarity between two ChIP profiles.
 =====================
 
+[![Build Status](https://travis-ci.org/adeschen/similaRpeak.svg?branch=master)](https://travis-ci.org/adeschen/similaRpeak)
+
 This package calculates metrics to estimate a level of similarity between two 
 ChIP-Seq profiles.
 
