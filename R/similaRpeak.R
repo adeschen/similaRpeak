@@ -78,11 +78,11 @@ similarity <- function(profile1,
     }
     
     # At elements in profile1 and profile2 at to have a value superior to zero 
-    if (sum(profile1 < 0, na.rm = TRUE) > 0) {
-        stop("The profile1 argument contains at least one negative number.")
+    if (any(profile1 < 0, na.rm = TRUE)) {
+        stop("The 'profile1' argument contains at least one negative number.")
     }
-    if (sum(profile2 < 0, na.rm = TRUE) > 0) {
-        stop("The profile2 argument contains at least one negative number.")
+    if (any(profile2 < 0, na.rm = TRUE)) {
+        stop("The 'profile2' argument contains at least one negative number.")
     }
     
     # The length of profile1 is equal to the length of profile2
@@ -117,7 +117,7 @@ similarity <- function(profile1,
             !is.numeric(ratioNormalizedIntersectThreshold) || 
             (ratioNormalizedIntersectThreshold <= 0)) {
         stop(paste0("The 'ratioNormalizedIntersectThreshold' must be",
-                , " a positive numeric value."))
+                " a positive numeric value."))
     }
     
     # The diffPosMaxThresholdMinValue argument is a positive numeric element
