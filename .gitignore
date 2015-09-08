@@ -1,0 +1,13 @@
+# RStudio files
+.Rproj.user
+.Rhistory
+.RData
+
+# produced vignettes
+# History files
+.Rhistory
+
+.Rapp.history
+vignettes/*.html
+vignettes/*.pdf
+
