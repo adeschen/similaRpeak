@@ -1,4 +1,4 @@
-# Created by Astrid Louise Deschenes
+# Created by Astrid Deschenes
 # 2014-08-13
 
 # Class representing a abstract Metric which is used to quantify the similarity 

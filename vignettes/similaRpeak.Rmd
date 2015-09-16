@@ -7,7 +7,7 @@
 Metrics which estimate similarity between two ChIP-Seq profiles
 ====================================================================
 
-Astrid Louise Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, 
+Astrid Deschenes, Elsa Bernatchez, Charles Joly Beauparlant, 
 Fabien Claude Lamaze, Rawane Samb, Pascal Belleau and Arnaud Droit.
 
 This package and the underlying similaRpeak code are distributed 
