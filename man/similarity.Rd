@@ -135,7 +135,7 @@
 }
 
 \author{
-    Astrid Louise Deschenes
+    Astrid Deschenes
     <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca> 
   
     Elsa Bernatchez
