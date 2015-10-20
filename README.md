@@ -16,7 +16,7 @@ However, all official releases can be downloaded from this site:
 [All releases](https://github.com/adeschen/similaRpeak/releases)
 
 
-## NOTE ##
+## Note ##
 
 To use this current similaRpeak version, the use of the R6 package (>= 2.0) is mandatory.
 
@@ -33,6 +33,10 @@ and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud "Arnaud Droit").
 
 See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/ "Arnaud Droit Lab") 
 website.
+
+## Maintainer ##
+
+[Astrid Deschenes](http://ca.linkedin.com/in/astriddeschenes "Astrid Louise Deschenes")
 
 ## License ##
 
