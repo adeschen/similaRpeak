@@ -9,6 +9,8 @@ ChIP-Seq profiles.
 
 ## Bioconductor Package ##
 
+[![Bioconductor Time](http://bioconductor.org/shields/years-in-bioc/similaRpeak.svg)](http://bioconductor.org/packages/release/bioc/html/similaRpeak.html "Bioconductor status")
+
 similaRpeak is now an official package of [Bioconductor](http://bioconductor.org/). The current release can be directly downloaded from their website:
 [Current release](http://bioconductor.org/packages/release/bioc/html/similaRpeak.html)
 
