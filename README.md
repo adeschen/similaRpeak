@@ -25,7 +25,7 @@ To use this current similaRpeak version, the use of the R6 package (>= 2.0) is m
 
 ## Authors ##
 
-[Astrid Deschenes](http://ca.linkedin.com/in/astriddeschenes "Astrid Louise Deschenes"), 
+[Astrid Desch&ecirc;nes](http://ca.linkedin.com/in/astriddeschenes "Astrid Desch&ecirc;nes"), 
 Elsa Bernatchez, 
 [Charles Joly Beauparlant](http://ca.linkedin.com/pub/charles-joly-beauparlant/89/491/3b3 "Charles Joly Beauparlant"), 
 [Fabien Claude Lamaze](http://ca.linkedin.com/in/fabienlamaze/en "Fabien Claude Lamaze"), 
@@ -38,7 +38,7 @@ website.
 
 ## Maintainer ##
 
-[Astrid Deschenes](http://ca.linkedin.com/in/astriddeschenes "Astrid Louise Deschenes")
+[Astrid Desch&ecirc;nes](http://ca.linkedin.com/in/astriddeschenes "Astrid Desch&ecirc;nes")
 
 ## License ##
 
