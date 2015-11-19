@@ -1,7 +1,25 @@
-<!--
-%\VignetteEngine{knitr::knitr}
-%\VignetteIndexEntry{similaRpeak: similarity between two ChIP-Seq profiles}
--->
+---
+title: "Similarity between two ChIP-Seq profiles"
+output:
+    BiocStyle::html_document:
+        toc: true
+vignette: >
+  %\VignetteIndexEntry{Similarity between two ChIP-Seq profiles}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignettePackage{similaRpeak}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r style, echo = FALSE, results = 'asis', message = FALSE}
+BiocStyle::markdown()
+library(knitr)
+```
+<br>
+**Package**: `r Rpackage("similaRpeak")`<br />
+**Authors**: `r packageDescription("similaRpeak")[["Author"]]`<br />
+**Version**: `r packageDescription("similaRpeak")$Version`<br />
+**Compiled date**: `r Sys.Date()`<br />
+**License**: `r packageDescription("similaRpeak")[["License"]]`<br />
 
 
 Metrics which estimate similarity between two ChIP-Seq profiles
@@ -51,7 +69,8 @@ respected for the intersection area.
 
 * **SPEARMAN_CORRELATION**: The Spearman's rho statistic between profiles.
 
-![alt text](figure/metrics_small.gif "Metrics")
+
+![alt text](metrics_small.gif "Metrics")
 
 
 ## Loading the similaRpeak package
@@ -834,6 +853,15 @@ ratio_normalized_intersect <- factory$createMetric(
 ratio_normalized_intersect
 ```
 
+
+## Session info
+
+Here is the output of `sessionInfo()` on the system on which this document was 
+compiled:
+
+```{r sessionInfo, echo=FALSE}
+sessionInfo()
+```
 
 ## References
 
