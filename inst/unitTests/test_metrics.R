@@ -35,6 +35,10 @@ test.metrics_metricfactory_all <- function() {
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
+###################################################
+# Test good result for each metric
+###################################################
+
 ## Test the result of using "RATIO_AREA"
 test.metrics_metricfactory_ratio_area <- function() {
     exp <- list("RATIO_AREA" = 1.084291188)
@@ -76,6 +80,10 @@ test.metrics_metricfactory_ratio_intersect <- function() {
                                 c(15,9,46,44,9,39,27,34,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
+
+#####################################################
+# Test results for each metric when NA in profiles
+#####################################################
 
 ## Test the result of using "ALL" and NA in first profile
 test.metrics_metricfactory_all_na_only <- function() {
@@ -200,8 +208,12 @@ test.metrics_metricfactory_missing_metric_type <- function() {
                         "the expected excpetion."))
 }
 
+####################################################################
+## Test result for each metric when missing profile
+####################################################################
+
 ## Test the result of missing profile1
-test.metrics_metricfactory_missing_profile1 <- function() {
+test.metrics_metricfactory_ALL_missing_profile1 <- function() {
     obs <- tryCatch(factory$createMetric(metricType="ALL", 
                         profile2=c(15,9,46,44,9,39,27,34,34,4)), 
                         error=conditionMessage)
@@ -213,13 +225,77 @@ test.metrics_metricfactory_missing_profile1 <- function() {
 }
 
 ## Test the result of missing profile2
-test.metrics_metricfactory_missing_profile2 <- function() {
+test.metrics_metricfactory_ALL_missing_profile2 <- function() {
     obs <- tryCatch(factory$createMetric(metricType="ALL", 
                             profile1=c(15,9,46,44,9,39,27,34,34,4)), 
                             error=conditionMessage)
     exp <- "The 'profile2' argument is mandatory."
     message <- paste0("metrics_metricfactory_missing_profile2() ",
                       "- The 'profile2' argument is mandatory.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result of missing profile1 for RATIO_AREA
+test.metrics_metricfactory_RATIO_AREA_missing_profile1 <- function() {
+    obs <- tryCatch(factory$createMetric(metricType="RATIO_AREA", 
+                                         profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+                    error=conditionMessage)
+    exp <- "The 'profile1' argument is mandatory."
+    message <- paste0("metrics_metricfactory_RATIO_AREA_missing_profile1() ",
+                      "- The missing 'profile1' argument did not ",
+                      "generated the expected exception.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result of missing profile2 for RATIO_AREA
+test.metrics_metricfactory_RATIO_AREA_missing_profile2 <- function() {
+    obs <- tryCatch(factory$createMetric(metricType="RATIO_AREA", 
+                                         profile1=c(15,9,46,44,9,39,27,34,34,4)), 
+                    error=conditionMessage)
+    exp <- "The 'profile2' argument is mandatory."
+    message <- paste0("metrics_metricfactory_RATIO_AREA_missing_profile2() ",
+                      "- The 'profile2' argument is mandatory.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result of RATIO_MAX_MAX when using profile 1 with only NA values
+test.metrics_metricfactory_all_RATIO_MAX_MAX_profile_1_ratio_max_max <- function() {
+    obs <- tryCatch(factory$createMetric(metricType="RATIO_MAX_MAX", 
+                                         profile1=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA),
+                                         profile2=c(15,9,46,44,9,39,27,34,34,4)), 
+                    error=conditionMessage)
+    exp <- "The 'profile1' argument must be a numeric vector."
+    message <- paste0("test.metrics_metricfactory_all_RATIO_MAX_MAX_profile_1_ratio_max_max() ",
+                      "- The 'profile2' with NA did not raise the exepected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+## Test the result of RATIO_MAX_MAX when using profile 2 with only NA values
+test.metrics_metricfactory_all_RATIO_MAX_MAX_profile_2_ratio_max_max <- function() {
+    obs <- tryCatch(factory$createMetric(metricType="RATIO_MAX_MAX", 
+                                         profile1=c(15,9,46,44,9,39,27,34,34,4), 
+                                         profile2=c(NA,NA,NA,NA,NA,NA,NA,NA,NA,NA)),
+                    error=conditionMessage)
+    exp <- "The 'profile2' argument must be a numeric vector."
+    message <- paste0("test.metrics_metricfactory_all_RATIO_MAX_MAX_profile_2_ratio_max_max() ",
+                      "- The 'profile2' with NA did not raise the exepected error.")
+    checkEquals(obs, exp, msg = message)
+}
+
+
+###########################################################################
+## Test result for each metric when profile 1 and 2 having different length
+###########################################################################
+
+## Test the result of RATIO_MAX_MAX when using profile 1 and 2 with different length
+test.metrics_metricfactory_all_RATIO_MAX_MAX_profile_1_and_2_diff_length <- function() {
+    obs <- tryCatch(factory$createMetric(metricType="RATIO_MAX_MAX", 
+                    profile1=c(15,9,46,44,9,39,27,34,34,4,2), 
+                    profile2=c(44,9,39,27,34,34,4,2)),
+                    error=conditionMessage)
+    exp <- "Lengths of 'profile1' and 'profile2' vectors aren't equals."
+    message <- paste0("test.metrics_metricfactory_all_RATIO_MAX_MAX_profile_1_and_2_diff_length() ",
+                      "- The 'profile1' and 'profile2' having different length did not raise the exepected error.")
     checkEquals(obs, exp, msg = message)
 }
 
@@ -237,6 +313,7 @@ test.metric_class <- function() {
 
     checkEquals(obs$getType(), NA, msg = message)
     checkEquals(obs$calculateMetric(), NULL, msg = message)
+    checkEquals(obs$getInfo(), NULL, msg = message)
 }
 
 
