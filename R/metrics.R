@@ -20,7 +20,7 @@ Metric <- R6Class("Metric",
             cat(paste0("Metric type: ", private$type, ". Metric value: ", 
                     private$metric, "\n"))
         }
-    ),  
+    ),
     private = list(
         metric = NA,
         type = NA,
@@ -44,7 +44,7 @@ RatioMaxMax <- R6Class("RatioMaxMax",
 
             # Fix the type of metric
             super$setType("RATIO_MAX_MAX")
-                                
+
             if (!missing(profile1) && !missing(profile2)) {
                 self$calculateMetric(profile1, profile2, threshold)   
             }
@@ -155,7 +155,7 @@ DiffPosMax <- R6Class("DiffPosMax",
 
             # Fix the type of metric
             super$setType("DIFF_POS_MAX")
-                             
+
             if (!missing(profile1) && !missing(profile2)) {
                 self$calculateMetric(profile1, profile2, threshold, 
                                         thresholdDiff, tolerance)   
@@ -201,7 +201,7 @@ DiffPosMax <- R6Class("DiffPosMax",
                             thresholdDiff, tolerance))
         }
     )
-)  
+)
 
 
 # Class representing an Intersect Ratio metric which is the ratio of profiles 
