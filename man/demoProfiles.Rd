@@ -13,12 +13,12 @@ H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements
 }
 \usage{data(demoProfiles)}
 \format{
-  A list with 4 entries. Each entry is a list of 2 ChIP-Seq profiles, one per
-  active enhancer (H3K27ac and H3K4me1).The 2 ChIP-Seq profiles are of 
-  identical length and specific to a genomic region. Each ChiP-Seq profile is a 
-  numerical vector containing the profiles values at each position, as reported
-  in reads per million (RPM),
-  \describe{
+A list with 4 entries. Each entry is a list of 2 ChIP-Seq profiles, one per
+active enhancer (H3K27ac and H3K4me1).The 2 ChIP-Seq profiles are of 
+identical length and specific to a genomic region. Each ChiP-Seq profile is a 
+numerical vector containing the profiles values at each position, as reported
+in reads per million (RPM),
+    \describe{
     \item{\code{demoProfiles}}{ a list containing all demo ChIP-Seq profiles }
     \item{\code{demoProfiles$chr2.70360770.70361098}}{ a list containing
             2  ChIP-Seq profiles for the genomic region chr2:70360770-70361098 }
@@ -47,7 +47,7 @@ H3K4me1 (DCC accession: ENCFF000ARY) from the Encyclopedia of DNA Elements
                 in reads per million (RPM). The first entry of the vector is for
                 position chr3:73159773 while the last entry is for position
                 chr3:73160145 }
-  }
+    }
 }
 \source{
 The Encyclopedia of DNA Elements (ENCODE) data
