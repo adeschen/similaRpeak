@@ -17,8 +17,11 @@ if(FALSE) {
 
 ### }}}
 
+###################################################
+# Test Factory class
+###################################################
 
-factory = MetricFactory$new()
+factory <- MetricFactory$new()
 
 ## Test the result of using "ALL"
 test.metrics_metricfactory_all <- function() {
@@ -74,10 +77,16 @@ test.metrics_metricfactory_ratio_intersect <- function() {
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
-## Test the result of using "ALL" and NA or zeros
+## Test the result of using "ALL" and NA in first profile
 test.metrics_metricfactory_all_na_only <- function() {
-    checkException(factory$createMetric("ALL", c(NA,NA,NA,NA), c(NA,NA,NA,NA)),
-                   msg = "The 'profile1' argument must be a numeric vector.")
+    checkException(factory$createMetric("ALL", c(NA,NA,NA,NA), c(3, 3, 3, 4)),
+                    msg = "The 'profile1' argument must be a numeric vector.")
+}
+
+## Test the result of using "ALL" and NA in second profile
+test.metrics_metricfactory_all_na_only <- function() {
+    checkException(factory$createMetric("ALL", c(3, 3, 3, 3), c(NA,NA,NA,NA)),
+                    msg = "The 'profile2' argument must be a numeric vector.")
 }
 
 ## Test the result of DIFF_POS_MAX when using profiles with only zero values
@@ -212,6 +221,22 @@ test.metrics_metricfactory_missing_profile2 <- function() {
     message <- paste0("metrics_metricfactory_missing_profile2() ",
                       "- The 'profile2' argument is mandatory.")
     checkEquals(obs, exp, msg = message)
+}
+
+###############################################
+# Test Metric class
+###############################################
+
+## Test the creation of a metric object
+test.metric_class <- function() {
+    obs <- similaRpeak:::Metric$new()
+
+    exp <- "The 'profile2' argument is mandatory."
+    message <- paste0("test.metric_class() ",
+                      "- The metric object does not correspond to the expected object.")
+
+    checkEquals(obs$getType(), NA, msg = message)
+    checkEquals(obs$calculateMetric(), NULL, msg = message)
 }
 
 
