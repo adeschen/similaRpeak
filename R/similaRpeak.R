@@ -1,192 +1,217 @@
-# 
-# Calculate and return five metrics which estimates the level of similarity 
-# between two profiles (represented as vectors).
-#
-# Input:   
-#   profile1:                   a first profile/vector containing depths. 
-#                                 Each position is associated to a position in 
-#                                 particular, which is assumed.
-#   profile2:                   a second profile/vector containing depths. 
-#                                 Each position is associated to a position in 
-#                                 particular, which is assumed.
-#   ratioAreaThreshold:         the minimum denominator accepted to calculate 
-#                                 the ratio of the area between both profiles. 
-#                                 Default = 1.
-#   ratioMaxMaxThreshold:       the minimum denominator accepted to calculate
-#                                 the ratio of the maximum values between both 
-#                                 profiles. Default = 1.
-#   ratioIntersectThreshold:    the minimum denominator accepted to calculate 
-#                                 the ratio of the intersection area of both 
-#                                 profiles and the total area. Default = 1.
-#   ratioNormalizedIntersectThreshold: the minimum denominator accepted to 
-#                                 calculate the ratio of the normalized 
-#                                 intersection area of both 
-#                                 profiles and the total area. Default = 1.
-#   diffPosMaxThresholdMinValue: the minimum peak accepted to calculate the 
-#                                 metric. Default = 1.
-#   diffPosMaxThresholdMaxDiff:  the maximum distance accepted between 2 peaks 
-#                                 positions in one profile to calculate the 
-#                                 metric. Default = 100.
-#   diffPosMaxTolerance:         the maximum variation accepted on the maximum 
-#                                 value to consider a position as a peak 
-#                                 position. Default = 0.01.
-#   spearmanCorrSDThreashold:    the minimum standard deviation accepted on 
-#                                 both profiles to calculate the metric.
-#                                 Default = 1e-8.
-# Prerequisites: 
-#   The 'profile1' argument is a numeric vector where no element is less 
-#      than zero.
-#   The 'profile2' argument is a numeric vector where no element is less 
-#      than zero.
-#   The length of 'profile1' is equal to the length of 'profile2'.
-#   The 'ratioAreaThreshold' argument is a positive numeric value. 
-#   The 'ratioMaxMaxThreshold' argument is a positive numeric value. 
-#   The 'ratioIntersectThreshold' argument is a positive numeric value. 
-#   The 'ratioNormalizedIntersectThreshold' argument is a positive 
-#      numeric value.
-#   The 'diffPosMaxThresholdMinValue' argument is a positive numeric value.
-#   The 'diffPosMaxThresholdMaxDiff' argument is a positive numeric value.
-#   The 'diffPosMaxTolerance' argument is a positive numeric value
-#      between 0 and 1.
-#   The 'spearmanCorrSDThreashold' argument is a positive numeric value.
-#
-# Output: 
-#   A list of elements containing information about both profiles and a 
-#   list of metrics.
-#
-similarity <- function(profile1, 
-                    profile2, 
-                    ratioAreaThreshold = 1, 
-                    ratioMaxMaxThreshold = 1, 
-                    ratioIntersectThreshold = 1, 
-                    ratioNormalizedIntersectThreshold = 1,
-                    diffPosMaxThresholdMinValue = 1, 
-                    diffPosMaxThresholdMaxDiff = 100, 
-                    diffPosMaxTolerance = 0.01,
-                    spearmanCorrSDThreashold = 1e-8) {
-    
-    #######################################
-    # Test prerequisites
-    #######################################
-    
-    # The profile1 and profile2 arguments are numeric vectors.  
-    if (!is.vector(profile1) || !is.numeric(profile1)) {
-        stop("The 'profile1' argument must be a numeric vector.")
-    }
-    if (!is.vector(profile2) || !is.numeric(profile2)) {
-        stop("The 'profile2' argument must be a numeric vector.")
-    }
-    
-    # At elements in profile1 and profile2 at to have a value superior to zero 
-    if (any(profile1 < 0, na.rm = TRUE)) {
-        stop("The 'profile1' argument contains at least one negative number.")
-    }
-    if (any(profile2 < 0, na.rm = TRUE)) {
-        stop("The 'profile2' argument contains at least one negative number.")
-    }
-    
-    # The length of profile1 is equal to the length of profile2
-    if (length(profile1) != length(profile2)) {
-        stop("Lengths of 'profile1' and 'profile2' vectors aren't equals.")
-    }
-    
-    # The ratioAreaThreshold argument is a positive numeric element
-    if (length(ratioAreaThreshold) != 1 || 
-            !is.numeric(ratioAreaThreshold) || 
-            (ratioAreaThreshold <= 0)) {
-        stop("The 'ratioAreaThreshold' must be a positive numeric value.")
-    }
-    
-    # The ratioMaxMaxThreshold argument is a positive numeric element
-    if (length(ratioMaxMaxThreshold) != 1 || 
-            !is.numeric(ratioMaxMaxThreshold) || 
-            (ratioMaxMaxThreshold <= 0)) {
-        stop("The 'ratioMaxMaxThreshold' must be a positive numeric value.")
-    }
+#' similaRpeak: Metrics to estimate a level of similarity between two 
+#' ChIP-Seq profiles
+#'
+#' This package is calculating six differents metrics to estimate a 
+#' level of similarity between two ChIP-Seq profiles.
+#'
+#' The \code{\link{similarity}} function calculates six differents metrics:
+#' \itemize{
+#' \item RATIO_AREA: The ratio between the areas. The larger value is always 
+#' divided by the smaller value.
+#' \item DIFF_POS_MAX: The difference between the maximal peaks positions. The 
+#' difference is always a positive value.
+#' \item RATIO_MAX_MAX: The ratio between the maximal peaks values. The 
+#' larger value is always divided by the smaller value. 
+#' \item RATIO_INTERSECT: The ratio between the intersection area and the 
+#' total area.
+#' \item RATIO_NORMALIZED_INTERSECT: The ratio between the intersection area 
+#' and the total area of two normalized profiles. The profiles are normalized 
+#' by divinding them by their average value.
+#' \item SPEARMAN_CORRELATION: The Spearman's rho statistic between profiles.  
+#' }
+#' 
+#' The function \code{\link{similarity}} also reports basic information about
+#' each ChIP profile such as the number of positions, the area, the maximum 
+#' value and the position of the maximum value.
+#'
+#' To learn more about \pkg{similaRpeak} package see:
+#' \url{https://github.com/adeschen/similaRpeak/wiki}
+#' 
+#' @docType package
+#'
+#' @name similaRpeak-package
+#'
+#' @aliases similaRpeak-package similaRpeak
+#'
+#' @author  Astrid Deschenes,
+#' Elsa Bernatchez,
+#' Charles Joly Beauparlant,
+#' Fabien Claude Lamaze,
+#' Rawane Samb,
+#' Pascal Belleau and
+#' Arnaud Droit
+#'
+#' Maintainer:
+#' Astrid Deschenes <astrid-louise.deschenes@@crchudequebec.ulaval.ca>
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately.}
+#' \item \code{\link{similarity}} {for calculating all available metrics 
+#' between two ChIP-Seq profiles.}
+#' }
+#'
+#' @keywords package
+NULL
 
-    # The ratioIntersectThreshold argument is a positive numeric element
-    if (length(ratioIntersectThreshold) != 1 || 
-            !is.numeric(ratioIntersectThreshold) || 
-            (ratioIntersectThreshold <= 0)) {
-        stop("The 'ratioIntersectThreshold' must be a positive numeric value.")
-    }
-    
-    # The ratioNormalizedIntersectThreshold argument is a positive 
-    # numeric element
-    if (length(ratioNormalizedIntersectThreshold) != 1 || 
-            !is.numeric(ratioNormalizedIntersectThreshold) || 
-            (ratioNormalizedIntersectThreshold <= 0)) {
-        stop(paste0("The 'ratioNormalizedIntersectThreshold' must be",
-                " a positive numeric value."))
-    }
-    
-    # The diffPosMaxThresholdMinValue argument is a positive numeric element
-    if (length(diffPosMaxThresholdMinValue) != 1 || 
-            !is.numeric(diffPosMaxThresholdMinValue) || 
-            (diffPosMaxThresholdMinValue <= 0)) {
-        stop(paste0("The 'diffPosMaxThresholdMinValue' must be a positive ",
-                "numeric value."))
-    }   
-    
-    # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
-    if (length(diffPosMaxThresholdMaxDiff) != 1 || 
-            !is.numeric(diffPosMaxThresholdMaxDiff) || 
-            (diffPosMaxThresholdMaxDiff <= 0)) {
-        stop(paste0("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
-                "numeric value."))
-    }  
-    
-    # The diffPosMaxTolerance argument is a positive numeric element between
-    # zero and one
-    if (length(diffPosMaxTolerance) != 1 || 
-            !is.numeric(diffPosMaxTolerance) || 
-            (diffPosMaxTolerance < 0) || 
-            (diffPosMaxTolerance > 1)) {
-        stop(paste0("The 'diffPosMaxTolerance' must be a positive numeric ",
-                "value between 0 and 1 included."))
-    } 
-    
-    # The spearmanCorrSDThreashold argument is a positive numeric element
-    if (length(spearmanCorrSDThreashold) != 1 || 
-            !is.numeric(spearmanCorrSDThreashold) || 
-            (spearmanCorrSDThreashold <= 0)) {
-        stop(paste0("The 'spearmanCorrSDThreashold' must be a positive ",
-                "numeric value."))
-    }  
-    
-    # Get information about both profiles
-    nbrPos <- length(profile1)
-    areaProfile1 <- sum(profile1, na.rm=TRUE)
-    areaProfile2 <- sum(profile2, na.rm=TRUE)
-    maxProfile1 <- max(profile1, na.rm=TRUE)
-    maxProfile2 <- max(profile2, na.rm=TRUE)
-    maxPositionProfile1 <- which(profile1 == maxProfile1)
-    maxPositionProfile2 <- which(profile2 == maxProfile2)
-    
-    
-    # Create a metric factory object
-    factory <- MetricFactory$new(ratioAreaThreshold, 
-                                ratioMaxMaxThreshold, 
-                                ratioIntersectThreshold,
-                                ratioNormalizedIntersectThreshold,
-                                diffPosMaxThresholdMinValue,
-                                diffPosMaxThresholdMaxDiff, 
-                                diffPosMaxTolerance,
-                                spearmanCorrSDThreashold)
-    
-    # Generate the list of all metrics availables
-    metricList <- factory$createMetric("ALL", profile1, profile2)
-    
-    # Create a list containing all pertinent information and 
-    # a sub-list with all metrics values
-    result <- list(nbrPosition=nbrPos, 
-                areaProfile1=areaProfile1, 
-                areaProfile2=areaProfile2, 
-                maxProfile1=maxProfile1,
-                maxProfile2=maxProfile2, 
-                maxPositionProfile1=maxPositionProfile1, 
-                maxPositionProfile2=maxPositionProfile2,
-                metrics=metricList)
-    
-    return(result)
-}
+#' ChIP-Seq profiles of region chr7:61968807-61969730 related to enhancers 
+#' H3K27ac and H3K4me1 (for demonstration purpose)
+#' 
+#' ChIP-Seq profiles of region chr7:61968807-61969730 of two histone 
+#' post-transcriptional modifications linked to highly active enhancers H3K27ac 
+#' (DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) from 
+#' the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
+#'
+#' @name chr7Profiles
+#'
+#' @docType data
+#'
+#' @aliases chr7Profiles
+#'
+#' @format A \code{list} with 1 entry. The entry is a list of 2 ChIP-Seq profiles, 
+#' one per active enhancer (H3K27ac and H3K4me1).The 2 ChIP-Seq profiles are of 
+#' identical length and specific to a genomic region. Each ChiP-Seq profile is 
+#' a numerical vector containing the profiles values at each position, as 
+#' reported in reads per million (RPM).
+#' \itemize{
+#' \item{\code{chr7Profiles}}{ a \code{list} containing all demo ChIP-Seq 
+#' profiles }
+#' \item \code{chr7Profiles$chr7.61968807.61969730} { a \code{list} containing 2 
+#' ChIP-Seq profiles for the genomic region chr7:6196880-61969730 }
+#' \item \code{demoProfiles$chr7.61968807.61969730$H3K27ac} { a numeric vector 
+#' containing the profiles values related to the enhancer H3K27ac, as reported 
+#' in reads per million (RPM). The first entry of the vector is for position 
+#' chr7:61968807 while the last entry is for position chr7:61969730 }
+#' \item \code{demoProfiles$chr7.61968807.61969730$H3K4me1} { a numeric vector 
+#' containing the profiles values related to the enhancer H3K4me1, as reported 
+#' in reads per million (RPM). The first entry of the vector is for position 
+#' chr7:61968807 while the last entry is for position chr7:61969730 }
+#' }
+#' 
+#' @source The Encyclopedia of DNA Elements (ENCODE) (DCC accession:
+#' ENCFF000MZT)
+#'
+#' @references
+#' \itemize{
+#' \item Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia
+#' of DNA elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
+#' }
+#'
+#' @seealso
+#' \itemize{
+#' \item \code{\link{demoProfiles}} { ChIP-seq profiles related to enhancers 
+#' H3K27ac and H3K4me1 (for demonstration purpose)}
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately.}
+#' \item \code{\link{similarity}} {for calculating all available metrics 
+#' between two ChIP-Seq profiles.}
+#' }
+#'
+#' @usage data(chr7Profiles)
+#'
+#' @keywords datasets
+#'
+#' @examples
+#'
+#' data(chr7Profiles)
+#'
+#' ## Calculating all metrics for the "chr7.61968807.61969730" region 
+#' metrics <- similarity(chr7Profiles$chr7.61968807.61969730$H3K4me1, 
+#' chr7Profiles$chr7.61968807.61969730$H3K27ac, 
+#'     ratioAreaThreshold=10, 
+#'     ratioMaxMaxThreshold=4,
+#'     ratioIntersectThreshold=5, 
+#'     ratioNormalizedIntersectThreshold=2,
+#'     diffPosMaxThresholdMinValue=10, 
+#'     diffPosMaxThresholdMaxDiff=100, 
+#'     diffPosMaxTolerance=0.10)
+#' metrics
+#' 
+#' ## You can refer to the vignette to see more examples using ChIP-Seq profiles
+#' ## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
+#'
+NULL
+
+#' ChIP-Seq profiles of region chr7:61968807-61969730 related to enhancers 
+#' H3K27ac and H3K4me1 (for demonstration purpose)
+#' 
+#' ChIP-Seq profiles of region chr7:61968807-61969730 of two histone 
+#' post-transcriptional modifications linked to highly active enhancers H3K27ac 
+#' (DCC accession: ENCFF000ASG) and H3K4me1 (DCC accession: ENCFF000ARY) from 
+#' the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
+#'
+#' @name demoProfiles
+#'
+#' @docType data
+#'
+#' @aliases demoProfiles
+#'
+#' @format A \code{list} with 1 entry. The entry is a \code{list} of 2 
+#' ChIP-Seq profiles, one per active enhancer (H3K27ac and H3K4me1).The 2 
+#' ChIP-Seq profiles are of identical length and specific to a 
+#' genomic region. Each ChiP-Seq profile is 
+#' a numerical vector containing the profiles values at each position, as 
+#' reported in reads per million (RPM).
+#' \itemize{
+#' \item \code{demoProfiles} { a \code{list} containing all demo ChIP-Seq 
+#' profiles }
+#' \item \code{demoProfiles$chr2.70360770.70361098} { a list containing 2 
+#' ChIP-Seq profiles for the genomic region chr2:70360770-70361098 }
+#' \item \code{demoProfiles$chr2.70360770.70361098$H3K27ac} { a numeric vector 
+#' containing the profiles values related to the enhancer H3K27ac, as reported 
+#' in reads per million (RPM). The first entry of the vector is for position 
+#' chr1:70360770 while the last entry is for position chr2:70361098 }
+#' \item \code{demoProfiles$chr2.70360770.70361098$H3K4me1} { a numeric vector 
+#' containing the profiles values related to the enhancer H3K4me1, as reported 
+#' in reads per million (RPM). The first entry of the vector is for position 
+#' chr1:70360770 while the last entry is for position chr2:70361098 }
+#' \item \code{demoProfiles$chr3.73159773.73160145$H3K4me1} { a list containing 
+#' 2 ChIP-Seq profiles for the genomic region chr3:73159773-73160145 }
+#' \item \code{demoProfiles$chr3.73159773.73160145$H3K27ac} { a numeric vector 
+#' containing the profiles values related to the enhancer H3K27ac, as reported 
+#' in reads per million (RPM). The first entry of the vector is for position 
+#' chr2:73159773 while the last entry is for position chr3:73160145 }
+#' \item \code{demoProfiles$chr3.73159773.73160145$H3K4me1} { a numeric vector 
+#' containing the profiles values related to the enhancer H3K4me1, as reported 
+#' in reads per million (RPM). The first entry of the vector is for position 
+#' chr3:73159773 while the last entry is for position chr3:73160145 }
+#' }
+#' 
+#' @source The Encyclopedia of DNA Elements (ENCODE) (DCC accession:
+#' ENCFF000MZT)
+#'
+#' @references
+#' \itemize{
+#' \item Dunham I, Kundaje A, Aldred SF, et al. An integrated encyclopedia
+#' of DNA elements in the human genome. Nature. 2012 Sep 6;489(7414):57-74.
+#' }
+#'
+#' @seealso
+#' \itemize{
+#' \item \code{\link{chr7Profiles}} { ChIP-Seq profiles of region 
+#' chr7:61968807-61969730 related to enhancers H3K27ac and H3K4me1 
+#' (for demonstration purpose)}
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately.}
+#' \item \code{\link{similarity}} {for calculating all available metrics 
+#' between two ChIP-Seq profiles.}
+#' }
+#'
+#' @usage data(demoProfiles)
+#'
+#' @keywords datasets
+#'
+#' @examples
+#'
+#' data(demoProfiles)
+#'
+#' # Calculate metrics for the "chr3:73159773-73160145" region
+#' metrics <- similarity(demoProfiles$chr3.73159773.73160145$H3K27ac, 
+#'     demoProfiles$chr3.73159773.73160145$H3K4me1)
+#' metrics
+#' 
+#' ## You can refer to the vignette to see more examples using ChIP-Seq profiles
+#' ## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
+#'
+NULL
