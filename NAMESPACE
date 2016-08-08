@@ -3,3 +3,7 @@
 export(MetricFactory)
 export(similarity)
 import(R6)
+importFrom(stats,complete.cases)
+importFrom(stats,cor)
+importFrom(stats,median)
+importFrom(stats,sd)

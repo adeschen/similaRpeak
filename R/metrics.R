@@ -4,6 +4,45 @@
 # Class representing a abstract Metric which is used to quantify the similarity 
 # between two ChIP profiles covering the same range.
 #
+#' @title Metric class
+#' 
+#' @description A class which represents a abstract Metric object which is 
+#' used to quantify the similarity between two profiles covering the same range.
+#' 
+#' The \code{Metric} class should not be directly instanciated. It should be 
+#' used as the parent class of a specific metric class.
+#' 
+#' @return The \code{Metric$new} function returns a \code{Metric} 
+#' object which contains the information about the two profiles and the 
+#' threshold used to calculate the metric. It can be used, as many times 
+#' needed, to calculate the specified metric. 
+#' 
+#' @section Constructor:
+#' Create a \code{Metric} object.
+#' 
+#' \code{Metric$new(profile1, profile2, threshold = NULL)}
+#'
+#' The \code{Metric} object inherites those functions:
+#' \itemize{
+#' \item \code{getMetric} { A function that returns the value of the
+#' calculated metric }
+#' \item \code{getInfo} { A function that returns a description of the metric
+#' with the metric value.}
+#' \item \code{getType} { A function that returns the unique name associated
+#' to this metric }
+#' \item \code{calculateMetric} { A function that modifies the values of the
+#' two profiles and the threshold. The new values (profile1, profile2, 
+#' threshold) are passed as arguments.}
+#' }
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @import R6
+#' @author Astrid Deschenes
 Metric <- R6Class("Metric",
     public = list(
         initialize = function() {  
