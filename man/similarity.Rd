@@ -47,9 +47,6 @@ between 0 and 1. Default=0.01.}
 
 \item{spearmanCorrSDThreashold}{The minimum standard deviation accepted 
 on both profiles to calculate the metric. Default=1e-8.}
-
-\item{profile2}{Vector containing the RPM values of the second ChIP-Seq 
-profile for each position of the selected region.}
 }
 \value{
 A \code{list} containing :

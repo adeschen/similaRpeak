@@ -14,9 +14,6 @@
 #' @param profile2 Vector containing the RPM values of the second ChIP-Seq 
 #' profile for each position of the selected region.
 #' 
-#' @param profile2 Vector containing the RPM values of the second ChIP-Seq 
-#' profile for each position of the selected region.
-#' 
 #' @param ratioAreaThreshold The minimum denominator accepted to calculate 
 #' the ratio of the area between both profiles. The value has to be positive. 
 #' Default = 1.
