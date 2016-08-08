@@ -56,11 +56,9 @@ Metric <- R6Class("Metric",
 #' @section Constructor:
 #' Create a \code{RatioMaxMax} object.
 #' 
-#' @section Constructor:
-#' Create a \code{RatioMaxMax} object.
-#' 
 #' \code{RatioMaxMax$new(profile1, profile2, threshold = 1)}
 #'     
+#' The \code{RatioMaxMax} object inherites those functions:
 #' \itemize{
 #' \item \code{getMetric} { A function that returns the value of the
 #' calculated metric }
@@ -80,7 +78,7 @@ Metric <- R6Class("Metric",
 #' }
 #' 
 #' @import R6
-#' @author Astrid Deschenes, Elsa Bernatchez
+#' @author Astrid Deschenes
 RatioMaxMax <- R6Class("RatioMaxMax",
     inherit = Metric,
     public = list(
@@ -131,10 +129,50 @@ RatioMaxMax <- R6Class("RatioMaxMax",
     )
 )
 
-
-# Class representing an Area Ratio metric which is the ratio of profiles
-# total areas between two ChIP profiles covering the same range.
-#
+#' @title RatioArea class
+#' 
+#' @description An object which is a interface to calculate ratio between 
+#' the profile area of two profiles.
+#' 
+#' The \code{RatioArea} object is needed to 
+#' calculate the ratio between the profile area of two profile.
+#' A threshold and the two profiles are set during the \code{RatioArea} 
+#' object creation. If different threshold or 
+#' profiles are needed, the \code{calculateMetric} function should be used, 
+#' with the new profiles and threshold passed as arguments to update those
+#' values inside the \code{RatioArea} object.
+#' 
+#' @return The \code{RatioArea$new} function returns a \code{RatioArea} 
+#' object which contains the information about the two profiles and the 
+#' threshold used to calculate the metric. It can be used, as many times 
+#' needed, to calculate the specified metric. 
+#' 
+#' @section Constructor:
+#' Create a \code{RatioArea} object.
+#' 
+#' \code{RatioArea$new(profile1, profile2, threshold = 1)}
+#'     
+#' The \code{RatioArea} object inherites those functions:
+#' \itemize{
+#' \item \code{getMetric} { A function that returns the value of the
+#' calculated metric }
+#' \item \code{getInfo} { A function that returns a description of the metric
+#' with the metric value.}
+#' \item \code{getType} { A function that returns the unique name associated
+#' to this metric }
+#' \item \code{calculateMetric} { A function that modifies the values of the
+#' two profiles and the threshold. The new values (profile1, profile2, 
+#' threshold) are passed as arguments.}
+#' }
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately or togheter.}
+#' }
+#' 
+#' @import R6
+#' @author Astrid Deschenes
 RatioArea <- R6Class("RatioArea",
     inherit = Metric,
     public = list(
@@ -187,10 +225,51 @@ RatioArea <- R6Class("RatioArea",
 )  
 
 
-# Class representing a Positions Difference metric which is the difference 
-# of profiles maximal peaks positions 
-# between two ChIP profiles covering the same range.
-#
+#' @title DiffPosMax class
+#' 
+#' @description An object which is a interface to calculate he difference 
+#' of profiles maximal peaks positions.
+#' 
+#' The \code{DiffPosMax} object is needed to 
+#' calculate the difference of profiles maximal peaks positions.
+#' A threshold and the two profiles are set during the \code{DiffPosMax} 
+#' object creation. If different thresholds or 
+#' profiles are needed, the \code{calculateMetric} function should be used, 
+#' with the new profiles and thresholds passed as arguments to update those
+#' values inside the \code{DiffPosMax} object.
+#' 
+#' @return The \code{DiffPosMax$new} function returns a \code{DiffPosMax} 
+#' object which contains the information about the two profiles and the 
+#' thresholds used to calculate the metric. It can be used, as many times 
+#' needed, to calculate the specified metric. 
+#' 
+#' @section Constructor:
+#' Create a \code{DiffPosMax} object.
+#' 
+#' \code{DiffPosMax$new(profile1, profile2, threshold = 1, 
+#' thresholdDiff = 100, tolerance = 0.01)}
+#'     
+#' The \code{DiffPosMax} object inherites those functions:
+#' \itemize{
+#' \item \code{getMetric} { A function that returns the value of the
+#' calculated metric }
+#' \item \code{getInfo} { A function that returns a description of the metric
+#' with the metric value.}
+#' \item \code{getType} { A function that returns the unique name associated
+#' to this metric }
+#' \item \code{calculateMetric} { A function that modifies the values of the
+#' two profiles and the threshold. The new values (profile1, profile2, 
+#' threshold, thresholdDiff, tolerance) are passed as arguments.}
+#' }
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately or togheter.}
+#' }
+#' 
+#' @import R6
+#' @author Astrid Deschenes
 DiffPosMax <- R6Class("DiffPosMax",
     inherit = Metric,
     public = list(
@@ -248,10 +327,51 @@ DiffPosMax <- R6Class("DiffPosMax",
 )
 
 
-# Class representing an Intersect Ratio metric which is the ratio of profiles 
-# intersection area between two ChIP profiles covering the same range and 
-# those profiles total areas.
-#
+#' @title RatioIntersect class
+#' 
+#' @description An object which is a interface to calculate the ratio between 
+#' the peaks values between two profiles.
+#' 
+#' The \code{RatioIntersect} object is needed to 
+#' calculate  the ratio of profiles intersection area between two profiles and 
+#' those profiles total areas.
+#' A threshold and the two profiles are set during the \code{RatioIntersect} 
+#' object creation. If different threshold or 
+#' profiles are needed, the \code{calculateMetric} function should be used, 
+#' with the new profiles and threshold passed as arguments to update those
+#' values inside the \code{RatioIntersect} object.
+#' 
+#' @return The \code{RatioIntersect$new} function returns a \code{RatioIntersect} 
+#' object which contains the information about the two profiles and the 
+#' threshold used to calculate the metric. It can be used, as many times 
+#' needed, to calculate the specified metric. 
+#' 
+#' @section Constructor:
+#' Create a \code{RatioIntersect} object.
+#' 
+#' \code{RatioIntersect$new(profile1, profile2, threshold = 1)}
+#'     
+#' The \code{RatioIntersect} object inherites those functions:
+#' \itemize{
+#' \item \code{getMetric} { A function that returns the value of the
+#' calculated metric }
+#' \item \code{getInfo} { A function that returns a description of the metric
+#' with the metric value.}
+#' \item \code{getType} { A function that returns the unique name associated
+#' to this metric }
+#' \item \code{calculateMetric} { A function that modifies the values of the
+#' two profiles and the threshold. The new values (profile1, profile2, 
+#' threshold) are passed as arguments.}
+#' }
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately or togheter.}
+#' }
+#' 
+#' @import R6
+#' @author Astrid Deschenes
 RatioIntersect <- R6Class("RatioIntersect",
     inherit = Metric,
     public = list(
@@ -367,9 +487,52 @@ RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
     )
 )
 
-# Class representing a Spearman correlation metric which is the Spearman's  
+
+#' @title SpearmanCorrelation class
+#' 
+#' @description An object which is a interface to calculate the Spearman's  
 # rank correlation coefficient of the two profiles.
-#
+#' 
+#' The \code{SpearmanCorrelation} object is needed to 
+#' calculate the ratio between 
+#' the peaks values between two profiles.
+#' A threshold and the two profiles are set during the \code{SpearmanCorrelation} 
+#' object creation. If different profiles are needed, the 
+#' \code{calculateMetric} function should be used, 
+#' with the new profiles passed as arguments to update those
+#' values inside the \code{SpearmanCorrelation} object.
+#' 
+#' @return The \code{SpearmanCorrelation$new} function returns a 
+#' \code{SpearmanCorrelation} object which contains the information about 
+#' the two profiles. It can be used, as many times 
+#' needed, to calculate the specified metric. 
+#' 
+#' @section Constructor:
+#' Create a \code{SpearmanCorrelation} object.
+#' 
+#' \code{SpearmanCorrelation$new(profile1, profile2, threshold = NULL)}
+#'     
+#' The \code{SpearmanCorrelation} object inherites those functions:
+#' \itemize{
+#' \item \code{getMetric} { A function that returns the value of the
+#' calculated metric }
+#' \item \code{getInfo} { A function that returns a description of the metric
+#' with the metric value.}
+#' \item \code{getType} { A function that returns the unique name associated
+#' to this metric }
+#' \item \code{calculateMetric} { A function that modifies the values of the
+#' two profiles and the threshold. The new values (profile1, profile2) 
+#' are passed as arguments.}
+#' }
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately or togheter.}
+#' }
+#' 
+#' @import R6
+#' @author Astrid Deschenes
 SpearmanCorrelation <- R6Class("SpearmanCorrelation",
     inherit = Metric,
     public = list(
