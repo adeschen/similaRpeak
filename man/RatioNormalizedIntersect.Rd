@@ -27,13 +27,19 @@ object creation. If different profiles are needed, the
 \code{calculateMetric} function should be used, 
 with the new profiles passed as arguments to update those
 values inside the \code{RatioNormalizedIntersect} object.
+
+The threshold is the minimum total normalized area value accepted to 
+calculate a ratio.
 }
 \section{Constructor}{
 
 Create a \code{RatioNormalizedIntersect} object.
 
-\code{RatioNormalizedIntersect$new(profile1, profile2, threshold = NULL)}
-    
+\code{RatioNormalizedIntersect$new(profile1, profile2, threshold = 1)}
+
+The threshold is the minimum total normalized area value accepted to 
+calculate a ratio.
+
 The \code{RatioNormalizedIntersect} object inherites those functions:
 \itemize{
 \item \code{getMetric} { A function that returns the value of the

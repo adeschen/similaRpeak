@@ -419,15 +419,20 @@ DiffPosMax <- R6Class("DiffPosMax",
 #' with the new profiles and threshold passed as arguments to update those
 #' values inside the \code{RatioIntersect} object.
 #' 
-#' @return The \code{RatioIntersect$new} function returns a \code{RatioIntersect} 
-#' object which contains the information about the two profiles and the 
-#' threshold used to calculate the metric. It can be used, as many times 
-#' needed, to calculate the specified metric. 
+#' The threshold is the minimum total area value accepted 
+#' to calculate a ratio.
+#' 
+#' @return The \code{RatioIntersect$new} function returns a 
+#' \code{RatioIntersect} object which contains the information about the two 
+#' profiles and the threshold used to calculate the metric. It can be used, as 
+#' many times needed, to calculate the specified metric. 
 #' 
 #' @section Constructor:
 #' Create a \code{RatioIntersect} object.
 #' 
 #' \code{RatioIntersect$new(profile1, profile2, threshold = 1)}
+#' 
+#' The threshold is the minimum total area value accepted to calculate a ratio.
 #'     
 #' The \code{RatioIntersect} object inherites those functions:
 #' \itemize{
@@ -519,6 +524,9 @@ RatioIntersect <- R6Class("RatioIntersect",
 #' with the new profiles passed as arguments to update those
 #' values inside the \code{RatioNormalizedIntersect} object.
 #' 
+#' The threshold is the minimum total normalized area value accepted to 
+#' calculate a ratio.
+#' 
 #' @return The \code{RatioNormalizedIntersect$new} function returns a 
 #' \code{RatioNormalizedIntersect} object which contains the information about 
 #' the two profiles. It can be used, as many times 
@@ -527,8 +535,11 @@ RatioIntersect <- R6Class("RatioIntersect",
 #' @section Constructor:
 #' Create a \code{RatioNormalizedIntersect} object.
 #' 
-#' \code{RatioNormalizedIntersect$new(profile1, profile2, threshold = NULL)}
-#'     
+#' \code{RatioNormalizedIntersect$new(profile1, profile2, threshold = 1)}
+#' 
+#' The threshold is the minimum total normalized area value accepted to 
+#' calculate a ratio.
+#' 
 #' The \code{RatioNormalizedIntersect} object inherites those functions:
 #' \itemize{
 #' \item \code{getMetric} { A function that returns the value of the
@@ -616,12 +627,16 @@ RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
 #' The \code{SpearmanCorrelation} object is needed to 
 #' calculate the ratio between 
 #' the peaks values between two profiles.
-#' A threshold and the two profiles are set during the \code{SpearmanCorrelation} 
-#' object creation. If different profiles are needed, the 
+#' A threshold and the two profiles are set during the 
+#' \code{SpearmanCorrelation} 
+#' object creation. If different threshold or profiles are needed, the 
 #' \code{calculateMetric} function should be used, 
-#' with the new profiles passed as arguments to update those
+#' with the new profiles and threshold passed as arguments to update those
 #' values inside the \code{SpearmanCorrelation} object.
 #' 
+#' The threshold is the minimum standard deviation of the profile accepted 
+#' to calculate a ratio.
+#'     
 #' @return The \code{SpearmanCorrelation$new} function returns a 
 #' \code{SpearmanCorrelation} object which contains the information about 
 #' the two profiles. It can be used, as many times 
@@ -631,6 +646,9 @@ RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
 #' Create a \code{SpearmanCorrelation} object.
 #' 
 #' \code{SpearmanCorrelation$new(profile1, profile2, threshold = NULL)}
+#' 
+#' The threshold is the minimum standard deviation of the profile accepted 
+#' to calculate a ratio.
 #'     
 #' The \code{SpearmanCorrelation} object inherites those functions:
 #' \itemize{

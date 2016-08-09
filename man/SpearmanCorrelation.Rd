@@ -20,17 +20,24 @@ An object which is a interface to calculate the Spearman's
 The \code{SpearmanCorrelation} object is needed to 
 calculate the ratio between 
 the peaks values between two profiles.
-A threshold and the two profiles are set during the \code{SpearmanCorrelation} 
-object creation. If different profiles are needed, the 
+A threshold and the two profiles are set during the 
+\code{SpearmanCorrelation} 
+object creation. If different threshold or profiles are needed, the 
 \code{calculateMetric} function should be used, 
-with the new profiles passed as arguments to update those
+with the new profiles and threshold passed as arguments to update those
 values inside the \code{SpearmanCorrelation} object.
+
+The threshold is the minimum standard deviation of the profile accepted 
+to calculate a ratio.
 }
 \section{Constructor}{
 
 Create a \code{SpearmanCorrelation} object.
 
 \code{SpearmanCorrelation$new(profile1, profile2, threshold = NULL)}
+
+The threshold is the minimum standard deviation of the profile accepted 
+to calculate a ratio.
     
 The \code{SpearmanCorrelation} object inherites those functions:
 \itemize{

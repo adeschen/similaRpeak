@@ -9,10 +9,10 @@
 RatioIntersect
 }
 \value{
-The \code{RatioIntersect$new} function returns a \code{RatioIntersect} 
-object which contains the information about the two profiles and the 
-threshold used to calculate the metric. It can be used, as many times 
-needed, to calculate the specified metric.
+The \code{RatioIntersect$new} function returns a 
+\code{RatioIntersect} object which contains the information about the two 
+profiles and the threshold used to calculate the metric. It can be used, as 
+many times needed, to calculate the specified metric.
 }
 \description{
 An object which is a interface to calculate the ratio between 
@@ -26,12 +26,17 @@ object creation. If different threshold or
 profiles are needed, the \code{calculateMetric} function should be used, 
 with the new profiles and threshold passed as arguments to update those
 values inside the \code{RatioIntersect} object.
+
+The threshold is the minimum total area value accepted 
+to calculate a ratio.
 }
 \section{Constructor}{
 
 Create a \code{RatioIntersect} object.
 
 \code{RatioIntersect$new(profile1, profile2, threshold = 1)}
+
+The threshold is the minimum total area value accepted to calculate a ratio.
     
 The \code{RatioIntersect} object inherites those functions:
 \itemize{
