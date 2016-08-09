@@ -237,7 +237,7 @@ ratioIntersectMethod <- function(profile1, profile2, threshold = 1) {
 #' containing the alignment depth for each position. The \code{profile1} and 
 #' \code{profile2} should have the same length. 
 #' 
-#' @param threshold a \code{numeric}, the minimum denominator accepted 
+#' @param threshold a \code{numeric}, the minimum standard deviation accepted 
 #' to calculate a ratio.
 #' 
 #' @return The calculated ratio or \code{NA} if one profile has a standard 

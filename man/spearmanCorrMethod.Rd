@@ -15,7 +15,7 @@ containing the alignment depth for each position. The \code{profile1} and
 containing the alignment depth for each position. The \code{profile1} and 
 \code{profile2} should have the same length.}
 
-\item{threshold}{a \code{numeric}, the minimum denominator accepted 
+\item{threshold}{a \code{numeric}, the minimum standard deviation accepted 
 to calculate a ratio.}
 }
 \value{
