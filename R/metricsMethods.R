@@ -185,21 +185,36 @@ diffPosMaxMethod <- function(profile1,
     return(diff)
 }
 
-# Calculate and return the ratio between the intersection area of two profiles 
-# and the total area covered by those profiles. If the total area is inferior 
-# to the threshold, the function returns NA. The threshold has to be a positive 
-# value.
-#
-# Input:   
-#   profile1:    a first curve/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   profile2:    a second curve/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   threshold:   the minimum denominator accepted to calculate a ratio.
-#
-# Output: 
-#   The calculated ratio or NA if threshold is not respected.
-#
+
+#' @title  Ratio between the intersection area of two profiles and the 
+#' total area covered by those profiles
+#' 
+#' @description Calculate and return the ratio between the intersection area 
+#' of two profiles and the total area covered by those profiles. If the total
+#' area is inferior to 
+#' the threshold, the function returns \code{NA}.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum total area value accepted 
+#' to calculate a ratio.
+#' 
+#' @return The calculated ratio or \code{NA} if the total area is inferior 
+#' to the threshold. 
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @author Astrid Deschenes, Elsa Bernatchez
 ratioIntersectMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the area of the intersection (min of both curves for each position)
