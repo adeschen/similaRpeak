@@ -289,6 +289,19 @@ RatioArea <- R6Class("RatioArea",
 #' with the new profiles and thresholds passed as arguments to update those
 #' values inside the \code{DiffPosMax} object.
 #' 
+#' The threshold is the minimum peak value accepted 
+#' to calculate the ratio.
+#' 
+#' The thresholdDiff is the maximum distance accepted 
+#' between two maximum peaks positions in the same profile. When the 
+#' thresholdDiff is not respected, the profile is considered having more than
+#' one peak.
+#' 
+#' The tolerance is the maximum variation accepted on the 
+#' maximum peak value to consider a position as a peak position. The tolerance 
+#' must be between 0 and 1. All peaks within the tolerated range will be 
+#' considered in the calculation of the metric.
+#' 
 #' @return The \code{DiffPosMax$new} function returns a \code{DiffPosMax} 
 #' object which contains the information about the two profiles and the 
 #' thresholds used to calculate the metric. It can be used, as many times 
@@ -299,7 +312,21 @@ RatioArea <- R6Class("RatioArea",
 #' 
 #' \code{DiffPosMax$new(profile1, profile2, threshold = 1, 
 #' thresholdDiff = 100, tolerance = 0.01)}
-#'     
+#' 
+#' The threshold is the minimum peak value accepted 
+#' to calculate the ratio.
+#' 
+#' The thresholdDiff is the maximum distance accepted 
+#' between two maximum peaks positions in the same profile. When the 
+#' thresholdDiff is not respected, the profile is considered having more than
+#' one peak.
+#' 
+#' The tolerance is the maximum variation accepted on the 
+#' maximum peak value to consider a position as a peak position. All peaks 
+#' within the tolerated range will be 
+#' considered in the calculation of the metric.The tolerance must
+#  be between 0 and 1. Default = 0.01.
+#' 
 #' The \code{DiffPosMax} object inherites those functions:
 #' \itemize{
 #' \item \code{getMetric} { A function that returns the value of the
