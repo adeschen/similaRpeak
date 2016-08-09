@@ -26,7 +26,7 @@ profiles are needed, the \code{calculateMetric} function should be used,
 with the new profiles and threshold passed as arguments to update those
 values inside the \code{RatioArea} object.
 
-The threshold represent the minimum profile area value accepted 
+The threshold is the minimum profile area value accepted 
 to calculate the ratio.
 }
 \section{Constructor}{
@@ -34,7 +34,10 @@ to calculate the ratio.
 Create a \code{RatioArea} object.
 
 \code{RatioArea$new(profile1, profile2, threshold = 1)}
-    
+
+The threshold is the minimum profile area value accepted 
+to calculate the ratio.
+
 The \code{RatioArea} object inherites those functions:
 \itemize{
 \item \code{getMetric} { A function that returns the value of the

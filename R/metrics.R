@@ -87,6 +87,9 @@ Metric <- R6Class("Metric",
 #' with the new profiles and threshold passed as arguments to update those
 #' values inside the \code{RatioMaxMax} object.
 #' 
+#' The threshold is the minimum peak value accepted 
+#' to calculate a ratio.
+#' 
 #' @return The \code{RatioMaxMax$new} function returns a \code{RatioMaxMax} 
 #' object which contains the information about the two profiles and the 
 #' threshold used to calculate the metric. It can be used, as many times 
@@ -96,7 +99,10 @@ Metric <- R6Class("Metric",
 #' Create a \code{RatioMaxMax} object.
 #' 
 #' \code{RatioMaxMax$new(profile1, profile2, threshold = 1)}
-#'     
+#' 
+#' The threshold is the minimum peak value accepted 
+#' to calculate a ratio.
+#' 
 #' The \code{RatioMaxMax} object inherites those functions:
 #' \itemize{
 #' \item \code{getMetric} { A function that returns the value of the
@@ -181,6 +187,9 @@ RatioMaxMax <- R6Class("RatioMaxMax",
 #' with the new profiles and threshold passed as arguments to update those
 #' values inside the \code{RatioArea} object.
 #' 
+#' The threshold is the minimum profile area value accepted 
+#' to calculate the ratio.
+#' 
 #' @return The \code{RatioArea$new} function returns a \code{RatioArea} 
 #' object which contains the information about the two profiles and the 
 #' threshold used to calculate the metric. It can be used, as many times 
@@ -190,7 +199,10 @@ RatioMaxMax <- R6Class("RatioMaxMax",
 #' Create a \code{RatioArea} object.
 #' 
 #' \code{RatioArea$new(profile1, profile2, threshold = 1)}
-#'     
+#' 
+#' The threshold is the minimum profile area value accepted 
+#' to calculate the ratio.
+#' 
 #' The \code{RatioArea} object inherites those functions:
 #' \itemize{
 #' \item \code{getMetric} { A function that returns the value of the

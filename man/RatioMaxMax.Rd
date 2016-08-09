@@ -26,13 +26,19 @@ object creation. If different threshold or
 profiles are needed, the \code{calculateMetric} function should be used, 
 with the new profiles and threshold passed as arguments to update those
 values inside the \code{RatioMaxMax} object.
+
+The threshold is the minimum peak value accepted 
+to calculate a ratio.
 }
 \section{Constructor}{
 
 Create a \code{RatioMaxMax} object.
 
 \code{RatioMaxMax$new(profile1, profile2, threshold = 1)}
-    
+
+The threshold is the minimum peak value accepted 
+to calculate a ratio.
+
 The \code{RatioMaxMax} object inherites those functions:
 \itemize{
 \item \code{getMetric} { A function that returns the value of the
