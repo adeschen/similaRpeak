@@ -14,7 +14,7 @@
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioArea <- function(profile1, profile2, threshold = 1) {
+ratioAreaMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the total area associated to each profile
     area1 <- sum(profile1, na.rm = TRUE)
@@ -61,7 +61,7 @@ ratioArea <- function(profile1, profile2, threshold = 1) {
 #' }
 #' 
 #' @author Astrid Deschenes, Elsa Bernatchez
-ratioMaxMax <- function(profile1, profile2, threshold = 1) {
+ratioMaxMaxMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
@@ -117,7 +117,7 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1) {
 #' 
 #' @importFrom stats median
 #' @author Astrid Deschenes, Elsa Bernatchez
-diffPosMax <- function(profile1, 
+diffPosMaxMethod <- function(profile1, 
                        profile2, 
                        threshold = 1, 
                        thresholdDist = 100, 
@@ -186,7 +186,7 @@ diffPosMax <- function(profile1,
 # Output: 
 #   The calculated ratio or NA if threshold is not respected.
 #
-ratioIntersect <- function(profile1, profile2, threshold = 1) {
+ratioIntersectMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the area of the intersection (min of both curves for each position)
     intersect <- sum(unlist(lapply(1:length(profile1), 
@@ -238,7 +238,7 @@ ratioIntersect <- function(profile1, profile2, threshold = 1) {
 #' 
 #' @importFrom stats sd cor complete.cases
 #' @author Astrid Deschenes, Elsa Bernatchez
-spearmanCorr <- function(profile1, profile2, threshold = 1e-8) {
+spearmanCorrMethod <- function(profile1, profile2, threshold = 1e-8) {
 
     # Validate that each profile has at least one complete element pair
     # and that the standard deviation of each profile is superior to threshold

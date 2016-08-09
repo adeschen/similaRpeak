@@ -163,7 +163,7 @@ RatioMaxMax <- R6Class("RatioMaxMax",
             }
 
             # Calculate and assign the new max max ratio
-            super$setMetric(ratioMaxMax(profile1, profile2, threshold))
+            super$setMetric(ratioMaxMaxMethod(profile1, profile2, threshold))
         }
     )
 )
@@ -258,7 +258,7 @@ RatioArea <- R6Class("RatioArea",
             }
 
             # Calculate and assign the new max max ratio
-            super$setMetric(ratioArea(profile1, profile2, threshold))
+            super$setMetric(ratioAreaMethod(profile1, profile2, threshold))
         }
     )
 )  
@@ -359,7 +359,7 @@ DiffPosMax <- R6Class("DiffPosMax",
             }
 
             # Calculate and assign the new difference position maximum
-            super$setMetric(diffPosMax(profile1, profile2, threshold, 
+            super$setMetric(diffPosMaxMethod(profile1, profile2, threshold, 
                             thresholdDiff, tolerance))
         }
     )
@@ -456,19 +456,61 @@ RatioIntersect <- R6Class("RatioIntersect",
             }
 
             # Calculate and assign the new intersect ratio
-            super$setMetric(ratioIntersect(profile1, profile2, threshold))
+            super$setMetric(ratioIntersectMethod(profile1, profile2, threshold))
         }
     )
 )
 
 
-# Class representing a Normalized Intersect Ratio metric which is the ratio of 
-# profiles intersection area between two normalized ChIP profiles covering 
-# the same range and those profiles total areas. The ChIP profiles are 
+#' @title RatioNormalizedIntersect class
+#' 
+#' @description An object which is a interface to calculate the ratio of 
+#' profiles intersection area between two normalized profiles.The profiles are 
 # normalized by multiplying the profile values with the length 
-# of the profile and dividind it by the area of the profile.
+# of the profile and dividing it by the area of the profile.
 # normalized values = profile values * length(profile)/area(profile)
-#
+#' 
+#' The \code{RatioNormalizedIntersect} object is needed to 
+#' calculate the ratio of profiles intersection area between two 
+#' normalized profiles.
+#' A threshold and the two profiles are set during the 
+#' \code{RatioNormalizedIntersect} 
+#' object creation. If different profiles are needed, the 
+#' \code{calculateMetric} function should be used, 
+#' with the new profiles passed as arguments to update those
+#' values inside the \code{RatioNormalizedIntersect} object.
+#' 
+#' @return The \code{RatioNormalizedIntersect$new} function returns a 
+#' \code{RatioNormalizedIntersect} object which contains the information about 
+#' the two profiles. It can be used, as many times 
+#' needed, to calculate the specified metric. 
+#' 
+#' @section Constructor:
+#' Create a \code{RatioNormalizedIntersect} object.
+#' 
+#' \code{RatioNormalizedIntersect$new(profile1, profile2, threshold = NULL)}
+#'     
+#' The \code{RatioNormalizedIntersect} object inherites those functions:
+#' \itemize{
+#' \item \code{getMetric} { A function that returns the value of the
+#' calculated metric }
+#' \item \code{getInfo} { A function that returns a description of the metric
+#' with the metric value.}
+#' \item \code{getType} { A function that returns the unique name associated
+#' to this metric }
+#' \item \code{calculateMetric} { A function that modifies the values of the
+#' two profiles and the threshold. The new values (profile1, profile2, 
+#' threshold) are passed as arguments.}
+#' }
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using a interface to calculate all 
+#' available metrics separately or togheter.}
+#' }
+#' 
+#' @import R6
+#' @author Astrid Deschenes
 RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
     inherit = Metric,
     public = list(
@@ -520,7 +562,7 @@ RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
                                             na.rm=TRUE))
 
             # Calculate and assign the normalized intersect ratio
-            super$setMetric(ratioIntersect(normProfile1, normProfile2, 
+            super$setMetric(ratioIntersectMethod(normProfile1, normProfile2, 
                                             threshold))
         }
     )
@@ -617,7 +659,7 @@ SpearmanCorrelation <- R6Class("SpearmanCorrelation",
             }
 
             # Calculate and assign the spearman correlation
-            super$setMetric(spearmanCorr(profile1, profile2, threshold))
+            super$setMetric(spearmanCorrMethod(profile1, profile2, threshold))
         }
     )
 )
