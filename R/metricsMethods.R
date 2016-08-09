@@ -253,7 +253,7 @@ ratioIntersectMethod <- function(profile1, profile2, threshold = 1) {
 #' \code{profile2} should have the same length. 
 #' 
 #' @param threshold a \code{numeric}, the minimum standard deviation accepted 
-#' to calculate a ratio.
+#' to calculate a ratio. Default = 1e-8
 #' 
 #' @return The calculated ratio or \code{NA} if one profile has a standard 
 #' deviation inferior to the threshold. If profiles have no complete element 
