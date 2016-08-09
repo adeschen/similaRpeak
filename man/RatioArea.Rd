@@ -25,6 +25,9 @@ object creation. If different threshold or
 profiles are needed, the \code{calculateMetric} function should be used, 
 with the new profiles and threshold passed as arguments to update those
 values inside the \code{RatioArea} object.
+
+The threshold represent the minimum profile area value accepted 
+to calculate the ratio.
 }
 \section{Constructor}{
 

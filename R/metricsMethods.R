@@ -1,19 +1,33 @@
-# Calculate and return the area ratio between two ChIP 
-# profiles covering the same range. The area from profile1 is always divided by
-# area from profile2. If the minimum area between profile1 and profile2 is 
-# inferior to the threshold, the function returns NA. 
-# The threshold has to be a positive value.
-#
-# Input:   
-#   profile1:    a first profile/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   profile2:    a second profile/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   threshold:   the minimum denominator accepted to calculate a ratio.
-#
-# Output: 
-#   The calculated ratio or NA if threshold is not respected.
-#
+
+#' @title Ratio of profiles area between two profiles
+#' 
+#' @description Calculate and return the ratio of profiles area 
+#' between two profiles covering the same range. The  
+#' area of the first profile is always divided by the area of
+#' the second profile.If one area value is inferior to the threshold, the 
+#' function returns \code{NA}.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum profile area value accepted 
+#' to calculate a ratio.
+#' 
+#' @return The calculated ratio or \code{NA} if one profile area value is 
+#' inferior to the threshold.
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @author Astrid Deschenes, Elsa Bernatchez
 ratioAreaMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the total area associated to each profile
