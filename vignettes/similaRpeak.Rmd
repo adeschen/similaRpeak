@@ -10,7 +10,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r style, echo = FALSE, results = 'asis', message = FALSE}
+```{r style, echo = FALSE, results = 'asis', message = FALSE, warning=FALSE}
 BiocStyle::markdown()
 library(knitr)
 ```
@@ -75,8 +75,8 @@ respected for the intersection area.
 
 ## Loading the similaRpeak package
 
-```{r loadingPackage} 
-suppressMessages(library(similaRpeak))
+```{r loadingPackage, warning=FALSE, message=FALSE} 
+library(similaRpeak)
 ```
 
 
@@ -157,7 +157,7 @@ generate ChIP-Seq profiles. An example is available on
 
 ## Metrics
 
-### Metric definition
+### Metric versus Pseudometric
 
 Mathematically, a metric is considered as a function that quantifies the 
 similarity between two objects.The function must return zero when the two 
@@ -185,7 +185,7 @@ $$ |\log(RATIO)| $$
             
 <br>
 
-### Metrics demonstration
+## Metrics Presentation
 
 To ease comparison, the same ChIP-Seq profiles are used in each metric 
 description section. Those are ChIP-Seq profiles of two histone 
@@ -204,16 +204,20 @@ str(demoProfiles)
 
 <br>
 
-#### RATIO_AREA Metric
+### RATIO_AREA
 
 The **RATIO_AREA** metric is the ratio between the profile areas. The first 
 profile (`profile1` parameter) is always divided by the second profile 
 (`profile2` parameter). `NA` is returned if minimal area threshold 
-(`ratioAreaThreshold` parameter) is not respected for at least one of the 
-profiles.
+(`ratioAreaThreshold` parameter, default = 1) is not respected for at least 
+one of the profiles.
 
 The **RATIO_AREA** metric can be useful to detect regions with similar 
 coverage even if the profiles are different. 
+
+<p style="text-align: center;">
+**similarity(profile1, profile2, ratioAreaThreshold = 1)**
+</p>
 
 ```{r ratio_area_graph, echo=FALSE, fig.width=11, fig.height=8}
 par(mar=c(6,4,2,2))
@@ -284,7 +288,7 @@ metrics$metric$RATIO_AREA
 
 <br>
 
-#### DIFF_POS_MAX Metric
+### DIFF_POS_MAX
 
 The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
 positions. The difference is always the first profile value 
@@ -303,6 +307,10 @@ is not respected, it is assumed that no peak is present in the profile and
 `NA` is returned. 
 
 The **DIFF_POS_MAX** metric can be useful to detect regions with shifted peaks.
+
+<p style="text-align: center;">
+**similarity(profile1, profile2, diffPosMaxTolerance = 0.01, diffPosMaxThresholdMaxDiff = 100, diffPosMaxThresholdMinValue = 1)**
+</p>
 
 ```{r diff_pos_max, echo=FALSE, fig.width=11, fig.height=8}
 
