@@ -382,7 +382,7 @@ metrics$metric$DIFF_POS_MAX
 
 <br>
 
-#### RATIO_MAX_MAX Metric
+### RATIO_MAX_MAX 
 
 The **RATIO_MAX_MAX** metric is the ratio between the peaks values 
 in each profile. The first profile (`profile1` parameter) is always divided by 
@@ -392,6 +392,10 @@ profiles.
 
 The **RATIO_MAX_MAX** metric can be useful to detect regions with peaks with 
 similar (or dissimilar) amplitude.
+
+<p style="text-align: center;">
+**similarity(profile1, profile2, ratioMaxMaxThreshold = 1)**
+</p>
 
 ```{r ratio_max_max, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -463,7 +467,7 @@ metrics$metric$RATIO_MAX_MAX
 
 <br>
 
-#### RATIO_INTERSECT Metric
+### RATIO_INTERSECT 
 
 The **RATIO_INTERSECT** metric is the ratio between the intersection area and 
 the total area of the two profiles. `NA` if minimal area threshold 
@@ -472,6 +476,10 @@ area.
 
 The **RATIO_INTERSECT** metric can be useful to detect regions with possibily 
 similar profiles.
+
+<p style="text-align: center;">
+**similarity(profile1, profile2, ratioIntersectThreshold = 1)**
+</p>
 
 ```{r ratio_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
