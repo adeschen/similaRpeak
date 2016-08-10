@@ -34,10 +34,10 @@ to calculate a ratio.
 
 Create a \code{SpearmanCorrelation} object.
 
-\code{SpearmanCorrelation$new(profile1, profile2, threshold = NULL)}
+\code{SpearmanCorrelation$new(profile1, profile2, threshold = 1e-8)}
 
 The threshold is the minimum standard deviation of the profile accepted 
-to calculate a ratio.
+to calculate a ratio. Default = 1e-8
     
 The \code{SpearmanCorrelation} object inherites those functions:
 \itemize{

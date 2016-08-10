@@ -38,7 +38,7 @@ Create a \code{RatioNormalizedIntersect} object.
 \code{RatioNormalizedIntersect$new(profile1, profile2, threshold = 1)}
 
 The threshold is the minimum total normalized area value accepted to 
-calculate a ratio.
+calculate a ratio. Default = 1
 
 The \code{RatioNormalizedIntersect} object inherites those functions:
 \itemize{
