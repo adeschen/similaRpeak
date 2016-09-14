@@ -40,6 +40,6 @@ NeedsCompilation: no
 Author: Astrid Deschenes [cre, aut], Elsa Bernatchez [aut],
     Charles Joly Beauparlant [aut], Fabien Claude Lamaze [aut],
     Rawane Samb [aut], Pascal Belleau [aut], Arnaud Droit [aut]
-Maintainer: Astrid Louise Deschenes
+Maintainer: Astrid Deschenes
     <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
 RoxygenNote: 5.0.1
