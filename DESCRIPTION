@@ -1,7 +1,6 @@
 Package: similaRpeak
 Type: Package
-Title: Metrics to estimate a level of similarity between
-        two ChIP-Seq profiles
+Title: Metrics to estimate a level of similarity between two ChIP-Seq profiles
 Version: 1.5.2
 Date: 2014-08-08
 Authors@R: c( person("Astrid","Deschenes",
@@ -18,16 +17,20 @@ Authors@R: c( person("Astrid","Deschenes",
         person("Arnaud", "Droit",
         email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
 Description: This package calculates metrics which assign a level of
-        similarity between ChIP-Seq profiles.
+    similarity between ChIP-Seq profiles.
 biocViews: BiologicalQuestion, ChIPSeq, Genetics, MultipleComparison,
-        DifferentialExpression
-Depends: R6 (>= 2.0)
-Imports: rtracklayer, 
-    GenomicAlignments, 
-    Rsamtools
-Suggests: RUnit, 
-    BiocGenerics, 
-    knitr, 
+    DifferentialExpression
+Depends:
+    R6 (>= 2.0)
+Imports:
+    rtracklayer,
+    GenomicAlignments,
+    Rsamtools,
+    stats
+Suggests:
+    RUnit,
+    BiocGenerics,
+    knitr,
     BiocStyle
 License: Artistic-2.0
 URL: https://github.com/adeschen/similaRpeak
@@ -35,7 +38,7 @@ BugReports: https://github.com/adeschen/similaRpeak/issues
 VignetteBuilder: knitr
 NeedsCompilation: no
 Author: Astrid Deschenes [cre, aut], Elsa Bernatchez [aut],
-        Charles Joly Beauparlant [aut], Fabien Claude Lamaze [aut],
-        Rawane Samb [aut], Pascal Belleau [aut], Arnaud Droit [aut]
+    Charles Joly Beauparlant [aut], Fabien Claude Lamaze [aut],
+    Rawane Samb [aut], Pascal Belleau [aut], Arnaud Droit [aut]
 Maintainer: Astrid Louise Deschenes
-        <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
+    <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
