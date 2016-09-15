@@ -11,6 +11,7 @@ warnings_are_errors: true
 r_binary_packages:
   - RUnit
   - knitr
+  - rmarkdown
 
 # Package dependencies from Bioconductor
 bioc_packages:

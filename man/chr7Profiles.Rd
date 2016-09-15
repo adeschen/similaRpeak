@@ -33,7 +33,7 @@ the Encyclopedia of DNA Elements (ENCODE) data (Dunham I et al. 2012).
                 enhancer H3K4me1, as reported in reads per million (RPM). The 
                 first entry of the vector is for position chr7:61968807 while 
                 the last entry is for position chr7:61969730 }
-  }
+    }
 }
 \source{
 The Encyclopedia of DNA Elements (ENCODE) data
