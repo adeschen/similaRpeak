@@ -31,6 +31,7 @@ Suggests:
     RUnit,
     BiocGenerics,
     knitr,
+    rmarkdown,
     BiocStyle
 License: Artistic-2.0
 URL: https://github.com/adeschen/similaRpeak
