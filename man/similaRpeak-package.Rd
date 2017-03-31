@@ -52,6 +52,6 @@ Pascal Belleau and
 Arnaud Droit
 
 Maintainer:
-Astrid Deschenes <astrid-louise.deschenes@crchudequebec.ulaval.ca>
+Astrid Deschenes <adeschen@hotmail.com>
 }
 \keyword{package}

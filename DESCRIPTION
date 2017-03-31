@@ -4,7 +4,7 @@ Title: Metrics to estimate a level of similarity between two ChIP-Seq profiles
 Version: 1.5.2
 Date: 2014-08-08
 Authors@R: c( person("Astrid","Deschenes",
-        email="Astrid-Louise.Deschenes@crchudequebec.ulaval.ca",
+        email="adeschen@hotmail.com",
         role=c("cre","aut")), person("Elsa", "Bernatchez",
         email="elsa.bernatchez.1@ulaval.ca", role=c("aut")),
         person("Charles", "Joly Beauparlant",
@@ -13,7 +13,7 @@ Authors@R: c( person("Astrid","Deschenes",
         email="fabien.lamaze.1@ulaval.ca", role=c("aut")),
         person("Rawane", "Samb", email="rawane.samb.1@ulaval.ca",
         role=c("aut")), person("Pascal", "Belleau",
-        email="pascal.belleau@crchuq.ulaval.ca", role=c("aut")),
+        email="pascal_belleau@hotmail.com", role=c("aut")),
         person("Arnaud", "Droit",
         email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
 Description: This package calculates metrics which assign a level of
@@ -42,5 +42,5 @@ Author: Astrid Deschenes [cre, aut], Elsa Bernatchez [aut],
     Charles Joly Beauparlant [aut], Fabien Claude Lamaze [aut],
     Rawane Samb [aut], Pascal Belleau [aut], Arnaud Droit [aut]
 Maintainer: Astrid Deschenes
-    <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
+    <adeschen@hotmail.com>
 RoxygenNote: 6.0.1
