@@ -23,14 +23,14 @@ biocViews: BiologicalQuestion, ChIPSeq, Genetics, MultipleComparison,
 Depends:
     R6 (>= 2.0)
 Imports:
-    rtracklayer,
-    GenomicAlignments,
-    Rsamtools,
     stats
 Suggests:
     RUnit,
     BiocGenerics,
     knitr,
+    Rsamtools,
+    GenomicAlignments,
+    rtracklayer,
     rmarkdown,
     BiocStyle
 License: Artistic-2.0
@@ -41,5 +41,6 @@ NeedsCompilation: no
 Author: Astrid Deschenes [cre, aut], Elsa Bernatchez [aut],
     Charles Joly Beauparlant [aut], Fabien Claude Lamaze [aut],
     Rawane Samb [aut], Pascal Belleau [aut], Arnaud Droit [aut]
-Maintainer: Astrid Louise Deschenes
+Maintainer: Astrid Deschenes
     <Astrid-Louise.Deschenes@crchudequebec.ulaval.ca>
+RoxygenNote: 6.0.1
