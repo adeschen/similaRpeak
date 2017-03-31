@@ -231,7 +231,7 @@ RatioArea <- R6Class("RatioArea",
 
             # Fix the type of metric
             super$setType("RATIO_AREA")
-                               
+
             if (!missing(profile1) && !missing(profile2)) {
                 self$calculateMetric(profile1, profile2, threshold)   
             }
@@ -371,7 +371,7 @@ DiffPosMax <- R6Class("DiffPosMax",
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
                 stop(paste0("The 'profile1' argument is mandatory. ", 
-                       "The metric value has been reset to NA."))
+                        "The metric value has been reset to NA."))
             }
 
             if (missing(profile2)) {
@@ -459,7 +459,7 @@ RatioIntersect <- R6Class("RatioIntersect",
     inherit = Metric,
     public = list(
         initialize = function(profile1,profile2, threshold = 1) {
-                             
+            
             # Fix the type of metric
             super$setType("RATIO_INTERSECT")
 
@@ -756,7 +756,8 @@ SpearmanCorrelation <- R6Class("SpearmanCorrelation",
 #' \item \code{ratioAreaThreshold} { The minimum denominator accepted to 
 #' calculate the ratio of the area between both profiles. Default = 1.}
 #' \item \code{ratioMaxMaxThreshold} { The minimum denominator accepted to 
-#' calculate the ratio of the maximum values between both profiles. Default = 1.}
+#' calculate the ratio of the maximum values between both profiles. 
+#' Default = 1.}
 #' \item \code{ratioIntersectThreshold} { The minimum denominator accepted to 
 #' calculate the ratio of the intersection area of both profiles and the 
 #' total area. Default = 1.}
@@ -771,7 +772,8 @@ SpearmanCorrelation <- R6Class("SpearmanCorrelation",
 #' \item \code{diffPosMaxTolerance} {The maximum variation accepted on the 
 #' maximum value to consider a position as a peak position. Default=0.01.}
 #' \item\code{spearmanCorrSDThreashold} {The minimum standard deviation 
-#' accepted on both profiles to consider to calculate the metric. Default=1e-8.}
+#' accepted on both profiles to consider to calculate the metric. 
+#' Default=1e-8.}
 #' }
 #' 
 #' @examples

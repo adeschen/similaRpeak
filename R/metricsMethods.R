@@ -132,10 +132,10 @@ ratioMaxMaxMethod <- function(profile1, profile2, threshold = 1) {
 #' @importFrom stats median
 #' @author Astrid Deschenes, Elsa Bernatchez
 diffPosMaxMethod <- function(profile1, 
-                       profile2, 
-                       threshold = 1, 
-                       thresholdDist = 100, 
-                       tolerance = 0.01) {
+                        profile2, 
+                        threshold = 1, 
+                        thresholdDist = 100, 
+                        tolerance = 0.01) {
 
     # The profile1 and profile2 arguments are numeric vectors. 
     # If not, NA is returned. 
@@ -278,7 +278,7 @@ spearmanCorrMethod <- function(profile1, profile2, threshold = 1e-8) {
     } else {
         # Spearman correlation
         correlation <- cor(x=profile1, y=profile2, use="complete.obs", 
-                       method="spearman")
+                            method="spearman")
     }
 
     return(correlation)

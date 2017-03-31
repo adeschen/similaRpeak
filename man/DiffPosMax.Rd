@@ -72,14 +72,14 @@ two profiles and the threshold. The new values (profile1, profile2,
 threshold, thresholdDiff, tolerance) are passed as arguments.}
 }
 }
-\author{
-Astrid Deschenes
-}
+
 \seealso{
 \itemize{
 \item \code{\link{MetricFactory}} {for using a interface to calculate all 
 available metrics separately or togheter.}
 }
 }
+\author{
+Astrid Deschenes
+}
 \keyword{datasets}
-

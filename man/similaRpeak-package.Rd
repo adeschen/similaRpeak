@@ -2,8 +2,8 @@
 % Please edit documentation in R/similaRpeak.R
 \docType{package}
 \name{similaRpeak-package}
-\alias{similaRpeak}
 \alias{similaRpeak-package}
+\alias{similaRpeak}
 \title{similaRpeak: Metrics to estimate a level of similarity between two 
 ChIP-Seq profiles}
 \description{
@@ -34,6 +34,14 @@ value and the position of the maximum value.
 To learn more about \pkg{similaRpeak} package see:
 \url{https://github.com/adeschen/similaRpeak/wiki}
 }
+\seealso{
+\itemize{
+\item \code{\link{MetricFactory}} {for using a interface to calculate all 
+available metrics separately.}
+\item \code{\link{similarity}} {for calculating all available metrics 
+between two ChIP-Seq profiles.}
+}
+}
 \author{
 Astrid Deschenes,
 Elsa Bernatchez,
@@ -46,13 +54,4 @@ Arnaud Droit
 Maintainer:
 Astrid Deschenes <astrid-louise.deschenes@crchudequebec.ulaval.ca>
 }
-\seealso{
-\itemize{
-\item \code{\link{MetricFactory}} {for using a interface to calculate all 
-available metrics separately.}
-\item \code{\link{similarity}} {for calculating all available metrics 
-between two ChIP-Seq profiles.}
-}
-}
 \keyword{package}
-

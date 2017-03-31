@@ -37,13 +37,12 @@ When more than one maximual peak is present in one profile, the mediane of
 the position is calculated and used as the maximal peak position.
 If one threshold is not respected, the function returns \code{NA}.
 }
-\author{
-Astrid Deschenes, Elsa Bernatchez
-}
 \seealso{
 \itemize{
 \item \code{\link{MetricFactory}} {for using the recommanded interface to 
 calculate all available metrics separately or togheter.}
 }
 }
-
+\author{
+Astrid Deschenes, Elsa Bernatchez
+}

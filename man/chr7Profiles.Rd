@@ -5,16 +5,16 @@
 \alias{chr7Profiles}
 \title{ChIP-Seq profiles of region chr7:61968807-61969730 related to enhancers 
 H3K27ac and H3K4me1 (for demonstration purpose)}
-\format{A \code{list} with 1 entry. The entry is a list of 2 ChIP-Seq profiles, 
-one per active enhancer (H3K27ac and H3K4me1).The 2 ChIP-Seq profiles are of 
-identical length and specific to a genomic region. Each ChiP-Seq profile is 
-a numerical vector containing the profiles values at each position, as 
-reported in reads per million (RPM).
+\format{A \code{list} with 1 entry. The entry is a list of 2 ChIP-Seq 
+profiles, one per active enhancer (H3K27ac and H3K4me1).The 2 ChIP-Seq 
+profiles are of identical length and specific to a genomic region. Each 
+ChiP-Seq profile is a numerical vector containing the profiles values 
+at each position, as reported in reads per million (RPM).
 \itemize{
 \item{\code{chr7Profiles}}{ a \code{list} containing all demo ChIP-Seq 
 profiles }
-\item \code{chr7Profiles$chr7.61968807.61969730} { a \code{list} containing 2 
-ChIP-Seq profiles for the genomic region chr7:6196880-61969730 }
+\item \code{chr7Profiles$chr7.61968807.61969730} { a \code{list} containing  
+2 ChIP-Seq profiles for the genomic region chr7:6196880-61969730 }
 \item \code{demoProfiles$chr7.61968807.61969730$H3K27ac} { a numeric vector 
 containing the profiles values related to the enhancer H3K27ac, as reported 
 in reads per million (RPM). The first entry of the vector is for position 
@@ -74,4 +74,3 @@ between two ChIP-Seq profiles.}
 }
 }
 \keyword{datasets}
-

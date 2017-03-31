@@ -44,7 +44,8 @@ Create a \code{MetricFactory} object.
 \item \code{ratioAreaThreshold} { The minimum denominator accepted to 
 calculate the ratio of the area between both profiles. Default = 1.}
 \item \code{ratioMaxMaxThreshold} { The minimum denominator accepted to 
-calculate the ratio of the maximum values between both profiles. Default = 1.}
+calculate the ratio of the maximum values between both profiles. 
+Default = 1.}
 \item \code{ratioIntersectThreshold} { The minimum denominator accepted to 
 calculate the ratio of the intersection area of both profiles and the 
 total area. Default = 1.}
@@ -59,9 +60,11 @@ Default=100.}
 \item \code{diffPosMaxTolerance} {The maximum variation accepted on the 
 maximum value to consider a position as a peak position. Default=0.01.}
 \item\code{spearmanCorrSDThreashold} {The minimum standard deviation 
-accepted on both profiles to consider to calculate the metric. Default=1e-8.}
+accepted on both profiles to consider to calculate the metric. 
+Default=1e-8.}
 }
 }
+
 \examples{
 
 ## Initialized the factory object
@@ -110,9 +113,6 @@ ratio_area <- factory$createMetric(metricType="RATIO_AREA",
 ratio_area
 
 }
-\author{
-Astrid Deschenes
-}
 \seealso{
 \itemize{
 \item \code{\link{similarity}} {for calculating all available metrics 
@@ -121,5 +121,7 @@ between two ChIP-Seq profiles.}
 profiles present in the demoProfiles data.}
 }
 }
+\author{
+Astrid Deschenes
+}
 \keyword{datasets}
-

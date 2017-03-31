@@ -29,13 +29,12 @@ of two profiles and the total area covered by those profiles. If the total
 area is inferior to 
 the threshold, the function returns \code{NA}.
 }
-\author{
-Astrid Deschenes, Elsa Bernatchez
-}
 \seealso{
 \itemize{
 \item \code{\link{MetricFactory}} {for using the recommanded interface to 
 calculate all available metrics separately or togheter.}
 }
 }
-
+\author{
+Astrid Deschenes, Elsa Bernatchez
+}

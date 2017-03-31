@@ -29,13 +29,12 @@ area of the first profile is always divided by the area of
 the second profile.If one area value is inferior to the threshold, the 
 function returns \code{NA}.
 }
-\author{
-Astrid Deschenes, Elsa Bernatchez
-}
 \seealso{
 \itemize{
 \item \code{\link{MetricFactory}} {for using the recommanded interface to 
 calculate all available metrics separately or togheter.}
 }
 }
-
+\author{
+Astrid Deschenes, Elsa Bernatchez
+}

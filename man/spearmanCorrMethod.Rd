@@ -29,13 +29,12 @@ profiles. If one profile has a standard deviation inferior to
 the threshold, the function returns \code{NA}. When no complete element 
 pair are present, \code{NA} is returned.
 }
-\author{
-Astrid Deschenes, Elsa Bernatchez
-}
 \seealso{
 \itemize{
 \item \code{\link{MetricFactory}} {for using the recommanded interface to 
 calculate all available metrics separately or togheter.}
 }
 }
-
+\author{
+Astrid Deschenes, Elsa Bernatchez
+}

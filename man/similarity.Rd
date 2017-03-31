@@ -155,9 +155,6 @@ similarity(demoProfiles$chr2.70360770.70361098$H3K4me1,
 ## extracted from the Encyclopedia of DNA Elements (ENCODE) data.
 
 }
-\author{
-Astrid Deschenes, Elsa Bernatchez
-}
 \seealso{
 \itemize{
 \item \code{\link{MetricFactory}} {for using a interface to calculate all 
@@ -166,4 +163,6 @@ available metrics separately or togheter.}
 profiles present in the demoProfiles data.}
 }
 }
-
+\author{
+Astrid Deschenes, Elsa Bernatchez
+}
