@@ -35,6 +35,7 @@ test.metrics_metricfactory_all <- function() {
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
 
+
 ###################################################
 # Test good result for each metric
 ###################################################
@@ -80,6 +81,7 @@ test.metrics_metricfactory_ratio_intersect <- function() {
                                 c(15,9,46,44,9,39,27,34,34,4))
     checkEquals(obs, exp, tolerance = .Machine$double.eps^0.5)
 }
+
 
 #####################################################
 # Test results for each metric when NA in profiles
@@ -207,6 +209,7 @@ test.metrics_metricfactory_missing_metric_type <- function() {
                         "The missing 'metricType' argument did not generated ",
                         "the expected excpetion."))
 }
+
 
 ####################################################################
 ## Test result for each metric when missing profile

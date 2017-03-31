@@ -132,6 +132,7 @@ RatioMaxMax <- R6Class("RatioMaxMax",
             # Fix the type of metric
             super$setType("RATIO_MAX_MAX")
 
+
             if (!missing(profile1) && !missing(profile2)) {
                 self$calculateMetric(profile1, profile2, threshold)   
             }
