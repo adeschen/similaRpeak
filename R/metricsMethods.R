@@ -1,20 +1,34 @@
-# Calculate and return the area ratio between two ChIP 
-# profiles covering the same range. The area from profile1 is always divided by
-# area from profile2. If the minimum area between profile1 and profile2 is 
-# inferior to the threshold, the function returns NA. 
-# The threshold has to be a positive value.
-#
-# Input:   
-#   profile1:    a first profile/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   profile2:    a second profile/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   threshold:   the minimum denominator accepted to calculate a ratio.
-#
-# Output: 
-#   The calculated ratio or NA if threshold is not respected.
-#
-ratioArea <- function(profile1, profile2, threshold = 1) {
+
+#' @title Ratio of profiles area between two profiles
+#' 
+#' @description Calculate and return the ratio of profiles area 
+#' between two profiles covering the same range. The  
+#' area of the first profile is always divided by the area of
+#' the second profile.If one area value is inferior to the threshold, the 
+#' function returns \code{NA}.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum profile area value accepted 
+#' to calculate a ratio.
+#' 
+#' @return The calculated ratio or \code{NA} if one profile area value is 
+#' inferior to the threshold.
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @author Astrid Deschenes, Elsa Bernatchez
+ratioAreaMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the total area associated to each profile
     area1 <- sum(profile1, na.rm = TRUE)
@@ -31,22 +45,37 @@ ratioArea <- function(profile1, profile2, threshold = 1) {
     return(ratio)
 }
 
-# Calculate and return the ratio of profiles maximal peaks between two ChIP 
-# profiles covering the same range. The profile1 
-# maximal peak is always divided by the profile2 minimum peak. If the minimum 
-# peak is inferior to the threshold, the function returns NA.
-#
-# Input:   
-#   profile1:   a first profile/vector containing depths. Each position is 
-#               associated to a position in particular, which is assumed.
-#   profile2:   a second prfole/vector containing depths. Each position is 
-#               associated to a position in particular, which is assumed.
-#   threshold   the minimum denominator accepted to calculate a ratio.
-#
-# Output: 
-#   The calculated ratio or NA if threshold is not respected.
-#
-ratioMaxMax <- function(profile1, profile2, threshold = 1) {
+
+#' @title Ratio of profiles maximal peaks between two profiles
+#' 
+#' @description Calculate and return the ratio of profiles maximal peaks
+#' between two profiles covering the same range. The  
+#' maximal peak of the first profile is always divided by the maximal peak of
+#' the second profile.If one peak value is inferior to the threshold, the 
+#' function returns \code{NA}.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum peak value accepted 
+#' to calculate a ratio.
+#' 
+#' @return The calculated ratio or \code{NA} if one peak value is inferior to
+#' the threshold.
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @author Astrid Deschenes, Elsa Bernatchez
+ratioMaxMaxMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the maximum element associated to each profile
     max1 <- max(profile1, na.rm = TRUE)
@@ -63,32 +92,50 @@ ratioMaxMax <- function(profile1, profile2, threshold = 1) {
     return(ratio)
 }
 
-# Calculate and return the difference between two profiles maximal peaks 
-# positions. The difference is always the profile1 maximal position minus the 
-# profile2 maximum position. If the minimum peak is inferior to the threshold, 
-# the function returns NA. If profile1 or profile2 is
-# not a numerical vector (example: vector of NA only), the funtion returns NA.
-#
-# Input:   
-#   profile1:   a first profile/vector containing depths. Each position is 
-#               associated to a position in particular, which is assumed.
-#   profile2:   a second profile/vector containing depths. Each position is 
-#               associated to a position in particular, which is assumed.
-#   threshold:  the minimum peak accepted to calculate the metric.
-#   thresholdDist:   the maximum distance accepted between 2 peaks positions 
-#                    in one profile.
-#   tolerance:  the maximum variation accepted on the maximum value to
-#               consider a position as a peak position. The tolerance must
-#               be between 0 and 1.
-#
-# Output: 
-#   The calculated position difference if treshold are respected.
-#
-diffPosMax <- function(profile1, 
-                       profile2, 
-                       threshold = 1, 
-                       thresholdDist = 100, 
-                       tolerance = 0.01) {
+
+#' @title Difference between two profiles maximal peaks positions
+#' 
+#' @description Calculate and return the difference between two profiles 
+#' maximal peaks positions. The difference is always the first profile value 
+#' (profile1 parameter) minus the second profile value (profile2 parameter). 
+#' When more than one maximual peak is present in one profile, the mediane of
+#' the position is calculated and used as the maximal peak position.
+#' If one threshold is not respected, the function returns \code{NA}.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum peak value accepted to 
+#' calculate the metric. Default = 1.
+#' 
+#' @param thresholdDist a \code{numeric}, the maximum distance accepted 
+#' between two maximum peaks positions in the same profile. Default = 100.
+#' 
+#' @param tolerance a \code{numeric}, the maximum variation accepted on the 
+#' maximum value to consider a position as a peak position. The tolerance must
+#  be between 0 and 1. Default = 0.01.
+#' 
+#' @return The calculated ratio or \code{NA} if not all thresholds are 
+#' respected.
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @importFrom stats median
+#' @author Astrid Deschenes, Elsa Bernatchez
+diffPosMaxMethod <- function(profile1, 
+                        profile2, 
+                        threshold = 1, 
+                        thresholdDist = 100, 
+                        tolerance = 0.01) {
 
     # The profile1 and profile2 arguments are numeric vectors. 
     # If not, NA is returned. 
@@ -138,22 +185,37 @@ diffPosMax <- function(profile1,
     return(diff)
 }
 
-# Calculate and return the ratio between the intersection area of two profiles 
-# and the total area covered by those profiles. If the total area is inferior 
-# to the threshold, the function returns NA. The threshold has to be a positive 
-# value.
-#
-# Input:   
-#   profile1:    a first curve/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   profile2:    a second curve/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   threshold:   the minimum denominator accepted to calculate a ratio.
-#
-# Output: 
-#   The calculated ratio or NA if threshold is not respected.
-#
-ratioIntersect <- function(profile1, profile2, threshold = 1) {
+
+#' @title  Ratio between the intersection area of two profiles and the 
+#' total area covered by those profiles
+#' 
+#' @description Calculate and return the ratio between the intersection area 
+#' of two profiles and the total area covered by those profiles. If the total
+#' area is inferior to 
+#' the threshold, the function returns \code{NA}.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum total area value accepted 
+#' to calculate a ratio.
+#' 
+#' @return The calculated ratio or \code{NA} if the total area is inferior 
+#' to the threshold. 
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @author Astrid Deschenes, Elsa Bernatchez
+ratioIntersectMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the area of the intersection (min of both curves for each position)
     intersect <- sum(unlist(lapply(1:length(profile1), 
@@ -174,34 +236,49 @@ ratioIntersect <- function(profile1, profile2, threshold = 1) {
     return(ratio)
 }
 
-# Calculate and return the Spearman's rho statistic of two profiles. If there 
-# is not complete element pairs between the profiles.
-#
-# Input:   
-#   profile1:    a first curve/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   profile2:    a second curve/vector containing depths. Each position is 
-#                associated to a position in particular, which is assumed.
-#   threshold:   the minimum standard deviation accepted to calculate 
-#                the Spearman's rho statistic.
-#
-# Output: 
-#   The calculated Spearman's rho statistic or NA when no complete element pair
-#   is present between the two profiles or when one of the profile has a  
-#   standard deviation inferior to threshold.
-#
-spearmanCorr <- function(profile1, profile2, threshold = 1e-8) {
+
+#' @title Spearman's rho statistic of two profiles
+#' 
+#' @description Calculate and return the Spearman's rho statistic of two 
+#' profiles. If one profile has a standard deviation inferior to 
+#' the threshold, the function returns \code{NA}. When no complete element 
+#' pair are present, \code{NA} is returned.
+#' 
+#' @param profile1 a \code{vector} of \code{numeric} values, the first profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length.
+#' 
+#' @param profile2 a \code{vector} of \code{numeric} values, the second profile
+#' containing the alignment depth for each position. The \code{profile1} and 
+#' \code{profile2} should have the same length. 
+#' 
+#' @param threshold a \code{numeric}, the minimum standard deviation accepted 
+#' to calculate a ratio. Default = 1e-8
+#' 
+#' @return The calculated ratio or \code{NA} if one profile has a standard 
+#' deviation inferior to the threshold. If profiles have no complete element 
+#' pair, \code{NA} is returned.
+#' 
+#' @seealso
+#' \itemize{
+#' \item \code{\link{MetricFactory}} {for using the recommanded interface to 
+#' calculate all available metrics separately or togheter.}
+#' }
+#' 
+#' @importFrom stats sd cor complete.cases
+#' @author Astrid Deschenes, Elsa Bernatchez
+spearmanCorrMethod <- function(profile1, profile2, threshold = 1e-8) {
 
     # Validate that each profile has at least one complete element pair
     # and that the standard deviation of each profile is superior to threshold
     if (sum(complete.cases(profile1, profile2)) == 0  || 
-        (sd(profile1, na.rm = TRUE) < threshold)      ||  
+        (sd(profile1, na.rm = TRUE) < threshold)      || 
         (sd(profile2, na.rm = TRUE) < threshold))  {
         correlation <- as.numeric(NA)
     } else {
         # Spearman correlation
         correlation <- cor(x=profile1, y=profile2, use="complete.obs", 
-                       method="spearman")
+                            method="spearman")
     }
 
     return(correlation)

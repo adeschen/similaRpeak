@@ -10,7 +10,7 @@ vignette: >
   \usepackage[utf8]{inputenc}
 ---
 
-```{r style, echo = FALSE, results = 'asis', message = FALSE}
+```{r style, echo = FALSE, results = 'asis', message = FALSE, warning=FALSE}
 BiocStyle::markdown()
 library(knitr)
 ```
@@ -75,8 +75,8 @@ respected for the intersection area.
 
 ## Loading the similaRpeak package
 
-```{r loadingPackage} 
-suppressMessages(library(similaRpeak))
+```{r loadingPackage, warning=FALSE, message=FALSE} 
+library(similaRpeak)
 ```
 
 
@@ -157,7 +157,7 @@ generate ChIP-Seq profiles. An example is available on
 
 ## Metrics
 
-### Metric definition
+### Metric versus Pseudometric
 
 Mathematically, a metric is considered as a function that quantifies the 
 similarity between two objects.The function must return zero when the two 
@@ -185,7 +185,7 @@ $$ |\log(RATIO)| $$
             
 <br>
 
-### Metrics demonstration
+## Metrics Presentation
 
 To ease comparison, the same ChIP-Seq profiles are used in each metric 
 description section. Those are ChIP-Seq profiles of two histone 
@@ -204,13 +204,13 @@ str(demoProfiles)
 
 <br>
 
-#### RATIO_AREA Metric
+### RATIO_AREA
 
 The **RATIO_AREA** metric is the ratio between the profile areas. The first 
 profile (`profile1` parameter) is always divided by the second profile 
 (`profile2` parameter). `NA` is returned if minimal area threshold 
-(`ratioAreaThreshold` parameter) is not respected for at least one of the 
-profiles.
+(`ratioAreaThreshold` parameter, default = 1) is not respected for at least 
+one of the profiles.
 
 The **RATIO_AREA** metric can be useful to detect regions with similar 
 coverage even if the profiles are different. 
@@ -264,6 +264,13 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "RATIO_AREA=0.12", cex=1.5, col="red")
 ```
 
+
+&nbsp; 
+
+<p style="text-align: center; color: darkblue">
+**similarity(profile1, profile2, ratioAreaThreshold = 1)**
+</p>
+
 ```{r ratio_area_calculation, collapse=T}
 metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
                         demoProfiles$chr2.70360770.70361098$H3K4me1)
@@ -284,7 +291,7 @@ metrics$metric$RATIO_AREA
 
 <br>
 
-#### DIFF_POS_MAX Metric
+### DIFF_POS_MAX
 
 The **DIFF_POS_MAX** metric is the difference between the maximal peaks 
 positions. The difference is always the first profile value 
@@ -354,6 +361,10 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "DIFF_POS_MAX=2.5", cex=1.5, col="red")
 ```
 
+<p style="text-align: center; color: darkblue">
+**similarity(profile1, profile2, diffPosMaxTolerance = 0.01, diffPosMaxThresholdMaxDiff = 100, diffPosMaxThresholdMinValue = 1)**
+</p>
+
 ```{r diff_pos_max_calculation, collapse=T}
 metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
                         demoProfiles$chr2.70360770.70361098$H3K4me1)
@@ -374,13 +385,13 @@ metrics$metric$DIFF_POS_MAX
 
 <br>
 
-#### RATIO_MAX_MAX Metric
+### RATIO_MAX_MAX 
 
 The **RATIO_MAX_MAX** metric is the ratio between the peaks values 
 in each profile. The first profile (`profile1` parameter) is always divided by 
 the second profile (`profile2` parameter). `NA` if minimal peak value threshold 
-(`ratioMaxMaxThreshold` parameter) is not respected for at least one of the 
-profiles.
+(`ratioMaxMaxThreshold` parameter, default = 1) is not respected for at least 
+one of the profiles.
 
 The **RATIO_MAX_MAX** metric can be useful to detect regions with peaks with 
 similar (or dissimilar) amplitude.
@@ -435,6 +446,12 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(280, 225, "RATIO_MAX_MAX=0.12", cex=1.5, col="red")
 ```
 
+&nbsp;
+
+<p style="text-align: center; color: darkblue">
+**similarity(profile1, profile2, ratioMaxMaxThreshold = 1)**
+</p>
+
 ```{r ratio_max_max_calculation, collapse=T}
 metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
                         demoProfiles$chr2.70360770.70361098$H3K4me1)
@@ -455,12 +472,12 @@ metrics$metric$RATIO_MAX_MAX
 
 <br>
 
-#### RATIO_INTERSECT Metric
+### RATIO_INTERSECT 
 
 The **RATIO_INTERSECT** metric is the ratio between the intersection area and 
 the total area of the two profiles. `NA` if minimal area threshold 
-(`ratioIntersectThreshold` parameter) is not respected for the intersection 
-area.
+(`ratioIntersectThreshold` parameter, default = 1) is not respected for the 
+intersection area.
 
 The **RATIO_INTERSECT** metric can be useful to detect regions with possibily 
 similar profiles.
@@ -516,6 +533,12 @@ legend("topright", c("H3K27ac","H3K4me1"), cex=1.2,
 text(275, 225, "RATIO_INTERSECT=0.12", cex=1.5, col="red")
 ```
 
+&nbsp;
+
+<p style="text-align: center; color: darkblue">
+**similarity(profile1, profile2, ratioIntersectThreshold = 1)**
+</p>
+
 ```{r ratio_intersect_calculation, collapse=T}
 metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
                       demoProfiles$chr2.70360770.70361098$H3K4me1)
@@ -536,17 +559,18 @@ metrics$metric$RATIO_INTERSECT
 
 <br>
 
-#### RATIO_NORMALIZED_INTERSECT Metric
+### RATIO_NORMALIZED_INTERSECT
 
 The **RATIO_NORMALIZED_INTERSECT** metric is the ratio between the 
 intersection area and the total area of the two normalized profiles.  The 
 profiles are normalized by divinding them by their average value (total area 
 of the profile divided by profile lenght). `NA` if minimal area threshold 
-(`ratioNormalizedIntersectThreshold` parameter) is not respected for 
-the intersection area.
+(`ratioNormalizedIntersectThreshold` parameter, default = 1) is not respected 
+for the intersection area.
 
 The **RATIO_NORMALIZED_INTERSECT** metric can be useful to detect regions with 
 possibily similar profiles even if their have different amplitude.
+
 
 ```{r ratio_normalized_intersect, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -618,6 +642,12 @@ text(275, 7, "RATIO_NORMALIZED_", cex=1.5, col="red")
 text(275, 6, "INTERSECT=0.84", cex=1.5, col="red")
 ```
 
+&nbsp;
+
+<p style="text-align: center; color: darkblue">
+**similarity(profile1, profile2, ratioNormalizedIntersectThreshold = 1)**
+</p>
+
 ```{r ratio_normalized_intersect_calculation, collapse=TRUE}
 metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
                       demoProfiles$chr2.70360770.70361098$H3K4me1)
@@ -638,18 +668,19 @@ metrics$metric$RATIO_NORMALIZED_INTERSECT
 
 <br>
 
-#### SPEARMAN_CORRELATION Metric
+### SPEARMAN_CORRELATION
 
 The **SPEARMAN_CORRELATION** metric is the Spearman's rho statistic calculated
-usign the two profiles.`NA` if minimal standard deviation
-(`spearmanCorrSDThreashold` parameter) is not respected for at least one of the
-profiles.
+usign the two profiles. `NA` if minimal standard deviation
+(`spearmanCorrSDThreashold` parameter, default = 1e-8) is not respected for 
+at least one of the profiles.
 
 The **SPEARMAN_CORRELATION** assesses how well the relationship between the two
 ChIP-Seq profiles can be described using a monotonic function. As the 
 **RATIO_NORMALIZED_INTERSECT** metric, the **SPEARMAN_CORRELATION** 
 metric can be useful to detect regions with possibily similar profiles even if 
 their have different amplitude.
+
 
 ```{r spearman_corr_graphs, echo=FALSE, fig.width=11, fig.height=8}
 
@@ -705,6 +736,12 @@ text(270, 225, "SPEARMAN_CORRELATION", cex=1.5, col="red")
 text(270, 192, "=0.62", cex=1.5, col="red")
 
 ```
+
+&nbsp;
+
+<p style="text-align: center; color: darkblue">
+**similarity(profile1, profile2, spearmanCorrSDThreashold = 1e-8)**
+</p> 
 
 ```{r spearman_correlation_calculation, collapse=TRUE}
 metrics <- similarity(demoProfiles$chr2.70360770.70361098$H3K27ac, 
