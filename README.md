@@ -33,9 +33,6 @@ Elsa Bernatchez,
 [Pascal Belleau](http://ca.linkedin.com/in/pascalbelleau "Pascal Belleau") 
 and [Arnaud Droit](http://ca.linkedin.com/in/drarnaud "Arnaud Droit").
 
-See [Arnaud Droit Lab](http://bioinformatique.ulaval.ca/home/ "Arnaud Droit Lab") 
-website.
-
 ## Maintainer ##
 
 [Astrid Desch&ecirc;nes](http://ca.linkedin.com/in/astriddeschenes "Astrid Desch&ecirc;nes")
