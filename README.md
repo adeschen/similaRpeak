@@ -3,6 +3,8 @@ similaRpeak : metrics to estimate the level of similarity between two ChIP profi
 
 [![Build Status](https://travis-ci.org/adeschen/similaRpeak.svg?branch=master)](https://travis-ci.org/adeschen/similaRpeak)
 [![codecov](https://codecov.io/gh/adeschen/similaRpeak/branch/master/graph/badge.svg)](https://codecov.io/gh/adeschen/similaRpeak)
+[![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)
+
 
 This package calculates metrics to estimate a level of similarity between two 
 ChIP-Seq profiles.
