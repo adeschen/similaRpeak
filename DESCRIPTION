@@ -1,7 +1,7 @@
 Package: similaRpeak
 Type: Package
 Title: Metrics to estimate a level of similarity between two ChIP-Seq profiles
-Version: 1.19.0
+Version: 1.20.0
 Date: 2014-08-08
 Authors@R: c( person("Astrid","Deschenes",
         email="adeschen@hotmail.com",
