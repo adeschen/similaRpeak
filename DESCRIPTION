@@ -3,7 +3,7 @@ Type: Package
 Title: Metrics to estimate a level of similarity between two ChIP-Seq profiles
 Version: 1.9.0
 Date: 2014-08-08
-Authors@R: c( person("Astrid","Deschenes",
+Authors@R: c( person("Astrid","Deschênes",
         email="adeschen@hotmail.com",
         role=c("cre","aut")), person("Elsa", "Bernatchez",
         email="elsa.bernatchez.1@ulaval.ca", role=c("aut")),
@@ -38,9 +38,4 @@ URL: https://github.com/adeschen/similaRpeak
 BugReports: https://github.com/adeschen/similaRpeak/issues
 VignetteBuilder: knitr
 NeedsCompilation: no
-Author: Astrid Deschenes [cre, aut], Elsa Bernatchez [aut],
-    Charles Joly Beauparlant [aut], Fabien Claude Lamaze [aut],
-    Rawane Samb [aut], Pascal Belleau [aut], Arnaud Droit [aut]
-Maintainer: Astrid Deschenes
-    <adeschen@hotmail.com>
 RoxygenNote: 6.0.1
