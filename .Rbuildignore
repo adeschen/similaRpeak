@@ -1,6 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 
+^\.github$
 
 ## Ignore travis config file
 ^\.travis\.yml$
