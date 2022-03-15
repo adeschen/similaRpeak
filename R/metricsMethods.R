@@ -218,7 +218,7 @@ diffPosMaxMethod <- function(profile1,
 ratioIntersectMethod <- function(profile1, profile2, threshold = 1) {
 
     # Get the area of the intersection (min of both curves for each position)
-    intersect <- sum(unlist(lapply(1:length(profile1), 
+    intersect <- sum(unlist(lapply(seq_len(length(profile1)), 
                                 function(x) min(profile1[x], profile2[x]))), 
                     na.rm = TRUE)
 
