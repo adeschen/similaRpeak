@@ -526,7 +526,7 @@ test.similarity_metadata <- function() {
                     "maxProfile1" = 65, "maxProfile2" = 46, 
                     "maxPositionProfile1" = 5, "maxPositionProfile2" = 3)
     obs <- similarity(c(1,59,6,24,65,34,15,4,53,22), 
-                                        c(15,9,46,44,9,39,27,34,34,4))[1:7]
+                                        c(15,9,46,44,9,39,27,34,34,4))[seq_len(7)]
     message <- paste0("test.similarity_metadata() - ",
                         "profiles with only positives values did not ",
                         "generated all expected values")
@@ -539,7 +539,7 @@ test.similarity_na_profile_metadata <- function() {
                 "maxProfile1" = 65,"maxProfile2" = 46,"maxPositionProfile1" = 5,
                 "maxPositionProfile2" = 3)
     obs <- similarity(c(NA,NA,6,24,65,34,15,4,53,22), 
-                                    c(NA,9,46,44,9,39,27,NA,34,4))[1:7]
+                                    c(NA,9,46,44,9,39,27,NA,34,4))[seq_len(7)]
     message <- paste0("test.similarity_na_profile_metadata() - ",
                         "profiles with some NA did not generated all ",
                         "expected values")

@@ -319,4 +319,22 @@ test.metric_class <- function() {
     checkEquals(obs$getInfo(), NULL, msg = message)
 }
 
+###############################################
+# Test RatioMaxMax class
+###############################################
 
+## Test the creation of a metric object
+test.metricRatioMaxMax_class <- function() {
+    obs <- similaRpeak:::RatioMaxMax$new()
+    
+    message <- paste0("test.metricRatioMaxMax_class() ",
+                      "- The metric object does not correspond to the expected object.")
+    
+    checkEquals(obs$getType(), "RATIO_MAX_MAX", msg = message)
+    checkEquals(obs$getInfo(), NULL, msg = message)
+    
+    obs2 <- tryCatch(obs$calculateMetric(), error=conditionMessage)
+    exp <- "The 'profile1' argument is mandatory. The metric value has been reset to NA."
+    
+    checkEquals(obs2, exp, msg = message)
+}
