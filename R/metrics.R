@@ -144,29 +144,29 @@ RatioMaxMax <- R6Class("RatioMaxMax",
 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory. ", 
-                    "The metric value has been reset to NA."))
+                stop("The 'profile1' argument is mandatory. ", 
+                    "The metric value has been reset to NA.")
             }
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory. ", 
-                    "The metric value has been reset to NA."))
+                stop("The 'profile2' argument is mandatory. ", 
+                    "The metric value has been reset to NA.")
             }
 
             # The profile1 and profile2 arguments are 
             # numeric vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile1' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             } 
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile2' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             }
 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA."))
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA.")
             }
 
             # Calculate and assign the new max max ratio
@@ -244,30 +244,30 @@ RatioArea <- R6Class("RatioArea",
 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory. The metric ",
-                            "value has been reset to NA."))
+                stop("The 'profile1' argument is mandatory. The metric ",
+                            "value has been reset to NA.")
             }
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory. The metric ",
-                            "value has been reset to NA."))
+                stop("The 'profile2' argument is mandatory. The metric ",
+                            "value has been reset to NA.")
             }
 
             # The profile1 and profile2 arguments are numeric vectors where at 
             # least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ", 
-                            "vector. The metric value has been reset to NA."))
+                stop("The 'profile1' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA.")
             }
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ", 
-                            "vector. The metric value has been reset to NA."))
+                stop("The 'profile2' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA.")
             }
 
             # The length of profile1 is equal to the length  of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
                             "aren't equals. The metric value has been reset ",
-                            "to NA."))
+                            "to NA.")
             }
 
             # Calculate and assign the new max max ratio
@@ -371,31 +371,31 @@ DiffPosMax <- R6Class("DiffPosMax",
 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory. ", 
-                        "The metric value has been reset to NA."))
+                stop("The 'profile1' argument is mandatory. ", 
+                        "The metric value has been reset to NA.")
             }
 
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory. ", 
-                        "The metric value has been reset to NA."))
+                stop("The 'profile2' argument is mandatory. ", 
+                        "The metric value has been reset to NA.")
             }
 
             # The profile1 and profile2 arguments are numeric 
             # vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile1' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             }
 
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile2' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             }
 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA."))
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA.")
             }
 
             # Calculate and assign the new difference position maximum
@@ -475,29 +475,29 @@ RatioIntersect <- R6Class("RatioIntersect",
 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory. The ",
-                    "metric value has been reset to NA."))
+                stop("The 'profile1' argument is mandatory. The ",
+                    "metric value has been reset to NA.")
             }
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory. The ", 
-                    "metric value has been reset to NA."))
+                stop("The 'profile2' argument is mandatory. The ", 
+                    "metric value has been reset to NA.")
             }
 
             # The profile1 and profile2 arguments are numeric 
             # vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile1' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             }
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile2' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             }
 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA."))
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA.")
             }
 
             # Calculate and assign the new intersect ratio
@@ -581,29 +581,29 @@ RatioNormalizedIntersect <- R6Class("RatioNormalizedIntersect",
 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory. The ",
-                    "metric value has been reset to NA."))
+                stop("The 'profile1' argument is mandatory. The ",
+                    "metric value has been reset to NA.")
             }
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory. The ", 
-                    "metric value has been reset to NA."))
+                stop("The 'profile2' argument is mandatory. The ", 
+                    "metric value has been reset to NA.")
             }
 
             # The profile1 and profile2 arguments are numeric 
             # vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ", 
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile1' argument must be a numeric ", 
+                    "vector. The metric value has been reset to NA.")
             }
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ",
-                    "vector. The metric value has been reset to NA."))
+                stop("The 'profile2' argument must be a numeric ",
+                    "vector. The metric value has been reset to NA.")
             }
 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA."))
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA.")
             }
 
             # Normalized profiles values
@@ -691,29 +691,29 @@ SpearmanCorrelation <- R6Class("SpearmanCorrelation",
 
             # Profile1 and profile2 are mandatory
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory. ", 
-                    "The metric value has been reset to NA."))
+                stop("The 'profile1' argument is mandatory. ", 
+                    "The metric value has been reset to NA.")
             }
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory. The ",
-                    "metric value has been reset to NA."))
+                stop("The 'profile2' argument is mandatory. The ",
+                    "metric value has been reset to NA.")
             }
 
             # The profile1 and profile2 arguments are numeric 
             # vectors where at least one element is greater than zero
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ", 
-                            "vector. The metric value has been reset to NA."))
+                stop("The 'profile1' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA.")
             }
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ", 
-                            "vector. The metric value has been reset to NA."))
+                stop("The 'profile2' argument must be a numeric ", 
+                            "vector. The metric value has been reset to NA.")
             }
 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals. The metric value has been reset to NA."))
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals. The metric value has been reset to NA.")
             }
 
             # Calculate and assign the spearman correlation
@@ -860,32 +860,32 @@ MetricFactory <- R6Class("MetricFactory",
 
             # Metric, profile1 and profile2 are mandatory
             if (missing(metricType)) {
-                stop(paste0("The 'metricType' argument is mandatory."))
+                stop("The 'metricType' argument is mandatory.")
             }
 
             if (missing(profile1)) {
-                stop(paste0("The 'profile1' argument is mandatory."))
+                stop("The 'profile1' argument is mandatory.")
             }
 
             if (missing(profile2)) {
-                stop(paste0("The 'profile2' argument is mandatory."))
+                stop("The 'profile2' argument is mandatory.")
             }
 
             # The profile1 and profile2 arguments are numeric vectors 
             if (!is.vector(profile1) || !is.numeric(profile1)) {
-                stop(paste0("The 'profile1' argument must be a numeric ", 
-                            "vector."))
+                stop("The 'profile1' argument must be a numeric ", 
+                            "vector.")
             }
 
             if (!is.vector(profile2) || !is.numeric(profile2)) {
-                stop(paste0("The 'profile2' argument must be a numeric ", 
-                            "vector."))
+                stop("The 'profile2' argument must be a numeric ", 
+                            "vector.")
             }
 
             # The length of profile1 is equal to the length of profile2
             if (length(profile1) != length(profile2)) {
-                stop(paste0("Lengths of 'profile1' and 'profile2' vectors ", 
-                    "aren't equals."))
+                stop("Lengths of 'profile1' and 'profile2' vectors ", 
+                    "aren't equals.")
             }
 
             # Metric type must exist
@@ -894,8 +894,8 @@ MetricFactory <- R6Class("MetricFactory",
                     paste(private$metricVector, collapse = ", "))) 
             }
 
-            result_name = list()
-            result =list()
+            result_name <- list()
+            result <- list()
 
             if (metricType == "ALL" ||  metricType == "RATIO_AREA") {
                 metric <- RatioArea$new(profile1, profile2, 
