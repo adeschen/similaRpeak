@@ -213,24 +213,24 @@ similarity <- function(profile1,
     if (length(ratioNormalizedIntersectThreshold) != 1 || 
             !is.numeric(ratioNormalizedIntersectThreshold) || 
             (ratioNormalizedIntersectThreshold <= 0)) {
-        stop(paste0("The 'ratioNormalizedIntersectThreshold' must be",
-                " a positive numeric value."))
+        stop("The 'ratioNormalizedIntersectThreshold' must be",
+                " a positive numeric value.")
     }
     
     # The diffPosMaxThresholdMinValue argument is a positive numeric element
     if (length(diffPosMaxThresholdMinValue) != 1 || 
             !is.numeric(diffPosMaxThresholdMinValue) || 
             (diffPosMaxThresholdMinValue <= 0)) {
-        stop(paste0("The 'diffPosMaxThresholdMinValue' must be a positive ",
-                "numeric value."))
+        stop("The 'diffPosMaxThresholdMinValue' must be a positive ",
+                "numeric value.")
     }   
     
     # The diffPosMaxThresholdMaxDiff argument is a positive numeric element
     if (length(diffPosMaxThresholdMaxDiff) != 1 || 
             !is.numeric(diffPosMaxThresholdMaxDiff) || 
             (diffPosMaxThresholdMaxDiff <= 0)) {
-        stop(paste0("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
-                "numeric value."))
+        stop("The 'diffPosMaxThresholdMaxDiff' must be a positive ",
+                "numeric value.")
     }  
     
     # The diffPosMaxTolerance argument is a positive numeric element between
@@ -239,16 +239,16 @@ similarity <- function(profile1,
             !is.numeric(diffPosMaxTolerance) || 
             (diffPosMaxTolerance < 0) || 
             (diffPosMaxTolerance > 1)) {
-        stop(paste0("The 'diffPosMaxTolerance' must be a positive numeric ",
-                "value between 0 and 1 included."))
+        stop("The 'diffPosMaxTolerance' must be a positive numeric ",
+                "value between 0 and 1 included.")
     } 
     
     # The spearmanCorrSDThreashold argument is a positive numeric element
     if (length(spearmanCorrSDThreashold) != 1 || 
             !is.numeric(spearmanCorrSDThreashold) || 
             (spearmanCorrSDThreashold <= 0)) {
-        stop(paste0("The 'spearmanCorrSDThreashold' must be a positive ",
-                "numeric value."))
+        stop("The 'spearmanCorrSDThreashold' must be a positive ",
+                "numeric value.")
     }  
     
     # Get information about both profiles
