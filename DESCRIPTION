@@ -16,8 +16,10 @@ Authors@R: c( person("Astrid","Deschênes",
         email="pascal_belleau@hotmail.com", role=c("aut")),
         person("Arnaud", "Droit",
         email="arnaud.droit@crchuq.ulaval.ca", role=c("aut")))
-Description: This package calculates metrics which assign a level of
-    similarity between ChIP-Seq profiles.
+Description: This package calculates metrics which quantify the level of
+    similarity between ChIP-Seq profiles. More specifically, the package 
+    implements six pseudometrics specialized in pattern similarity detection 
+    in ChIP-Seq profiles.
 biocViews: BiologicalQuestion, ChIPSeq, Genetics, MultipleComparison,
     DifferentialExpression
 Depends:
